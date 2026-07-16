@@ -1,0 +1,192 @@
+id,user_story
+5,"As a Store Administrator,
+I want the system to prevent me from deleting a product variant that has already been purchased by a customer,
+So that historical order data remains accurate and consistent, and customers' past orders are not affected by data integrity issues.
+
+Acceptance Criteria:
+- Given a product variant is associated with at least one placed order, when an administrator attempts to delete that variant, the system should block the deletion.
+- The administrator should receive a clear notification stating that the variant is currently in use and cannot be deleted.
+- After the failed deletion attempt, the product variant should remain unchanged and still exist in the product catalog.
+- This behavior should be consistently enforced across both the API and UI interfaces."
+8,"As a store administrator,
+I want to filter orders by currency and by total amount (greater than, less than, or within a specified range),
+So that I can quickly locate and review orders placed in a specific currency or within a particular price range.
+
+Acceptance Criteria:
+- When filtering by currency alone, only orders placed in the selected currency are displayed, and orders in other currencies are excluded.
+- When filtering by a total greater than a specified amount (with a currency selected), only orders in that currency whose total exceeds the specified amount are displayed, and orders in other currencies are excluded.
+- When filtering by a total less than a specified amount (with a currency selected), only orders in that currency whose total is below the specified amount are displayed, and orders in other currencies are excluded.
+- When filtering by a total within a specified range (greater than a minimum and less than a maximum, with a currency selected), only orders in that currency falling within the range are displayed, and orders in other currencies are excluded.
+- When filtering by a total range without specifying a currency, orders from any currency that fall within the specified total range are displayed."
+9,"As a Store Manager,
+I want catalog promotions to be automatically applied and reflected in the discounted price of eligible product variants,
+So that customers can see accurate promotional pricing without manual price adjustments.
+
+Acceptance Criteria:
+- Given a configurable product with a variant priced at a specific original price, and an active catalog promotion that reduces the price by a defined percentage on that variant, when viewing the variant, the discounted price should be correctly calculated and displayed.
+- The system should show both the original price and the discounted price for the variant when a catalog promotion is successfully applied.
+- The name of the applied catalog promotion should be visible alongside the discounted price for transparency."
+28,"As a customer,
+I want the available shipping methods to be displayed in a specific, predefined order during checkout,
+So that I can easily find and select my preferred shipping option based on a consistent and logical arrangement.
+
+Acceptance Criteria:
+- Given a store with multiple shipping methods each assigned a specific position, the shipping methods should be displayed in ascending order according to their assigned positions.
+- When a logged-in customer adds a product to the cart, provides shipping address details, and proceeds to the shipping step, the shipping method list should reflect the correct sorted order.
+- The shipping method with the lowest position value should appear as the first choice, and the one with the highest position value should appear as the last choice."
+29,"As a customer,
+I want to view a product's images on the product details page in the correct order,
+So that I can see the main product image prominently and browse additional images easily.
+
+Acceptance Criteria:
+- When viewing a product details page, the product name should be displayed correctly.
+- The main image displayed should be the one designated with the ""main"" type.
+- Product images should be displayed as thumbnails in the correct order based on their assigned position, with the ""main"" type image appearing first.
+- Additional images (e.g., ""other"" type) should appear as subsequent thumbnails after the main image, in their assigned order."
+30,"As a store administrator,
+I want the system to validate the data I enter when creating or editing a taxon,
+So that I can avoid submitting incomplete, incorrect, or duplicate taxon information that could compromise the store's product categorization.
+
+Acceptance Criteria:
+- When attempting to add a translation for a taxon using a locale that is not available in the store, the system should notify the administrator that the locale is not available.
+- When attempting to create a new taxon without specifying a code, the system should notify the administrator that the code is required, and the taxon should not be added.
+- When attempting to create a new taxon without specifying a name, the system should notify the administrator that the name is required.
+- When attempting to create a new taxon with a code that exceeds the maximum allowed length, the system should notify the administrator that the code is too long.
+- When attempting to create a new taxon without specifying a slug (via the UI only), the system should notify the administrator that the slug is required.
+- When attempting to create a new taxon with a slug that is already used by another taxon, the system should notify the administrator that the taxon slug must be unique."
+35,"As a Finance/Accounting Officer,
+I want the system to generate correct General Ledger journal entries whenever a Credit Balance Refund (CBR) is processed on an overpaid Working Capital loan,
+So that overpayment liabilities are accurately debited and cleared through the appropriate suspense/clearing account, ensuring the accounting records remain accurate regardless of refund amount, frequency, or timing.
+
+Acceptance Criteria:
+- When a partial credit balance refund is processed on an overpaid Working Capital loan, the loan status must remain ""OVERPAID"" and generate a journal entry debiting the ""Other Credit Liability"" account and crediting the ""Suspense/Clearing"" account for the refunded amount.
+- When a credit balance refund fully settles the overpaid amount, the loan status must transition to ""CLOSED_OBLIGATIONS_MET"" and the corresponding journal entries must be recorded accurately.
+- The system must support multiple credit balance refunds on the same day or across different days, correctly reducing the overpayment balance each time and generating a separate, accurate set of journal entries for each refund transaction, including cases where payment details (such as payment type, account number, check number, routing code, receipt number, and bank number) are provided."
+41,"As a Loan Officer,
+I want to initiate a delinquency pause on a working capital loan by specifying a start date and end date,
+So that the delinquency calculation and repayment schedule can be adjusted to account for periods where the client should not be penalized for non-payment.
+
+Acceptance Criteria:
+- When a delinquency pause is initiated on the disbursement day, the pause action is recorded with the correct start and end dates, and the range schedule's ""toDate"" is extended by the paused duration while expected, paid, and outstanding amounts remain unchanged.
+- When a delinquency pause is initiated in the middle of the current period (whether the pause is future-dated, backdated, or overlapping the current business date), the system correctly extends the schedule's ""toDate"" by the number of paused days without affecting expected, paid, or outstanding amounts.
+- When a delinquency pause is initiated for a period that has already lapsed (e.g., in a subsequent period), the system correctly marks the prior period as delinquent (with the accurate delinquent amount and delinquent days) while still applying the pause extension to the current or future period's range schedule.
+- When a delinquency pause overlaps multiple periods, the system correctly splits and recalculates each affected period's range schedule, extending the ""toDate"" of each period according to the number of paused days falling within it.
+- When multiple delinquency pauses (past, current, and future) are initiated for the same loan, all pause actions are retained and displayed accurately, and the range schedule reflects the cumulative effect of all applicable pauses as the business date progresses.
+- After each business date progression and COB job execution, the delinquency range schedule is recalculated to accurately reflect minimum payment criteria met, delinquent amount, and delinquent days for periods where pauses have expired or are no longer active."
+42,"As a Loan Officer,
+I want to apply loan re-aging transactions on a loan before its maturity date, including scenarios where charges (fees/penalties) are already scheduled on installments,
+So that I can restructure the remaining repayment schedule into new evenly distributed installments while correctly preserving or reallocating any due charges on the affected periods.
+
+Acceptance Criteria:
+- When a re-aging transaction is created before the maturity date, the system must recalculate the repayment schedule starting from the specified start date, distributing the outstanding principal evenly across the specified number of new installments.
+- If a charge (e.g., NSF fee) is due on an installment being replaced by the re-aging transaction, the charge must be preserved and correctly reflected either on the re-aged installment or retained on the unaffected ""n+1"" installment as applicable, without loss of due amounts.
+- Installments beyond the re-aged range (n+1 and further, such as those containing pre-existing charges scheduled after the new schedule's end date) must remain unmodified by the re-aging transaction.
+- The system must correctly generate a preview of the re-aged repayment schedule (via the ""Loan re-aging preview"" action) that matches the actual schedule generated after the re-aging transaction is confirmed.
+- After a re-aging transaction, the Loan Transactions tab must record a ""Re-age"" transaction with the correct amount, principal, date, and resulting loan balance, and the totals in the repayment schedule (principal, fees, penalties, due, paid, outstanding) must remain consistent with amounts before re-aging.
+- The loan must be payable in full (via Loan Pay-off) after re-aging, resulting in a zero outstanding balance with all installments marked as having obligations met."
+49,"As a Loan System Administrator,
+I want the system to automatically execute the Close of Business (COB) process inline (in real-time) whenever a loan transaction occurs after the business date has advanced beyond the loan's last closed business date,
+So that loan statuses, delinquency classifications, and overdue calculations remain accurate and up-to-date even when the scheduled batch COB job has not yet run, without requiring manual intervention.
+
+Acceptance Criteria:
+- When the inline COB job is manually triggered for a loan, the system correctly updates the loan's delinquency range and delinquent date based on the elapsed business days since disbursement.
+- When the business date advances by multiple days, running the inline COB job should cause the loan to ""catch up,"" setting the last closed business date to one day prior to the current business date.
+- When a repayment transaction is made on a loan whose last closed business date is behind the current business date, the inline COB process should trigger automatically (via the loan's ID or external ID) to bring the loan's business date up to date before or as part of processing the transaction.
+- If no COB process has ever been applied to a loan before, a repayment transaction (whether identified by loan ID or external ID) should NOT trigger an inline COB job, and the loan's last closed business date should remain ""null"" after the transaction.
+- If a COB process has previously been applied to a loan, a subsequent repayment transaction (whether identified by loan ID or external ID) SHOULD trigger an inline COB job, updating the last closed business date accordingly (to one day prior to the transaction date).
+- Even when a loan account is locked by an administrator, a repayment transaction should still trigger the inline COB execution, correctly closing the business date, updating the loan status to ""CLOSED_OBLIGATIONS_MET,"" clearing the outstanding balance, generating the correct journal entries, and recording accurate delinquency history (added/lifted dates).
+- The inline COB and delinquency/lock behavior described above must hold true consistently for both default (simple) loan products and advanced/progressive loan products (e.g., those using Advanced Payment Allocation and interest recalculation rules)."
+52,"As a Loan Officer,
+I want the system to correctly recalculate the repayment schedule, interest amounts, and accounting entries when a multi-disbursement progressive loan with flat interest receives an additional disbursement at various points in the repayment cycle (mid-period or on the installment due date),
+So that I can accurately manage tranche disbursements, ensure correct interest accrual and journal postings, and safely reverse repayments or disbursements when corrections are needed without corrupting the loan's financial data.
+
+Acceptance Criteria:
+- When a second disbursement is made on a loan with flat interest and multi-disbursement enabled, the repayment schedule must be recalculated to redistribute the additional principal and recompute interest across the remaining installments, regardless of whether the disbursement occurs mid-period or exactly on an installment due date.
+- The recalculation behavior must be consistent across different interest calculation conventions (e.g., actual/actual and 360/30), with the schedule reflecting split balance rows for the disbursement date and updated principal, interest, and due amounts for affected installments.
+- Each disbursement transaction must generate correct journal entries (debiting Loans Receivable and crediting the Suspense/Clearing account) for the exact disbursed amount, and the Loan Transactions tab must reflect all disbursements with accurate running loan balances.
+- When a customer repayment is made via AUTOPAY covering all outstanding dues, the system must correctly allocate the payment across principal and interest for each installment, update paid/in-advance/late/outstanding statuses, and generate an accrual transaction alongside proper repayment journal entries.
+- The system must support undoing a repayment and undoing the last disbursement, correctly reverting the loan schedule and transaction history back to the state prior to those actions, with reverted transactions clearly flagged (Reverted = true) while preserving the integrity of prior transactions (Replayed = false)."
+72,"As a user,
+I want the publisher to automatically detect links I post and render rich media previews (such as embedded video players or images) when the content supports oEmbed and comes from a secure source,
+So that I can share and view rich media content directly within the stream without needing to open external links.
+
+Acceptance Criteria:
+- When a user posts a link to a video from a secure, supported oEmbed provider, the system should render an embedded video player within the post.
+- When a user posts a link to a video from an unsecure source, the system should not render a video player and should instead display the raw link text within the stream element.
+- When a user posts an unsecure link that is rich-typed (e.g., video-like content) but not from a secure oEmbed provider, the system should not render a video player and should display the raw link text instead.
+- When a user posts a direct photo link, the system should render an image element within the stream element instead of plain text.
+- When a user posts a link from a domain that does not support oEmbed, the system should display the link as plain text within the stream element without any embedded preview."
+73,"As a user,
+I want to create a poll and attach it to my post when publishing a status update,
+So that I can ask my followers a question and let them vote on the available options.
+
+Acceptance Criteria:
+- The poll creator panel is hidden by default and only becomes visible after the publisher is expanded and the user clicks on the poll creator toggle
+- When the user fills in values for the first two answer options and loses focus, a third empty option field should automatically appear, and users should be able to remove the last added option (with the remove icon disappearing once only two options remain)
+- Submitting the publisher form with a status message, a poll question, and at least two filled-in options should successfully post the update with the poll displayed within the stream element
+- A signed-in user should be able to select an option and vote, after which the poll should display a progress bar, a percentage indicator, and a vote count summary (e.g., ""1 vote so far"")
+- Clicking the toggle-result control should reveal the percentage breakdown of the poll results
+- Attempting to submit a poll with fewer than two filled-in answer options should display a validation error on the empty answer input field"
+82,"As a mobile user,
+I want to send, view, and delete private conversation messages with my connections on the mobile website,
+So that I can communicate privately with other users and manage my message history while on a mobile device.
+
+Acceptance Criteria:
+- A signed-in user must be able to send a new private message with a subject and text to one of their connections, and after sending, the message subject should appear in the conversation heading, the recipient should be shown as part of the active conversation, and the message text should be visible in the conversation stream.
+- When the recipient signs in and replies to the conversation, their reply text should be visible within the conversation after selecting it.
+- A user must be able to delete a message from the conversation by clicking the remove action and confirming the deletion prompt, after which the deleted message text should no longer be visible in the conversation."
+84,"As a mobile user,
+I want to create posts from the mobile main page, including selecting which aspects to share with and attaching photos,
+So that I can share updates and images with specific groups of my contacts directly from my mobile device.
+
+Acceptance Criteria:
+- A user can enter text into the mobile publisher, select one or more aspects from the aspect dropdown, and share the post so that it appears in the stream for the selected aspects only, remaining hidden from aspects that were not selected.
+- A user can delete a posted item from the stream, and after confirming the deletion prompt, the content should no longer be visible.
+- A user can upload a photo without any accompanying text; once the upload completes, the photo should appear in the stream after sharing, and it should also be visible to other connected users who view the stream.
+- When attempting to attach an invalid file, the system should prompt an alert and not display any uploaded image in the photo drop zone; the user can then attach a valid photo, see the upload complete, and remove the uploaded photo before sharing, resulting in no image shown in the drop zone.
+- When a user attaches multiple photos in sequence and removes one of them, the remaining attached photo should still be visible in the drop zone, and the text area should correctly indicate the presence of attachments alongside the text content."
+88,"As a user,
+I want to reshare public posts from other users through the stream, their profile page, or a single post view,
+So that I can share interesting content with my own contacts and network.
+
+Acceptance Criteria:
+- A user can reshare a public post from the stream, from another user's profile page, and from the single post view, with a confirmation prompt before the reshare is executed.
+- After a successful reshare, a success flash message containing ""successfully"" is displayed, and the reshare option is no longer shown for that post in the feedback area.
+- If a user has already reshared a specific post, the reshare option should not be available again for that same post on the author's profile.
+- If the original post of a reshare is deleted by its author, users who see the reshare should instead see a message indicating ""Original post deleted by author""."
+89,"As a visitor browsing Diaspora on a mobile device,
+I want to view a user's public profile page along with their public posts and comments,
+So that I can access shared content without needing to log in.
+
+Acceptance Criteria:
+- When visiting a user's profile page as a logged-out user, their public post text should be visible within the designated post area.
+- Clicking on the ""show comments"" element should reveal the comments associated with the public post.
+- Previously submitted comments on the public post should be displayed correctly within the comment section."
+92,"As a Moderator,
+I want to report posts and comments that violate the terms of use,
+So that inappropriate content can be reviewed and addressed by the platform.
+
+Acceptance Criteria:
+- When reporting a post or comment, a report modal appears displaying a message about only reporting content that violates the terms of use, along with a reason field to fill in.
+- Submitting a report successfully creates the report, displays a success message, and triggers an email notification to the moderator with an appropriate subject line indicating whether a post or comment was flagged as offensive.
+- Attempting to report the same post or comment a second time results in an error message stating the report already exists, preventing duplicate reports.
+- Reports are correctly linked to the specific post or comment being flagged, and the report page accurately displays the reporter's identity, the reason provided, and the exact content that was reported, even when multiple items exist on the page.
+- Closing the report modal without submitting resets the reason field, ensuring no residual text carries over when reporting a different item afterward."
+99,"As a mobile user,
+I want to view my activity stream showing posts I've created and liked,
+So that I can quickly track my own contributions and interactions on the platform.
+
+Acceptance Criteria:
+- When a user has not created or liked any posts, the ""My activity"" page should display no posts in the stream.
+- When a user likes a post, that post should appear within the user's ""My activity"" stream.
+- When a user creates a post, that post should appear within the user's own ""My activity"" stream."
+100,"As a new user who has received an invitation from an existing member,
+I want to accept the invitation and complete my account registration,
+So that I can join the platform and immediately connect with the person who invited me.
+
+Acceptance Criteria:
+- Given an invitation email has been sent by an existing user (e.g., ""alice@alice.alice""), the invited user can access their acceptance form page.
+- Upon filling in the new user form with the required information and pressing ""Create account"", the user should see a ""welcome to diaspora"" confirmation message.
+- After account creation, the new user should be able to friend/connect with the person who sent the invitation.
+- The new user should be able to select an aspect (e.g., ""Family"") from the ""user_aspects"" dropdown within the ""#hello-there"" section.
+- Once an aspect is selected, the aspect dropdown within ""#hello-there"" should correctly display the chosen label (e.g., ""Family"")."
