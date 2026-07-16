@@ -1,0 +1,956 @@
+id,user_story
+1,"As a store owner,
+I want the checkout process to prevent customers from completing an order with a shipping method that has become unavailable,
+So that customers cannot place orders using shipping methods that are no longer valid or offered.
+
+Acceptance Criteria:
+- When a customer has selected a shipping method and payment method during checkout, but that shipping method is subsequently disabled entirely, the system should block order confirmation and inform the customer that the chosen shipping method is not available.
+- When a customer has selected a shipping method and payment method during checkout, but that shipping method is subsequently disabled specifically for the channel/country associated with their order, the system should block order confirmation and inform the customer that the chosen shipping method is not available.
+- In both cases, the customer should not be able to successfully confirm and place the order while the selected shipping method remains disabled."
+2,"As an administrator,
+I want to be prevented from viewing the details of a customer's cart that is not yet an order,
+So that I only access valid order information and receive clear feedback when attempting to view non-existent orders.
+
+Acceptance Criteria:
+- The store operates on a single channel in ""United States"" with a product ""PHP T-Shirt"" priced at ""$12.00""
+- Given a customer has added the product ""PHP T-Shirt"" to their cart without placing an order
+- When an administrator attempts to view the summary of the customer's latest cart
+- The administrator should be informed that the order does not exist"
+3,"As a store administrator,
+I want to delete zones from the registry,
+So that I can keep the list of zones accurate and free of unused entries.
+
+Acceptance Criteria:
+- Successfully deleting a zone that has no dependencies removes it from the registry and displays a confirmation message.
+- Attempting to delete a zone that has associated tax rates is blocked, with a notification explaining that the zone cannot be deleted, and the zone remains visible in the list.
+- Attempting to delete a zone that is a member of another zone is blocked, with a notification explaining that the zone cannot be deleted, and the zone remains visible in the list."
+4,"As a store manager,
+I want exclusive catalog promotions to override all other applicable promotions on a product,
+So that customers see the correct discounted price based solely on the most relevant exclusive promotion, avoiding stacking of multiple discounts.
+
+Acceptance Criteria:
+- When a product has both a regular catalog promotion and an exclusive catalog promotion applicable, only the exclusive promotion should be applied to calculate the displayed price.
+- The product's original price should still be displayed alongside the discounted price for customer reference.
+- When multiple exclusive catalog promotions apply to the same product, only the single exclusive promotion with the highest priority should be applied, ignoring all others."
+5,"As a Store Administrator,
+I want the system to prevent me from deleting a product variant that has already been purchased by a customer,
+So that historical order data remains accurate and consistent, and customers' past orders are not affected by data integrity issues.
+
+Acceptance Criteria:
+- Given a product variant is associated with at least one placed order, when an administrator attempts to delete that variant, the system should block the deletion.
+- The administrator should receive a clear notification stating that the variant is currently in use and cannot be deleted.
+- After the failed deletion attempt, the product variant should remain unchanged and still exist in the product catalog.
+- This behavior should be consistently enforced across both the API and UI interfaces."
+6,"As an administrator,
+I want to create a new product option with its option values,
+So that I can define configurable attributes (such as size or color) that customers can select when purchasing a product.
+
+Acceptance Criteria:
+- When creating a new product option, I must be able to name it and specify its code, and upon successful creation I should receive a confirmation notification and see it appear in the product option registry.
+- I should be able to add multiple option values (e.g., ""S"", ""M"") to a product option, and each added option value should be correctly associated with that option after creation.
+- I should be able to create a product option without adding any option values, and the system should still allow it to be successfully created and registered.
+- When the store supports multiple locales, I should be able to apply an option value entered in one locale (e.g., ""English (United States)"") to all other available locales (e.g., ""Polish (Poland)"") in a single action, while still being able to add other option values that remain locale-specific and are not automatically translated."
+7,"As a store administrator,
+I want the system to prevent me from creating a new product association type with a code that is already in use,
+So that I can avoid duplicate product association types and maintain data integrity in the catalog configuration.
+
+Acceptance Criteria:
+- When creating a new product association type, the administrator can specify a code and a name for a given locale.
+- If the specified code already exists among the current product association types, the system should reject the creation attempt and display a notification informing the administrator that a product association type with this code already exists.
+- After the failed attempt, the total number of product association types with the given code should remain unchanged (only one product association type should exist with that code)."
+8,"As a store administrator,
+I want to filter orders by currency and by total amount (greater than, less than, or within a specified range),
+So that I can quickly locate and review orders placed in a specific currency or within a particular price range.
+
+Acceptance Criteria:
+- When filtering by currency alone, only orders placed in the selected currency are displayed, and orders in other currencies are excluded.
+- When filtering by a total greater than a specified amount (with a currency selected), only orders in that currency whose total exceeds the specified amount are displayed, and orders in other currencies are excluded.
+- When filtering by a total less than a specified amount (with a currency selected), only orders in that currency whose total is below the specified amount are displayed, and orders in other currencies are excluded.
+- When filtering by a total within a specified range (greater than a minimum and less than a maximum, with a currency selected), only orders in that currency falling within the range are displayed, and orders in other currencies are excluded.
+- When filtering by a total range without specifying a currency, orders from any currency that fall within the specified total range are displayed."
+9,"As a Store Manager,
+I want catalog promotions to be automatically applied and reflected in the discounted price of eligible product variants,
+So that customers can see accurate promotional pricing without manual price adjustments.
+
+Acceptance Criteria:
+- Given a configurable product with a variant priced at a specific original price, and an active catalog promotion that reduces the price by a defined percentage on that variant, when viewing the variant, the discounted price should be correctly calculated and displayed.
+- The system should show both the original price and the discounted price for the variant when a catalog promotion is successfully applied.
+- The name of the applied catalog promotion should be visible alongside the discounted price for transparency."
+10,"As an administrator,
+I want to modify a customer's billing address on an already placed order,
+So that I can correct or update customer billing information even after the order has been submitted.
+
+Acceptance Criteria:
+- The administrator should be able to view an order's summary and edit its billing address, specifying a new recipient name, street, postcode, city, and country.
+- Upon saving the changes, the administrator should receive a confirmation notification that the billing address has been successfully edited, and the order should display the updated billing address details.
+- When selecting a country for the billing address, only the provinces belonging to that selected country should be available for selection.
+- The billing address should remain editable and correctly saved regardless of external conditions such as changes in product price, a disabled sales channel, a disabled currency, or the product being out of stock, with the order's total remaining unaffected by the address change."
+11,"As a guest visitor,
+I want to leave a review with a rating and comment for a product,
+So that I can share my feedback and experience about the product with other potential customers.
+
+Acceptance Criteria:
+- A guest must be able to select a product and initiate the review process by providing their email address, a title, a comment, and a rating.
+- Upon submission, the guest must receive a notification confirming that their review has been received and is pending acceptance.
+- Newly submitted reviews from guests must not be immediately visible to other customers until they have been approved."
+12,"As a Store Administrator,
+I want catalog promotions to be applied to products in descending order of their priority,
+So that customers see accurate final discounted prices when multiple promotions overlap on the same product.
+
+Acceptance Criteria:
+- When multiple catalog promotions apply to the same product variant, they must be applied sequentially starting from the highest priority value to the lowest.
+- Each promotion (whether a percentage discount or a fixed amount discount) must be calculated based on the price resulting from the previously applied promotion, not the original price.
+- The product page must display the original price, the final discounted price, and the names of all applied promotions in the order they were processed."
+13,"As a customer,
+I want the cart page to prevent any modifications (clearing, removing items, or changing quantities) once my order has already been completed in the background,
+So that I cannot accidentally mutate or corrupt a completed order by interacting with a stale, outdated cart page.
+
+Acceptance Criteria:
+- If a customer attempts to clear the cart from a stale cart page (i.e., the order was completed in the background without reloading), the completed order must remain intact in the database and its checkout state must remain ""completed"".
+- If a customer attempts to remove an item from the cart on a stale page after the order has been completed, the completed order must still exist and must still contain its original item(s), unaffected by the removal action.
+- If a customer attempts to increase the quantity of an item in the cart on a stale page after the order has been completed, the completed order must still exist and the item quantity must remain unchanged from its original value.
+- These protections must apply regardless of whether the page was reloaded, ensuring stale client-side state cannot desynchronize from the actual server-side order status."
+14,"As an Administrator,
+I want to browse and view the list of customer orders in the store,
+So that I can monitor and manage incoming orders efficiently.
+
+Acceptance Criteria:
+- The administrator must be logged in to access the orders list.
+- When an order is placed by a customer, it should appear in the orders list.
+- The orders list should display the correct customer information associated with each order."
+15,"As a customer,
+I want to provide only a shipping address during checkout when the store's channel requires solely the shipping address,
+So that I can complete the addressing step quickly without entering redundant billing information.
+
+Acceptance Criteria:
+- The checkout addressing step must accept a shipping address containing city, street, postcode, country, and recipient name.
+- When the channel is configured to require only the shipping address, the system should not demand a separate billing address to proceed.
+- After successfully submitting the required shipping address, the customer should be automatically progressed to the checkout shipping step."
+16,"As a store administrator,
+I want to create new administrator accounts with email, name, password, and locale settings,
+So that I can grant additional users access to manage the store.
+
+Acceptance Criteria:
+- An administrator can create a new administrator account by specifying an email, name, password, and locale, and upon adding it, a success notification should be displayed and the new administrator should appear in the store's list of administrators.
+- An administrator can create a new administrator account, enable it during creation, and the newly created administrator should be able to log in successfully using the specified email and password credentials.
+- The system must support creating administrator accounts within a single-channel store setup, such as one operating in ""United States""."
+17,"As a store administrator,
+I want to create a new sales channel with complete shop billing data (company, tax ID, and billing address),
+So that I can properly configure and manage a new channel for a specific market with accurate billing and legal information.
+
+Acceptance Criteria:
+- The administrator must be able to specify a unique code and name for the new channel
+- The administrator must be able to select a base currency, an available locale, and a default locale for the channel
+- The administrator must be able to select a tax calculation strategy for the channel
+- The administrator must be able to provide shop billing data, including company name, tax ID, and billing address (street, postcode, city, and country)
+- Upon successful creation, the system should display a confirmation notification to the administrator
+- The newly created channel should appear in the channel registry with the specified name"
+18,"As an administrator,
+I want to create new sales channels with essential and additional configuration details,
+So that I can manage distinct storefronts with tailored currencies, locales, tax strategies, and checkout behaviors.
+
+Acceptance Criteria:
+- The administrator must be able to create a new channel by specifying a code, name, base currency, available locale, default locale, and tax calculation strategy, and upon successful creation, receive a confirmation notification with the new channel appearing in the registry.
+- The administrator must be able to optionally provide additional details when creating a channel, including a description, hostname, contact email, contact phone number, color, and a selection of operating countries.
+- The administrator must be able to configure checkout behavior options, such as allowing the shipping step to be skipped when only one shipping method is available and allowing the payment step to be skipped when only one payment method is available.
+- The system must confirm successful creation of the channel and display it in the channel registry regardless of whether only mandatory fields or both mandatory and optional fields were provided."
+19,"As a store administrator,
+I want to be prevented from finalizing an order's payment when a purchased item has become tracked in inventory after the order was placed and does not have sufficient stock,
+So that I avoid confirming payments for orders that cannot actually be fulfilled due to stock shortages.
+
+Acceptance Criteria:
+- When viewing an order summary for a previously placed order, if a product within that order becomes stock-tracked after purchase with fewer available units than the quantity ordered, attempting to mark the order as paid must be blocked.
+- The administrator must be notified that the payment could not be finalized due to insufficient stock whenever the tracked inventory is less than the ordered quantity.
+- After a failed attempt to mark the order as paid due to insufficient stock, the order's payment state must remain ""New""."
+20,"As a store administrator,
+I want to browse and view the list of product association types configured in the store,
+So that I can review and manage the existing associations available for products.
+
+Acceptance Criteria:
+- Given the store has multiple product association types (e.g., ""Cross sell"" and ""Up sell"") already created, the administrator can access a list view of all product association types.
+- The list should display the correct total count of product association types matching the number configured in the store.
+- Each product association type in the list should be identifiable by its name (e.g., ""Cross sell"" should appear in the list)."
+21,"As a Store Administrator,
+I want to create a new text-type product attribute by specifying its code and name,
+So that I can define custom textual properties for products in the store.
+
+Acceptance Criteria:
+- The administrator must be able to create a text attribute by providing a unique code and a name in a selected language.
+- Upon successful creation, the administrator should receive a confirmation notification and the new text attribute should be visible in the store.
+- While creating a text attribute, the type field must be disabled to prevent changing the attribute type during this process."
+22,"As a customer,
+I want the address book edit form to safely handle address fields even if they contain malicious script-like content,
+So that I can update my address information without being exposed to potential XSS (Cross-Site Scripting) attacks.
+
+Acceptance Criteria:
+- The store operates on a single channel in ""United States"" and the user is a logged-in customer.
+- The customer has an existing address in their address book that contains a province value with embedded malicious script content (e.g., an XSS payload).
+- When the customer opens the edit form for that address, the page must render without executing any injected script or triggering an unexpected alert popup.
+- The customer must be able to successfully update the address information through the edit form without any interruption caused by malicious script execution.
+- Any potentially dangerous characters or script tags in the address fields must be properly escaped or sanitized when displayed or processed by the system."
+23,"As a Customer,
+I want to be able to return to the shop homepage while I am on the checkout addressing step,
+So that I can easily continue shopping or navigate away from checkout without getting stuck.
+
+Acceptance Criteria:
+- The store operates on a single channel in ""United States"", with the product ""The Stick of Truth"" priced at ""$19.99"" and available with free shipping everywhere.
+- When a product has been added to the cart and the customer is at the checkout addressing step, selecting the option to go back to the store should redirect the customer to the homepage."
+24,"As a Store Administrator,
+I want to view all existing zones sorted by priority in descending order,
+So that I can quickly identify which zones are most important and understand their ranking within the store configuration.
+
+Acceptance Criteria:
+- When viewing the list of all zones in the store, they should be displayed sorted by priority from highest to lowest by default
+- A zone created without an explicitly specified priority should automatically receive a default priority of 0, placing it at the bottom of the sorted list
+- The zone list should accurately reflect the total count of zones and display the correct zone at both the top (highest priority) and bottom (lowest priority) positions"
+25,"As a Customer,
+I want to complete the checkout process and confirm my order when a shipping promotion is applied,
+So that I can benefit from the discount on shipping cost while successfully placing my order.
+
+Acceptance Criteria:
+- The customer can add a product to the cart and proceed through the checkout addressing step by providing an email and billing address.
+- The system correctly applies the active promotion, granting a 10% discount on the shipping fee, when the customer selects the shipping method during checkout.
+- The customer can select an available shipping method and an offline payment option, then confirm the order.
+- Upon successful order confirmation, the customer is redirected to the thank you page."
+26,"As a store administrator,
+I want to reorder the images of a product,
+So that I can control the display sequence of product images in the store.
+
+Acceptance Criteria:
+- The administrator can access the image management view for a specific product and modify the position of each existing image.
+- The administrator can assign a new position value to each image (small, medium, large) and save the changes.
+- After saving, the images should be reordered according to the newly assigned positions, with each image's type correctly reflecting its new position in the list."
+27,"As a Customer,
+I want to see the lowest price a discounted product was sold at during the previous 30 days,
+So that I can evaluate whether the current discount is genuine before making a purchase decision.
+
+Acceptance Criteria:
+- When a product has no discount, no lowest-price-before-discount information is displayed.
+- When a product is discounted, the lowest price at which it was offered (with or without a prior discount) within the last 30 days is displayed, and this reference price updates correctly as the price and discount history change over time, only considering price points within the rolling 30-day window.
+- When a discount is removed and the product returns to its original price, no lowest-price-before-discount information is displayed, unless the price later drops below that original price and a new discount is subsequently applied, in which case the lowest price recorded is shown.
+- Catalog promotions are treated the same as manual price changes when determining the lowest price before the discount.
+- The lowest-price-before-discount information can be enabled or disabled per sales channel, and when disabled, it is never shown to customers regardless of discount history."
+28,"As a customer,
+I want the available shipping methods to be displayed in a specific, predefined order during checkout,
+So that I can easily find and select my preferred shipping option based on a consistent and logical arrangement.
+
+Acceptance Criteria:
+- Given a store with multiple shipping methods each assigned a specific position, the shipping methods should be displayed in ascending order according to their assigned positions.
+- When a logged-in customer adds a product to the cart, provides shipping address details, and proceeds to the shipping step, the shipping method list should reflect the correct sorted order.
+- The shipping method with the lowest position value should appear as the first choice, and the one with the highest position value should appear as the last choice."
+29,"As a customer,
+I want to view a product's images on the product details page in the correct order,
+So that I can see the main product image prominently and browse additional images easily.
+
+Acceptance Criteria:
+- When viewing a product details page, the product name should be displayed correctly.
+- The main image displayed should be the one designated with the ""main"" type.
+- Product images should be displayed as thumbnails in the correct order based on their assigned position, with the ""main"" type image appearing first.
+- Additional images (e.g., ""other"" type) should appear as subsequent thumbnails after the main image, in their assigned order."
+30,"As a store administrator,
+I want the system to validate the data I enter when creating or editing a taxon,
+So that I can avoid submitting incomplete, incorrect, or duplicate taxon information that could compromise the store's product categorization.
+
+Acceptance Criteria:
+- When attempting to add a translation for a taxon using a locale that is not available in the store, the system should notify the administrator that the locale is not available.
+- When attempting to create a new taxon without specifying a code, the system should notify the administrator that the code is required, and the taxon should not be added.
+- When attempting to create a new taxon without specifying a name, the system should notify the administrator that the name is required.
+- When attempting to create a new taxon with a code that exceeds the maximum allowed length, the system should notify the administrator that the code is too long.
+- When attempting to create a new taxon without specifying a slug (via the UI only), the system should notify the administrator that the slug is required.
+- When attempting to create a new taxon with a slug that is already used by another taxon, the system should notify the administrator that the taxon slug must be unique."
+31,"As an administrator,
+I want to delete a product association type from the store,
+So that I can keep the registry of association types clean and free of unused or unnecessary entries.
+
+Acceptance Criteria:
+- The administrator must be logged in to perform the deletion.
+- Upon deleting an existing product association type (e.g., ""Cross sell""), the system displays a confirmation notification that the deletion was successful.
+- After deletion, the product association type no longer exists in the registry."
+32,"As a Store Administrator,
+I want to browse the list of customer groups configured in the store,
+So that I can view and verify all existing customer groups at a glance.
+
+Acceptance Criteria:
+- Given the store has customer groups ""Retail"" and ""Wholesale"" already created, when I access the customer group browsing page, the system should display a list containing 2 customer groups.
+- The displayed list should correctly include the customer group named ""Retail"".
+- Only an authenticated administrator should be able to access and browse the customer group list."
+33,"As a customer,
+I want the checkout process to automatically skip the shipping step when my order does not contain any items requiring shipping,
+So that I can complete my purchase faster without going through an unnecessary shipping selection step.
+
+Acceptance Criteria:
+- When all items in the cart do not require shipping (e.g., digital products like ebooks), after completing the addressing step, the customer should be redirected directly to the payment step, bypassing the shipping step.
+- When at least one item in the cart requires shipping (e.g., a physical book), after completing the addressing step, the customer should be redirected to the shipping step as usual.
+- The determination of whether shipping is required should be based on the shipping requirements of each individual product variant in the cart."
+34,"As a store administrator,
+I want to remove a product variant's price from a specific channel,
+So that I can manage pricing configurations for channels where the product is disabled or no longer relevant, while retaining the original price for reference.
+
+Acceptance Criteria:
+- The administrator should be able to remove a configured price for a product variant on a specific channel, even if the product is disabled on that channel.
+- After removing the price, the product variant should no longer have a configured price for that channel.
+- The original price for the product variant on that channel should remain unchanged and still be displayed.
+- This behavior should be consistent whether the channel itself is enabled or disabled."
+35,"As a Finance/Accounting Officer,
+I want the system to generate correct General Ledger journal entries whenever a Credit Balance Refund (CBR) is processed on an overpaid Working Capital loan,
+So that overpayment liabilities are accurately debited and cleared through the appropriate suspense/clearing account, ensuring the accounting records remain accurate regardless of refund amount, frequency, or timing.
+
+Acceptance Criteria:
+- When a partial credit balance refund is processed on an overpaid Working Capital loan, the loan status must remain ""OVERPAID"" and generate a journal entry debiting the ""Other Credit Liability"" account and crediting the ""Suspense/Clearing"" account for the refunded amount.
+- When a credit balance refund fully settles the overpaid amount, the loan status must transition to ""CLOSED_OBLIGATIONS_MET"" and the corresponding journal entries must be recorded accurately.
+- The system must support multiple credit balance refunds on the same day or across different days, correctly reducing the overpayment balance each time and generating a separate, accurate set of journal entries for each refund transaction, including cases where payment details (such as payment type, account number, check number, routing code, receipt number, and bank number) are provided."
+36,"As a Bank Administrator,
+I want to create, view, update, and delete Working Capital Near Breach configurations with proper validation on their fields (name, frequency, frequency type, and threshold),
+So that I can accurately manage and enforce early-warning thresholds for working capital loans before they reach an actual breach, while preventing invalid, duplicate, or unsafe configuration changes.
+
+Acceptance Criteria:
+- The system shall allow an Admin to create a new Working Capital Near Breach configuration by providing valid values for name, frequency, frequency type, and threshold, and shall persist and correctly return these values upon creation, update, and deletion.
+- The system shall reject creation or update of a Near Breach configuration when mandatory fields (nearBreachName, nearBreachFrequency, nearBreachFrequencyType, nearBreachThreshold) are null or empty, returning a clear mandatory-field error message.
+- The system shall reject creation or update when nearBreachFrequency is not greater than 0, returning an appropriate validation error.
+- The system shall reject creation or update when nearBreachFrequencyType is not one of the allowed values (DAYS, WEEKS, MONTHS, YEARS), returning an appropriate validation error.
+- The system shall reject creation or update when nearBreachThreshold is not greater than 0 or exceeds 100, returning an appropriate validation error.
+- The system shall prevent creating or updating a Near Breach configuration with a name that already exists, returning a duplicate-name error.
+- The system shall prevent deleting a Near Breach configuration that has already been deleted, returning an appropriate error, and shall also prevent retrieval of such a deleted configuration.
+- The system shall reject deletion or retrieval requests referencing a Near Breach configuration ID that does not exist or is invalid (e.g., 0 or an unassigned ID), returning a not-found error.
+- The system shall prevent deletion of a Near Breach configuration that is still assigned to an active Working Capital Loan Product or a Working Capital Loan Account, returning an appropriate assignment error."
+37,"As a system administrator,
+I want the Close of Business (COB) job to automatically process loans and keep the last closed business date accurate for each loan,
+So that loan statuses, delinquency classifications, and locking mechanisms remain consistent and up to date without manual intervention.
+
+Acceptance Criteria:
+- After the COB job runs, each active loan's ""last closed business date"" must be updated to reflect one day behind the current business date, and this must not change for loans already CLOSED or OVERPAID.
+- When the business date advances by multiple days, running ""COB catch up"" must process each missed day sequentially until the loan's last closed business date reaches one day behind the current business date.
+- The COB job must correctly calculate and update the loan's delinquency range and delinquency date based on the configured arrears tolerance/settings on the loan product, and must maintain an accurate delinquency history (added/lifted dates) as the loan moves in and out of delinquency ranges.
+- If a payment is made on a loan whose last closed business date is behind the current business date, an inline COB run must be triggered automatically before the repayment is processed, so the loan's last closed business date is brought up to date first.
+- The COB job must correctly manage loan locks: locks with an error message must remain in place (blocking further processing), while orphaned locks without an error message must be automatically removed once the loan has already been processed for that COB date; locks with a null COB date or a COB date that doesn't match the loan's last closed business date must always be preserved.
+- After a successful COB run, no unreleased/orphaned locks should remain on the loan account, and when multiple loans are processed in the same COB run, only the orphaned locks (without errors) should be removed while locks carrying error messages remain intact for their respective loans."
+38,"As a Loan Product Manager,
+I want the system to correctly recalculate and amortize the Working Capital loan discount fee across multiple COB runs, repayments, and discount fee adjustments,
+So that realized and unrealized income figures remain accurate and consistent throughout the loan lifecycle, without generating duplicate transactions.
+
+Acceptance Criteria:
+- When the COB job runs after a new repayment, a new Discount Fee Amortization transaction must be created and the realized/unrealized income amounts must be updated proportionally to the principal paid.
+- When the COB job runs again without any new repayment since the last run, no duplicate Discount Fee Amortization transaction should be generated and the loan's financial data must remain unchanged.
+- When a Discount Fee Adjustment is applied, the system must generate a corresponding Discount Fee Amortization Adjustment transaction with correct journal entries, and undoing that adjustment must reverse both transactions and restore the loan's previous financial data.
+- When the loan is fully repaid and closed, the system must automatically recognize the full remaining discount fee amortization, regardless of whether a prior discount fee adjustment reduced the total discount amount, and post the correct journal entries.
+- Subsequent COB runs after an amortization adjustment must not create duplicate adjustment transactions, preserving the accuracy of realized and unrealized income data."
+39,"As a System Administrator,
+I want the Spring Batch infrastructure to correctly read job-specific configuration properties (such as partition size, chunk size, and retry limit) for defined jobs, and to fall back to safe default values for undefined jobs,
+So that batch jobs like LOAN_COB can be executed with the correct performance and resilience settings, while unrecognized job configurations do not cause failures or unpredictable behavior.
+
+Acceptance Criteria:
+- Given the Property Service is initialized, when the partition size, chunk size, and retry limit are fetched for the ""LOAN_COB"" job, the system must return a partition size of 100, a chunk size of 100, and a retry limit of 5.
+- Given the Property Service is initialized, when the partition size, chunk size, and retry limit are fetched for a non-existing job (e.g., ""INVALID_JOB""), the system must return default values of 1 for partition size, chunk size, and retry limit.
+- The Property Service must be able to distinguish between configured jobs and unconfigured/invalid jobs, applying the appropriate values accordingly without throwing errors."
+40,"As a Finance Officer,
+I want the system to automatically generate and record loan accrual transactions for outstanding fees, interest, and penalties whenever the Close of Business (COB) job or periodic accrual job runs,
+So that unearned income is accurately recognized and tracked throughout the loan lifecycle, ensuring correct financial reporting regardless of repayments, chargebacks, waivers, overpayments, or multiple disbursements.
+
+Acceptance Criteria:
+- When a due-date fee charge exists on a loan's disbursement date, running the COB job (inline or periodic) must create an Accrual transaction reflecting the correct fee amount, and the corresponding LoanAccrualTransactionCreatedBusinessEvent must be raised on that date, regardless of whether a partial or full repayment has already been made.
+- Accrual transactions must continue to be generated correctly even when the loan has been fully repaid and closed (CLOSED_OBLIGATIONS_MET), when a chargeback is applied afterward, or when a fee charge is waived and the waiver is later undone.
+- For loans using interest recalculation (declining balance, daily recalculation), the periodic accrual job or COB job must generate an Accrual transaction with the correct accrued interest amount, both before and after the loan reaches a closed state.
+- When a loan transitions into an OVERPAID status (due to full repayment covering principal, interest, and fees plus an excess amount), a final Accrual transaction must still be created for any outstanding fees, and this must remain consistent even after a Credit Balance Refund (CBR) is applied.
+- Accrual transactions must be correctly reconstructed after a repayment undo followed by a new overpayment, including scenarios where an additional fee charge is added between the undo and the repeated overpayment.
+- When mult"
+41,"As a Loan Officer,
+I want to initiate a delinquency pause on a working capital loan by specifying a start date and end date,
+So that the delinquency calculation and repayment schedule can be adjusted to account for periods where the client should not be penalized for non-payment.
+
+Acceptance Criteria:
+- When a delinquency pause is initiated on the disbursement day, the pause action is recorded with the correct start and end dates, and the range schedule's ""toDate"" is extended by the paused duration while expected, paid, and outstanding amounts remain unchanged.
+- When a delinquency pause is initiated in the middle of the current period (whether the pause is future-dated, backdated, or overlapping the current business date), the system correctly extends the schedule's ""toDate"" by the number of paused days without affecting expected, paid, or outstanding amounts.
+- When a delinquency pause is initiated for a period that has already lapsed (e.g., in a subsequent period), the system correctly marks the prior period as delinquent (with the accurate delinquent amount and delinquent days) while still applying the pause extension to the current or future period's range schedule.
+- When a delinquency pause overlaps multiple periods, the system correctly splits and recalculates each affected period's range schedule, extending the ""toDate"" of each period according to the number of paused days falling within it.
+- When multiple delinquency pauses (past, current, and future) are initiated for the same loan, all pause actions are retained and displayed accurately, and the range schedule reflects the cumulative effect of all applicable pauses as the business date progresses.
+- After each business date progression and COB job execution, the delinquency range schedule is recalculated to accurately reflect minimum payment criteria met, delinquent amount, and delinquent days for periods where pauses have expired or are no longer active."
+42,"As a Loan Officer,
+I want to apply loan re-aging transactions on a loan before its maturity date, including scenarios where charges (fees/penalties) are already scheduled on installments,
+So that I can restructure the remaining repayment schedule into new evenly distributed installments while correctly preserving or reallocating any due charges on the affected periods.
+
+Acceptance Criteria:
+- When a re-aging transaction is created before the maturity date, the system must recalculate the repayment schedule starting from the specified start date, distributing the outstanding principal evenly across the specified number of new installments.
+- If a charge (e.g., NSF fee) is due on an installment being replaced by the re-aging transaction, the charge must be preserved and correctly reflected either on the re-aged installment or retained on the unaffected ""n+1"" installment as applicable, without loss of due amounts.
+- Installments beyond the re-aged range (n+1 and further, such as those containing pre-existing charges scheduled after the new schedule's end date) must remain unmodified by the re-aging transaction.
+- The system must correctly generate a preview of the re-aged repayment schedule (via the ""Loan re-aging preview"" action) that matches the actual schedule generated after the re-aging transaction is confirmed.
+- After a re-aging transaction, the Loan Transactions tab must record a ""Re-age"" transaction with the correct amount, principal, date, and resulting loan balance, and the totals in the repayment schedule (principal, fees, penalties, due, paid, outstanding) must remain consistent with amounts before re-aging.
+- The loan must be payable in full (via Loan Pay-off) after re-aging, resulting in a zero outstanding balance with all installments marked as having obligations met."
+43,"As a Loan Officer,
+I want the loan system to correctly handle down payment calculations, allocations, and reversals when loans become overpaid due to multiple disbursements, and to control down payment configurability at the loan level based on product-level settings,
+So that overpaid amounts are accurately reallocated against subsequent disbursements, loan balances and repayment schedules remain correct after transaction reversals, and down payment behavior consistently respects the rules defined at the product level.
+
+Acceptance Criteria:
+- When a loan becomes overpaid and a subsequent disbursement is made, the system must correctly determine whether the overpaid amount is greater or smaller than both the disbursement amount and the related down payment amount, and allocate the overpaid amount accordingly, generating a new Down Payment transaction only when applicable, updating the loan status, outstanding/overpaid amounts, repayment schedule, and transaction history accurately.
+- When a repayment transaction that caused an overpayment is reverted after a subsequent disbursement has already occurred, the system must correctly recalculate the repayment schedule, outstanding balances, in-advance/late amounts, and transaction history, marking the reverted transaction accordingly.
+- When multiple disbursements are made on the same day (or across different days) for a loan using advanced payment allocation, the system must correctly create a new repayment period and corresponding Down Payment transaction for each disbursement, updating the schedule and total row balances accurately.
+- When a loan is fully paid off after multiple disbursements and down payments, the system must close the loan with a zero outstanding balance and mark all installments as having their obligations met.
+- When creating a loan, the system must only allow enabling down payment if the selected loan product has down payment enabled, and must reject loan creation attempts that try to force-enable down payment on a product where it is disabled.
+- When creating a loan from a product with down payment enabled, the system must allow specifying a custom auto down payment percentage, and correctly apply this percentage to calculate the down payment amount for each disbursement, reflecting it accurately in the repayment schedule and transaction history."
+44,"As a Loan Officer,
+I want the system to automatically generate an additional (N+1) installment when a charge is added to a loan after its maturity date, regardless of whether the loan is already closed or still active with an outstanding balance,
+So that fees applied after the original repayment schedule has ended are still properly tracked, billed, and can be collected without disrupting the existing installment history.
+
+Acceptance Criteria:
+- When a due date charge is added on a date after the loan's original maturity/last installment date, the system must create a new (N+1) installment period with a due date matching the charge's due date, containing only the fee/penalty amount (zero principal and interest).
+- This behavior must be consistent across all supported loan configurations: LP1 products, LP2 products with auto-payment (down payment) enabled, LP2 products with auto-payment disabled, and LP2 products using Advanced Payment Allocation.
+- The behavior must apply whether the loan status is CLOSED_OBLIGATIONS_MET (fully paid off) or ACTIVE with a remaining outstanding balance (partial repayment scenario).
+- The Loan Repayment Schedule, Total row, Loan Transactions tab, and Loan Charges tab must all correctly reflect the new installment, the added charge amount, and updated outstanding/paid/due totals.
+- After the new charge is added, performing a full Loan Pay-off on the charge due date must close the loan with zero outstanding balance and mark all installments (including the new N+1 installment) as obligations met."
+45,"As a Loan Product Manager,
+I want the system to correctly recalculate and reverse-replay accrual and accrual activity transactions whenever a repayment is reversed, undone, or backdated relative to installment dates,
+So that interest accrual records, repayment schedules, and transaction histories remain accurate and consistent regardless of when repayment adjustments occur.
+
+Acceptance Criteria:
+- When a repayment is reversed before its installment due date, the system must restore the original repayment schedule (principal, interest, due/outstanding amounts) and revert the associated Accrual Activity transaction, while keeping the original Accrual transaction unaffected.
+- When a repayment is reversed after its installment due date, the system must reverse-replay the Accrual Activity transaction on the correct installment date, recalculate interest for subsequent periods, and preserve the external ID continuity between the original and replayed Accrual Activity transactions.
+- When the COB job runs on or after an installment date, the system must generate Accrual and Accrual Activity transactions automatically, and if a backdated repayment is later posted before that installment date, the existing Accrual Activity transaction must be reverse-replayed with updated interest and principal allocations while retaining its external ID.
+- When a partial repayment made before an installment date is later undone, the system must fully reverse the related Accrual Activity transaction, restore the original schedule values for all subsequent periods, and ensure the Loan Transactions tab accurately reflects the reverted and replayed transaction statuses.
+- In all reversal and replay cases, the Total row of the Loan Repayment Schedule and the Loan Transactions tab must always reflect updated, consistent, and correct principal, interest, fees, penalties, due, paid, in advance, late, and outstanding values."
+46,"As a Loan Officer,
+I want the system to correctly process partial and full chargebacks of prior repayments on loans with interest recalculation enabled, applying the configured allocation priority (principal, interest, fees or interest, fees, principal) and recalculating the repayment schedule and outstanding balances accordingly,
+So that I can accurately reverse erroneous or returned payments at any point in the loan lifecycle—whether before or after the maturity date—while ensuring the loan schedule, transaction history, and outstanding amounts remain correct and auditable.
+
+Acceptance Criteria:
+- When a chargeback (partial or full) is processed for a previously paid installment, the system must recalculate the remaining repayment schedule, redistributing the charged-back amount across principal, interest, and fees according to the loan product's configured allocation priority order.
+- The system must correctly recalculate interest for subsequent periods after a chargeback, reflecting the increased outstanding balance from the current business date forward, regardless of whether the chargeback occurs before or after the loan's original maturity date.
+- If a chargeback occurs after the loan has been fully repaid and past the original maturity date, the system must generate an additional repayment period to accommodate the outstanding balance resulting from the chargeback.
+- The Loan Transactions tab must record each chargeback as a distinct transaction entry, showing the correct date, amount, principal/interest/fee breakdown, and resulting loan balance, while preserving the original disbursement and repayment transaction history.
+- The Loan Repayment schedule's Total row must accurately reflect updated aggregate values (principal due, interest, fees, due, paid, outstanding) after each chargeback transaction is applied.
+- Multiple sequential chargebacks (e.g., on different installments or on different business dates) must be supported, with each subsequent chargeback correctly building upon the recalculated state left by the previous one."
+47,"As a Developer,
+I want to verify that no duplicate classes exist in the classpath,
+So that I can prevent potential conflicts and ensure application stability.
+
+Acceptance Criteria:
+- A class graph representing the classpath is available for analysis.
+- The system scans the class graph to identify any classes present in multiple locations.
+- The scan confirms that no duplicate classes are found in the classpath."
+48,"# User Story
+
+As a Working Capital loan operations user (Admin/Customer),
+I want backdated repayments to be correctly recorded on their actual transaction date and trigger reprocessing of subsequent transactions when necessary,
+So that loan balances, principal allocations, charge allocations, and delinquency tracking remain accurate and consistent regardless of the order in which repayments are recorded.
+
+Acceptance Criteria:
+- When a customer makes a repayment dated earlier than an already-recorded repayment (backdated repayment), the system must recompute and reflect the correct principal outstanding, total paid principal, and overpayment amount, independent of the order in which repayments were entered.
+- When a loan has no charges, principal-only allocation across multiple repayments (including backdated ones) must be order-independent, leaving previously recorded transactions' allocations unchanged.
+- When a backdated repayment causes the total repaid amount to exceed the outstanding principal, the excess must be recorded as an overpayment amount, without redistributing the allocation of other transactions.
+- When multiple backdated repayments are made in any sequence (including between two existing repayments), the system must accumulate principal outstanding, total paid principal, and transaction records correctly for all repayments.
+- When repayments are made sequentially in chronological order (non-backdated), the system must process balances and allocations normally without triggering unnecessary reprocessing side effects.
+- When a backdated repayment is made before a charge's due date, the repayment must be allocated as principal-only, while the later repayment made on or after the charge's due date must settle the charge first per the fee-first allocation order.
+- When a single repayment covers multiple lapsed delinquency periods, the system must distribute the paid amount across periods based on each period's remaining outstanding balance, correctly updating expected amount, paid amount, outstanding amount, minimum payment criteria met status, delinquent amount, and delinquent days for each period.
+- When a backdated repayment is recorded, the projected amortization schedule structure must remain a static, unaffected projection, while the recalculated principal outstanding must reflect the actual impact of the backdated payment.
+- When a backdated repayment is made on a loan configured with a breach schedule, the outstanding balance tracked by the breach schedule must be reduced accordingly after the inline COB job processes the loan.
+- When a backdated repayment causes a later transaction's fee allocation to no longer apply (because the earlier backdated transaction now claims the fee), the later transaction must be reprocessed to reallocate its portion fully to principal, following the fee-first allocation order defined by the loan product.
+- When a repayment is made against a loan with a due fee, the transaction must split allocation between fee and principal according to the product's configured payment allocation order (e.g., fee before principal), and the charge balance (fee amount, fee paid, fee outstanding) must be updated to reflect the settlement."
+49,"As a Loan System Administrator,
+I want the system to automatically execute the Close of Business (COB) process inline (in real-time) whenever a loan transaction occurs after the business date has advanced beyond the loan's last closed business date,
+So that loan statuses, delinquency classifications, and overdue calculations remain accurate and up-to-date even when the scheduled batch COB job has not yet run, without requiring manual intervention.
+
+Acceptance Criteria:
+- When the inline COB job is manually triggered for a loan, the system correctly updates the loan's delinquency range and delinquent date based on the elapsed business days since disbursement.
+- When the business date advances by multiple days, running the inline COB job should cause the loan to ""catch up,"" setting the last closed business date to one day prior to the current business date.
+- When a repayment transaction is made on a loan whose last closed business date is behind the current business date, the inline COB process should trigger automatically (via the loan's ID or external ID) to bring the loan's business date up to date before or as part of processing the transaction.
+- If no COB process has ever been applied to a loan before, a repayment transaction (whether identified by loan ID or external ID) should NOT trigger an inline COB job, and the loan's last closed business date should remain ""null"" after the transaction.
+- If a COB process has previously been applied to a loan, a subsequent repayment transaction (whether identified by loan ID or external ID) SHOULD trigger an inline COB job, updating the last closed business date accordingly (to one day prior to the transaction date).
+- Even when a loan account is locked by an administrator, a repayment transaction should still trigger the inline COB execution, correctly closing the business date, updating the loan status to ""CLOSED_OBLIGATIONS_MET,"" clearing the outstanding balance, generating the correct journal entries, and recording accurate delinquency history (added/lifted dates).
+- The inline COB and delinquency/lock behavior described above must hold true consistently for both default (simple) loan products and advanced/progressive loan products (e.g., those using Advanced Payment Allocation and interest recalculation rules)."
+50,"As a Loan Administrator,
+I want the loan repayment schedule and Interest Refund transactions to be automatically recalculated whenever a repayment or refund transaction is reversed, and post-maturity due date charges to be correctly recognized on the repayment schedule,
+So that the loan balances, interest amounts, and outstanding dues remain accurate and consistent regardless of transaction reversals or late-added charges.
+
+Acceptance Criteria:
+- When a repayment transaction is undone after an Interest Refund has already been processed, the system must recalculate the repayment schedule, correctly reallocate principal and interest across transactions, and mark the original repayment and related transactions as ""reverted"" while creating replayed counterparts.
+- When a Merchant Issued Refund transaction is undone, the system must reverse the associated Interest Refund transaction, recalculate the outstanding schedule with newly accrued interest, and correctly reflect the reverted status on both the Merchant Issued Refund and Interest Refund transactions in the Loan Transactions tab.
+- When a due date charge (e.g., NSF fee) is added after the loan's original maturity date, the system must extend the repayment schedule with an additional period reflecting the charge, correctly recalculate the total due/outstanding amounts, and ensure the charge appears properly in the Loan Charges tab whether or not an inline COB job has been run.
+- After all recalculations, the loan must still support a full pay-off transaction that results in the ""CLOSED_OBLIGATIONS_MET"" status once all outstanding principal, interest, fees, and penalties are settled."
+51,"As a Financial Administrator,
+I want to migrate backdated loans into the system and have the Close of Business (COB) job correctly recalculate schedules, accruals, charges, and delinquency status,
+So that historical loan data (with past disbursements, repayments, and charges) is accurately reflected in the system without requiring day-by-day COB execution for every missed business date.
+
+Acceptance Criteria:
+- When a loan is created, approved, and disbursed with a backdated submission and disbursement date, the repayment schedule must be generated correctly based on the original terms, showing accurate principal, interest, and due amounts for each period.
+- Backdated charges (such as an NSF fee) added to a migrated loan must be correctly reflected in the Loan Charges tab with accurate due, paid, waived, and outstanding amounts as of their specified due date.
+- Backdated repayments (full or partial) applied after loan migration must correctly update the repayment schedule, transaction history, and outstanding balances, including proper allocation to principal, interest, fees, and penalties.
+- Running a single inline COB job after migration must correctly generate all missing accrual entries (both ""Accrual Activity"" and ""Accrual"" transactions) for each period up to the current business date, without requiring COB to run for each individual missed day.
+- After COB execution, the loan's total overdue amount and delinquency status must be accurately calculated based on all recorded transactions and charges.
+- The system must correctly record and expose the ""last closed business date"" of the loan after each COB execution.
+- When the business date advances further and COB is run again, the system must generate only the incremental accrual entries for the new period(s), without duplicating or recalculating previously settled transactions.
+- The final repayment schedule, transaction history, and total row summaries must remain consistent and accurate across multiple COB executions following migration."
+52,"As a Loan Officer,
+I want the system to correctly recalculate the repayment schedule, interest amounts, and accounting entries when a multi-disbursement progressive loan with flat interest receives an additional disbursement at various points in the repayment cycle (mid-period or on the installment due date),
+So that I can accurately manage tranche disbursements, ensure correct interest accrual and journal postings, and safely reverse repayments or disbursements when corrections are needed without corrupting the loan's financial data.
+
+Acceptance Criteria:
+- When a second disbursement is made on a loan with flat interest and multi-disbursement enabled, the repayment schedule must be recalculated to redistribute the additional principal and recompute interest across the remaining installments, regardless of whether the disbursement occurs mid-period or exactly on an installment due date.
+- The recalculation behavior must be consistent across different interest calculation conventions (e.g., actual/actual and 360/30), with the schedule reflecting split balance rows for the disbursement date and updated principal, interest, and due amounts for affected installments.
+- Each disbursement transaction must generate correct journal entries (debiting Loans Receivable and crediting the Suspense/Clearing account) for the exact disbursed amount, and the Loan Transactions tab must reflect all disbursements with accurate running loan balances.
+- When a customer repayment is made via AUTOPAY covering all outstanding dues, the system must correctly allocate the payment across principal and interest for each installment, update paid/in-advance/late/outstanding statuses, and generate an accrual transaction alongside proper repayment journal entries.
+- The system must support undoing a repayment and undoing the last disbursement, correctly reverting the loan schedule and transaction history back to the state prior to those actions, with reverted transactions clearly flagged (Reverted = true) while preserving the integrity of prior transactions (Replayed = false)."
+53,"As a Loan Officer,
+I want to apply an Interest Payment Waiver transaction on a loan account with different payment allocation strategies, timings, and amounts,
+So that I can waive part or all of the interest due for a borrower while accurately reflecting the impact on the repayment schedule, transaction history, and accounting journal entries.
+
+Acceptance Criteria:
+- The system must allow an Interest Payment Waiver transaction to be applied on the due date, before the due date, or after the maturity date, with either the exact outstanding interest amount or a partial amount.
+- When the waiver amount exceeds the interest due, the system must correctly allocate the remaining amount to principal, fees, or penalties based on the configured payment allocation strategy (e.g., interest-principal, fee-interest-principal, principal-interest).
+- The repayment schedule must be updated accurately after the waiver, reflecting correct values for principal due, interest, fees, penalties, paid amount, in advance amount, late amount, and outstanding balance for each period and in the total row.
+- The Loan Transactions tab must display the Interest Payment Waiver transaction with the correct date, amount, and breakdown across principal, interest, fees, and penalties, along with the resulting loan balance.
+- The system must generate correct journal entries for the Interest Payment Waiver transaction, debiting the Interest Income account and crediting the appropriate receivable accounts (Loans Receivable and/or Interest/Fee Receivable) based on the allocation.
+- If the waiver amount results in an overpayment, the loan status must change to ""OVERPAID,"" the overpaid amount must be tracked, and the corresponding journal entries must include the Overpayment account.
+- The system must support undoing an Interest Payment Waiver transaction, reverting the repayment schedule, transaction history, and journal entries to their prior state.
+- The system must correctly handle scenarios where a waiver is applied before the due date, followed by a subsequent repayment for the remaining due amount on the due date, ensuring accurate calculation of ""in advance,"" ""late,"" and ""outstanding"" values."
+54,"As a Loan Officer,
+I want to define interest pause periods on a loan's repayment schedule so that interest does not accrue during the specified pause window,
+So that customers are not charged interest for periods where repayment obligations are temporarily suspended, while the loan schedule automatically recalculates to reflect the adjusted interest and outstanding balances.
+
+Acceptance Criteria:
+- When an interest pause period is created with a start and end date, the system triggers a LoanScheduleVariationsAddedBusinessEvent reflecting the specified pause range, and a LoanBalanceChangedBusinessEvent is raised on the appropriate transaction date.
+- The repayment schedule must recalculate interest for all outstanding periods affected by the pause, reducing the interest due for the paused days while adjusting principal, balance, due, and outstanding amounts accordingly, without altering already paid installments.
+- The system must support creating an interest pause period within the same period as an unpaid installment, between multiple future periods, retroactively (backdated) after a repayment has already been made, and support multiple overlapping or sequential pause periods within the same loan, with each new pause correctly recalculating the schedule and marking affected transactions as replayed where applicable.
+- After applying one or more interest pauses, the loan must still be payable in full, and performing a pay-off transaction on any given date must close the loan with zero outstanding balance and all installments marked as having their obligations met."
+55,"As a Finance Manager,
+I want the Transaction Summary Reports (including the version with Asset Owner details) to accurately capture and display all buydown fee related transaction types—such as Buy Down Fee, Buy Down Fee Amortization, Buy Down Fee Adjustment, and Buy Down Fee Amortization Adjustment—along with their correct allocation across Fees, Interest, Penalty, Principal, and Unallocated Credit categories,
+So that I can reliably reconcile loan transactions and verify the correct accounting treatment of buydown fees regardless of whether they are configured as an income type of ""FEE"" or another allocation type.
+
+Acceptance Criteria:
+- When a loan is disbursed and a buydown fee transaction is recorded, the Transaction Summary Report for that date must correctly reflect the Disbursement and Buy Down Fee transaction amounts, allocating the fee amount to the appropriate category (Interest or Fees) based on the product's configured buydown fee income type.
+- After running the COB (Close of Business) job on a subsequent date, the Transaction Summary Report must include a ""Buy Down Fee Amortization"" entry with the correctly calculated periodic amortization amount allocated to the appropriate category (Interest or Fees) consistent with the product configuration.
+- When a buydown fee adjustment (both a direct adjustment and an adjustment referencing an original buydown fee transaction) is applied, the Transaction Summary Report must show both a ""Buy Down Fee Adjustment"" entry and a corresponding ""Buy Down Fee Amortization Adjustment"" entry, with negative transaction amounts correctly reflecting the reduction, allocated to the appropriate category (Interest or Fees).
+- The Transaction Summary Report with Asset Owner must mirror all the same transaction entries, dates, types, payment types, and amounts as the standard Transaction Summary Report, additionally exposing Asset Owner ID and From Asset Owner ID columns for reporting purposes.
+- All reported transaction amounts must remain consistent whether the loan product's buydown fee income type is configured as default (Interest allocation) or explicitly as ""FEE"" (Fees allocation), with amounts correctly routed to the corresponding column in each case."
+56,"As a Loan Administrator,
+I want to configure and apply disbursement charges on interest-bearing progressive loans using different calculation types (Flat amount, Percentage of Amount, and Percentage of Loan Amount plus Interest),
+So that I can accurately charge fees at disbursement time and ensure correct accounting, repayment schedules, and loan balances are maintained throughout the loan lifecycle.
+
+Acceptance Criteria:
+- When a disbursement charge is configured with a ""Flat"" calculation type and a specified amount, the system must display the correct due charge amount on the Loan Charges tab, deduct it from the disbursement transaction as a ""Repayment (at time of disbursement)"" entry, and post the corresponding Fee Income and Suspense/Clearing account journal entries.
+- When a disbursement charge is configured with a ""Percentage of Amount"" calculation type, the system must calculate the charge based on the specified percentage of the transaction amount and reflect it consistently across the Loan Charges tab, Repayment Schedule, Loan Transactions tab, and Journal Entries.
+- When a disbursement charge is configured with a ""Percentage of Loan Amount + Interest"" calculation type, the system must calculate the charge based on both principal and total interest, and this value must be reflected consistently across the Loan Charges tab, Repayment Schedule, Loan Transactions tab, and Journal Entries.
+- Regardless of the calculation type, the disbursement charge must be fully paid off immediately upon disbursement, with the Loan Charges tab reflecting zero Outstanding and full Paid amount right after disbursement.
+- Regular repayments made after disbursement must correctly reduce the outstanding principal and interest balances according to the repayment schedule, without being affected by the disbursement charge once it has been settled.
+- Upon full repayment (via Pay-off) of the outstanding principal and interest, the loan must be closed with a zero outstanding balance, and all installments must have their obligations marked as met."
+57,"As an Admin,
+I want to enable, configure, and manage the business date within the system,
+So that I can control and maintain accurate date-based operations either manually or through scheduled automation.
+
+Acceptance Criteria:
+- The system allows enabling or disabling the ""enable-business-date"" global configuration.
+- The Admin can manually set the business date to a specific value and verify it is correctly applied.
+- The Admin can update the business date multiple times, with each change being correctly reflected.
+- The system supports incrementing the business date automatically through a scheduled job (e.g., Increase Business Date by 1 day).
+- The system validates business date input and returns an appropriate error message when the value is empty or null.
+- The system validates business date input and returns an appropriate error message when the value has an invalid or incorrectly formatted date."
+58,"As a Loan Administrator,
+I want to apply and manage Discount Fee Adjustments on Working Capital Loan accounts,
+So that I can accurately correct or reduce previously applied discount fees while maintaining reliable loan balances, transaction history, and accounting records.
+
+Acceptance Criteria:
+- Admin can successfully add a Discount Fee Adjustment to an active Working Capital Loan for an amount less than or equal to the remaining discount fee balance, updating the loan's totals (discount, totalDiscountFee, totalDiscountFeeAdjustment) and creating a corresponding ""Discount Fee Adjustment"" transaction.
+- The system rejects Discount Fee Adjustment attempts when the adjustment amount exceeds the available discount fee amount (single or cumulative), when the amount is zero or negative, when the transaction date precedes the related discount fee date, when the transaction date is in the future, or when the loan is not in an Active status (e.g., closed or overpaid), preserving the existing transaction history unchanged in each failure case.
+- Multiple Discount Fee Adjustments can be applied successfully on the same date or different dates, correctly appending each adjustment transaction, raising the appropriate WorkingCapitalLoanDiscountFeeAdjustmentTransactionBusinessEvent with correct amount and date, and generating accurate journal entries (debiting Deferred Interest Revenue and crediting Loans Receivable) for each adjustment made."
+59,"As a Loan Administrator,
+I want to re-age interest-bearing loans using equal amortization interest handling methods and reverse those re-aging transactions when necessary,
+So that I can accurately adjust repayment schedules for customers while ensuring the loan can be correctly restored to its original state and still reach full repayment if the re-aging is undone.
+
+Acceptance Criteria:
+- When a re-aging transaction is applied with a specified interest handling method (e.g., EQUAL_AMORTIZATION_PAYABLE_INTEREST or EQUAL_AMORTIZATION_FULL_INTEREST), the system must recalculate the repayment schedule, splitting the original installment where re-aging starts and generating new installments with recalculated principal and interest amounts based on the outstanding balance.
+- The system must correctly record the re-age transaction in the Loan Transactions tab, including the appropriate principal, interest, and outstanding loan balance, without altering previously paid installments.
+- When a re-aging transaction is undone, the system must restore the original repayment schedule (matching the state prior to re-aging) and mark the re-age transaction as reverted, while preserving all previous repayment history.
+- After undoing a re-aging transaction, the loan must remain payable in full, allowing a pay-off transaction to close the loan with zero outstanding balance and all installments marked as having obligations met."
+60,"# User Story
+
+As a Loan Officer,
+I want the loan repayment schedule to accurately recalculate principal, interest, fees, and penalties based on different interest recalculation frequencies, payment strategies, partial/late payments, multi-disbursements, and charges added mid-cycle,
+So that I can ensure accurate tracking of outstanding balances, due amounts, and payment allocations for customers under various loan repayment scenarios.
+
+Acceptance Criteria:
+- Given a loan with Declining Balance interest type and interest recalculation frequency set to ""Same as Repayment Period"", when a customer makes a partial or late repayment, the system must correctly recalculate the remaining periods' principal, interest, due, paid, in advance, late, and outstanding amounts.
+- Given a loan with multiple disbursements, when each disbursement occurs at a different date, the system must recalculate the outstanding loan balance and future installment breakdown (principal and interest) accordingly.
+- Given a loan configured with the ""Due-Penalty-Fee-Interest-Principal-In Advance-Principal-Penalty-Fee-Interest"" payment strategy, when a penalty charge with a future due date is added and repayments are made before, on, or after the charge due date, the system must allocate payments in the correct order (due amounts first, then in-advance principal, then remaining penalty/fee/interest) and update the loan transactions, charges, and repayment schedule tabs accurately.
+- Given a repayment that fully covers the due installment plus additional charges, when the payment is processed, the system must generate correct transaction records (including accrual entries when applicable) and mark the installment as fully paid with zero outstanding balance.
+- In all scenarios, the Loan Repayment Schedule and Total Row must display accurate values for Principal Due, Interest, Fees, Penalties, Due, Paid, In Advance, Late, and Outstanding amounts consistent with the loan’s configured terms and repayment strategy."
+61,"As a Loan Officer/Administrator,
+I want the loan management system to accurately track overdue status, repayment history, and support various transaction types (refunds, chargebacks, fraud flags) throughout the loan lifecycle,
+So that I can ensure correct delinquency reporting, accurate outstanding balances, and proper handling of financial adjustments for compliance and customer service purposes.
+
+Acceptance Criteria:
+- When a Payout Refund or Merchant Issued Refund transaction fully covers the outstanding balance, the delinquency range must reset to ""NO_DELINQUENCY"", the delinquent date must be cleared, the loan status must change to ""CLOSED_OBLIGATIONS_MET"", and the outstanding amount must become zero.
+- The system must correctly calculate and report the delinquent date based on the earliest overdue installment, whether a single repayment or multiple repayments are overdue, reflecting the appropriate delinquency range (e.g., RANGE_3, RANGE_30).
+- The loan details endpoint must always return the correct ""last payment amount/date"" and ""last repayment amount/date"" fields, updating appropriately after each repayment, goodwill credit, transaction reversal, loan closure, or overpayment event.
+- Both closed (""CLOSED_OBLIGATIONS_MET"") and overpaid (""OVERPAID"") loans must be eligible to be flagged as Fraud by an Administrator.
+- The repayment schedule must recalculate principal, fees, and outstanding balances correctly when multiple disbursements occur on a loan that already has fees applied.
+- When a chargeback transaction is applied after a Goodwill Credit, Payout Refund, or Merchant Issued Refund, the system must reverse the credit correctly, restoring the original due amounts, balances, and reflecting the chargeback in the loan transaction history."
+62,"As a Loan Administrator,
+I want to associate one or more loan originators with a Working Capital loan, either inline at submission time or afterward via attach/detach APIs,
+So that I can accurately track which originator(s) referred or managed each Working Capital loan throughout its lifecycle while ensuring only valid, active originators are linked.
+
+Acceptance Criteria:
+- An originator attached to a Working Capital loan before approval must remain attached and visible in the loan details throughout submission, approval, undo-approval, re-approval, and disbursement.
+- A loan can be created with one or more originators attached inline at submission time, either by referencing an existing originator's external ID, by referencing multiple distinct originators, or by creating a new originator on the fly (when enabled by configuration); duplicate inline references to the same originator must result in only a single attachment.
+- Originators can be attached to or detached from a loan by internal ID, by originator external ID, by loan external ID, or by both external IDs, and the full originator record (including all fields) must be retrievable through the loan details and dedicated originators endpoints.
+- Attaching an inactive/pending originator, attaching a duplicate originator, or modifying originators on an already-approved loan must be rejected with a 403 status, while operations referencing non-existent originators or non-existent loans must be rejected with a 404 status, including rollback of loan creation when an inline originator reference is invalid."
+63,"As a Loan Officer,
+I want the system to automatically recalculate interest on the outstanding repayment schedule when installments become overdue, whether fully unpaid or partially paid late,
+So that the loan balance, interest accrual, and future installment amounts remain accurate and reflect the actual repayment behavior of the customer.
+
+Acceptance Criteria:
+- When a loan is disbursed with an interest recalculation strategy (such as ""till rest frequency date"" or ""till preclose"") and daily interest calculation, the initial repayment schedule must correctly reflect principal, interest, fees, penalties, and outstanding balances for all periods.
+- When the first installment is paid in full on its due date, the repayment schedule and transaction history must correctly mark that period as fully paid with zero outstanding balance, without affecting future installments.
+- When a subsequent installment becomes overdue (fully unpaid) and the business date passes the due date, running the COB job must trigger interest recalculation and an accrual transaction, updating the remaining installments' principal, interest, and outstanding amounts accordingly, while preserving the total loan balance consistency in the Total row.
+- When a subsequent installment is partially paid after its due date (late payment), the system must correctly split the payment between ""Paid"" and ""Late"" amounts for that period, and recalculate interest for the remaining unpaid periods based on the selected recalculation frequency (daily or till rest frequency date).
+- After any overdue or partial late payment event, subsequent COB job execution must recalculate interest accurately according to the configured recalculation strategy, ensuring that the Loan Repayment Schedule Total row and the Loan Transactions tab consistently reflect updated principal, interest, due, paid, in advance, late, and outstanding values."
+64,"As a Loan Officer,
+I want the system to correctly calculate and manage progressive loan repayment schedules, disbursements, chargebacks, and pay-offs—including edge cases with very small disbursement amounts and various future installment allocation strategies (NEXT_INSTALLMENT, LAST_INSTALLMENT)—under the Advanced Payment Allocation strategy,
+So that loan balances, repayment schedules, and transaction records remain accurate and consistent, and improper actions (such as undoing a transaction linked to a chargeback) are correctly blocked with clear error messages.
+
+Acceptance Criteria:
+- When a progressive loan is created with a very small total disbursement amount (e.g., less than 1 unit) and disbursed partially, the repayment schedule and loan transactions must accurately reflect the disbursed amount, and a full pay-off must close the loan with zero outstanding balance and all installment obligations met, regardless of whether the loan has 1 or multiple repayment periods.
+- When a repayment transaction has a linked chargeback, attempting to undo that repayment transaction must be rejected with a 403 error and the message ""update not allowed as loan transaction is linked to other transactions""; the loan must still be payable off and closed with zero outstanding balance afterward.
+- When the loan product's future installment allocation rule is set to NEXT_INSTALLMENT for vertical progressive loan schedules, a full prepayment made before the term ends must correctly reallocate paid amounts across all remaining installments (marking them as paid in advance where applicable), generate the appropriate accrual transaction, and close the loan with zero outstanding balance.
+- When the loan product's future installment allocation rule is set to LAST_INSTALLMENT for vertical progressive loan schedules, the system must calculate and apply the repayment schedule, disbursement, and prepayment behavior consistently with the defined allocation rule, ensuring accurate totals for principal, interest, fees, penalties, due, paid, in-advance, late, and outstanding amounts across all periods."
+65,"As a loan officer,
+I want to terminate a progressive loan contract with automatic interest recalculation at any point in its lifecycle,
+So that I can accurately close out loans early while ensuring the outstanding balance, interest, and repayment schedule are correctly recalculated as of the termination date.
+
+Acceptance Criteria:
+- When a contract termination is performed on an installment due date, the system recalculates the repayment schedule to show only the periods up to and including the termination date, with interest accrued and due amounts correctly adjusted, and generates matching Accrual and Contract Termination transactions.
+- When a contract termination is performed before an installment date (e.g., mid-period), the system prorates the interest calculation up to the termination date, updates the schedule and total row accordingly, and records the correct Accrual and Contract Termination transactions with zero remaining outstanding balance.
+- When a contract termination is performed in the middle of an installment period, the system recalculates the number of days, interest due, and outstanding balance up to that exact date, ensuring the transactions tab reflects accurate Accrual and Contract Termination entries.
+- When a contract termination is performed after the loan's maturity date (with prior repayments already made and the ""is-principal-compounding-disabled-for-overdue-loans"" configuration enabled), the system correctly recalculates the remaining schedule, interest, and balances based on payments already applied.
+- After any successful contract termination and subsequent loan pay-off on the same date, the loan must be closed with a zero outstanding balance, and all installments must show that their obligations have been fully met."
+66,"As a system integrator managing loan operations,
+I want to perform Working Capital Loan operations (create, modify, approve, disburse, reject, withdraw, add discount fee, and fetch details/transactions) through a single Batch API, referencing loans by either internal ID or external ID, and optionally chaining multiple steps within one enclosing transaction,
+So that I can efficiently automate and orchestrate complete Working Capital Loan lifecycles in a single request while ensuring data consistency and proper rollback when any step fails.
+
+Acceptance Criteria:
+- The Batch API must support individual operations on Working Capital Loans, including creation, modification, approval, disbursement, rejection, withdrawal/deletion, discount fee addition, and fetching loan details or transactions, all returning a 200OK response and correctly updated loan data upon success.
+- The Batch API must support referencing a Working Capital Loan by either its internal loan ID or its external ID for all supported operations, with equivalent behavior and correct data returned in both cases.
+- The Batch API must support executing multiple chained Working Capital Loan steps (e.g., create, approve, disburse, add discount fee, fetch details) within a single call, correctly reflecting the final loan status and all resulting transactions.
+- When enclosingTransaction is set to ""true"" and any step in the chain fails, all previously executed steps within that batch call must be rolled back, and the failing step must return an error with code 400.
+- When enclosingTransaction is set to ""false"", each step in the chain must be evaluated independently, allowing prior successful steps to persist even if a later step fails, with each step's individual result status (200 or error code) verifiable."
+67,"As a Loan Officer,
+I want to generate and retrieve a projected amortization schedule for a working capital loan,
+So that I can review the expected payment breakdown, balances, and discount fee allocation over the life of the loan before disbursement.
+
+Acceptance Criteria:
+- Given a client with an approved working capital loan, the system must allow an admin to generate a projected amortization schedule by providing the discount fee amount, net disbursement amount, total payment volume, period payment rate, NPV day count, and expected disbursement date.
+- The retrieved amortization schedule must return accurate summary fields, including discount fee amount, net disbursement amount, total payment volume, period payment rate, NPV day count, expected payment amount, and the original number of payments.
+- The retrieved amortization schedule must return a detailed list of payments, each including payment number, date, expected payment amount, expected balance, expected amortization amount, and expected discount fee balance, calculated correctly for every installment from disbursement through full repayment."
+68,"As a user,
+I want to moderate posts using single post view (SPV) moderation buttons,
+So that I can hide, block, report, or delete posts and users as appropriate to control my content and interactions.
+
+Acceptance Criteria:
+- When a user opens the show page of a contact's post and confirms the alert after clicking to hide the post, they should be redirected to the stream page.
+- When a user opens the show page of a contact's post and confirms the alert after clicking to block the user, they should be redirected to the stream page.
+- When a user opens the show page of a contact's post, clicks to report the post, fills in a reason, and submits the form, a flash message confirming the report was successfully created should be displayed.
+- When a user opens the show page of their own post and confirms the alert after clicking to delete the post, they should be redirected to the stream page."
+69,"As a signed-in user,
+I want to have media links I post automatically rendered as embedded players,
+So that other users can play audio and video content directly without leaving the page.
+
+Acceptance Criteria:
+- A registered user must be able to sign in successfully before posting content.
+- When a user posts a message containing a link to a video file (e.g., .ogv format) using the publisher, the system should display an HTML5 video player for that content.
+- When a user posts a message containing a link to an audio file (e.g., .ogg format) using the publisher, the system should display an HTML5 audio player for that content."
+70,"As a user of the social network,
+I want to follow other users and manage my contact aspects while safely viewing their profiles,
+So that I can build meaningful connections and control how I interact with and see people I follow or who follow me.
+
+Acceptance Criteria:
+- When a user's profile name contains malicious script content, the system must sanitize/escape it before displaying it in flash messages or elsewhere, preventing script execution.
+- When a user adds a contact to a newly created aspect, the contact count for both the new aspect and the original aspect used by the other user must be updated correctly, without duplicating the relationship.
+- On a profile page of someone the user follows but who does not follow back, the aspect name they were added to should be visible, a mention option should be available, but no direct messaging option should be shown.
+- On a profile page of someone who follows the user but whom the user does not yet follow, an ""Add contact"" option should be shown, and neither mention nor messaging options should be available.
+- On a profile page of someone with a mutual follow relationship (added to multiple aspects), the system should indicate ""All aspects"" and display both mention and messaging options."
+71,"As a signed-in user,
+I want to manage my account settings such as email, email notification preferences, preferred language, default post aspects, and profile data export,
+So that I can control how my account behaves and how my personal information is used and shared.
+
+Acceptance Criteria:
+- When I update my email address on the edit user page and confirm it via the link sent in a confirmation email, my account should reflect the new activated email address.
+- When I toggle specific email notification preferences (such as ""mentioned"" or ""mentioned in comment"") and confirm the change, the system should display a success message and persist the updated preference state.
+- When I select a different preferred language and confirm the change, the interface should display the confirmation message in the newly selected language and retain that language as the selected option.
+- When I change my default post aspects (e.g., selecting ""Family"" or ""Public"" instead of ""All aspects"") and save the change, the publisher on the stream page should reflect the newly selected default aspect the next time it is expanded.
+- When I request to export my profile data, the system should notify me that the download is being prepared and send exactly one email containing the export information."
+72,"As a user,
+I want the publisher to automatically detect links I post and render rich media previews (such as embedded video players or images) when the content supports oEmbed and comes from a secure source,
+So that I can share and view rich media content directly within the stream without needing to open external links.
+
+Acceptance Criteria:
+- When a user posts a link to a video from a secure, supported oEmbed provider, the system should render an embedded video player within the post.
+- When a user posts a link to a video from an unsecure source, the system should not render a video player and should instead display the raw link text within the stream element.
+- When a user posts an unsecure link that is rich-typed (e.g., video-like content) but not from a secure oEmbed provider, the system should not render a video player and should display the raw link text instead.
+- When a user posts a direct photo link, the system should render an image element within the stream element instead of plain text.
+- When a user posts a link from a domain that does not support oEmbed, the system should display the link as plain text within the stream element without any embedded preview."
+73,"As a user,
+I want to create a poll and attach it to my post when publishing a status update,
+So that I can ask my followers a question and let them vote on the available options.
+
+Acceptance Criteria:
+- The poll creator panel is hidden by default and only becomes visible after the publisher is expanded and the user clicks on the poll creator toggle
+- When the user fills in values for the first two answer options and loses focus, a third empty option field should automatically appear, and users should be able to remove the last added option (with the remove icon disappearing once only two options remain)
+- Submitting the publisher form with a status message, a poll question, and at least two filled-in options should successfully post the update with the poll displayed within the stream element
+- A signed-in user should be able to select an option and vote, after which the poll should display a progress bar, a percentage indicator, and a vote count summary (e.g., ""1 vote so far"")
+- Clicking the toggle-result control should reveal the percentage breakdown of the poll results
+- Attempting to submit a poll with fewer than two filled-in answer options should display a validation error on the empty answer input field"
+74,"As a user,
+I want web+diaspora:// links to resolve directly to the corresponding post,
+So that I can access shared content through external links without extra navigation.
+
+Acceptance Criteria:
+- A registered user with a public post can be referenced by an external web+diaspora:// link.
+- Opening an external link pointing to a specific user's post navigates to that post's content.
+- The resolved page correctly displays the text content of the linked post."
+75,"As a new visitor,
+I want to register for an account by filling out a sign-up form,
+So that I can create a valid account and start using the getting started experience.
+
+Acceptance Criteria:
+- Accessing the new user registration page displays a form for account creation.
+- Submitting valid account details (username, email, and password) creates the account and redirects the user to the getting started page, displaying its content.
+- Submitting an invalid username containing disallowed special characters prevents account creation and shows validation errors for the username, password, and email fields.
+- Submitting a valid username with an improperly formatted email address prevents account creation and shows validation errors for the password and email fields.
+- Submitting a valid email with a password that does not meet the required criteria or does not match the confirmation prevents account creation and shows validation errors for the password and password confirmation fields."
+76,"As a mobile website user,
+I want to edit my profile information including personal details, birth date, tags, and profile photo,
+So that I can keep my profile accurate and up to date from my mobile device.
+
+Acceptance Criteria:
+- The user can update profile fields such as gender, first name, last name, bio, and location, and after saving, the edit profile page should display a confirmation message and reflect all the updated values.
+- The user can add multiple tags to their profile using an autocomplete/search selection mechanism, and all previously added tags should remain visible after adding new ones.
+- The user can upload a profile photo by attaching a file, with appropriate alert/confirmation handling for invalid and valid file uploads, and the uploaded photo should be displayed and persist when revisiting the edit profile page."
+77,"As a registered user,
+I want to close (delete) my own account from my profile settings,
+So that I can permanently remove my access and data from the system when I no longer wish to use it.
+
+Acceptance Criteria:
+- When a signed-in user navigates to the edit user page and clicks the ""close account"" selector, a confirmation modal should be displayed containing the message ""Hey, please don't go!"".
+- The user must enter their current password into the modal's password field and confirm the action (including a browser confirmation alert) before the account is closed.
+- After successfully confirming, the user should be redirected to the new user session (sign-in) page.
+- Once the account is closed, attempting to manually sign in with the same credentials should keep the user on the sign-in page and display a warning flash message indicating the sign-in attempt failed."
+78,"As a mobile website user,
+I want to search for hashtags and follow or unfollow them, and manage my followed tags list,
+So that I can control which tagged content appears in my home feed.
+
+Acceptance Criteria:
+- When searching for a specific hashtag, the search results should display a follow action button for that tag
+- Clicking the follow action button on a tag should toggle its state, showing ""Stop following #tag"" when followed and ""Follow #tag"" when not followed
+- Posts containing a followed tag should appear on the user's home page, and should disappear from the home page once the tag is unfollowed
+- The manage tag followings page should list all tags the user currently follows
+- Removing a tag from the manage tag followings page should require a confirmation prompt before deletion
+- After removing all followed tags, the manage tag followings page should display a message indicating no tags are being followed, and related posts should no longer appear on the home page"
+79,"As a user,
+I want to see a hovercard with profile information when I hover over a person's name or avatar in posts and reshares,
+So that I can quickly view relevant details about that person without navigating away from the current page.
+
+Acceptance Criteria:
+- Hovering over a user's name/avatar in a stream displays a hovercard, and moving away from it hides the hovercard again.
+- Hovercards are displayed for the original poster of a public post, but not for the person who merely reshared it.
+- Hovercards work consistently on the main stream, tag streams, and for both logged-in and logged-out users.
+- The hovercard displays the profile's hashtags/tags associated with that user.
+- The hovercard shows the aspect (e.g., ""Besties"") the viewed user belongs to, if the viewing user has added them to an aspect.
+- The hovercard indicates whether the profile owner is sharing with the current user, showing an appropriate status icon and tooltip message (e.g., ""is sharing with you"" vs ""is not sharing with you"")."
+80,"As a mobile website user,
+I want to add or remove people from my aspects directly from their profile page,
+So that I can organize my contacts into meaningful groups and easily manage those relationships.
+
+Acceptance Criteria:
+- On a user's profile page, the aspect dropdown within the author info section should display ""Add contact"" when the viewed person is not yet in any of my aspects.
+- Selecting an aspect from the dropdown should add the person to that aspect and update the dropdown label to show the selected aspect's name.
+- When the person belongs to more than one aspect, the dropdown label should display the total count (e.g., ""In 2 aspects"") instead of individual aspect names.
+- Adding a person to an aspect should increase that aspect's contact count accordingly, and this should persist when revisiting the profile page.
+- Selecting an aspect the person already belongs to should remove them from that aspect, updating the dropdown label and decreasing that aspect's contact count accordingly."
+81,"As a new visitor,
+I want to register for a new account through the sign-up page,
+So that I can create my own account and start using the application.
+
+Acceptance Criteria:
+- When a visitor fills in the new user registration form with valid information and submits it by pressing ""Create account"", they should be redirected to the getting started page and see its contents.
+- When open registrations are closed, a visitor navigating to the new user registration page should see the message ""Open signups are closed at this time"" instead of being able to sign up.
+- When registrations are closed, even if a visitor has already filled in the registration form before submitting, pressing ""Create account"" should still block the registration and display the message ""Open signups are closed at this time"", preventing account creation regardless of how the request is sent."
+82,"As a mobile user,
+I want to send, view, and delete private conversation messages with my connections on the mobile website,
+So that I can communicate privately with other users and manage my message history while on a mobile device.
+
+Acceptance Criteria:
+- A signed-in user must be able to send a new private message with a subject and text to one of their connections, and after sending, the message subject should appear in the conversation heading, the recipient should be shown as part of the active conversation, and the message text should be visible in the conversation stream.
+- When the recipient signs in and replies to the conversation, their reply text should be visible within the conversation after selecting it.
+- A user must be able to delete a message from the conversation by clicking the remove action and confirming the deletion prompt, after which the deleted message text should no longer be visible in the conversation."
+83,"As a user,
+I want to manage my contacts by creating, editing, renaming, deleting, and organizing them into aspects,
+So that I can easily categorize my contacts and control how I share content with different groups of people.
+
+Acceptance Criteria:
+- Users can create a new aspect from both the contacts page and the aspects (homepage) page by providing an aspect name, and the new aspect should immediately appear in the aspect navigation list.
+- Users can delete an existing aspect from either the contacts page or the aspects page, with a confirmation prompt before deletion, and the deleted aspect should no longer appear in the aspect navigation list.
+- Users can add or remove a contact from a specific aspect, and the contact count for that aspect should update accordingly.
+- Users can rename an existing aspect, and the updated name should be reflected immediately on the page.
+- Users can reorder aspects by dragging them into a new position, and the new order should persist after navigating away and returning to the contacts page."
+84,"As a mobile user,
+I want to create posts from the mobile main page, including selecting which aspects to share with and attaching photos,
+So that I can share updates and images with specific groups of my contacts directly from my mobile device.
+
+Acceptance Criteria:
+- A user can enter text into the mobile publisher, select one or more aspects from the aspect dropdown, and share the post so that it appears in the stream for the selected aspects only, remaining hidden from aspects that were not selected.
+- A user can delete a posted item from the stream, and after confirming the deletion prompt, the content should no longer be visible.
+- A user can upload a photo without any accompanying text; once the upload completes, the photo should appear in the stream after sharing, and it should also be visible to other connected users who view the stream.
+- When attempting to attach an invalid file, the system should prompt an alert and not display any uploaded image in the photo drop zone; the user can then attach a valid photo, see the upload complete, and remove the uploaded photo before sharing, resulting in no image shown in the drop zone.
+- When a user attaches multiple photos in sequence and removes one of them, the remaining attached photo should still be visible in the drop zone, and the text area should correctly indicate the presence of attachments alongside the text content."
+85,"As a mobile user,
+I want to mark my content as not safe for work (NSFW) and control the visibility of NSFW content from others,
+So that I can protect sensitive content and choose whether to view potentially objectionable material from people I follow.
+
+Acceptance Criteria:
+- A user must be able to mark their profile as NSFW or safe for work via the edit profile page, and the ""profile[nsfw]"" checkbox state should correctly reflect the chosen setting after submission.
+- Posts from an NSFW user (including those containing text, polls, locations, or pictures) must be hidden by default in another user's mobile stream, with their content, poll text, location indicator, and pictures not visible until the user toggles NSFW visibility.
+- When a viewing user toggles NSFW visibility, previously hidden NSFW posts (text, polls, locations, pictures) must become visible in the stream.
+- Resharing an NSFW post (with a poll, location, or picture) must mark the reshare action as active, and the reshared content should remain hidden by default on the resharer’s home page, while still being counted correctly as an NSFW post."
+86,"As a registered user,
+I want to be able to log in and log out of my account,
+So that I can securely access and exit my personal stream page.
+
+Acceptance Criteria:
+- A user with valid credentials (username and password) can sign in manually and be redirected to the stream page.
+- A signed-in user can click on their name in the header to reveal account options.
+- A signed-in user can select the ""Log out"" option from the header menu and be redirected to the new user session (login) page."
+87,"As a registered user,
+I want to edit and update my profile information including personal details, tags, privacy settings, and photo,
+So that I can keep my profile accurate, up to date, and personalized.
+
+Acceptance Criteria:
+- The user can update profile fields (gender, first name, last name, bio, location, and date of birth) and see a success confirmation after saving, with all updated values correctly reflected in the form.
+- The user can add multiple tags to their profile through a search/selection interface, and all added tags remain visible after subsequent updates.
+- The user can toggle the ""public details"" switch on or off, and the updated state persists after saving.
+- The user can upload a profile photo, receive an error message if an invalid file is uploaded, and successfully crop, preview, and confirm a valid image before it is saved and displayed on their profile page."
+88,"As a user,
+I want to reshare public posts from other users through the stream, their profile page, or a single post view,
+So that I can share interesting content with my own contacts and network.
+
+Acceptance Criteria:
+- A user can reshare a public post from the stream, from another user's profile page, and from the single post view, with a confirmation prompt before the reshare is executed.
+- After a successful reshare, a success flash message containing ""successfully"" is displayed, and the reshare option is no longer shown for that post in the feedback area.
+- If a user has already reshared a specific post, the reshare option should not be available again for that same post on the author's profile.
+- If the original post of a reshare is deleted by its author, users who see the reshare should instead see a message indicating ""Original post deleted by author""."
+89,"As a visitor browsing Diaspora on a mobile device,
+I want to view a user's public profile page along with their public posts and comments,
+So that I can access shared content without needing to log in.
+
+Acceptance Criteria:
+- When visiting a user's profile page as a logged-out user, their public post text should be visible within the designated post area.
+- Clicking on the ""show comments"" element should reveal the comments associated with the public post.
+- Previously submitted comments on the public post should be displayed correctly within the comment section."
+90,"As a user,
+I want to search for other users and hashtags directly from the search input,
+So that I can quickly find and navigate to profiles or tag pages relevant to my interests.
+
+Acceptance Criteria:
+- When entering a partial username in the search input, matching users should appear in the dropdown results, and clicking a result should navigate to that user's profile page.
+- When searching for a username that does not exist and submitting the search, the user should be redirected to a search results page displaying a title indicating no exact match was found, such as ""Users matching [query]"".
+- When searching for a user identified only by their federated ID (e.g., ""user@pod.tld"") who is discovered in the background, the search results should display the diaspora handle and provide an option to add them to an aspect.
+- Users who have marked their profile as ""not searchable"" should not appear in search results for other users who are not connected to them, but should appear in search results once a connection (aspect membership) is established.
+- When entering a hashtag (e.g., ""#Matrix"") in the search input, the matching tag should appear in the dropdown results, and clicking it should navigate to the corresponding tag page."
+91,"As a QA Engineer,
+I want to capture reference and comparison screenshots of the application layout in both logged-out and logged-in states,
+So that I can detect unintended visual regressions across different user scenarios and content types.
+
+Acceptance Criteria:
+- Test data includes at least two users (e.g., ""B Robertson"" and ""A Aronsdottir"") who are connected to each other, along with sample public posts, a post that mentions another user, and a post containing a hashtag.
+- Screenshots can be captured while the user is logged out, saving them into a designated reference or comparison directory depending on the test run type.
+- Screenshots can also be captured after signing in as a specific user (e.g., ""alice@alice.alice""), reflecting the logged-in view of the layout.
+- The system supports two distinct screenshot-taking modes: one for generating reference screenshots and another for generating comparison screenshots, both following the same logged-out and logged-in capture sequence."
+92,"As a Moderator,
+I want to report posts and comments that violate the terms of use,
+So that inappropriate content can be reviewed and addressed by the platform.
+
+Acceptance Criteria:
+- When reporting a post or comment, a report modal appears displaying a message about only reporting content that violates the terms of use, along with a reason field to fill in.
+- Submitting a report successfully creates the report, displays a success message, and triggers an email notification to the moderator with an appropriate subject line indicating whether a post or comment was flagged as offensive.
+- Attempting to report the same post or comment a second time results in an error message stating the report already exists, preventing duplicate reports.
+- Reports are correctly linked to the specific post or comment being flagged, and the report page accurately displays the reporter's identity, the reason provided, and the exact content that was reported, even when multiple items exist on the page.
+- Closing the report modal without submitting resets the reason field, ensuring no residual text carries over when reporting a different item afterward."
+93,"As a registered user,
+I want to be able to change my password while signed in or reset it via email when I forget it,
+So that I can maintain access to my account securely and regain access if I forget my credentials.
+
+Acceptance Criteria:
+- A signed-in user can change their password by providing a valid new password and matching confirmation, resulting in a success message and requiring them to sign in again with the new password.
+- Attempting to change the password with an invalid or mismatched confirmation displays appropriate validation error messages (e.g., ""Password is too short"", ""Password confirmation doesn't match"") and prevents the change.
+- A user can request a password reset by submitting their registered email on the forgot password page, receiving a generic confirmation message regardless of whether the email exists in the system, and an email containing a password reset link is sent when the account exists.
+- Following the password reset link allows the user to set a new valid password, after which they can sign in successfully with the new credentials.
+- Attempting to reset the password with invalid input (too short or mismatched confirmation) displays validation error messages and keeps the user on the password reset page.
+- Submitting the forgot password form with an invalid email format still shows the same generic confirmation message, without revealing whether the email is registered."
+94,"As a user,
+I want to view, share, and manage photos on profile pages,
+So that I can control who sees my posted photos and maintain privacy over my content.
+
+Acceptance Criteria:
+- A user can view their own posted photos by navigating to their profile page and accessing the photos link
+- A user who has not been granted sharing access should not see the ""Photos"" section on another person's profile page
+- When a user posts a public status message with a photo, other users who share a connection should see the ""Photos"" section on that profile and be able to access the photos page
+- A user can delete their own photo from the photos page, after confirming the deletion action, and the deleted photo should no longer appear in the photo stream
+- After all photos are deleted, the ""Photos"" section should no longer be visible on the profile page if there are no remaining shared photos"
+95,"As a visitor,
+I want to view the landing page correctly based on whether I'm on a desktop or mobile view,
+So that I have an appropriate and consistent experience regardless of the device I use to access the site.
+
+Acceptance Criteria:
+- When visiting the root page in desktop view, the ""LOG IN"" text is displayed.
+- When toggling to mobile view and navigating to the root page, the ""Welcome, friend"" text is displayed instead of ""LOG IN"".
+- When visiting the root page in mobile view directly, the ""Welcome, friend"" text is displayed.
+- When navigating to the mobile-specific path, the ""LOG IN"" text is displayed, regardless of the previously toggled view state."
+96,"As a mobile website user,
+I want to navigate between different pages (stream, notifications, conversations, publisher, profile, contacts, settings, aspects, tags, and admin/moderation areas) using the header menu and the drawer navigation,
+So that I can quickly access the content and features relevant to my role and preferences without confusion.
+
+Acceptance Criteria:
+- Clicking the header title from the activity stream page navigates the user to the stream page.
+- Clicking the notification badge navigates the user to the notifications page.
+- Clicking the conversations badge navigates the user to the conversations page.
+- Clicking the compose badge navigates the user to the new status message page.
+- Opening the drawer displays a search input, and searching for a username shows matching users while searching for a hashtag navigates to the corresponding tag page.
+- The drawer provides navigation links to the stream page, my activity page, mentions page, aspects pages, profile page, contacts page, and settings page, each leading to the correct destination.
+- When viewing aspects, only posts belonging to the selected aspect are displayed within the main stream, and switching aspects updates the visible content accordingly.
+- Following a tag adds it to the ""Followed tags"" section in the drawer, allowing navigation to its tag page, the followed tags stream page, and the manage tag followings page.
+- Regular users do not see ""Admin"" or ""Reports"" options in the drawer.
+- Moderators see a ""Reports"" option in the drawer (but not ""Admin""), which leads to the reports overview page.
+- Admins see an ""Admin"" option in the drawer (but not ""Reports"" or ""Dashboard"" directly), which expands to provide access to Dashboard, User search, Weekly user stats, Pod stats, Reports, Pod network, and Sidekiq monitor pages, each displaying the correct corresponding content."
+97,"As a registered user,
+I want to create posts with text and photos directly from my profile page and control which aspects can see them,
+So that I can share updates with the appropriate audience and manage my content before sharing.
+
+Acceptance Criteria:
+- When I expand the publisher, write a text message, select a specific aspect, and share the post, the post should appear as the first post both on my profile page and on the home page, but only be visible when filtering by the selected aspect and not visible when filtering by a different aspect.
+- When I expand the publisher, write a status message, attach a photo, and submit the post, the post should appear on the home page displaying both the attached image and the text message.
+- When I expand the publisher, attach a photo, and then delete the uploaded photo before sharing, the photo should no longer appear in the upload area, and I should be able to close the publisher without posting."
+98,"As a new user,
+I want to register an account and be guided through an initial setup wizard on the getting started page,
+So that I can safely personalize my profile, optionally follow tags, and publish my first status message before entering the main stream.
+
+Acceptance Criteria:
+- After completing registration, the user is redirected to the getting started page displaying the setup wizard, with the publisher expanded and ready for input.
+- Input fields such as the first name must be sanitized against script injection, and the flash message must safely echo the entered name without executing scripts.
+- The user can either skip the setup wizard (via a confirmation prompt) or cancel it (via a rejection prompt), with appropriate flash messages and page redirection in each case.
+- If the user proceeds without adding tags, the default first post reads ""Hey everyone, I’m #newhere."" while providing tags appends them, e.g., ""Hey everyone, I’m #newhere. I’m interested in #rockstar.""
+- The first status message defaults to ""Public"" visibility, and closing popovers or the publisher clears the getting started welcome content.
+- Attempting registration with invalid or malformed data (username, email, password) must trigger client-side validation errors and prevent account creation.
+- Attempting to register with an already existing username/email must show a failure flash message, while subsequent successful sign-in attempts must not display that failure message."
+99,"As a mobile user,
+I want to view my activity stream showing posts I've created and liked,
+So that I can quickly track my own contributions and interactions on the platform.
+
+Acceptance Criteria:
+- When a user has not created or liked any posts, the ""My activity"" page should display no posts in the stream.
+- When a user likes a post, that post should appear within the user's ""My activity"" stream.
+- When a user creates a post, that post should appear within the user's own ""My activity"" stream."
+100,"As a new user who has received an invitation from an existing member,
+I want to accept the invitation and complete my account registration,
+So that I can join the platform and immediately connect with the person who invited me.
+
+Acceptance Criteria:
+- Given an invitation email has been sent by an existing user (e.g., ""alice@alice.alice""), the invited user can access their acceptance form page.
+- Upon filling in the new user form with the required information and pressing ""Create account"", the user should see a ""welcome to diaspora"" confirmation message.
+- After account creation, the new user should be able to friend/connect with the person who sent the invitation.
+- The new user should be able to select an aspect (e.g., ""Family"") from the ""user_aspects"" dropdown within the ""#hello-there"" section.
+- Once an aspect is selected, the aspect dropdown within ""#hello-there"" should correctly display the chosen label (e.g., ""Family"")."
