@@ -1,0 +1,2188 @@
+id,user_story,generated_gherkin
+1,"As a store owner,
+I want the checkout process to prevent customers from completing an order with a shipping method that has become unavailable,
+So that customers cannot place orders using shipping methods that are no longer valid or offered.
+
+Acceptance Criteria:
+- When a customer has selected a shipping method and payment method during checkout, but that shipping method is subsequently disabled entirely, the system should block order confirmation and inform the customer that the chosen shipping method is not available.
+- When a customer has selected a shipping method and payment method during checkout, but that shipping method is subsequently disabled specifically for the channel/country associated with their order, the system should block order confirmation and inform the customer that the chosen shipping method is not available.
+- In both cases, the customer should not be able to successfully confirm and place the order while the selected shipping method remains disabled.","@checkout
+Feature: Preventing checkout with an unavailable shipping method
+
+    Background:
+        Given the store operates on a single channel in ""United States""
+        And the store has a product ""PHP T-Shirt"" priced at ""$12.00""
+        And the store has ""DHL"" shipping method with ""$10.00"" fee
+        And the store has ""Mollie"" payment method
+        And the customer added product ""PHP T-Shirt"" to the cart
+        And the customer selected ""DHL"" shipping method
+        And the customer selected ""Mollie"" payment method
+
+    @ui
+    Scenario: Being unable to confirm an order when the selected shipping method is disabled entirely
+        And the ""DHL"" shipping method is disabled
+        When the customer tries to confirm the order
+        Then I should be informed that the chosen shipping method is not available
+        And the customer should not be able to place the order
+
+    @ui
+    Scenario: Being unable to confirm an order when the selected shipping method is disabled for the channel
+        And the ""DHL"" shipping method is disabled for the ""United States"" channel
+        When the customer tries to confirm the order
+        Then I should be informed that the chosen shipping method is not available
+        And the customer should not be able to place the order"
+2,"As an administrator,
+I want to be prevented from viewing the details of a customer's cart that is not yet an order,
+So that I only access valid order information and receive clear feedback when attempting to view non-existent orders.
+
+Acceptance Criteria:
+- The store operates on a single channel in ""United States"" with a product ""PHP T-Shirt"" priced at ""$12.00""
+- Given a customer has added the product ""PHP T-Shirt"" to their cart without placing an order
+- When an administrator attempts to view the summary of the customer's latest cart
+- The administrator should be informed that the order does not exist","@managing_orders
+Feature: Being unable to see details of a cart
+
+    Background:
+        Given the store operates on a single channel in ""United States""
+        And the store has a product ""PHP T-Shirt"" priced at ""$12.00""
+        And the customer added product ""PHP T-Shirt"" to the cart
+        And I am logged in as an administrator
+
+    @api @ui
+    Scenario: Being unable to see the details of a cart
+        When I try to view the summary of the customer's latest cart
+        Then I should be informed that the order does not exist"
+3,"As a store administrator,
+I want to delete zones from the registry,
+So that I can keep the list of zones accurate and free of unused entries.
+
+Acceptance Criteria:
+- Successfully deleting a zone that has no dependencies removes it from the registry and displays a confirmation message.
+- Attempting to delete a zone that has associated tax rates is blocked, with a notification explaining that the zone cannot be deleted, and the zone remains visible in the list.
+- Attempting to delete a zone that is a member of another zone is blocked, with a notification explaining that the zone cannot be deleted, and the zone remains visible in the list.","@managing_zones
+Feature: Deleting zones from the registry
+
+    Background:
+        Given the store operates on a single channel in ""United States""
+        And the store has a zone ""Europe""
+        And the store has a zone ""United Kingdom""
+        And the store has a tax rate ""VAT"" for zone ""United Kingdom""
+        And the zone ""United Kingdom"" is a member of zone ""Europe""
+        And I am logged in as an administrator
+
+    @ui
+    Scenario: Successfully deleting a zone with no dependencies
+        When I delete the zone ""Europe""
+        Then I should be notified that it has been successfully deleted
+        And the zone ""Europe"" should no longer exist in the registry
+
+    @ui
+    Scenario: Being unable to delete a zone that has associated tax rates
+        When I delete the zone ""United Kingdom""
+        Then I should be informed that the zone cannot be deleted
+        And the zone ""United Kingdom"" should still exist in the registry
+
+    @ui
+    Scenario: Being unable to delete a zone that is a member of another zone
+        When I delete the zone ""United Kingdom""
+        Then I should be informed that the zone cannot be deleted
+        And the zone ""United Kingdom"" should still exist in the registry"
+4,"As a store manager,
+I want exclusive catalog promotions to override all other applicable promotions on a product,
+So that customers see the correct discounted price based solely on the most relevant exclusive promotion, avoiding stacking of multiple discounts.
+
+Acceptance Criteria:
+- When a product has both a regular catalog promotion and an exclusive catalog promotion applicable, only the exclusive promotion should be applied to calculate the displayed price.
+- The product's original price should still be displayed alongside the discounted price for customer reference.
+- When multiple exclusive catalog promotions apply to the same product, only the single exclusive promotion with the highest priority should be applied, ignoring all others.","@catalog_promotions
+Feature: Applying exclusive catalog promotions to product prices
+
+    Background:
+        Given the store operates on a single channel in ""United States""
+        And the store has a product ""PHP T-Shirt"" priced at ""$12.00""
+        And I am logged in as a store manager
+
+    @ui
+    Scenario: Applying only the exclusive catalog promotion when a regular promotion is also applicable
+        Given the product ""PHP T-Shirt"" has a regular catalog promotion of ""-20%""
+        And the product ""PHP T-Shirt"" has an exclusive catalog promotion of ""-30%""
+        When I browse the product ""PHP T-Shirt""
+        Then I should see the original price ""$12.00""
+        And I should see the discounted price based only on the exclusive catalog promotion
+
+    @ui
+    Scenario: Applying only the highest priority exclusive catalog promotion when multiple exclusive promotions are applicable
+        Given the product ""PHP T-Shirt"" has an exclusive catalog promotion of ""-10%"" with priority ""1""
+        And the product ""PHP T-Shirt"" has an exclusive catalog promotion of ""-25%"" with priority ""10""
+        And the product ""PHP T-Shirt"" has an exclusive catalog promotion of ""-15%"" with priority ""5""
+        When I browse the product ""PHP T-Shirt""
+        Then I should see the original price ""$12.00""
+        And I should see the discounted price based only on the exclusive catalog promotion with the highest priority"
+5,"As a Store Administrator,
+I want the system to prevent me from deleting a product variant that has already been purchased by a customer,
+So that historical order data remains accurate and consistent, and customers' past orders are not affected by data integrity issues.
+
+Acceptance Criteria:
+- Given a product variant is associated with at least one placed order, when an administrator attempts to delete that variant, the system should block the deletion.
+- The administrator should receive a clear notification stating that the variant is currently in use and cannot be deleted.
+- After the failed deletion attempt, the product variant should remain unchanged and still exist in the product catalog.
+- This behavior should be consistently enforced across both the API and UI interfaces.","@managing_product_variants
+Feature: Being unable to delete a purchased product variant
+
+    Background:
+        Given the store operates on a single channel in ""United States""
+        And the store has a product ""PHP T-Shirt"" with a variant ""PHP T-Shirt - Medium"" priced at ""$12.00""
+        And the customer bought the ""PHP T-Shirt - Medium"" variant
+        And I am logged in as an administrator
+
+    @api @ui
+    Scenario: Being unable to delete a purchased product variant
+        When I try to delete the ""PHP T-Shirt - Medium"" variant
+        Then I should be informed that the variant is currently in use and cannot be deleted
+        And the ""PHP T-Shirt - Medium"" variant should still exist in the product catalog"
+6,"As an administrator,
+I want to create a new product option with its option values,
+So that I can define configurable attributes (such as size or color) that customers can select when purchasing a product.
+
+Acceptance Criteria:
+- When creating a new product option, I must be able to name it and specify its code, and upon successful creation I should receive a confirmation notification and see it appear in the product option registry.
+- I should be able to add multiple option values (e.g., ""S"", ""M"") to a product option, and each added option value should be correctly associated with that option after creation.
+- I should be able to create a product option without adding any option values, and the system should still allow it to be successfully created and registered.
+- When the store supports multiple locales, I should be able to apply an option value entered in one locale (e.g., ""English (United States)"") to all other available locales (e.g., ""Polish (Poland)"") in a single action, while still being able to add other option values that remain locale-specific and are not automatically translated.","@managing_product_options
+Feature: Creating product options with option values
+
+    Background:
+        Given the store operates on a single channel in ""United States""
+        And I am logged in as an administrator
+
+    @ui
+    Scenario: Creating a new product option with multiple option values
+        When I want to create a new product option
+        And I name it ""Size""
+        And I specify its code as ""SIZE""
+        And I add option value ""S""
+        And I add option value ""M""
+        And I create it
+        Then I should be notified that it has been successfully created
+        And I should see the product option ""Size"" in the registry
+        And the product option ""Size"" should have option values ""S"" and ""M""
+
+    @ui
+    Scenario: Creating a new product option without option values
+        When I want to create a new product option
+        And I name it ""Color""
+        And I specify its code as ""COLOR""
+        And I create it
+        Then I should be notified that it has been successfully created
+        And I should see the product option ""Color"" in the registry
+        And the product option ""Color"" should have no option values
+
+    @ui
+    Scenario: Applying an option value to all locales while keeping another value locale-specific
+        Given the store has multiple locales ""English (United States)"" and ""Polish (Poland)""
+        When I want to create a new product option
+        And I name it ""Material""
+        And I specify its code as ""MATERIAL""
+        And I add option value ""Cotton"" in locale ""English (United States)""
+        And I apply the option value ""Cotton"" to all locales
+        And I add option value ""Wool"" in locale ""English (United States)""
+        And I create it
+        Then I should be notified that it has been successfully created
+        And I should see the product option ""Material"" in the registry
+        And the product option ""Material"" should have option value ""Cotton"" in locale ""English (United States)""
+        And the product option ""Material"" should have option value ""Cotton"" in locale ""Polish (Poland)""
+        And the product option ""Material"" should have option value ""Wool"" only in locale ""English (United States)"""
+7,"As a store administrator,
+I want the system to prevent me from creating a new product association type with a code that is already in use,
+So that I can avoid duplicate product association types and maintain data integrity in the catalog configuration.
+
+Acceptance Criteria:
+- When creating a new product association type, the administrator can specify a code and a name for a given locale.
+- If the specified code already exists among the current product association types, the system should reject the creation attempt and display a notification informing the administrator that a product association type with this code already exists.
+- After the failed attempt, the total number of product association types with the given code should remain unchanged (only one product association type should exist with that code).","@managing_product_association_types
+Feature: Being unable to create a product association type with an existing code
+
+    Background:
+        Given the store operates on a single channel in ""United States""
+        And I am logged in as an administrator
+        And the store has a product association type ""Related products"" with code ""related""
+
+    @ui
+    Scenario: Being unable to create a product association type with an existing code
+        When I want to create a new product association type
+        And I specify its code as ""related""
+        And I specify its name as ""Similar products"" for locale ""en_US""
+        And I try to create it
+        Then I should be informed that a product association type with this code already exists
+        And there should still be only one product association type with code ""related"""
+8,"As a store administrator,
+I want to filter orders by currency and by total amount (greater than, less than, or within a specified range),
+So that I can quickly locate and review orders placed in a specific currency or within a particular price range.
+
+Acceptance Criteria:
+- When filtering by currency alone, only orders placed in the selected currency are displayed, and orders in other currencies are excluded.
+- When filtering by a total greater than a specified amount (with a currency selected), only orders in that currency whose total exceeds the specified amount are displayed, and orders in other currencies are excluded.
+- When filtering by a total less than a specified amount (with a currency selected), only orders in that currency whose total is below the specified amount are displayed, and orders in other currencies are excluded.
+- When filtering by a total within a specified range (greater than a minimum and less than a maximum, with a currency selected), only orders in that currency falling within the range are displayed, and orders in other currencies are excluded.
+- When filtering by a total range without specifying a currency, orders from any currency that fall within the specified total range are displayed.","@managing_orders
+Feature: Filtering orders by currency and total amount
+
+    Background:
+        Given the store operates on a single channel in ""United States""
+        And the store has a product ""PHP T-Shirt"" priced at ""$12.00""
+        And the store has a product ""Symfony Mug"" priced at ""$20.00""
+        And the store has a product ""API Cap"" priced at ""€15.00""
+        And the store has a product ""Doctrine Hoodie"" priced at ""£30.00""
+        And there are orders with totals ""$12.00"", ""$20.00"", ""€15.00"", and ""£30.00""
+        And I am logged in as an administrator
+
+    @ui
+    Scenario: Filtering orders by currency
+        When I filter orders by currency ""USD""
+        Then I should see only orders in currency ""USD""
+        And I should not see orders in other currencies
+
+    @ui
+    Scenario: Filtering orders by total greater than a specified amount in a selected currency
+        When I filter orders by currency ""USD"" and total greater than ""$15.00""
+        Then I should see only orders in currency ""USD"" with total greater than ""$15.00""
+        And I should not see orders in other currencies
+
+    @ui
+    Scenario: Filtering orders by total less than a specified amount in a selected currency
+        When I filter orders by currency ""USD"" and total less than ""$15.00""
+        Then I should see only orders in currency ""USD"" with total less than ""$15.00""
+        And I should not see orders in other currencies
+
+    @ui
+    Scenario: Filtering orders by total within a specified range in a selected currency
+        When I filter orders by currency ""USD"" and total greater than ""$10.00"" and less than ""$25.00""
+        Then I should see only orders in currency ""USD"" with total between ""$10.00"" and ""$25.00""
+        And I should not see orders in other currencies
+
+    @ui
+    Scenario: Filtering orders by total within a specified range without selecting a currency
+        When I filter orders by total greater than ""$10.00"" and less than ""$25.00""
+        Then I should see only orders with total between ""$10.00"" and ""$25.00""
+        And I should see orders in any currency within that range"
+9,"As a Store Manager,
+I want catalog promotions to be automatically applied and reflected in the discounted price of eligible product variants,
+So that customers can see accurate promotional pricing without manual price adjustments.
+
+Acceptance Criteria:
+- Given a configurable product with a variant priced at a specific original price, and an active catalog promotion that reduces the price by a defined percentage on that variant, when viewing the variant, the discounted price should be correctly calculated and displayed.
+- The system should show both the original price and the discounted price for the variant when a catalog promotion is successfully applied.
+- The name of the applied catalog promotion should be visible alongside the discounted price for transparency.","@catalog_promotions
+Feature: Being able to see catalog promotion prices on product variants
+
+    Background:
+        Given the store operates on a single channel in ""United States""
+        And the store has a configurable product ""PHP T-Shirt""
+        And the product ""PHP T-Shirt"" has a variant ""PHP T-Shirt - Medium"" priced at ""$20.00""
+        And there is an active catalog promotion ""Summer Sale"" that reduces the price by 25% for the variant ""PHP T-Shirt - Medium""
+        And I am logged in as a store manager
+
+    @ui
+    Scenario: Seeing the discounted price of an eligible product variant
+        When I view the variant ""PHP T-Shirt - Medium""
+        Then I should see that its original price is ""$20.00""
+        And I should see that its discounted price is ""$15.00""
+        And I should see that the catalog promotion ""Summer Sale"" is applied to it"
+10,"As an administrator,
+I want to modify a customer's billing address on an already placed order,
+So that I can correct or update customer billing information even after the order has been submitted.
+
+Acceptance Criteria:
+- The administrator should be able to view an order's summary and edit its billing address, specifying a new recipient name, street, postcode, city, and country.
+- Upon saving the changes, the administrator should receive a confirmation notification that the billing address has been successfully edited, and the order should display the updated billing address details.
+- When selecting a country for the billing address, only the provinces belonging to that selected country should be available for selection.
+- The billing address should remain editable and correctly saved regardless of external conditions such as changes in product price, a disabled sales channel, a disabled currency, or the product being out of stock, with the order's total remaining unaffected by the address change.","@managing_orders
+Feature: Editing the billing address of an order
+
+    Background:
+        Given the store operates on a single channel in ""United States""
+        And the store has a product ""PHP T-Shirt"" priced at ""$12.00""
+        And the store has a product ""Symfony Mug"" priced at ""$20.00""
+        And the store has ""United States"" country with ""California"" province
+        And the store has ""Canada"" country with ""Ontario"" province
+        And the customer placed an order for product ""PHP T-Shirt""
+        And I am logged in as an administrator
+
+    @api @ui
+    Scenario: Editing the billing address of an order
+        When I view the summary of the customer's latest order
+        And I edit the billing address with recipient name ""John Doe"", street ""123 Main Street"", postcode ""90210"", city ""Los Angeles"", and country ""United States""
+        And I save the billing address changes
+        Then I should be notified that the billing address has been successfully edited
+        And the order should have billing address with recipient name ""John Doe"", street ""123 Main Street"", postcode ""90210"", city ""Los Angeles"", and country ""United States""
+
+    @ui
+    Scenario: Showing only provinces belonging to the selected country when editing the billing address
+        When I view the summary of the customer's latest order
+        And I start editing the billing address
+        And I select ""Canada"" as the billing country
+        Then I should only see provinces belonging to ""Canada""
+
+    @api @ui
+    Scenario: Editing the billing address of an order when the product price changes
+        Given the product ""PHP T-Shirt"" price has changed to ""$15.00""
+        When I view the summary of the customer's latest order
+        And I edit the billing address with recipient name ""John Doe"", street ""123 Main Street"", postcode ""90210"", city ""Los Angeles"", and country ""United States""
+        And I save the billing address changes
+        Then I should be notified that the billing address has been successfully edited
+        And the order total should remain unchanged
+
+    @api @ui
+    Scenario: Editing the billing address of an order when the sales channel is disabled
+        Given the sales channel is disabled
+        When I view the summary of the customer's latest order
+        And I edit the billing address with recipient name ""John Doe"", street ""123 Main Street"", postcode ""90210"", city ""Los Angeles"", and country ""United States""
+        And I save the billing address changes
+        Then I should be notified that the billing address has been successfully edited
+        And the order total should remain unchanged
+
+    @api @ui
+    Scenario: Editing the billing address of an order when the currency is disabled
+        Given the currency ""USD"" is disabled
+        When I view the summary of the customer's latest order
+        And I edit the billing address with recipient name ""John Doe"", street ""123 Main Street"", postcode ""90210"", city ""Los Angeles"", and country ""United States""
+        And I save the billing address changes
+        Then I should be notified that the billing address has been successfully edited
+        And the order total should remain unchanged
+
+    @api @ui
+    Scenario: Editing the billing address of an order when the product is out of stock
+        Given the product ""PHP T-Shirt"" is out of stock
+        When I view the summary of the customer's latest order
+        And I edit the billing address with recipient name ""John Doe"", street ""123 Main Street"", postcode ""90210"", city ""Los Angeles"", and country ""United States""
+        And I save the billing address changes
+        Then I should be notified that the billing address has been successfully edited
+        And the order total should remain unchanged"
+101,"As a Finance/Accounting Officer,
+I want the system to generate correct General Ledger journal entries whenever a Credit Balance Refund (CBR) is processed on an overpaid Working Capital loan,
+So that overpayment liabilities are accurately debited and cleared through the appropriate suspense/clearing account, ensuring the accounting records remain accurate regardless of refund amount, frequency, or timing.
+
+Acceptance Criteria:
+- When a partial credit balance refund is processed on an overpaid Working Capital loan, the loan status must remain ""OVERPAID"" and generate a journal entry debiting the ""Other Credit Liability"" account and crediting the ""Suspense/Clearing"" account for the refunded amount.
+- When a credit balance refund fully settles the overpaid amount, the loan status must transition to ""CLOSED_OBLIGATIONS_MET"" and the corresponding journal entries must be recorded accurately.
+- The system must support multiple credit balance refunds on the same day or across different days, correctly reducing the overpayment balance each time and generating a separate, accurate set of journal entries for each refund transaction, including cases where payment details (such as payment type, account number, check number, routing code, receipt number, and bank number) are provided.","@WorkingCapital
+@WorkingCapitalCreditBalanceRefundFeature
+Feature: Working Capital Credit Balance Refund Journal Entries
+
+  @TestRailId:C76707
+  Scenario: Verify Credit Balance Refund journal entries for partial refund on overpaid Working Capital loan - UC1
+    Given Admin sets the business date to ""01 January 2027""
+    And Admin creates a client with random data
+    And Admin creates a Working Capital Loan Product with overpayment accounting enabled
+    And Admin creates and approves a Working Capital loan with overpayment balance
+      | loan_amount | disbursement_date | overpayment_amount | loan_status |
+      | 100000.00   | 01 January 2027   | 2500.00            | OVERPAID    |
+    When Admin processes a Credit Balance Refund on the Working Capital loan
+      | refund_amount | payment_type | account_number | check_number | routing_code | receipt_number | bank_number |
+      | 500.00        | CASH         |                |              |              |                |             |
+    Then Check Working Capital loan remains in OVERPAID status
+    And Check Credit Balance Refund journal entries are created with the following values
+      | transaction_type | debit_account_name      | credit_account_name     | amount  | loan_status_after_transaction |
+      | CBR              | Other Credit Liability  | Suspense/Clearing       | 500.00  | OVERPAID                      |
+    And Check Working Capital loan overpayment balance is reduced to 2000.00
+
+  @TestRailId:C76708
+  Scenario: Verify Credit Balance Refund journal entries for full settlement refund on overpaid Working Capital loan - UC2
+    Given Admin sets the business date to ""01 January 2027""
+    And Admin creates a client with random data
+    And Admin creates a Working Capital Loan Product with overpayment accounting enabled
+    And Admin creates and approves a Working Capital loan with overpayment balance
+      | loan_amount | disbursement_date | overpayment_amount | loan_status |
+      | 100000.00   | 01 January 2027   | 1500.00            | OVERPAID    |
+    When Admin processes a Credit Balance Refund on the Working Capital loan
+      | refund_amount | payment_type | account_number | check_number | routing_code | receipt_number | bank_number |
+      | 1500.00       | BANK_TRANSFER| 1234567890     |              | 011000015    | RCPT-0001      | 001         |
+    Then Check Working Capital loan transitions to CLOSED_OBLIGATIONS_MET status
+    And Check Credit Balance Refund journal entries are created with the following values
+      | transaction_type | debit_account_name      | credit_account_name     | amount   | loan_status_after_transaction |
+      | CBR              | Other Credit Liability  | Suspense/Clearing       | 1500.00  | CLOSED_OBLIGATIONS_MET        |
+    And Check Working Capital loan overpayment balance is reduced to 0.00
+
+  @TestRailId:C76709
+  Scenario: Verify multiple Credit Balance Refund transactions on the same day generate separate journal entries and reduce overpayment balance correctly - UC3
+    Given Admin sets the business date to ""01 January 2027""
+    And Admin creates a client with random data
+    And Admin creates a Working Capital Loan Product with overpayment accounting enabled
+    And Admin creates and approves a Working Capital loan with overpayment balance
+      | loan_amount | disbursement_date | overpayment_amount | loan_status |
+      | 100000.00   | 01 January 2027   | 3000.00            | OVERPAID    |
+    When Admin processes a Credit Balance Refund on the Working Capital loan
+      | refund_amount | payment_type | account_number | check_number | routing_code | receipt_number | bank_number |
+      | 1000.00       | CASH         |                |              |              | RCPT-0002      |             |
+    Then Check Credit Balance Refund journal entries are created with the following values
+      | transaction_type | debit_account_name      | credit_account_name     | amount   | loan_status_after_transaction |
+      | CBR              | Other Credit Liability  | Suspense/Clearing       | 1000.00  | OVERPAID                      |
+    And Check Working Capital loan overpayment balance is reduced to 2000.00
+    When Admin processes a Credit Balance Refund on the Working Capital loan
+      | refund_amount | payment_type | account_number | check_number | routing_code | receipt_number | bank_number |
+      | 750.00        | CASH         |                |              |              | RCPT-0003      |             |
+    Then Check Credit Balance Refund journal entries are created with the following values
+      | transaction_type | debit_account_name      | credit_account_name     | amount  | loan_status_after_transaction |
+      | CBR              | Other Credit Liability  | Suspense/Clearing       | 750.00  | OVERPAID                      |
+    And Check Working Capital loan overpayment balance is reduced to 1250.00
+
+  @TestRailId:C76710
+  Scenario: Verify multiple Credit Balance Refund transactions across different days generate separate journal entries and preserve accounting accuracy - UC4
+    Given Admin sets the business date to ""01 January 2027""
+    And Admin creates a client with random data
+    And Admin creates a Working Capital Loan Product with overpayment accounting enabled
+    And Admin creates and approves a Working Capital loan with overpayment balance
+      | loan_amount | disbursement_date | overpayment_amount | loan_status |
+      | 100000.00   | 01 January 2027   | 2200.00            | OVERPAID    |
+    When Admin processes a Credit Balance Refund on the Working Capital loan
+      | refund_amount | payment_type | account_number | check_number | routing_code | receipt_number | bank_number |
+      | 700.00        | BANK_TRANSFER| 9988776655     |              | 021000021    | RCPT-0004      | 002         |
+    Then Check Credit Balance Refund journal entries are created with the following values
+      | transaction_type | debit_account_name      | credit_account_name     | amount  | loan_status_after_transaction |
+      | CBR              | Other Credit Liability  | Suspense/Clearing       | 700.00  | OVERPAID                      |
+    And Check Working Capital loan overpayment balance is reduced to 1500.00
+    When Admin sets the business date to ""02 January 2027""
+    And Admin processes a Credit Balance Refund on the Working Capital loan
+      | refund_amount | payment_type | account_number | check_number | routing_code | receipt_number | bank_number |
+      | 1500.00       | BANK_TRANSFER| 9988776655     |              | 021000021    | RCPT-0005      | 002         |
+    Then Check Working Capital loan transitions to CLOSED_OBLIGATIONS_MET status
+    And Check Credit Balance Refund journal entries are created with the following values
+      | transaction_type | debit_account_name      | credit_account_name     | amount   | loan_status_after_transaction |
+      | CBR              | Other Credit Liability  | Suspense/Clearing       | 1500.00  | CLOSED_OBLIGATIONS_MET        |
+    And Check Working Capital loan overpayment balance is reduced to 0.00
+
+  @TestRailId:C76711
+  Scenario: Verify Credit Balance Refund journal entries with complete payment details are recorded accurately - UC5
+    Given Admin sets the business date to ""01 January 2027""
+    And Admin creates a client with random data
+    And Admin creates a Working Capital Loan Product with overpayment accounting enabled
+    And Admin creates and approves a Working Capital loan with overpayment balance
+      | loan_amount | disbursement_date | overpayment_amount | loan_status |
+      | 100000.00   | 01 January 2027   | 1800.00            | OVERPAID    |
+    When Admin processes a Credit Balance Refund on the Working Capital loan
+      | refund_amount | payment_type | account_number | check_number | routing_code | receipt_number | bank_number |
+      | 600.00        | CHEQUE       | 4455667788     | CHK-778899    | 026009593    | RCPT-0006      | 003         |
+    Then Check Credit Balance Refund transaction details are persisted with the following values
+      | refund_amount | payment_type | account_number | check_number | routing_code | receipt_number | bank_number |
+      | 600.00        | CHEQUE       | 4455667788     | CHK-778899    | 026009593    | RCPT-0006      | 003         |
+    And Check Credit Balance Refund journal entries are created with the following values
+      | transaction_type | debit_account_name      | credit_account_name     | amount  | loan_status_after_transaction |
+      | CBR              | Other Credit Liability  | Suspense/Clearing       | 600.00  | OVERPAID                      |
+    And Check Working Capital loan overpayment balance is reduced to 1200.00"
+102,"As a Bank Administrator,
+I want to create, view, update, and delete Working Capital Near Breach configurations with proper validation on their fields (name, frequency, frequency type, and threshold),
+So that I can accurately manage and enforce early-warning thresholds for working capital loans before they reach an actual breach, while preventing invalid, duplicate, or unsafe configuration changes.
+
+Acceptance Criteria:
+- The system shall allow an Admin to create a new Working Capital Near Breach configuration by providing valid values for name, frequency, frequency type, and threshold, and shall persist and correctly return these values upon creation, update, and deletion.
+- The system shall reject creation or update of a Near Breach configuration when mandatory fields (nearBreachName, nearBreachFrequency, nearBreachFrequencyType, nearBreachThreshold) are null or empty, returning a clear mandatory-field error message.
+- The system shall reject creation or update when nearBreachFrequency is not greater than 0, returning an appropriate validation error.
+- The system shall reject creation or update when nearBreachFrequencyType is not one of the allowed values (DAYS, WEEKS, MONTHS, YEARS), returning an appropriate validation error.
+- The system shall reject creation or update when nearBreachThreshold is not greater than 0 or exceeds 100, returning an appropriate validation error.
+- The system shall prevent creating or updating a Near Breach configuration with a name that already exists, returning a duplicate-name error.
+- The system shall prevent deleting a Near Breach configuration that has already been deleted, returning an appropriate error, and shall also prevent retrieval of such a deleted configuration.
+- The system shall reject deletion or retrieval requests referencing a Near Breach configuration ID that does not exist or is invalid (e.g., 0 or an unassigned ID), returning a not-found error.
+- The system shall prevent deletion of a Near Breach configuration that is still assigned to an active Working Capital Loan Product or a Working Capital Loan Account, returning an appropriate assignment error.","@WorkingCapital
+@WorkingCapitalNearBreachManagementFeature
+Feature: Working Capital Near Breach Configuration
+
+  @TestRailId:C76707
+  Scenario: Verify Working Capital Near Breach Configuration CRUD - UC1
+    When Admin Calls Breach Template
+    When Admin creates WC Near Breach With Values
+    Then Check created Near Breach has the following values
+    When Admin modifies WC Near Breach With Values
+    Then Check updated Near Breach has the following values
+    When Admin deletes WC Near Breach With Values
+
+  @TestRailId:C76708
+  Scenario Outline: Verify Working Capital Near Breach Configuration create with invalid data shall outcome with error - UC2
+    Then Admin failed to create a new WC Near Breach for field ""<wcb_field_name_invalid>"" with invalid data <wcb_field_value_invalid> results with an error <wcb_error_message>
+
+    Examples:
+      | wcb_field_name_invalid       | wcb_field_value_invalid | wcb_error_message                                                                       |
+      | nearBreachName               | ""null""                  | The parameter `nearBreachName` is mandatory.                                            |
+      | nearBreachName               | """"                      | The parameter `nearBreachName` is mandatory.                                            |
+      | nearBreachFrequency          | ""null""                  | The parameter `nearBreachFrequency` is mandatory.                                       |
+      | nearBreachFrequency          | ""0""                     | The parameter `nearBreachFrequency` must be greater than 0.                             |
+      | nearBreachFrequencyType      | ""null""                  | The parameter `nearBreachFrequencyType` is mandatory.                                   |
+      | nearBreachFrequencyType      | ""INVALID""               | The parameter `nearBreachFrequencyType` must be one of [ DAYS, WEEKS, MONTHS, YEARS ] . |
+      | nearBreachThreshold          | ""null""                  | The parameter `nearBreachThreshold` is mandatory.                                       |
+      | nearBreachThreshold          | ""0""                     | The parameter `nearBreachThreshold` must be greater than 0.                             |
+      | nearBreachThreshold          | ""100.01""                | The parameter `nearBreachThreshold` must be not greater than 100.                      |
+
+  @TestRailId:C76709
+  Scenario: Verify Working Capital Near Breach Configuration create validation with existing name outcomes with error - UC3
+    When Admin creates WC Breach With Values for update
+    Then Admin failed to create WC Breach With duplicated name
+    When Admin deletes WC Breach With Values for update
+
+  @TestRailId:C76710
+  Scenario Outline: Verify Working Capital Near Breach Configuration update with invalid data shall outcome with error - UC4
+    When Admin creates WC Near Breach With Values for update
+    Then Admin failed to update WC Near Breach for field ""<wcb_field_name_invalid>"" with invalid data <wcb_field_value_invalid> results with an error <wcb_error_message>
+    When Admin deletes WC Near Breach With Values for update
+
+    Examples:
+      | wcb_field_name_invalid       | wcb_field_value_invalid | wcb_error_message                                                                       |
+      | nearBreachName               | ""null""                  | The parameter `nearBreachName` is mandatory.                                            |
+      | nearBreachName               | """"                      | The parameter `nearBreachName` is mandatory.                                            |
+      | nearBreachFrequency          | ""null""                  | The parameter `nearBreachFrequency` is mandatory.                                       |
+      | nearBreachFrequency          | ""0""                     | The parameter `nearBreachFrequency` must be greater than 0.                             |
+      | nearBreachFrequencyType      | ""null""                  | The parameter `nearBreachFrequencyType` is mandatory.                                   |
+      | nearBreachFrequencyType      | ""INVALID""               | The parameter `nearBreachFrequencyType` must be one of [ DAYS, WEEKS, MONTHS, YEARS ] . |
+      | nearBreachThreshold          | ""null""                  | The parameter `nearBreachThreshold` is mandatory.                                       |
+      | nearBreachThreshold          | ""0""                     | The parameter `nearBreachThreshold` must be greater than 0.                             |
+      | nearBreachThreshold          | ""110""                   | The parameter `nearBreachThreshold` must be not greater than 100.                       |
+
+  @TestRailId:C76711
+  Scenario: Verify Working Capital Near Breach update validation with existing name outcomes with error - UC5
+    When Admin creates WC Near Breach With Values
+    When Admin creates WC Near Breach With Values for update
+    Then Admin failed to update WC Near Breach With duplicated name
+    When Admin deletes WC Near Breach With Values
+    When Admin deletes WC Near Breach With Values for update
+
+  @TestRailId:C76712
+  Scenario: Verify deleting Working Capital Near Breach Configuration that is already deleted failure - UC6
+    When Admin creates WC Near Breach With Values for update
+    When Admin deletes WC Near Breach With Values for update
+    Then Admin failed to delete WC Near Breach that is already deleted
+    Then Admin failed to retrieve WC Near Breach that is already deleted
+
+  @TestRailId:C76713
+  Scenario Outline: Verify Working Capital Breach delete with invalid data shall outcome with error - validation check with id - UC7
+    Then Admin failed to delete WC Near Breach with id <wcb_field_name_incorrect_value> that doesn't exist
+    Examples:
+      | wcb_field_name_incorrect_value |
+      | 103284                         |
+      | 0                              |
+
+  @TestRailId:C76714
+  Scenario Outline: Verify Working Capital Breach retrieve with invalid data shall outcome with error - validation check with id - UC8
+    Then Admin failed to retrieve WC Near Breach with id <wcb_field_name_incorrect_value> that is not found
+    Examples:
+      | wcb_field_name_incorrect_value |
+      | 565465                         |
+      | 0                              |
+
+  @TestRailId:C76715
+  Scenario: Verify deleting Working Capital Near Breach Configuration that is still assigned to WCLP failure - UC9.1
+    When Admin creates a new Working Capital Loan Product with breach and near breach
+    Then Admin failed to delete WC Near Breach that is still assigned to WC loan product or account
+    Then Admin deletes a Working Capital Loan Product
+    Then Admin deletes WC Breach With Values
+    Then Admin deletes WC Near Breach With Values
+
+  @TestRailId:C76716
+  Scenario: Verify deleting Working Capital Near Breach Configuration that is still assigned to WC loan account failure - UC9.2
+    When Admin sets the business date to ""01 January 2027""
+    And Admin creates a client with random data
+    And Admin creates working capital loan with with breach and near breach on ""01 January 2027"" date
+    Then Admin failed to delete WC Near Breach that is still assigned to WC loan product or account"
+103,"As a system administrator,
+I want the Close of Business (COB) job to automatically process loans and keep the last closed business date accurate for each loan,
+So that loan statuses, delinquency classifications, and locking mechanisms remain consistent and up to date without manual intervention.
+
+Acceptance Criteria:
+- After the COB job runs, each active loan's ""last closed business date"" must be updated to reflect one day behind the current business date, and this must not change for loans already CLOSED or OVERPAID.
+- When the business date advances by multiple days, running ""COB catch up"" must process each missed day sequentially until the loan's last closed business date reaches one day behind the current business date.
+- The COB job must correctly calculate and update the loan's delinquency range and delinquency date based on the configured arrears tolerance/settings on the loan product, and must maintain an accurate delinquency history (added/lifted dates) as the loan moves in and out of delinquency ranges.
+- If a payment is made on a loan whose last closed business date is behind the current business date, an inline COB run must be triggered automatically before the repayment is processed, so the loan's last closed business date is brought up to date first.
+- The COB job must correctly manage loan locks: locks with an error message must remain in place (blocking further processing), while orphaned locks without an error message must be automatically removed once the loan has already been processed for that COB date; locks with a null COB date or a COB date that doesn't match the loan's last closed business date must always be preserved.
+- After a successful COB run, no unreleased/orphaned locks should remain on the loan account, and when multiple loans are processed in the same COB run, only the orphaned locks (without errors) should be removed while locks carrying error messages remain intact for their respective loans.","@Loan
+@LoanCOBManagementFeature
+Feature: Loan Close of Business Processing
+
+  @TestRailId:C76707
+  Scenario: Verify COB job updates last closed business date for active loans and preserves CLOSED or OVERPAID loans - UC1
+    Given Admin sets the business date to ""01 January 2027""
+    And Admin creates a loan product with the following values
+      | loan_product_name              | currency | digits_after_decimal | in_multiples_of | repayment_frequency | repayment_frequency_type | arrears_tolerance | interest_recalculation | allow_partial_period_interest_calc | days_in_year | days_in_month |
+      | COB Active Loan Product        | USD      | 2                   | 1               | 30                  | DAYS                     | 5                | true                   | true                               | 365          | 30            |
+    And Admin creates the following clients
+      | client_name      | external_id | office_name |
+      | COB Active Client| CL-COB-001   | Main Office |
+    And Admin creates the following loans
+      | loan_name           | client_name       | loan_product_name       | principal | submitted_on_date   | expected_disbursement_date | disbursement_date     | loan_term_frequency | loan_term_frequency_type | repayment_every | repayment_frequency_type | number_of_repayments | interest_rate_per_period | interest_rate_frequency_type | loan_status |
+      | COB Active Loan     | COB Active Client | COB Active Loan Product | 10000.00  | 01 January 2027     | 01 January 2027            | 01 January 2027       | 12                  | MONTHS                   | 1               | MONTHS                   | 12                   | 12.00                    | MONTHS                       | ACTIVE      |
+      | COB Closed Loan     | COB Active Client | COB Active Loan Product | 5000.00   | 01 January 2027     | 01 January 2027            | 01 January 2027       | 12                  | MONTHS                   | 1               | MONTHS                   | 12                   | 12.00                    | MONTHS                       | CLOSED      |
+      | COB Overpaid Loan   | COB Active Client | COB Active Loan Product | 5000.00   | 01 January 2027     | 01 January 2027            | 01 January 2027       | 12                  | MONTHS                   | 1               | MONTHS                   | 12                   | 12.00                    | MONTHS                       | OVERPAID    |
+    When Admin runs COB job
+    Then Check loan last closed business date has been updated for active loans only
+    And Check loan last closed business date for ""COB Active Loan"" is ""01 January 2027""
+    And Check loan last closed business date for ""COB Closed Loan"" is unchanged
+    And Check loan last closed business date for ""COB Overpaid Loan"" is unchanged
+
+  @TestRailId:C76708
+  Scenario: Verify COB catch up processes missed business dates sequentially until last closed business date is current minus one day - UC2
+    Given Admin sets the business date to ""10 January 2027""
+    And Admin creates a loan product with the following values
+      | loan_product_name           | currency | digits_after_decimal | in_multiples_of | repayment_frequency | repayment_frequency_type | arrears_tolerance | interest_recalculation | allow_partial_period_interest_calc | days_in_year | days_in_month |
+      | COB Catch Up Product        | USD      | 2                   | 1               | 30                  | DAYS                     | 0                | true                   | true                               | 365          | 30            |
+    And Admin creates the following clients
+      | client_name        | external_id | office_name |
+      | COB Catch Up Client | CL-COB-002   | Main Office |
+    And Admin creates the following loans
+      | loan_name          | client_name          | loan_product_name      | principal | submitted_on_date   | expected_disbursement_date | disbursement_date     | loan_term_frequency | loan_term_frequency_type | repayment_every | repayment_frequency_type | number_of_repayments | interest_rate_per_period | interest_rate_frequency_type | loan_status |
+      | COB Catch Up Loan  | COB Catch Up Client  | COB Catch Up Product  | 15000.00  | 01 January 2027     | 01 January 2027            | 01 January 2027       | 12                  | MONTHS                   | 1               | MONTHS                   | 12                   | 10.00                    | MONTHS                       | ACTIVE      |
+    When Admin runs COB catch up job
+    Then Check loan last closed business date for ""COB Catch Up Loan"" is ""09 January 2027""
+    And Check COB catch up processed the following business dates sequentially
+      | processed_business_date |
+      | 01 January 2027         |
+      | 02 January 2027         |
+      | 03 January 2027         |
+      | 04 January 2027         |
+      | 05 January 2027         |
+      | 06 January 2027         |
+      | 07 January 2027         |
+      | 08 January 2027         |
+      | 09 January 2027         |
+
+  @TestRailId:C76709
+  Scenario Outline: Verify COB job updates delinquency range and delinquency date based on arrears tolerance and maintains delinquency history - UC3
+    Given Admin sets the business date to ""01 February 2027""
+    And Admin creates a loan product with the following values
+      | loan_product_name              | currency | digits_after_decimal | in_multiples_of | repayment_frequency | repayment_frequency_type | arrears_tolerance | interest_recalculation | allow_partial_period_interest_calc | days_in_year | days_in_month |
+      | <loan_product_name>            | USD      | 2                   | 1               | 30                  | DAYS                     | <arrears_tolerance> | true                   | true                               | 365          | 30            |
+    And Admin creates the following clients
+      | client_name            | external_id | office_name |
+      | <client_name>          | <external_id> | Main Office |
+    And Admin creates the following loans
+      | loan_name            | client_name      | loan_product_name      | principal | submitted_on_date   | expected_disbursement_date | disbursement_date     | loan_term_frequency | loan_term_frequency_type | repayment_every | repayment_frequency_type | number_of_repayments | interest_rate_per_period | interest_rate_frequency_type | loan_status |
+      | <loan_name>          | <client_name>    | <loan_product_name>    | 20000.00  | 01 January 2027     | 01 January 2027            | 01 January 2027       | 12                  | MONTHS                   | 1               | MONTHS                   | 12                   | 12.00                    | MONTHS                       | ACTIVE      |
+    And Admin posts the following repayment transactions
+      | loan_name   | transaction_date   | transaction_amount | payment_type |
+      | <loan_name> | 15 January 2027    | 1000.00            | REPAYMENT    |
+    When Admin runs COB job
+    Then Check loan delinquency details for ""<loan_name>""
+    And Check loan delinquency range is ""<expected_delinquency_range>""
+    And Check loan delinquency date is ""<expected_delinquency_date>""
+    And Check loan delinquency history contains the following entries
+      | delinquency_event | event_date          | delinquency_range |
+      | added             | <expected_added_on> | <expected_delinquency_range> |
+      | lifted            | <expected_lifted_on> | <expected_lifted_range> |
+
+    Examples:
+      | loan_product_name        | client_name          | external_id | loan_name          | arrears_tolerance | expected_delinquency_range | expected_delinquency_date | expected_added_on      | expected_lifted_on      | expected_lifted_range |
+      | COB Delinquent Product A | COB Delinquent Client A | CL-COB-003 | COB Delinquent Loan A | 0                | 1-30 Days                  | 15 January 2027          | 15 January 2027        | 01 February 2027       | Current               |
+      | COB Delinquent Product B | COB Delinquent Client B | CL-COB-004 | COB Delinquent Loan B | 5                | 1-35 Days                  | 15 January 2027          | 15 January 2027        | 01 February 2027       | Current               |
+
+  @TestRailId:C76710
+  Scenario: Verify inline COB is triggered automatically before repayment processing when last closed business date is behind current business date - UC4
+    Given Admin sets the business date to ""05 March 2027""
+    And Admin creates a loan product with the following values
+      | loan_product_name           | currency | digits_after_decimal | in_multiples_of | repayment_frequency | repayment_frequency_type | arrears_tolerance | interest_recalculation | allow_partial_period_interest_calc | days_in_year | days_in_month |
+      | COB Inline Product          | USD      | 2                   | 1               | 30                  | DAYS                     | 0                | true                   | true                               | 365          | 30            |
+    And Admin creates the following clients
+      | client_name        | external_id | office_name |
+      | COB Inline Client  | CL-COB-005   | Main Office |
+    And Admin creates the following loans
+      | loan_name         | client_name        | loan_product_name     | principal | submitted_on_date   | expected_disbursement_date | disbursement_date     | loan_term_frequency | loan_term_frequency_type | repayment_every | repayment_frequency_type | number_of_repayments | interest_rate_per_period | interest_rate_frequency_type | loan_status |
+      | COB Inline Loan   | COB Inline Client  | COB Inline Product   | 12000.00  | 01 March 2027      | 01 March 2027              | 01 March 2027         | 12                  | MONTHS                   | 1               | MONTHS                   | 12                   | 11.00                    | MONTHS                       | ACTIVE      |
+    When Admin runs COB job for ""01 March 2027""
+    And Admin posts a repayment transaction for ""COB Inline Loan"" on ""05 March 2027"" with amount ""500.00""
+    Then Check inline COB was triggered before repayment processing
+    And Check loan last closed business date for ""COB Inline Loan"" is ""04 March 2027""
+    And Check repayment transaction for ""COB Inline Loan"" was processed successfully
+
+  @TestRailId:C76711
+  Scenario: Verify COB lock management preserves error locks and removes orphaned locks after successful processing - UC5
+    Given Admin sets the business date to ""12 April 2027""
+    And Admin creates a loan product with the following values
+      | loan_product_name           | currency | digits_after_decimal | in_multiples_of | repayment_frequency | repayment_frequency_type | arrears_tolerance | interest_recalculation | allow_partial_period_interest_calc | days_in_year | days_in_month |
+      | COB Lock Product            | USD      | 2                   | 1               | 30                  | DAYS                     | 0                | true                   | true                               | 365          | 30            |
+    And Admin creates the following clients
+      | client_name        | external_id | office_name |
+      | COB Lock Client 1   | CL-COB-006   | Main Office |
+      | COB Lock Client 2   | CL-COB-007   | Main Office |
+    And Admin creates the following loans
+      | loan_name          | client_name       | loan_product_name     | principal | submitted_on_date   | expected_disbursement_date | disbursement_date     | loan_term_frequency | loan_term_frequency_type | repayment_every | repayment_frequency_type | number_of_repayments | interest_rate_per_period | interest_rate_frequency_type | loan_status |
+      | COB Lock Loan 1    | COB Lock Client 1 | COB Lock Product    | 10000.00  | 01 April 2027      | 01 April 2027              | 01 April 2027         | 12                  | MONTHS                   | 1               | MONTHS                   | 12                   | 10.00                    | MONTHS                       | ACTIVE      |
+      | COB Lock Loan 2    | COB Lock Client 2 | COB Lock Product    | 10000.00  | 01 April 2027      | 01 April 2027              | 01 April 2027         | 12                  | MONTHS                   | 1               | MONTHS                   | 12                   | 10.00                    | MONTHS                       | ACTIVE      |
+    And Admin creates the following loan locks
+      | loan_name        | cob_date          | lock_status | error_message                 |
+      | COB Lock Loan 1  | 11 April 2027     | LOCKED      | Processing failed on accrual  |
+      | COB Lock Loan 1  | 11 April 2027     | LOCKED      | null                          |
+      | COB Lock Loan 2  | 11 April 2027     | LOCKED      | null                          |
+      | COB Lock Loan 2  | null              | LOCKED      | null                          |
+      | COB Lock Loan 2  | 10 April 2027     | LOCKED      | null                          |
+    When Admin runs COB job
+    Then Check loan lock with error message remains in place for ""COB Lock Loan 1""
+    And Check orphaned loan lock without error message is removed for ""COB Lock Loan 1""
+    And Check orphaned loan lock without error message is removed for ""COB Lock Loan 2""
+    And Check loan lock with null COB date is preserved for ""COB Lock Loan 2""
+    And Check loan lock with mismatched COB date is preserved for ""COB Lock Loan 2""
+    And Check no unreleased or orphaned locks remain on processed loans
+
+  @TestRailId:C76712
+  Scenario: Verify multiple loans processed in same COB run remove only orphaned locks while preserving error locks - UC6
+    Given Admin sets the business date to ""20 May 2027""
+    And Admin creates a loan product with the following values
+      | loan_product_name           | currency | digits_after_decimal | in_multiples_of | repayment_frequency | repayment_frequency_type | arrears_tolerance | interest_recalculation | allow_partial_period_interest_calc | days_in_year | days_in_month |
+      | COB Multi Lock Product      | USD      | 2                   | 1               | 30                  | DAYS                     | 0                | true                   | true                               | 365          | 30            |
+    And Admin creates the following clients
+      | client_name        | external_id | office_name |
+      | COB Multi Client 1  | CL-COB-008   | Main Office |
+      | COB Multi Client 2  | CL-COB-009   | Main Office |
+      | COB Multi Client 3  | CL-COB-010   | Main Office |
+    And Admin creates the following loans
+      | loan_name          | client_name         | loan_product_name        | principal | submitted_on_date   | expected_disbursement_date | disbursement_date     | loan_term_frequency | loan_term_frequency_type | repayment_every | repayment_frequency_type | number_of_repayments | interest_rate_per_period | interest_rate_frequency_type | loan_status |
+      | COB Multi Loan 1   | COB Multi Client 1  | COB Multi Lock Product   | 8000.00   | 01 May 2027         | 01 May 2027                | 01 May 2027           | 12                  | MONTHS                   | 1               | MONTHS                   | 12                   | 9.00                     | MONTHS                       | ACTIVE      |
+      | COB Multi Loan 2   | COB Multi Client 2  | COB Multi Lock Product   | 9000.00   | 01 May 2027         | 01 May 2027                | 01 May 2027           | 12                  | MONTHS                   | 1               | MONTHS                   | 12                   | 9.00                     | MONTHS                       | ACTIVE      |
+      | COB Multi Loan 3   | COB Multi Client 3  | COB Multi Lock Product   | 7000.00   | 01 May 2027         | 01 May 2027                | 01 May 2027           | 12                  | MONTHS                   | 1               | MONTHS                   | 12                   | 9.00                     | MONTHS                       | ACTIVE      |
+    And Admin creates the following loan locks
+      | loan_name         | cob_date          | lock_status | error_message                |
+      | COB Multi Loan 1  | 19 May 2027       | LOCKED      | null                         |
+      | COB Multi Loan 1  | 19 May 2027       | LOCKED      | Validation failed on charge  |
+      | COB Multi Loan 2  | 19 May 2027       | LOCKED      | null                         |
+      | COB Multi Loan 3  | 19 May 2027       | LOCKED      | null                         |
+      | COB Multi Loan 3  | 19 May 2027       | LOCKED      | null                         |
+    When Admin runs COB job
+    Then Check loan lock with error message remains in place for ""COB Multi Loan 1""
+    And Check orphaned loan lock without error message is removed for ""COB Multi Loan 1""
+    And Check orphaned loan lock without error message is removed for ""COB Multi Loan 2""
+    And Check orphaned loan lock without error message is removed for ""COB Multi Loan 3""
+    And Check no unreleased or orphaned locks remain on processed loans"
+104,"As a Loan Product Manager,
+I want the system to correctly recalculate and amortize the Working Capital loan discount fee across multiple COB runs, repayments, and discount fee adjustments,
+So that realized and unrealized income figures remain accurate and consistent throughout the loan lifecycle, without generating duplicate transactions.
+
+Acceptance Criteria:
+- When the COB job runs after a new repayment, a new Discount Fee Amortization transaction must be created and the realized/unrealized income amounts must be updated proportionally to the principal paid.
+- When the COB job runs again without any new repayment since the last run, no duplicate Discount Fee Amortization transaction should be generated and the loan's financial data must remain unchanged.
+- When a Discount Fee Adjustment is applied, the system must generate a corresponding Discount Fee Amortization Adjustment transaction with correct journal entries, and undoing that adjustment must reverse both transactions and restore the loan's previous financial data.
+- When the loan is fully repaid and closed, the system must automatically recognize the full remaining discount fee amortization, regardless of whether a prior discount fee adjustment reduced the total discount amount, and post the correct journal entries.
+- Subsequent COB runs after an amortization adjustment must not create duplicate adjustment transactions, preserving the accuracy of realized and unrealized income data.","@WorkingCapital
+@WorkingCapitalDiscountFeeAmortizationFeature
+Feature: Working Capital Discount Fee Amortization and Adjustment
+
+  @TestRailId:C76707
+  Scenario: Verify Discount Fee Amortization transaction creation and income recalculation after repayment and COB run - UC1
+    Given Admin sets the business date to ""01 January 2027""
+    And Admin creates a client with random data
+    And Admin creates a Working Capital Loan Product with the following values
+      | loan_product_field_name                 | loan_product_field_value |
+      | name                                    | WC Loan Product DF A1    |
+      | principal                                | 100000.00                |
+      | interestRatePerPeriod                    | 12.00                    |
+      | numberOfRepayments                       | 12                       |
+      | repaymentEvery                           | 1                        |
+      | repaymentFrequencyType                   | MONTHS                   |
+      | amortizationType                         | equalInstallments        |
+      | interestType                             | decliningBalance         |
+      | transactionProcessingStrategyCode        | advanced-payment-allocation |
+      | accountingRule                           | accrualPeriodic          |
+      | enableDiscountFee                        | true                     |
+      | discountFeeAmount                        | 10000.00                 |
+      | discountFeeAmortizationMethod            | straightLine             |
+      | discountFeeIncomeRecognitionMethod       | proportionalToPrincipal  |
+    And Admin approves and disburses the Working Capital Loan on ""01 January 2027""
+    And Admin posts a repayment of ""10000.00"" on the Working Capital Loan on ""15 January 2027""
+    When Admin runs COB for the Working Capital Loan on ""15 January 2027""
+    Then Check Discount Fee Amortization transaction is created with the following values
+      | amortization_field_name                  | amortization_field_value |
+      | transactionType                         | Discount Fee Amortization |
+      | amount                                  | 1000.00                  |
+      | realizedIncomeAmount                    | 1000.00                  |
+      | unrealizedIncomeAmount                  | 9000.00                  |
+      | principalPaid                           | 10000.00                 |
+      | journalEntryDebitAccount                | Discount Fee Receivable  |
+      | journalEntryCreditAccount               | Discount Fee Income      |
+    And Check Working Capital Loan financial data has the following values
+      | financial_field_name                    | financial_field_value |
+      | totalDiscountFeeAmortized              | 1000.00              |
+      | totalRealizedIncome                    | 1000.00              |
+      | totalUnrealizedIncome                  | 9000.00              |
+      | totalDiscountFeeAmortizationTransactions | 1                    |
+
+  @TestRailId:C76708
+  Scenario: Verify COB rerun without new repayment does not create duplicate Discount Fee Amortization transaction - UC2
+    Given Admin sets the business date to ""01 January 2027""
+    And Admin creates a client with random data
+    And Admin creates a Working Capital Loan Product with the following values
+      | loan_product_field_name                 | loan_product_field_value |
+      | name                                    | WC Loan Product DF A2    |
+      | principal                                | 100000.00                |
+      | interestRatePerPeriod                    | 12.00                    |
+      | numberOfRepayments                       | 12                       |
+      | repaymentEvery                           | 1                        |
+      | repaymentFrequencyType                   | MONTHS                   |
+      | amortizationType                         | equalInstallments        |
+      | interestType                             | decliningBalance         |
+      | transactionProcessingStrategyCode        | advanced-payment-allocation |
+      | accountingRule                           | accrualPeriodic          |
+      | enableDiscountFee                        | true                   |
+      | discountFeeAmount                        | 10000.00                |
+      | discountFeeAmortizationMethod            | straightLine             |
+      | discountFeeIncomeRecognitionMethod       | proportionalToPrincipal  |
+    And Admin approves and disburses the Working Capital Loan on ""01 January 2027""
+    And Admin posts a repayment of ""10000.00"" on the Working Capital Loan on ""15 January 2027""
+    When Admin runs COB for the Working Capital Loan on ""15 January 2027""
+    And Admin runs COB for the Working Capital Loan on ""15 January 2027"" again without any new repayment
+    Then Check no duplicate Discount Fee Amortization transaction is created
+    And Check Working Capital Loan financial data remains unchanged with the following values
+      | financial_field_name                    | financial_field_value |
+      | totalDiscountFeeAmortized              | 1000.00              |
+      | totalRealizedIncome                    | 1000.00              |
+      | totalUnrealizedIncome                  | 9000.00              |
+      | totalDiscountFeeAmortizationTransactions | 1                    |
+
+  @TestRailId:C76709
+  Scenario: Verify Discount Fee Adjustment creates adjustment transaction and reversing it restores prior financial data - UC3
+    Given Admin sets the business date to ""01 January 2027""
+    And Admin creates a client with random data
+    And Admin creates a Working Capital Loan Product with the following values
+      | loan_product_field_name                 | loan_product_field_value |
+      | name                                    | WC Loan Product DF A3    |
+      | principal                                | 100000.00                |
+      | interestRatePerPeriod                    | 12.00                    |
+      | numberOfRepayments                       | 12                       |
+      | repaymentEvery                           | 1                        |
+      | repaymentFrequencyType                   | MONTHS                   |
+      | amortizationType                         | equalInstallments        |
+      | interestType                             | decliningBalance         |
+      | transactionProcessingStrategyCode        | advanced-payment-allocation |
+      | accountingRule                           | accrualPeriodic          |
+      | enableDiscountFee                        | true                   |
+      | discountFeeAmount                        | 10000.00                |
+      | discountFeeAmortizationMethod            | straightLine             |
+      | discountFeeIncomeRecognitionMethod       | proportionalToPrincipal  |
+    And Admin approves and disburses the Working Capital Loan on ""01 January 2027""
+    And Admin posts a repayment of ""10000.00"" on the Working Capital Loan on ""15 January 2027""
+    And Admin runs COB for the Working Capital Loan on ""15 January 2027""
+    When Admin applies a Discount Fee Adjustment of ""-2000.00"" on the Working Capital Loan on ""16 January 2027""
+    Then Check Discount Fee Amortization Adjustment transaction is created with the following values
+      | adjustment_field_name                   | adjustment_field_value |
+      | transactionType                        | Discount Fee Amortization Adjustment |
+      | amount                                 | -2000.00              |
+      | realizedIncomeAdjustment               | -200.00               |
+      | unrealizedIncomeAdjustment             | 200.00                |
+      | journalEntryDebitAccount               | Discount Fee Income   |
+      | journalEntryCreditAccount              | Discount Fee Receivable |
+    And Check Working Capital Loan financial data has the following values
+      | financial_field_name                    | financial_field_value |
+      | totalDiscountFeeAmortized              | 800.00               |
+      | totalRealizedIncome                    | 800.00               |
+      | totalUnrealizedIncome                  | 7200.00              |
+      | totalDiscountFeeAmortizationTransactions | 1                    |
+      | totalDiscountFeeAmortizationAdjustmentTransactions | 1      |
+    When Admin reverses the Discount Fee Adjustment on the Working Capital Loan on ""16 January 2027""
+    Then Check Discount Fee Amortization Adjustment transaction is reversed
+    And Check Discount Fee Amortization transaction is reversed
+    And Check Working Capital Loan financial data is restored to the previous values
+      | financial_field_name                    | financial_field_value |
+      | totalDiscountFeeAmortized              | 1000.00              |
+      | totalRealizedIncome                    | 1000.00              |
+      | totalUnrealizedIncome                  | 9000.00              |
+      | totalDiscountFeeAmortizationTransactions | 1                    |
+      | totalDiscountFeeAmortizationAdjustmentTransactions | 0      |
+
+  @TestRailId:C76710
+  Scenario: Verify full repayment and loan closure recognizes remaining discount fee amortization and posts correct journal entries - UC4
+    Given Admin sets the business date to ""01 January 2027""
+    And Admin creates a client with random data
+    And Admin creates a Working Capital Loan Product with the following values
+      | loan_product_field_name                 | loan_product_field_value |
+      | name                                    | WC Loan Product DF A4    |
+      | principal                                | 100000.00                |
+      | interestRatePerPeriod                    | 12.00                    |
+      | numberOfRepayments                       | 12                       |
+      | repaymentEvery                           | 1                        |
+      | repaymentFrequencyType                   | MONTHS                   |
+      | amortizationType                         | equalInstallments        |
+      | interestType                             | decliningBalance         |
+      | transactionProcessingStrategyCode        | advanced-payment-allocation |
+      | accountingRule                           | accrualPeriodic          |
+      | enableDiscountFee                        | true                   |
+      | discountFeeAmount                        | 10000.00                |
+      | discountFeeAmortizationMethod            | straightLine             |
+      | discountFeeIncomeRecognitionMethod       | proportionalToPrincipal  |
+    And Admin approves and disburses the Working Capital Loan on ""01 January 2027""
+    And Admin applies a Discount Fee Adjustment of ""-2000.00"" on the Working Capital Loan on ""10 January 2027""
+    And Admin posts a full repayment of ""100000.00"" on the Working Capital Loan on ""20 January 2027""
+    When Admin runs COB for the Working Capital Loan on ""20 January 2027""
+    Then Check remaining Discount Fee Amortization is fully recognized
+    And Check final Discount Fee Amortization transaction is created with the following values
+      | amortization_field_name                  | amortization_field_value |
+      | transactionType                         | Discount Fee Amortization |
+      | amount                                  | 8000.00                  |
+      | realizedIncomeAmount                    | 8000.00                  |
+      | unrealizedIncomeAmount                  | 0.00                     |
+      | journalEntryDebitAccount                | Discount Fee Receivable  |
+      | journalEntryCreditAccount               | Discount Fee Income      |
+    And Check Working Capital Loan financial data has the following values
+      | financial_field_name                    | financial_field_value |
+      | totalDiscountFeeAmortized              | 8000.00              |
+      | totalRealizedIncome                    | 8000.00              |
+      | totalUnrealizedIncome                  | 0.00                 |
+      | loanStatus                              | Closed               |
+
+  @TestRailId:C76711
+  Scenario: Verify subsequent COB runs after amortization adjustment do not create duplicate adjustment transactions - UC5
+    Given Admin sets the business date to ""01 January 2027""
+    And Admin creates a client with random data
+    And Admin creates a Working Capital Loan Product with the following values
+      | loan_product_field_name                 | loan_product_field_value |
+      | name                                    | WC Loan Product DF A5    |
+      | principal                                | 100000.00                |
+      | interestRatePerPeriod                    | 12.00                    |
+      | numberOfRepayments                       | 12                       |
+      | repaymentEvery                           | 1                        |
+      | repaymentFrequencyType                   | MONTHS                   |
+      | amortizationType                         | equalInstallments        |
+      | interestType                             | decliningBalance         |
+      | transactionProcessingStrategyCode        | advanced-payment-allocation |
+      | accountingRule                           | accrualPeriodic          |
+      | enableDiscountFee                        | true                   |
+      | discountFeeAmount                        | 10000.00                |
+      | discountFeeAmortizationMethod            | straightLine             |
+      | discountFeeIncomeRecognitionMethod       | proportionalToPrincipal  |
+    And Admin approves and disburses the Working Capital Loan on ""01 January 2027""
+    And Admin posts a repayment of ""10000.00"" on the Working Capital Loan on ""15 January 2027""
+    And Admin runs COB for the Working Capital Loan on ""15 January 2027""
+    And Admin applies a Discount Fee Adjustment of ""-1000.00"" on the Working Capital Loan on ""16 January 2027""
+    When Admin runs COB for the Working Capital Loan on ""16 January 2027""
+    And Admin runs COB for the Working Capital Loan on ""16 January 2027"" again without any new repayment or adjustment
+    Then Check no duplicate Discount Fee Amortization Adjustment transaction is created
+    And Check realized and unrealized income data remains accurate with the following values
+      | financial_field_name                    | financial_field_value |
+      | totalDiscountFeeAmortized              | 900.00               |
+      | totalRealizedIncome                    | 900.00               |
+      | totalUnrealizedIncome                  | 8100.00              |
+      | totalDiscountFeeAmortizationAdjustmentTransactions | 1      |"
+105,"As a System Administrator,
+I want the Spring Batch infrastructure to correctly read job-specific configuration properties (such as partition size, chunk size, and retry limit) for defined jobs, and to fall back to safe default values for undefined jobs,
+So that batch jobs like LOAN_COB can be executed with the correct performance and resilience settings, while unrecognized job configurations do not cause failures or unpredictable behavior.
+
+Acceptance Criteria:
+- Given the Property Service is initialized, when the partition size, chunk size, and retry limit are fetched for the ""LOAN_COB"" job, the system must return a partition size of 100, a chunk size of 100, and a retry limit of 5.
+- Given the Property Service is initialized, when the partition size, chunk size, and retry limit are fetched for a non-existing job (e.g., ""INVALID_JOB""), the system must return default values of 1 for partition size, chunk size, and retry limit.
+- The Property Service must be able to distinguish between configured jobs and unconfigured/invalid jobs, applying the appropriate values accordingly without throwing errors.","@Batch
+@SpringBatchInfrastructureFeature
+Feature: Spring Batch Job-Specific Configuration Properties
+
+  @TestRailId:C76707
+  Scenario: Verify Spring Batch infrastructure returns configured values for LOAN_COB job - UC1
+    Given Property Service is initialized
+    When Admin fetches batch properties for job ""LOAN_COB""
+    Then Check fetched batch properties have the following values
+      | batch_job_name | partition_size | chunk_size | retry_limit |
+      | LOAN_COB       | 100            | 100        | 5           |
+
+  @TestRailId:C76708
+  Scenario: Verify Spring Batch infrastructure returns safe default values for invalid job - UC2
+    Given Property Service is initialized
+    When Admin fetches batch properties for job ""INVALID_JOB""
+    Then Check fetched batch properties have the following values
+      | batch_job_name | partition_size | chunk_size | retry_limit |
+      | INVALID_JOB    | 1              | 1          | 1           |
+
+  @TestRailId:C76709
+  Scenario Outline: Verify Spring Batch infrastructure distinguishes configured and unconfigured jobs without errors - UC3
+    Given Property Service is initialized
+    When Admin fetches batch properties for job ""<batch_job_name>""
+    Then Check fetched batch properties have the following values
+      | batch_job_name     | partition_size   | chunk_size   | retry_limit   |
+      | <batch_job_name>   | <partition_size> | <chunk_size> | <retry_limit> |
+
+    Examples:
+      | batch_job_name | partition_size | chunk_size | retry_limit |
+      | LOAN_COB       | 100            | 100        | 5           |
+      | INVALID_JOB    | 1              | 1          | 1           |"
+106,"As a Finance Officer,
+I want the system to automatically generate and record loan accrual transactions for outstanding fees, interest, and penalties whenever the Close of Business (COB) job or periodic accrual job runs,
+So that unearned income is accurately recognized and tracked throughout the loan lifecycle, ensuring correct financial reporting regardless of repayments, chargebacks, waivers, overpayments, or multiple disbursements.
+
+Acceptance Criteria:
+- When a due-date fee charge exists on a loan's disbursement date, running the COB job (inline or periodic) must create an Accrual transaction reflecting the correct fee amount, and the corresponding LoanAccrualTransactionCreatedBusinessEvent must be raised on that date, regardless of whether a partial or full repayment has already been made.
+- Accrual transactions must continue to be generated correctly even when the loan has been fully repaid and closed (CLOSED_OBLIGATIONS_MET), when a chargeback is applied afterward, or when a fee charge is waived and the waiver is later undone.
+- For loans using interest recalculation (declining balance, daily recalculation), the periodic accrual job or COB job must generate an Accrual transaction with the correct accrued interest amount, both before and after the loan reaches a closed state.
+- When a loan transitions into an OVERPAID status (due to full repayment covering principal, interest, and fees plus an excess amount), a final Accrual transaction must still be created for any outstanding fees, and this must remain consistent even after a Credit Balance Refund (CBR) is applied.
+- Accrual transactions must be correctly reconstructed after a repayment undo followed by a new overpayment, including scenarios where an additional fee charge is added between the undo and the repeated overpayment.
+- When mult","@Loans
+@LoanAccrualTransactionsFeature
+Feature: Loan Accrual Transactions
+
+  @TestRailId:C00001
+  Scenario: Verify loan accrual transaction creation for due-date fee charge on disbursement date with partial repayment - UC1.1
+    Given Admin sets the business date to ""01 January 2027""
+    And Admin creates a client with random data
+    And Admin creates a loan product with fee accrual enabled and due-date fee charge
+      | loanProductField                 | value                         |
+      | name                             | LP_ACCRUAL_FEE_DUE_DATE_001    |
+      | principal                        | 10000.00                     |
+      | interestRatePerPeriod           | 12.00                       |
+      | interestRateFrequencyType        | DAYS                         |
+      | interestCalculationPeriodType    | DAILY                        |
+      | amortizationType                | EQUAL_INSTALLMENTS            |
+      | transactionProcessingStrategy    | MIFOS_STANDARD               |
+      | daysInYear                      | 365                          |
+      | feeChargeAmount                 | 250.00                       |
+      | feeChargeTiming                 | DISBURSEMENT_DATE             |
+      | accrualEnabled                  | true                         |
+      | interestRecalculationEnabled    | false                        |
+    And Admin submits a loan application with the following data
+      | loanField                        | value                         |
+      | clientId                         | ${clientId}                   |
+      | productId                        | ${loanProductId}              |
+      | principal                       | 10000.00                     |
+      | expectedDisbursementDate        | 01 January 2027              |
+      | submittedOnDate                 | 01 January 2027              |
+      | interestRatePerPeriod           | 12.00                        |
+      | repaymentEvery                  | 1                             |
+      | repaymentFrequencyType          | DAYS                          |
+      | numberOfRepayments              | 30                            |
+    When Admin approves the loan application on ""01 January 2027""
+    And Admin disburses the loan on ""01 January 2027""
+    And Admin makes a partial repayment on ""01 January 2027"" with amount ""100.00""
+    And Admin runs the COB job inline on ""01 January 2027""
+    Then Admin verifies an Accrual transaction is created for fee charge amount ""250.00"" on ""01 January 2027""
+    And Admin verifies LoanAccrualTransactionCreatedBusinessEvent is raised on ""01 January 2027""
+    And Admin verifies the loan accrual ledger entries are balanced
+
+  @TestRailId:C00002
+  Scenario: Verify loan accrual transaction creation for due-date fee charge on disbursement date with full repayment - UC1.2
+    Given Admin sets the business date to ""01 February 2027""
+    And Admin creates a client with random data
+    And Admin creates a loan product with fee accrual enabled and due-date fee charge
+      | loanProductField                 | value                         |
+      | name                             | LP_ACCRUAL_FEE_DUE_DATE_002    |
+      | principal                        | 5000.00                      |
+      | interestRatePerPeriod           | 10.00                       |
+      | interestRateFrequencyType        | DAYS                         |
+      | interestCalculationPeriodType    | DAILY                        |
+      | amortizationType                | EQUAL_INSTALLMENTS            |
+      | transactionProcessingStrategy    | MIFOS_STANDARD               |
+      | daysInYear                      | 365                          |
+      | feeChargeAmount                 | 75.00                        |
+      | feeChargeTiming                 | DISBURSEMENT_DATE             |
+      | accrualEnabled                  | true                         |
+      | interestRecalculationEnabled    | false                        |
+    And Admin submits a loan application with the following data
+      | loanField                        | value                         |
+      | clientId                         | ${clientId}                   |
+      | productId                        | ${loanProductId}              |
+      | principal                       | 5000.00                       |
+      | expectedDisbursementDate        | 01 February 2027             |
+      | submittedOnDate                 | 01 February 2027             |
+      | interestRatePerPeriod           | 10.00                        |
+      | repaymentEvery                  | 1                             |
+      | repaymentFrequencyType          | DAYS                          |
+      | numberOfRepayments              | 20                            |
+    When Admin approves the loan application on ""01 February 2027""
+    And Admin disburses the loan on ""01 February 2027""
+    And Admin makes a full repayment on ""01 February 2027""
+    And Admin runs the periodic accrual job on ""01 February 2027""
+    Then Admin verifies an Accrual transaction is created for fee charge amount ""75.00"" on ""01 February 2027""
+    And Admin verifies LoanAccrualTransactionCreatedBusinessEvent is raised on ""01 February 2027""
+    And Admin verifies the loan status is ""CLOSED_OBLIGATIONS_MET""
+
+  @TestRailId:C00003
+  Scenario: Verify accrual generation after loan closure and chargeback application - UC2.1
+    Given Admin sets the business date to ""15 March 2027""
+    And Admin creates a client with random data
+    And Admin creates a loan product with fee accrual enabled and due-date fee charge
+      | loanProductField                 | value                         |
+      | name                             | LP_ACCRUAL_CHARGEBACK_001      |
+      | principal                        | 8000.00                      |
+      | interestRatePerPeriod           | 11.50                       |
+      | interestRateFrequencyType        | DAYS                         |
+      | interestCalculationPeriodType    | DAILY                        |
+      | amortizationType                | EQUAL_INSTALLMENTS            |
+      | transactionProcessingStrategy    | MIFOS_STANDARD               |
+      | daysInYear                      | 365                          |
+      | feeChargeAmount                 | 120.00                       |
+      | feeChargeTiming                 | DISBURSEMENT_DATE             |
+      | accrualEnabled                  | true                         |
+      | interestRecalculationEnabled    | false                        |
+    And Admin submits a loan application with the following data
+      | loanField                        | value                         |
+      | clientId                         | ${clientId}                   |
+      | productId                         | ${loanProductId}              |
+      | principal                       | 8000.00                       |
+      | expectedDisbursementDate        | 15 March 2027                |
+      | submittedOnDate                 | 15 March 2027                |
+      | interestRatePerPeriod           | 11.50                        |
+      | repaymentEvery                  | 1                             |
+      | repaymentFrequencyType          | DAYS                          |
+      | numberOfRepayments              | 24                            |
+    When Admin approves the loan application on ""15 March 2027""
+    And Admin disburses the loan on ""15 March 2027""
+    And Admin makes a full repayment on ""15 March 2027""
+    And Admin runs the COB job inline on ""15 March 2027""
+    And Admin applies a chargeback on the fee charge on ""16 March 2027""
+    And Admin runs the periodic accrual job on ""16 March 2027""
+    Then Admin verifies an Accrual transaction is created for fee charge amount ""120.00"" on ""16 March 2027""
+    And Admin verifies LoanAccrualTransactionCreatedBusinessEvent is raised on ""16 March 2027""
+    And Admin verifies the loan status is ""CLOSED_OBLIGATIONS_MET""
+
+  @TestRailId:C00004
+  Scenario: Verify accrual generation after fee waiver and waiver undo - UC2.2
+    Given Admin sets the business date to ""01 April 2027""
+    And Admin creates a client with random data
+    And Admin creates a loan product with fee accrual enabled and due-date fee charge
+      | loanProductField                 | value                         |
+      | name                             | LP_ACCRUAL_WAIVER_001          |
+      | principal                        | 12000.00                     |
+      | interestRatePerPeriod           | 9.75                        |
+      | interestRateFrequencyType        | DAYS                         |
+      | interestCalculationPeriodType    | DAILY                        |
+      | amortizationType                | EQUAL_INSTALLMENTS            |
+      | transactionProcessingStrategy    | MIFOS_STANDARD               |
+      | daysInYear                      | 365                          |
+      | feeChargeAmount                 | 300.00                       |
+      | feeChargeTiming                 | DISBURSEMENT_DATE             |
+      | accrualEnabled                  | true                         |
+      | interestRecalculationEnabled    | false                        |
+    And Admin submits a loan application with the following data
+      | loanField                        | value                         |
+      | clientId                         | ${clientId}                   |
+      | productId                         | ${loanProductId}              |
+      | principal                       | 12000.00                      |
+      | expectedDisbursementDate        | 01 April 2027                |
+      | submittedOnDate                 | 01 April 2027                |
+      | interestRatePerPeriod           | 9.75                         |
+      | repaymentEvery                  | 1                             |
+      | repaymentFrequencyType          | DAYS                          |
+      | numberOfRepayments              | 36                            |
+    When Admin approves the loan application on ""01 April 2027""
+    And Admin disburses the loan on ""01 April 2027""
+    And Admin waives the fee charge on ""01 April 2027""
+    And Admin undoes the fee waiver on ""02 April 2027""
+    And Admin runs the COB job inline on ""02 April 2027""
+    Then Admin verifies an Accrual transaction is created for fee charge amount ""300.00"" on ""02 April 2027""
+    And Admin verifies LoanAccrualTransactionCreatedBusinessEvent is raised on ""02 April 2027""
+
+  @TestRailId:C00005
+  Scenario: Verify periodic accrual generation for interest recalculation loan before closure - UC3.1
+    Given Admin sets the business date to ""01 May 2027""
+    And Admin creates a client with random data
+    And Admin creates a loan product with interest recalculation enabled and daily declining balance accrual
+      | loanProductField                 | value                         |
+      | name                             | LP_ACCRUAL_INT_RECALC_001      |
+      | principal                        | 15000.00                     |
+      | interestRatePerPeriod           | 14.00                       |
+      | interestRateFrequencyType        | DAYS                         |
+      | interestCalculationPeriodType    | DAILY                        |
+      | amortizationType                | EQUAL_INSTALLMENTS            |
+      | transactionProcessingStrategy    | MIFOS_STANDARD               |
+      | daysInYear                      | 365                          |
+      | accrualEnabled                  | true                         |
+      | interestRecalculationEnabled    | true                         |
+      | interestRecalculationMethod      | DAILY                         |
+      | compoundingMethod                | NONE                          |
+    And Admin submits a loan application with the following data
+      | loanField                        | value                         |
+      | clientId                         | ${clientId}                   |
+      | productId                         | ${loanProductId}              |
+      | principal                       | 15000.00                      |
+      | expectedDisbursementDate        | 01 May 2027                  |
+      | submittedOnDate                 | 01 May 2027                  |
+      | interestRatePerPeriod           | 14.00                        |
+      | repaymentEvery                  | 1                             |
+      | repaymentFrequencyType          | DAYS                          |
+      | numberOfRepayments              | 45                            |
+    When Admin approves the loan application on ""01 May 2027""
+    And Admin disburses the loan on ""01 May 2027""
+    And Admin makes a repayment on ""05 May 2027"" with amount ""500.00""
+    And Admin runs the periodic accrual job on ""05 May 2027""
+    Then Admin verifies an Accrual transaction is created for accrued interest amount ""5.75"" on ""05 May 2027""
+    And Admin verifies LoanAccrualTransactionCreatedBusinessEvent is raised on ""05 May 2027""
+    And Admin verifies the loan accrual transaction references the correct interest recalculation schedule
+
+  @TestRailId:C00006
+  Scenario: Verify periodic accrual generation for interest recalculation loan after closure - UC3.2
+    Given Admin sets the business date to ""20 May 2027""
+    And Admin creates a client with random data
+    And Admin creates a loan product with interest recalculation enabled and daily declining balance accrual
+      | loanProductField                 | value                         |
+      | name                             | LP_ACCRUAL_INT_RECALC_002      |
+      | principal                        | 9000.00                      |
+      | interestRatePerPeriod           | 13.25                       |
+      | interestRateFrequencyType        | DAYS                         |
+      | interestCalculationPeriodType    | DAILY                        |
+      | amortizationType                | EQUAL_INSTALLMENTS            |
+      | transactionProcessingStrategy    | MIFOS_STANDARD               |
+      | daysInYear                      | 365                          |
+      | accrualEnabled                  | true                         |
+      | interestRecalculationEnabled    | true                         |
+      | interestRecalculationMethod      | DAILY                         |
+      | compoundingMethod                | NONE                          |
+    And Admin submits a loan application with the following data
+      | loanField                        | value                         |
+      | clientId                         | ${clientId}                   |
+      | productId                         | ${loanProductId}              |
+      | principal                       | 9000.00                       |
+      | expectedDisbursementDate        | 20 May 2027                  |
+      | submittedOnDate                 | 20 May 2027                  |
+      | interestRatePerPeriod           | 13.25                        |
+      | repaymentEvery                  | 1                             |
+      | repaymentFrequencyType          | DAYS                          |
+      | numberOfRepayments              | 30                            |
+    When Admin approves the loan application on ""20 May 2027""
+    And Admin disburses the loan on ""20 May 2027""
+    And Admin makes a full repayment on ""20 May 2027""
+    And Admin runs the COB job inline on ""20 May 2027""
+    Then Admin verifies an Accrual transaction is created for accrued interest amount ""0.00"" on ""20 May 2027""
+    And Admin verifies LoanAccrualTransactionCreatedBusinessEvent is raised on ""20 May 2027""
+    And Admin verifies the loan status is ""CLOSED_OBLIGATIONS_MET""
+
+  @TestRailId:C00007
+  Scenario: Verify final accrual generation when loan becomes OVERPAID and after Credit Balance Refund - UC4.1
+    Given Admin sets the business date to ""01 June 2027""
+    And Admin creates a client with random data
+    And Admin creates a loan product with fee accrual enabled and due-date fee charge
+      | loanProductField                 | value                         |
+      | name                             | LP_ACCRUAL_OVERPAID_001        |
+      | principal                        | 7000.00                      |
+      | interestRatePerPeriod           | 10.50                       |
+      | interestRateFrequencyType        | DAYS                         |
+      | interestCalculationPeriodType    | DAILY                        |
+      | amortizationType                | EQUAL_INSTALLMENTS            |
+      | transactionProcessingStrategy    | MIFOS_STANDARD               |
+      | daysInYear                      | 365                          |
+      | feeChargeAmount                 | 180.00                       |
+      | feeChargeTiming                 | DISBURSEMENT_DATE             |
+      | accrualEnabled                  | true                         |
+      | interestRecalculationEnabled    | false                        |
+    And Admin submits a loan application with the following data
+      | loanField                        | value                         |
+      | clientId                         | ${clientId}                   |
+      | productId                         | ${loanProductId}              |
+      | principal                       | 7000.00                       |
+      | expectedDisbursementDate        | 01 June 2027                 |
+      | submittedOnDate                 | 01 June 2027                 |
+      | interestRatePerPeriod           | 10.50                        |
+      | repaymentEvery                  | 1                             |
+      | repaymentFrequencyType          | DAYS                          |
+      | numberOfRepayments              | 21                            |
+    When Admin approves the loan application on ""01 June 2027""
+    And Admin disburses the loan on ""01 June 2027""
+    And Admin makes an overpayment on ""01 June 2027"" with amount ""1000.00""
+    And Admin runs the COB job inline on ""01 June 2027""
+    Then Admin verifies an Accrual transaction is created for fee charge amount ""180.00"" on ""01 June 2027""
+    And Admin verifies LoanAccrualTransactionCreatedBusinessEvent is raised on ""01 June 2027""
+    When Admin applies a Credit Balance Refund on ""02 June 2027""
+    And Admin runs the periodic accrual job on ""02 June 2027""
+    Then Admin verifies the accrual transaction remains consistent after CBR
+    And Admin verifies the loan status is ""OVERPAID""
+
+  @TestRailId:C00008
+  Scenario: Verify accrual reconstruction after repayment undo and repeated overpayment with additional fee charge - UC5.1
+    Given Admin sets the business date to ""01 July 2027""
+    And Admin creates a client with random data
+    And Admin creates a loan product with fee accrual enabled and due-date fee charge
+      | loanProductField                 | value                         |
+      | name                             | LP_ACCRUAL_UNDO_REPAY_001      |
+      | principal                        | 11000.00                     |
+      | interestRatePerPeriod           | 12.50                       |
+      | interestRateFrequencyType        | DAYS                         |
+      | interestCalculationPeriodType    | DAILY                        |
+      | amortizationType                | EQUAL_INSTALLMENTS            |
+      | transactionProcessingStrategy    | MIFOS_STANDARD               |
+      | daysInYear                      | 365                          |
+      | feeChargeAmount                 | 220.00                       |
+      | feeChargeTiming                 | DISBURSEMENT_DATE             |
+      | accrualEnabled                  | true                         |
+      | interestRecalculationEnabled    | false                        |
+    And Admin submits a loan application with the following data
+      | loanField                        | value                         |
+      | clientId                         | ${clientId}                   |
+      | productId                         | ${loanProductId}              |
+      | principal                       | 11000.00                      |
+      | expectedDisbursementDate        | 01 July 2027                 |
+      | submittedOnDate                 | 01 July 2027                 |
+      | interestRatePerPeriod           | 12.50                        |
+      | repaymentEvery                  | 1                             |
+      | repaymentFrequencyType          | DAYS                          |
+      | numberOfRepayments              | 33                            |
+    When Admin approves the loan application on ""01 July 2027""
+    And Admin disburses the loan on ""01 July 2027""
+    And Admin makes a repayment on ""01 July 2027"" with amount ""500.00""
+    And Admin undoes the repayment on ""01 July 2027""
+    And Admin adds an additional fee charge on ""01 July 2027"" with amount ""50.00""
+    And Admin makes an overpayment on ""01 July 2027"" with amount ""1500.00""
+    And Admin runs the COB job inline on ""01 July 2027""
+    Then Admin verifies accrual transactions are reconstructed correctly after repayment undo
+    And Admin verifies an Accrual transaction is created for fee charge amount ""270.00"" on ""01 July 2027""
+    And Admin verifies LoanAccrualTransactionCreatedBusinessEvent is raised on ""01 July 2027""
+
+  @TestRailId:C00009
+  Scenario: Verify accrual generation for multiple disbursements with outstanding fees and interest - UC6.1
+    Given Admin sets the business date to ""01 August 2027""
+    And Admin creates a client with random data
+    And Admin creates a loan product with multiple disbursements and accrual enabled
+      | loanProductField                 | value                         |
+      | name                             | LP_ACCRUAL_MULTI_DISB_001      |
+      | principal                        | 20000.00                     |
+      | interestRatePerPeriod           | 15.00                       |
+      | interestRateFrequencyType        | DAYS                         |
+      | interestCalculationPeriodType    | DAILY                        |
+      | amortizationType                | EQUAL_INSTALLMENTS            |
+      | transactionProcessingStrategy    | MIFOS_STANDARD               |
+      | daysInYear                      | 365                          |
+      | feeChargeAmount                 | 400.00                       |
+      | feeChargeTiming                 | DISBURSEMENT_DATE             |
+      | accrualEnabled                  | true                         |
+      | interestRecalculationEnabled    | true                         |
+      | interestRecalculationMethod      | DAILY                         |
+      | allowMultipleDisbursements      | true                          |
+    And Admin submits a loan application with the following data
+      | loanField                        | value                         |
+      | clientId                         | ${clientId}                   |
+      | productId                         | ${loanProductId}              |
+      | principal                       | 20000.00                      |
+      | expectedDisbursementDate        | 01 August 2027               |
+      | submittedOnDate                 | 01 August 2027               |
+      | interestRatePerPeriod           | 15.00                        |
+      | repaymentEvery                  | 1                             |
+      | repaymentFrequencyType          | DAYS                          |
+      | numberOfRepayments              | 60                            |
+    When Admin approves the loan application on ""01 August 2027""
+    And Admin disburses the first tranche on ""01 August 2027"" with amount ""10000.00""
+    And Admin disburses the second tranche on ""10 August 2027"" with amount ""10000.00""
+    And Admin makes a repayment on ""10 August 2027"" with amount ""750.00""
+    And Admin runs the periodic accrual job on ""10 August 2027""
+    Then Admin verifies accrual transactions are created for outstanding fees and interest across all disbursements
+    And Admin verifies LoanAccrualTransactionCreatedBusinessEvent is raised on ""10 August 2027""
+    And Admin verifies the loan accrual transaction totals match the disbursement schedule"
+107,"As a Loan Officer,
+I want to initiate a delinquency pause on a working capital loan by specifying a start date and end date,
+So that the delinquency calculation and repayment schedule can be adjusted to account for periods where the client should not be penalized for non-payment.
+
+Acceptance Criteria:
+- When a delinquency pause is initiated on the disbursement day, the pause action is recorded with the correct start and end dates, and the range schedule's ""toDate"" is extended by the paused duration while expected, paid, and outstanding amounts remain unchanged.
+- When a delinquency pause is initiated in the middle of the current period (whether the pause is future-dated, backdated, or overlapping the current business date), the system correctly extends the schedule's ""toDate"" by the number of paused days without affecting expected, paid, or outstanding amounts.
+- When a delinquency pause is initiated for a period that has already lapsed (e.g., in a subsequent period), the system correctly marks the prior period as delinquent (with the accurate delinquent amount and delinquent days) while still applying the pause extension to the current or future period's range schedule.
+- When a delinquency pause overlaps multiple periods, the system correctly splits and recalculates each affected period's range schedule, extending the ""toDate"" of each period according to the number of paused days falling within it.
+- When multiple delinquency pauses (past, current, and future) are initiated for the same loan, all pause actions are retained and displayed accurately, and the range schedule reflects the cumulative effect of all applicable pauses as the business date progresses.
+- After each business date progression and COB job execution, the delinquency range schedule is recalculated to accurately reflect minimum payment criteria met, delinquent amount, and delinquent days for periods where pauses have expired or are no longer active.","@WorkingCapital
+@WorkingCapitalDelinquencyPauseFeature
+Feature: Working Capital Delinquency Pause Management
+
+  @TestRailId:C76707
+  Scenario: Verify Working Capital Delinquency Pause initiation on disbursement day with schedule extension and unchanged amounts - UC1
+    When Admin sets the business date to ""01 January 2027""
+    And Admin creates a client with random data
+    And Admin creates a working capital loan product with delinquency pause enabled
+    And Admin approves and disburses a working capital loan on ""01 January 2027"" date
+    When Admin initiates a delinquency pause on the working capital loan with start date ""01 January 2027"" and end date ""05 January 2027""
+    Then Check delinquency pause action is recorded with the following values
+      | pauseStartDate | pauseEndDate   | pauseDays | pauseStatus |
+      | 01 January 2027| 05 January 2027| 5         | ACTIVE      |
+    Then Check delinquency range schedule for disbursement day has the following values
+      | rangeStartDate | rangeEndDate   | toDate         | expectedAmount | paidAmount | outstandingAmount |
+      | 01 January 2027| 31 January 2027| 05 February 2027| 1000.00        | 0.00       | 1000.00           |
+
+  @TestRailId:C76708
+  Scenario Outline: Verify Working Capital Delinquency Pause initiation in the middle of the current period with schedule extension and unchanged amounts - UC2
+    When Admin sets the business date to ""<business_date>""
+    And Admin creates a client with random data
+    And Admin creates a working capital loan product with delinquency pause enabled
+    And Admin approves and disburses a working capital loan on ""01 January 2027"" date
+    When Admin initiates a delinquency pause on the working capital loan with start date ""<pause_start_date>"" and end date ""<pause_end_date>""
+    Then Check delinquency range schedule for current period has the following values
+      | rangeStartDate   | rangeEndDate     | toDate           | expectedAmount | paidAmount | outstandingAmount |
+      | 01 January 2027  | 31 January 2027  | <expected_toDate>| 1000.00        | 0.00       | 1000.00           |
+
+    Examples:
+      | business_date     | pause_start_date  | pause_end_date    | expected_toDate   |
+      | 10 January 2027   | 08 January 2027   | 12 January 2027   | 05 February 2027  |
+      | 15 January 2027   | 18 January 2027   | 22 January 2027   | 05 February 2027  |
+      | 20 January 2027   | 12 January 2027   | 16 January 2027   | 05 February 2027  |
+
+  @TestRailId:C76709
+  Scenario: Verify Working Capital Delinquency Pause initiation for a lapsed prior period with delinquency marking and current period extension - UC3
+    When Admin sets the business date to ""15 February 2027""
+    And Admin creates a client with random data
+    And Admin creates a working capital loan product with delinquency pause enabled
+    And Admin approves and disburses a working capital loan on ""01 January 2027"" date
+    And Admin runs COB for working capital loan delinquency calculation
+    When Admin initiates a delinquency pause on the working capital loan with start date ""05 January 2027"" and end date ""10 January 2027""
+    Then Check prior period is marked delinquent with the following values
+      | delinquentAmount | delinquentDays | minimumPaymentCriteriaMet |
+      | 250.00           | 10             | false                     |
+    Then Check current period delinquency range schedule has the following values
+      | rangeStartDate   | rangeEndDate     | toDate           | expectedAmount | paidAmount | outstandingAmount |
+      | 01 February 2027 | 28 February 2027 | 10 March 2027   | 1000.00        | 0.00       | 1000.00           |
+
+  @TestRailId:C76710
+  Scenario: Verify Working Capital Delinquency Pause overlapping multiple periods with split recalculation and per-period toDate extension - UC4
+    When Admin sets the business date to ""20 March 2027""
+    And Admin creates a client with random data
+    And Admin creates a working capital loan product with delinquency pause enabled
+    And Admin approves and disburses a working capital loan on ""01 January 2027"" date
+    When Admin initiates a delinquency pause on the working capital loan with start date ""25 February 2027"" and end date ""10 March 2027""
+    Then Check delinquency range schedule for period 1 has the following values
+      | rangeStartDate   | rangeEndDate     | toDate           | expectedAmount | paidAmount | outstandingAmount |
+      | 01 February 2027 | 28 February 2027 | 10 March 2027   | 1000.00        | 0.00       | 1000.00           |
+    Then Check delinquency range schedule for period 2 has the following values
+      | rangeStartDate   | rangeEndDate     | toDate           | expectedAmount | paidAmount | outstandingAmount |
+      | 01 March 2027    | 31 March 2027    | 11 March 2027   | 1000.00        | 0.00       | 1000.00           |
+
+  @TestRailId:C76711
+  Scenario: Verify multiple delinquency pauses are retained and reflected cumulatively as business date progresses - UC5
+    When Admin sets the business date to ""01 April 2027""
+    And Admin creates a client with random data
+    And Admin creates a working capital loan product with delinquency pause enabled
+    And Admin approves and disburses a working capital loan on ""01 January 2027"" date
+    When Admin initiates a delinquency pause on the working capital loan with start date ""05 January 2027"" and end date ""10 January 2027""
+    And Admin initiates a delinquency pause on the working capital loan with start date ""15 February 2027"" and end date ""20 February 2027""
+    And Admin initiates a delinquency pause on the working capital loan with start date ""05 April 2027"" and end date ""12 April 2027""
+    Then Check all delinquency pause actions are retained with the following values
+      | pauseStartDate   | pauseEndDate     | pauseDays | pauseStatus |
+      | 05 January 2027  | 10 January 2027  | 6         | ACTIVE      |
+      | 15 February 2027 | 20 February 2027 | 6         | ACTIVE      |
+      | 05 April 2027    | 12 April 2027    | 8         | ACTIVE      |
+    Then Check delinquency range schedule reflects cumulative pause effect with the following values
+      | rangeStartDate   | rangeEndDate     | toDate           | expectedAmount | paidAmount | outstandingAmount |
+      | 01 April 2027    | 30 April 2027    | 08 May 2027      | 1000.00        | 0.00       | 1000.00           |
+
+  @TestRailId:C76712
+  Scenario: Verify delinquency range schedule recalculation after business date progression and COB execution when pauses expire - UC6
+    When Admin sets the business date to ""01 May 2027""
+    And Admin creates a client with random data
+    And Admin creates a working capital loan product with delinquency pause enabled
+    And Admin approves and disburses a working capital loan on ""01 January 2027"" date
+    And Admin initiates a delinquency pause on the working capital loan with start date ""10 April 2027"" and end date ""20 April 2027""
+    And Admin runs COB for working capital loan delinquency calculation
+    Then Check delinquency range schedule before business date progression has the following values
+      | rangeStartDate   | rangeEndDate     | toDate           | minimumPaymentCriteriaMet | delinquentAmount | delinquentDays |
+      | 01 May 2027      | 31 May 2027      | 31 May 2027      | true                      | 0.00             | 0              |
+    When Admin sets the business date to ""02 May 2027""
+    And Admin runs COB for working capital loan delinquency calculation
+    Then Check delinquency range schedule after business date progression has the following values
+      | rangeStartDate   | rangeEndDate     | toDate           | minimumPaymentCriteriaMet | delinquentAmount | delinquentDays |
+      | 01 May 2027      | 31 May 2027      | 31 May 2027      | false                     | 50.00            | 1              |"
+108,"As a Loan Officer,
+I want to apply loan re-aging transactions on a loan before its maturity date, including scenarios where charges (fees/penalties) are already scheduled on installments,
+So that I can restructure the remaining repayment schedule into new evenly distributed installments while correctly preserving or reallocating any due charges on the affected periods.
+
+Acceptance Criteria:
+- When a re-aging transaction is created before the maturity date, the system must recalculate the repayment schedule starting from the specified start date, distributing the outstanding principal evenly across the specified number of new installments.
+- If a charge (e.g., NSF fee) is due on an installment being replaced by the re-aging transaction, the charge must be preserved and correctly reflected either on the re-aged installment or retained on the unaffected ""n+1"" installment as applicable, without loss of due amounts.
+- Installments beyond the re-aged range (n+1 and further, such as those containing pre-existing charges scheduled after the new schedule's end date) must remain unmodified by the re-aging transaction.
+- The system must correctly generate a preview of the re-aged repayment schedule (via the ""Loan re-aging preview"" action) that matches the actual schedule generated after the re-aging transaction is confirmed.
+- After a re-aging transaction, the Loan Transactions tab must record a ""Re-age"" transaction with the correct amount, principal, date, and resulting loan balance, and the totals in the repayment schedule (principal, fees, penalties, due, paid, outstanding) must remain consistent with amounts before re-aging.
+- The loan must be payable in full (via Loan Pay-off) after re-aging, resulting in a zero outstanding balance with all installments marked as having obligations met.","@Loan
+@LoanReagingFeature
+Feature: Loan Re-aging Transaction
+
+  @TestRailId:C76707
+  Scenario: Verify loan re-aging transaction before maturity date with evenly distributed installments and preserved charges - UC1
+    When Admin creates a loan product with re-aging enabled and scheduled charges
+    And Admin creates a client with random data
+    And Admin creates a loan account with disbursement date ""01 January 2027"" and maturity date ""01 July 2027""
+    And Admin approves and disburses the loan account
+    And Admin applies a loan re-aging preview starting from ""01 March 2027"" into 3 new installments
+    Then Admin verifies the loan re-aging preview repayment schedule matches the expected re-aged schedule
+    When Admin confirms the loan re-aging transaction
+    Then Admin verifies the loan repayment schedule has been recalculated from ""01 March 2027"" into 3 evenly distributed installments
+    And Admin verifies any due charges on replaced installments are preserved without loss
+    And Admin verifies installments beyond the re-aged range remain unmodified
+
+  @TestRailId:C76708
+  Scenario: Verify loan re-aging preview and confirmed schedule are identical - UC2
+    When Admin creates a loan product with re-aging enabled and scheduled charges
+    And Admin creates a client with random data
+    And Admin creates a loan account with disbursement date ""01 February 2027"" and maturity date ""01 August 2027""
+    And Admin approves and disburses the loan account
+    And Admin applies a loan re-aging preview starting from ""01 April 2027"" into 4 new installments
+    Then Admin verifies the loan re-aging preview repayment schedule matches the expected re-aged schedule
+    When Admin confirms the loan re-aging transaction
+    Then Admin verifies the confirmed repayment schedule matches the previously generated preview
+
+  @TestRailId:C76709
+  Scenario: Verify scheduled charge on replaced installment is preserved during loan re-aging - UC3
+    When Admin creates a loan product with re-aging enabled and scheduled charges
+    And Admin creates a client with random data
+    And Admin creates a loan account with disbursement date ""15 January 2027"" and maturity date ""15 July 2027""
+    And Admin approves and disburses the loan account
+    And Admin ensures an NSF fee is scheduled on installment 3
+    And Admin applies a loan re-aging preview starting from ""15 March 2027"" into 2 new installments
+    Then Admin verifies the scheduled NSF fee is preserved on the re-aged installment or retained on the unaffected n+1 installment as applicable
+    When Admin confirms the loan re-aging transaction
+    Then Admin verifies the due NSF fee amount is not lost after re-aging
+    And Admin verifies the loan repayment schedule totals remain consistent after re-aging
+
+  @TestRailId:C76710
+  Scenario: Verify installments beyond the re-aged range remain unmodified when charges exist after the new schedule end date - UC4
+    When Admin creates a loan product with re-aging enabled and scheduled charges
+    And Admin creates a client with random data
+    And Admin creates a loan account with disbursement date ""01 March 2027"" and maturity date ""01 September 2027""
+    And Admin approves and disburses the loan account
+    And Admin ensures a penalty charge is scheduled on installment 6
+    And Admin applies a loan re-aging preview starting from ""01 May 2027"" into 2 new installments
+    Then Admin verifies installments n+1 and further remain unmodified by the re-aging transaction
+    And Admin verifies the pre-existing penalty charge scheduled after the new schedule end date remains unchanged
+    When Admin confirms the loan re-aging transaction
+    Then Admin verifies the unaffected installments retain their original due dates, amounts, and charges
+
+  @TestRailId:C76711
+  Scenario: Verify loan transactions tab records Re-age transaction with correct financial values - UC5
+    When Admin creates a loan product with re-aging enabled and scheduled charges
+    And Admin creates a client with random data
+    And Admin creates a loan account with disbursement date ""10 January 2027"" and maturity date ""10 July 2027""
+    And Admin approves and disburses the loan account
+    And Admin applies a loan re-aging preview starting from ""10 March 2027"" into 3 new installments
+    When Admin confirms the loan re-aging transaction
+    Then Admin verifies the Loan Transactions tab contains a ""Re-age"" transaction
+    And Admin verifies the Re-age transaction has the correct amount, principal, date, and resulting loan balance
+    And Admin verifies the repayment schedule totals for principal, fees, penalties, due, paid, and outstanding remain consistent before and after re-aging
+
+  @TestRailId:C76712
+  Scenario: Verify loan can be paid off in full after re-aging - UC6
+    When Admin creates a loan product with re-aging enabled and scheduled charges
+    And Admin creates a client with random data
+    And Admin creates a loan account with disbursement date ""05 January 2027"" and maturity date ""05 July 2027""
+    And Admin approves and disburses the loan account
+    And Admin applies a loan re-aging preview starting from ""05 March 2027"" into 4 new installments
+    When Admin confirms the loan re-aging transaction
+    And Admin performs a Loan Pay-off on the re-aged loan
+    Then Admin verifies the loan outstanding balance is zero
+    And Admin verifies all installments are marked as having obligations met
+    And Admin verifies the loan is payable in full after re-aging"
+109,"As a Loan Officer,
+I want the loan system to correctly handle down payment calculations, allocations, and reversals when loans become overpaid due to multiple disbursements, and to control down payment configurability at the loan level based on product-level settings,
+So that overpaid amounts are accurately reallocated against subsequent disbursements, loan balances and repayment schedules remain correct after transaction reversals, and down payment behavior consistently respects the rules defined at the product level.
+
+Acceptance Criteria:
+- When a loan becomes overpaid and a subsequent disbursement is made, the system must correctly determine whether the overpaid amount is greater or smaller than both the disbursement amount and the related down payment amount, and allocate the overpaid amount accordingly, generating a new Down Payment transaction only when applicable, updating the loan status, outstanding/overpaid amounts, repayment schedule, and transaction history accurately.
+- When a repayment transaction that caused an overpayment is reverted after a subsequent disbursement has already occurred, the system must correctly recalculate the repayment schedule, outstanding balances, in-advance/late amounts, and transaction history, marking the reverted transaction accordingly.
+- When multiple disbursements are made on the same day (or across different days) for a loan using advanced payment allocation, the system must correctly create a new repayment period and corresponding Down Payment transaction for each disbursement, updating the schedule and total row balances accurately.
+- When a loan is fully paid off after multiple disbursements and down payments, the system must close the loan with a zero outstanding balance and mark all installments as having their obligations met.
+- When creating a loan, the system must only allow enabling down payment if the selected loan product has down payment enabled, and must reject loan creation attempts that try to force-enable down payment on a product where it is disabled.
+- When creating a loan from a product with down payment enabled, the system must allow specifying a custom auto down payment percentage, and correctly apply this percentage to calculate the down payment amount for each disbursement, reflecting it accurately in the repayment schedule and transaction history.","@Loan
+@LoanDownPaymentManagementFeature
+Feature: Loan Down Payment Allocation, Reversal, and Configurability
+
+  @TestRailId:C77001
+  Scenario: Verify overpaid loan allocation against subsequent disbursement with down payment creation - UC1.1
+    Given Admin creates a loan product with advanced payment allocation and down payment enabled
+    And Admin creates a client with random data
+    And Admin approves and disburses a loan that becomes overpaid by a repayment transaction
+    When Admin creates a subsequent disbursement on the overpaid loan
+    Then Check overpaid amount is allocated against the subsequent disbursement and down payment according to business rules
+    And Check a new Down Payment transaction is created only when applicable
+    And Check loan status, outstanding amount, overpaid amount, repayment schedule, and transaction history are updated correctly
+
+  @TestRailId:C77002
+  Scenario Outline: Verify overpaid loan allocation against subsequent disbursement with varying overpaid and down payment relationships - UC1.2
+    Given Admin creates a loan product with advanced payment allocation and down payment enabled
+    And Admin creates a client with random data
+    And Admin creates an overpaid loan with repayment transaction amount <repayment_amount>
+    When Admin creates a subsequent disbursement amount <disbursement_amount> with configured down payment <down_payment_amount>
+    Then Check overpaid amount <overpaid_amount> is allocated correctly against disbursement and down payment
+    And Check loan repayment schedule and transaction history are updated correctly
+
+    Examples:
+      | repayment_amount | disbursement_amount | down_payment_amount | overpaid_amount |
+      | 1500.00          | 1000.00             | 100.00              | 500.00          |
+      | 2500.00          | 1000.00             | 300.00              | 1500.00         |
+      | 1200.00          | 1000.00             | 250.00              | 200.00          |
+
+  @TestRailId:C77003
+  Scenario: Verify repayment transaction reversal after overpayment and subsequent disbursement - UC2
+    Given Admin creates a loan product with advanced payment allocation and down payment enabled
+    And Admin creates a client with random data
+    And Admin approves and disburses a loan that becomes overpaid by a repayment transaction
+    And Admin creates a subsequent disbursement on the overpaid loan
+    When Admin reverts the repayment transaction that caused the overpayment
+    Then Check repayment schedule is recalculated correctly
+    And Check outstanding balance, in-advance amount, and late amount are updated correctly
+    And Check transaction history marks the reverted transaction accordingly
+
+  @TestRailId:C77004
+  Scenario Outline: Verify multiple disbursements create repayment periods and down payment transactions correctly - UC3
+    Given Admin creates a loan product with advanced payment allocation and down payment enabled
+    And Admin creates a client with random data
+    And Admin approves and disburses a loan with advanced payment allocation
+    When Admin creates multiple disbursements on <disbursement_dates> with amounts <disbursement_amounts>
+    Then Check a new repayment period is created for each disbursement
+    And Check a corresponding Down Payment transaction is created for each disbursement
+    And Check repayment schedule total row balances are updated accurately
+
+    Examples:
+      | disbursement_dates                 | disbursement_amounts      |
+      | ""01 January 2027,01 January 2027"" | ""500.00,750.00""           |
+      | ""01 January 2027,05 January 2027"" | ""1000.00,250.00""         |
+      | ""10 January 2027,15 January 2027"" | ""300.00,300.00,400.00""    |
+
+  @TestRailId:C77005
+  Scenario: Verify loan closure after multiple disbursements and down payments with zero outstanding balance - UC4
+    Given Admin creates a loan product with advanced payment allocation and down payment enabled
+    And Admin creates a client with random data
+    And Admin approves and disburses a loan with multiple disbursements and down payments
+    When Admin fully pays off the loan
+    Then Check loan is closed with zero outstanding balance
+    And Check all installments have their obligations met
+    And Check repayment schedule and transaction history reflect full settlement
+
+  @TestRailId:C77006
+  Scenario Outline: Verify loan creation allows down payment only when product-level setting is enabled - UC5.1
+    Given Admin creates a loan product with down payment enabled flag set to <product_down_payment_enabled>
+    When Admin attempts to create a loan with force-enable down payment set to <loan_down_payment_enabled>
+    Then Check loan creation outcome is <expected_result> with message <expected_message>
+
+    Examples:
+      | product_down_payment_enabled | loan_down_payment_enabled | expected_result | expected_message                                                                 |
+      | true                         | true                      | success         | Loan created successfully with down payment enabled.                              |
+      | true                         | false                     | success         | Loan created successfully with down payment disabled.                             |
+      | false                        | false                     | success         | Loan created successfully with down payment disabled.                             |
+      | false                        | true                      | error           | Down payment cannot be enabled for a loan product where it is disabled.          |
+
+  @TestRailId:C77007
+  Scenario: Verify loan creation rejects force-enable down payment when product-level setting is disabled - UC5.2
+    Given Admin creates a loan product with down payment disabled
+    And Admin creates a client with random data
+    When Admin attempts to create a loan with down payment force-enabled
+    Then Admin failed to create loan with down payment enabled on a product where it is disabled
+
+  @TestRailId:C77008
+  Scenario Outline: Verify custom auto down payment percentage is applied correctly for loans created from down payment enabled products - UC6
+    Given Admin creates a loan product with down payment enabled
+    And Admin creates a client with random data
+    When Admin creates a loan with custom auto down payment percentage <auto_down_payment_percentage>
+    Then Check down payment amount is calculated using percentage <auto_down_payment_percentage>
+    And Check repayment schedule and transaction history reflect the calculated down payment amount
+
+    Examples:
+      | auto_down_payment_percentage |
+      | 5.00                         |
+      | 10.00                        |
+      | 12.50                        |
+      | 25.00                        |
+
+  @TestRailId:C77009
+  Scenario: Verify custom auto down payment percentage is applied per disbursement for multiple disbursements - UC6.2
+    Given Admin creates a loan product with down payment enabled
+    And Admin creates a client with random data
+    And Admin creates a loan with custom auto down payment percentage 10.00
+    When Admin creates multiple disbursements for the loan
+    Then Check each disbursement generates a down payment amount using 10.00 percent
+    And Check repayment schedule, outstanding balance, and transaction history are updated consistently"
+110,"As a Loan Officer,
+I want the system to automatically generate an additional (N+1) installment when a charge is added to a loan after its maturity date, regardless of whether the loan is already closed or still active with an outstanding balance,
+So that fees applied after the original repayment schedule has ended are still properly tracked, billed, and can be collected without disrupting the existing installment history.
+
+Acceptance Criteria:
+- When a due date charge is added on a date after the loan's original maturity/last installment date, the system must create a new (N+1) installment period with a due date matching the charge's due date, containing only the fee/penalty amount (zero principal and interest).
+- This behavior must be consistent across all supported loan configurations: LP1 products, LP2 products with auto-payment (down payment) enabled, LP2 products with auto-payment disabled, and LP2 products using Advanced Payment Allocation.
+- The behavior must apply whether the loan status is CLOSED_OBLIGATIONS_MET (fully paid off) or ACTIVE with a remaining outstanding balance (partial repayment scenario).
+- The Loan Repayment Schedule, Total row, Loan Transactions tab, and Loan Charges tab must all correctly reflect the new installment, the added charge amount, and updated outstanding/paid/due totals.
+- After the new charge is added, performing a full Loan Pay-off on the charge due date must close the loan with zero outstanding balance and mark all installments (including the new N+1 installment) as obligations met.","@Loan
+@LoanChargeAfterMaturityFeature
+Feature: Loan Charge After Maturity Additional Installment Generation
+
+  @TestRailId:C77001
+  Scenario Outline: Verify additional N+1 installment is generated when a due date charge is added after maturity across supported loan configurations - UC1
+    Given Admin creates a loan product ""<loan_product_type>"" with configuration ""<loan_configuration>""
+    And Admin creates a client with random data
+    And Admin approves and disburses a loan with principal ""<principal_amount>"", term ""<term_count>"", and repayment frequency ""<repayment_frequency>""
+    And Admin advances the business date to the loan maturity date
+    And Admin performs loan repayment actions ""<repayment_action>"" resulting in loan status ""<loan_status_before_charge>""
+    When Admin adds a due date charge on date ""<charge_due_date>"" with amount ""<charge_amount>"" after the original maturity date
+    Then Loan Repayment Schedule shall contain an additional installment ""<expected_installment_number>"" with due date ""<charge_due_date>""
+    And The additional installment shall contain principal ""<expected_principal_amount>"", interest ""<expected_interest_amount>"", and fee/penalty ""<expected_fee_amount>""
+    And The Loan Repayment Schedule Total row shall reflect principal ""<expected_total_principal>"", interest ""<expected_total_interest>"", fee/penalty ""<expected_total_fee>"", and outstanding ""<expected_total_outstanding>""
+    And The Loan Transactions tab shall reflect the charge transaction amount ""<charge_amount>"" and updated totals
+    And The Loan Charges tab shall reflect the added charge amount ""<charge_amount>"" with due date ""<charge_due_date>""
+
+    Examples:
+      | loan_product_type | loan_configuration                 | principal_amount | term_count | repayment_frequency | repayment_action                 | loan_status_before_charge | charge_due_date   | charge_amount | expected_installment_number | expected_principal_amount | expected_interest_amount | expected_fee_amount | expected_total_principal | expected_total_interest | expected_total_fee | expected_total_outstanding |
+      | LP1               | standard                           | 10000            | 10         | monthly             | fully paid off                   | CLOSED_OBLIGATIONS_MET    | 31 December 2027 | 250           | N+1                         | 0                         | 0                        | 250                 | 10000                    | 0                       | 250               | 250                        |
+      | LP2               | auto-payment enabled (down payment) | 10000            | 10         | monthly             | fully paid off                   | CLOSED_OBLIGATIONS_MET    | 31 December 2027 | 250           | N+1                         | 0                         | 0                        | 250                 | 10000                    | 0                       | 250               | 250                        |
+      | LP2               | auto-payment disabled              | 10000            | 10         | monthly             | fully paid off                   | CLOSED_OBLIGATIONS_MET    | 31 December 2027 | 250           | N+1                         | 0                         | 0                        | 250                 | 10000                    | 0                       | 250               | 250                        |
+      | LP2               | advanced payment allocation        | 10000            | 10         | monthly             | fully paid off                   | CLOSED_OBLIGATIONS_MET    | 31 December 2027 | 250           | N+1                         | 0                         | 0                        | 250                 | 10000                    | 0                       | 250               | 250                        |
+      | LP1               | standard                           | 10000            | 10         | monthly             | partial repayment with balance    | ACTIVE                    | 31 December 2027 | 250           | N+1                         | 0                         | 0                        | 250                 | 10000                    | 0                       | 250               | 250                        |
+      | LP2               | auto-payment enabled (down payment) | 10000            | 10         | monthly             | partial repayment with balance    | ACTIVE                    | 31 December 2027 | 250           | N+1                         | 0                         | 0                        | 250                 | 10000                    | 0                       | 250               | 250                        |
+      | LP2               | auto-payment disabled              | 10000            | 10         | monthly             | partial repayment with balance    | ACTIVE                    | 31 December 2027 | 250           | N+1                         | 0                         | 0                        | 250                 | 10000                    | 0                       | 250               | 250                        |
+      | LP2               | advanced payment allocation        | 10000            | 10         | monthly             | partial repayment with balance    | ACTIVE                    | 31 December 2027 | 250           | N+1                         | 0                         | 0                        | 250                 | 10000                    | 0                       | 250               | 250                        |
+
+  @TestRailId:C77002
+  Scenario Outline: Verify additional installment after maturity contains only fee/penalty amount and zero principal and interest - UC2
+    Given Admin creates a loan product ""<loan_product_type>"" with configuration ""<loan_configuration>""
+    And Admin creates a client with random data
+    And Admin approves and disburses a loan with principal ""<principal_amount>"", term ""<term_count>"", and repayment frequency ""<repayment_frequency>""
+    And Admin advances the business date to the loan maturity date
+    When Admin adds a due date charge on date ""<charge_due_date>"" with amount ""<charge_amount>"" after the original maturity date
+    Then The newly created N+1 installment shall have principal amount ""0""
+    And The newly created N+1 installment shall have interest amount ""0""
+    And The newly created N+1 installment shall have fee/penalty amount ""<charge_amount>""
+    And The newly created N+1 installment shall have due date ""<charge_due_date>""
+
+    Examples:
+      | loan_product_type | loan_configuration                 | principal_amount | term_count | repayment_frequency | charge_due_date   | charge_amount |
+      | LP1               | standard                           | 10000            | 10         | monthly             | 31 December 2027 | 250           |
+      | LP2               | auto-payment enabled (down payment) | 10000            | 10         | monthly             | 31 December 2027 | 250           |
+      | LP2               | auto-payment disabled              | 10000            | 10         | monthly             | 31 December 2027 | 250           |
+      | LP2               | advanced payment allocation        | 10000            | 10         | monthly             | 31 December 2027 | 250           |
+
+  @TestRailId:C77003
+  Scenario Outline: Verify loan repayment schedule, total row, transactions tab, and charges tab reflect post-maturity charge installment correctly - UC3
+    Given Admin creates a loan product ""<loan_product_type>"" with configuration ""<loan_configuration>""
+    And Admin creates a client with random data
+    And Admin approves and disburses a loan with principal ""<principal_amount>"", term ""<term_count>"", and repayment frequency ""<repayment_frequency>""
+    And Admin advances the business date to the loan maturity date
+    When Admin adds a due date charge on date ""<charge_due_date>"" with amount ""<charge_amount>"" after the original maturity date
+    Then Loan Repayment Schedule shall show installment count ""<expected_installment_count>""
+    And Loan Repayment Schedule Total row shall show due amount ""<expected_due_amount>""
+    And Loan Transactions tab shall show charge amount ""<charge_amount>"" and outstanding amount ""<expected_outstanding_amount>""
+    And Loan Charges tab shall show charge amount ""<charge_amount>"" and due date ""<charge_due_date>""
+
+    Examples:
+      | loan_product_type | loan_configuration                 | principal_amount | term_count | repayment_frequency | charge_due_date   | charge_amount | expected_installment_count | expected_due_amount | expected_outstanding_amount |
+      | LP1               | standard                           | 10000            | 10         | monthly             | 31 December 2027 | 250           | 11                         | 250                 | 250                         |
+      | LP2               | auto-payment enabled (down payment) | 10000            | 10         | monthly             | 31 December 2027 | 250           | 11                         | 250                 | 250                         |
+      | LP2               | auto-payment disabled              | 10000            | 10         | monthly             | 31 December 2027 | 250           | 11                         | 250                 | 250                         |
+      | LP2               | advanced payment allocation        | 10000            | 10         | monthly             | 31 December 2027 | 250           | 11                         | 250                 | 250                         |
+
+  @TestRailId:C77004
+  Scenario Outline: Verify full loan pay-off on charge due date closes the loan and marks all installments obligations met - UC4
+    Given Admin creates a loan product ""<loan_product_type>"" with configuration ""<loan_configuration>""
+    And Admin creates a client with random data
+    And Admin approves and disburses a loan with principal ""<principal_amount>"", term ""<term_count>"", and repayment frequency ""<repayment_frequency>""
+    And Admin advances the business date to the loan maturity date
+    And Admin adds a due date charge on date ""<charge_due_date>"" with amount ""<charge_amount>"" after the original maturity date
+    When Admin performs full loan pay-off on date ""<charge_due_date>""
+    Then Loan status shall be ""CLOSED_OBLIGATIONS_MET""
+    And Loan outstanding balance shall be ""0""
+    And All installments including the N+1 installment shall be marked as obligations met
+    And Loan Repayment Schedule shall show zero outstanding for all installments
+
+    Examples:
+      | loan_product_type | loan_configuration                 | principal_amount | term_count | repayment_frequency | charge_due_date   | charge_amount |
+      | LP1               | standard                           | 10000            | 10         | monthly             | 31 December 2027 | 250           |
+      | LP2               | auto-payment enabled (down payment) | 10000            | 10         | monthly             | 31 December 2027 | 250           |
+      | LP2               | auto-payment disabled              | 10000            | 10         | monthly             | 31 December 2027 | 250           |
+      | LP2               | advanced payment allocation        | 10000            | 10         | monthly             | 31 December 2027 | 250           |"
+201,"As a user,
+I want to moderate posts using single post view (SPV) moderation buttons,
+So that I can hide, block, report, or delete posts and users as appropriate to control my content and interactions.
+
+Acceptance Criteria:
+- When a user opens the show page of a contact's post and confirms the alert after clicking to hide the post, they should be redirected to the stream page.
+- When a user opens the show page of a contact's post and confirms the alert after clicking to block the user, they should be redirected to the stream page.
+- When a user opens the show page of a contact's post, clicks to report the post, fills in a reason, and submits the form, a flash message confirming the report was successfully created should be displayed.
+- When a user opens the show page of their own post and confirms the alert after clicking to delete the post, they should be redirected to the stream page.","# We can create a separate cucumber profile that will run these tests with Selenium
+@javascript
+Feature: spv moderation
+
+  Background:
+    Given following user exists:
+      | username    | email             |
+      | Alice Smith | alice@alice.alice |
+      | Bob Jones   | bob@bob.bob       |
+    And I sign in as ""alice@alice.alice""
+
+  Scenario: Hide a contact's post from single post view
+    Given I am on the show page of ""Bob Jones""'s post
+    When I click to hide the post and confirm the alert
+    Then I should be redirected to the stream page
+
+  Scenario: Block a contact from single post view
+    Given I am on the show page of ""Bob Jones""'s post
+    When I click to block the user and confirm the alert
+    Then I should be redirected to the stream page
+
+  Scenario: Report a contact's post from single post view
+    Given I am on the show page of ""Bob Jones""'s post
+    When I click to report the post
+    And I fill in ""Reason"" with ""Spam""
+    And I submit the report form
+    Then I should see a flash message saying the report was successfully created
+
+  Scenario: Delete my own post from single post view
+    Given I am on the show page of my post
+    When I click to delete the post and confirm the alert
+    Then I should be redirected to the stream page"
+202,"As a signed-in user,
+I want to have media links I post automatically rendered as embedded players,
+So that other users can play audio and video content directly without leaving the page.
+
+Acceptance Criteria:
+- A registered user must be able to sign in successfully before posting content.
+- When a user posts a message containing a link to a video file (e.g., .ogv format) using the publisher, the system should display an HTML5 video player for that content.
+- When a user posts a message containing a link to an audio file (e.g., .ogg format) using the publisher, the system should display an HTML5 audio player for that content.","# We can create a separate cucumber profile that will run these tests with Selenium
+@javascript
+Feature: oembed
+
+  Background:
+    Given following user exists:
+      | username    | email             |
+      | Alice Smith | alice@alice.alice |
+    And I sign in as ""alice@alice.alice""
+
+  Scenario: Post a video link
+    When I click the publisher and post ""[title](https://example.com/file.ogv)""
+    Then I should see a HTML5 video player
+
+  Scenario: Post an audio link
+    When I click the publisher and post ""[title](https://example.com/file.ogg)""
+    Then I should see a HTML5 audio player"
+203,"As a user of the social network,
+I want to follow other users and manage my contact aspects while safely viewing their profiles,
+So that I can build meaningful connections and control how I interact with and see people I follow or who follow me.
+
+Acceptance Criteria:
+- When a user's profile name contains malicious script content, the system must sanitize/escape it before displaying it in flash messages or elsewhere, preventing script execution.
+- When a user adds a contact to a newly created aspect, the contact count for both the new aspect and the original aspect used by the other user must be updated correctly, without duplicating the relationship.
+- On a profile page of someone the user follows but who does not follow back, the aspect name they were added to should be visible, a mention option should be available, but no direct messaging option should be shown.
+- On a profile page of someone who follows the user but whom the user does not yet follow, an ""Add contact"" option should be shown, and neither mention nor messaging options should be available.
+- On a profile page of someone with a mutual follow relationship (added to multiple aspects), the system should indicate ""All aspects"" and display both mention and messaging options.","# We can create a separate cucumber profile that will run these tests with Selenium
+@javascript
+Feature: contacts and profile safety
+
+  Background:
+    Given following user exists:
+      | username        | email                 |
+      | Alice Smith      | alice@alice.alice     |
+      | Bob Jones        | bob@bob.bob           |
+      | Charlie Brown    | charlie@charlie.bob   |
+      | Eve <script>alert(1)</script> | eve@eve.eve |
+    And I sign in as ""alice@alice.alice""
+
+  Scenario: Sanitize malicious profile names in flash messages
+    When I follow ""eve@eve.eve"" in aspect ""Friends""
+    Then I should see ""Eve <script>alert(1)</script>"" in the flash message
+    And I should not see a script tag in the flash message
+
+  Scenario: Add a contact to a newly created aspect without duplicating the relationship
+    When I create a new aspect named ""Work""
+    And I follow ""bob@bob.bob"" in aspect ""Work""
+    Then I should see ""Work"" has 1 contact
+    And I should see ""Friends"" has 1 contact
+    And I should not see ""Bob Jones"" duplicated in my contacts
+
+  Scenario: View a profile of someone I follow who does not follow me back
+    Given I follow ""bob@bob.bob"" in aspect ""Friends""
+    When I visit the profile page of ""bob@bob.bob""
+    Then I should see ""Friends"" as the aspect name
+    And I should see a mention option
+    And I should not see a direct messaging option
+
+  Scenario: View a profile of someone who follows me but I do not follow back
+    Given ""charlie@charlie.bob"" follows me in aspect ""Friends""
+    When I visit the profile page of ""charlie@charlie.bob""
+    Then I should see an ""Add contact"" option
+    And I should not see a mention option
+    And I should not see a direct messaging option
+
+  Scenario: View a profile of a mutual contact added to multiple aspects
+    Given I follow ""bob@bob.bob"" in aspect ""Friends""
+    And I follow ""bob@bob.bob"" in aspect ""Work""
+    And ""bob@bob.bob"" follows me in aspect ""Friends""
+    When I visit the profile page of ""bob@bob.bob""
+    Then I should see ""All aspects""
+    And I should see a mention option
+    And I should see a direct messaging option"
+204,"As a signed-in user,
+I want to manage my account settings such as email, email notification preferences, preferred language, default post aspects, and profile data export,
+So that I can control how my account behaves and how my personal information is used and shared.
+
+Acceptance Criteria:
+- When I update my email address on the edit user page and confirm it via the link sent in a confirmation email, my account should reflect the new activated email address.
+- When I toggle specific email notification preferences (such as ""mentioned"" or ""mentioned in comment"") and confirm the change, the system should display a success message and persist the updated preference state.
+- When I select a different preferred language and confirm the change, the interface should display the confirmation message in the newly selected language and retain that language as the selected option.
+- When I change my default post aspects (e.g., selecting ""Family"" or ""Public"" instead of ""All aspects"") and save the change, the publisher on the stream page should reflect the newly selected default aspect the next time it is expanded.
+- When I request to export my profile data, the system should notify me that the download is being prepared and send exactly one email containing the export information.","@javascript
+Feature: account settings
+
+  Background:
+    Given following user exists:
+      | username    | email             |
+      | Alice Smith | alice@alice.alice |
+    And I sign in as ""alice@alice.alice""
+
+  Scenario: Update email address
+    When I go to the edit user page
+    And I fill in ""Email"" with ""alice.new@alice.alice""
+    And I press ""Save""
+    Then I should see ""A confirmation email has been sent to alice.new@alice.alice""
+    When I open the confirmation email for ""alice.new@alice.alice""
+    And I follow the confirmation link
+    Then I should see ""Your email address has been confirmed""
+    And I should see ""alice.new@alice.alice"" as my email address
+
+  Scenario: Update email notification preferences
+    When I go to the email notification settings page
+    And I uncheck ""mentioned""
+    And I check ""mentioned in comment""
+    And I press ""Save""
+    Then I should see ""Your notification preferences have been saved""
+    And the ""mentioned"" notification preference should be disabled
+    And the ""mentioned in comment"" notification preference should be enabled
+
+  Scenario: Update preferred language
+    When I go to the edit user page
+    And I select ""Deutsch"" from ""Language""
+    And I press ""Save""
+    Then I should see ""Ihre Einstellungen wurden gespeichert""
+    And I should see ""Deutsch"" selected as my language
+
+  Scenario: Update default post aspects
+    When I go to the edit user page
+    And I select ""Family"" from ""Default post aspects""
+    And I press ""Save""
+    Then I should see ""Your settings have been saved""
+    When I go to the stream page
+    And I expand the publisher
+    Then I should see ""Family"" selected as the default aspect
+
+  Scenario: Export profile data
+    When I go to the edit user page
+    And I press ""Export my data""
+    Then I should see ""Your download is being prepared""
+    And I should receive exactly 1 email
+    And I should receive an email containing the export information"
+205,"As a user,
+I want the publisher to automatically detect links I post and render rich media previews (such as embedded video players or images) when the content supports oEmbed and comes from a secure source,
+So that I can share and view rich media content directly within the stream without needing to open external links.
+
+Acceptance Criteria:
+- When a user posts a link to a video from a secure, supported oEmbed provider, the system should render an embedded video player within the post.
+- When a user posts a link to a video from an unsecure source, the system should not render a video player and should instead display the raw link text within the stream element.
+- When a user posts an unsecure link that is rich-typed (e.g., video-like content) but not from a secure oEmbed provider, the system should not render a video player and should display the raw link text instead.
+- When a user posts a direct photo link, the system should render an image element within the stream element instead of plain text.
+- When a user posts a link from a domain that does not support oEmbed, the system should display the link as plain text within the stream element without any embedded preview.","# We can create a separate cucumber profile that will run these tests with Selenium
+@javascript
+Feature: oembed rich media previews
+
+  Background:
+    Given following user exists:
+      | username    | email             |
+      | Alice Smith | alice@alice.alice |
+    And I sign in as ""alice@alice.alice""
+
+  Scenario: Post a secure video link from a supported oEmbed provider
+    When I click the publisher and post ""[title](https://example.com/file.ogv)""
+    Then I should see a HTML5 video player
+
+  Scenario: Post an unsecure video link
+    When I click the publisher and post ""[title](http://example.com/file.ogv)""
+    Then I should see the raw link text within the stream element
+    And I should not see a HTML5 video player
+
+  Scenario: Post an unsecure rich typed link from a non-secure source
+    When I click the publisher and post ""[title](http://example.com/video)""
+    Then I should see the raw link text within the stream element
+    And I should not see a HTML5 video player
+
+  Scenario: Post a direct photo link
+    When I click the publisher and post ""[title](https://example.com/photo.jpg)""
+    Then I should see an image element within the stream element
+
+  Scenario: Post a link from a domain that does not support oEmbed
+    When I click the publisher and post ""[title](https://example.com/page)""
+    Then I should see the link as plain text within the stream element
+    And I should not see any embedded preview"
+206,"As a user,
+I want to create a poll and attach it to my post when publishing a status update,
+So that I can ask my followers a question and let them vote on the available options.
+
+Acceptance Criteria:
+- The poll creator panel is hidden by default and only becomes visible after the publisher is expanded and the user clicks on the poll creator toggle
+- When the user fills in values for the first two answer options and loses focus, a third empty option field should automatically appear, and users should be able to remove the last added option (with the remove icon disappearing once only two options remain)
+- Submitting the publisher form with a status message, a poll question, and at least two filled-in options should successfully post the update with the poll displayed within the stream element
+- A signed-in user should be able to select an option and vote, after which the poll should display a progress bar, a percentage indicator, and a vote count summary (e.g., ""1 vote so far"")
+- Clicking the toggle-result control should reveal the percentage breakdown of the poll results
+- Attempting to submit a poll with fewer than two filled-in answer options should display a validation error on the empty answer input field","# We can create a separate cucumber profile that will run these tests with Selenium
+@javascript
+Feature: polls
+
+  Background:
+    Given following user exists:
+      | username    | email             |
+      | Alice Smith | alice@alice.alice |
+    And I sign in as ""alice@alice.alice""
+
+  Scenario: Create a poll from the publisher
+    When I expand the publisher
+    And I click the poll creator toggle
+    Then I should see the poll creator panel
+
+  Scenario: Add poll options and remove the last option
+    When I expand the publisher
+    And I click the poll creator toggle
+    And I fill in ""Question"" with ""What is your favorite color?""
+    And I fill in ""Answer 1"" with ""Blue""
+    And I fill in ""Answer 2"" with ""Green""
+    Then I should see a third empty answer option field
+    When I remove the last answer option
+    Then I should not see the remove icon for the last answer option
+
+  Scenario: Post a status update with a poll
+    When I expand the publisher
+    And I click the poll creator toggle
+    And I fill in ""What are you doing this weekend?"" with ""What are you doing this weekend?""
+    And I fill in ""Answer 1"" with ""Going out""
+    And I fill in ""Answer 2"" with ""Staying in""
+    And I click the publisher and post ""I am asking a question""
+    Then I should see the poll in the stream
+
+  Scenario: Vote on a poll
+    Given I have posted a poll with two options
+    When I select the first poll option
+    Then I should see a progress bar
+    And I should see a percentage indicator
+    And I should see ""1 vote so far""
+
+  Scenario: Reveal poll results
+    Given I have posted a poll with two options
+    When I click the toggle-result control
+    Then I should see the percentage breakdown of the poll results
+
+  Scenario: Validate poll requires at least two options
+    When I expand the publisher
+    And I click the poll creator toggle
+    And I fill in ""Question"" with ""What is your favorite color?""
+    And I fill in ""Answer 1"" with ""Blue""
+    And I click the publisher and post ""I am asking a question""
+    Then I should see a validation error on the empty answer input field"
+207,"As a user,
+I want web+diaspora:// links to resolve directly to the corresponding post,
+So that I can access shared content through external links without extra navigation.
+
+Acceptance Criteria:
+- A registered user with a public post can be referenced by an external web+diaspora:// link.
+- Opening an external link pointing to a specific user's post navigates to that post's content.
+- The resolved page correctly displays the text content of the linked post.","# We can create a separate cucumber profile that will run these tests with Selenium
+@javascript
+Feature: web+diaspora links
+
+  Background:
+    Given following user exists:
+      | username    | email             |
+      | Alice Smith | alice@alice.alice |
+    And I sign in as ""alice@alice.alice""
+    And I have a public post with text ""Hello from Alice""
+
+  Scenario: Open a web+diaspora link to a post
+    When I open the external link ""web+diaspora://alice@alice.alice/posts/1""
+    Then I should be on the post page for ""Hello from Alice""
+    And I should see the text ""Hello from Alice"""
+208,"As a new visitor,
+I want to register for an account by filling out a sign-up form,
+So that I can create a valid account and start using the getting started experience.
+
+Acceptance Criteria:
+- Accessing the new user registration page displays a form for account creation.
+- Submitting valid account details (username, email, and password) creates the account and redirects the user to the getting started page, displaying its content.
+- Submitting an invalid username containing disallowed special characters prevents account creation and shows validation errors for the username, password, and email fields.
+- Submitting a valid username with an improperly formatted email address prevents account creation and shows validation errors for the password and email fields.
+- Submitting a valid email with a password that does not meet the required criteria or does not match the confirmation prevents account creation and shows validation errors for the password and password confirmation fields.","# We can create a separate cucumber profile that will run these tests with Selenium
+@javascript
+Feature: sign up
+
+  Scenario: Visit the sign up page
+    When I go to the sign up page
+    Then I should see the sign up form
+
+  Scenario: Sign up with valid account details
+    When I sign up with ""Alice Smith"", ""alice@alice.alice"", and ""password""
+    Then I should be on the getting started page
+    And I should see the getting started content
+
+  Scenario: Sign up with an invalid username
+    When I sign up with ""Alice!"", ""alice@alice.alice"", and ""password""
+    Then I should see validation errors for the username, password, and email fields
+
+  Scenario: Sign up with an invalid email address
+    When I sign up with ""Alice Smith"", ""alice"", and ""password""
+    Then I should see validation errors for the password and email fields
+
+  Scenario: Sign up with an invalid password
+    When I sign up with ""Alice Smith"", ""alice@alice.alice"", and ""pass""
+    Then I should see validation errors for the password and password confirmation fields"
+209,"As a mobile website user,
+I want to edit my profile information including personal details, birth date, tags, and profile photo,
+So that I can keep my profile accurate and up to date from my mobile device.
+
+Acceptance Criteria:
+- The user can update profile fields such as gender, first name, last name, bio, and location, and after saving, the edit profile page should display a confirmation message and reflect all the updated values.
+- The user can add multiple tags to their profile using an autocomplete/search selection mechanism, and all previously added tags should remain visible after adding new ones.
+- The user can upload a profile photo by attaching a file, with appropriate alert/confirmation handling for invalid and valid file uploads, and the uploaded photo should be displayed and persist when revisiting the edit profile page.","# We can create a separate cucumber profile that will run these tests with Selenium
+@javascript
+Feature: edit profile on mobile
+
+  Background:
+    Given following user exists:
+      | username    | email             |
+      | Alice Smith | alice@alice.alice |
+    And I sign in as ""alice@alice.alice""
+
+  Scenario: Update profile information
+    When I go to the edit profile page
+    And I fill in ""Gender"" with ""Female""
+    And I fill in ""First name"" with ""Alice""
+    And I fill in ""Last name"" with ""Smith""
+    And I fill in ""Bio"" with ""I like mobile editing""
+    And I fill in ""Location"" with ""Berlin""
+    And I fill in ""Birth date"" with ""1990-01-01""
+    And I press ""Save""
+    Then I should see ""Profile updated""
+    And I should see ""Female"" within "".profile-gender""
+    And I should see ""Alice"" within "".profile-first-name""
+    And I should see ""Smith"" within "".profile-last-name""
+    And I should see ""I like mobile editing"" within "".profile-bio""
+    And I should see ""Berlin"" within "".profile-location""
+    And I should see ""1990-01-01"" within "".profile-birth-date""
+
+  Scenario: Add multiple tags to my profile
+    When I go to the edit profile page
+    And I fill in ""Tags"" with ""ruby""
+    And I select ""ruby"" from the autocomplete suggestions
+    And I fill in ""Tags"" with ""rails""
+    And I select ""rails"" from the autocomplete suggestions
+    And I press ""Save""
+    Then I should see ""Profile updated""
+    And I should see ""ruby"" within "".profile-tags""
+    And I should see ""rails"" within "".profile-tags""
+
+  Scenario: Upload a valid profile photo
+    When I go to the edit profile page
+    And I attach the file ""spec/fixtures/files/avatar.jpg"" to ""Profile photo""
+    And I press ""Save""
+    Then I should see ""Profile updated""
+    And I should see an image within "".profile-photo""
+    When I go to the edit profile page
+    Then I should see an image within "".profile-photo""
+
+  Scenario: Reject an invalid profile photo upload
+    When I go to the edit profile page
+    And I attach the file ""spec/fixtures/files/invalid.txt"" to ""Profile photo""
+    And I press ""Save""
+    Then I should see ""is not a valid image"""
+210,"As a registered user,
+I want to close (delete) my own account from my profile settings,
+So that I can permanently remove my access and data from the system when I no longer wish to use it.
+
+Acceptance Criteria:
+- When a signed-in user navigates to the edit user page and clicks the ""close account"" selector, a confirmation modal should be displayed containing the message ""Hey, please don't go!"".
+- The user must enter their current password into the modal's password field and confirm the action (including a browser confirmation alert) before the account is closed.
+- After successfully confirming, the user should be redirected to the new user session (sign-in) page.
+- Once the account is closed, attempting to manually sign in with the same credentials should keep the user on the sign-in page and display a warning flash message indicating the sign-in attempt failed.","# We can create a separate cucumber profile that will run these tests with Selenium
+@javascript
+Feature: close account
+
+  Background:
+    Given following user exists:
+      | username    | email             |
+      | Alice Smith | alice@alice.alice |
+    And I sign in as ""alice@alice.alice""
+
+  Scenario: Close my account from profile settings
+    When I go to the edit user page
+    And I click the ""close account"" selector
+    Then I should see a confirmation modal with ""Hey, please don't go!""
+    When I fill in the password field with ""password""
+    And I confirm the browser alert
+    Then I should be on the sign in page
+
+  Scenario: Sign in with a closed account
+    Given I close my account from the edit user page
+    When I sign in as ""alice@alice.alice""
+    Then I should be on the sign in page
+    And I should see a warning flash message indicating the sign in failed"

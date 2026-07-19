@@ -8,16 +8,16 @@
 
 ---
 
-## GAP PRIMARY (composite): GPT-4o × (cosine semantic + executable) × Connextra
+## GAP PRIMARY (composite): GPT-5.4-mini × (cosine semantic + executable) × Connextra
 
-> **"Không có nghiên cứu nào đánh giá GPT-4o (full version, official API, zero-shot, temperature=0) cho việc sinh Gherkin acceptance test scenarios + step definitions từ user story format Connextra, đo bằng cosine semantic similarity (all-MiniLM-L6-v2) ≥ ngưỡng so với expert-written Gherkin VÀ executable syntax rate bằng Gherkin parser (`behave --dry-run`) ≥ ngưỡng."**
+> **"Không có nghiên cứu nào đánh giá GPT-5.4-mini 2026-03-17 (latest version, official API, domain-specific few-shot prompting, temperature=0) cho việc sinh Gherkin acceptance test scenarios + step definitions từ user story format Connextra, đo bằng skeleton cosine semantic similarity (all-MiniLM-L6-v2) ≥ ngưỡng so với expert-written Gherkin VÀ executable syntax rate bằng Gherkin parser (`behave --dry-run`) ≥ ngưỡng."**
 
 GAP composite gồm 3 thành phần con, mỗi thành phần đã verify phản chứng:
 
-### GAP-T (Technology) — GPT-4o full chưa được dùng
-- **Bằng chứng:** 0/19 paper dùng GPT-4o full API cho task này.
-- **Paper gần nhất:** Rathnayake 2026 (GPT-4 `gpt-4-0613`, BERTScore F1=91.16%); Ferreira 2025 (GPT-4 Turbo, 100% syntactic, 95% helpful); Fernandes 2025 (GPT-4o **Mini** — không phải full, METEOR=0.78).
-- **Lý do là GAP thật:** GPT-4o ra mắt 5/2024, sau khi đa số paper (2023–early 2024) đã thiết kế thí nghiệm. GPT-4o Mini ≠ GPT-4o full (context 128K, reasoning mạnh hơn).
+### GAP-T (Technology) — GPT-5.4-mini 2026-03-17 chưa được dùng
+- **Bằng chứng:** 0/19 paper dùng GPT-5.4-mini 2026-03-17 API cho task này.
+- **Paper gần nhất:** Rathnayake 2026 (GPT-4 `gpt-4-0613`, BERTScore F1=91.16%); Ferreira 2025 (GPT-4 Turbo, 100% syntactic, 95% helpful);
+- **Lý do là GAP thật:** GPT-5.4-mini ra mắt 2026-03-17, sau khi đa số paper (2023–early 2024) đã thiết kế thí nghiệm. GPT-4o-mini ≠ GPT-5.4-mini (context 128K, reasoning mạnh hơn).
 
 ### GAP-M1 (Metric semantic) — cosine all-MiniLM + ngưỡng cố định chưa dùng
 - **Bằng chứng:** 0/19 paper dùng cosine similarity (all-MiniLM-L6-v2) với ngưỡng cố định so với expert-written Gherkin.
@@ -32,7 +32,7 @@ GAP composite gồm 3 thành phần con, mỗi thành phần đã verify phản 
   - Fonseca 2025 đo syntactic correctness 93.3% nhưng trên mobile UI (AToMIC), không phải behave parser chuẩn.
 - **Lý do là GAP thật:** Gherkin-lint chỉ check style rules; file pass lint vẫn fail `behave --dry-run` nếu lỗi indentation/encoding/malformed scenario outline.
 
-**Lý do kết hợp T+M1+M2:** GAP composite duy nhất tạo contribution hoàn chỉnh = **tool mới (GPT-4o) × metric combo mới (cosine + executable parser) × dataset mới (Connextra)**. Nếu chỉ GAP-T → thiếu đóng góp metric; chỉ GAP-M → thiếu novelty tool.
+**Lý do kết hợp T+M1+M2:** GAP composite duy nhất tạo contribution hoàn chỉnh = **tool mới (GPT-5.4-mini 2026-03-17) × metric combo mới (cosine + executable parser) × dataset mới (Connextra)**. Nếu chỉ GAP-T → thiếu đóng góp metric; chỉ GAP-M → thiếu novelty tool.
 
 ---
 
@@ -48,16 +48,16 @@ GAP composite gồm 3 thành phần con, mỗi thành phần đã verify phản 
 
 > Mỗi dòng = 1 paper thật + số liệu cụ thể + vị trí (abstract/full-text) + chứng minh cho GAP nào. Tất cả số liệu đều mở được trên IEEE Xplore / publisher (abstract miễn phí).
 
-### Bằng chứng GAP-T (GPT-4o chưa dùng)
+### Bằng chứng GAP-T (GPT-5.4-mini chưa dùng)
 
 | Paper | Model dùng | Số liệu | Chứng minh GAP-T | Nguồn |
 |---|---|---|---|---|
-| Rathnayake 2026 | GPT-4 (`gpt-4-0613`) | BERTScore F1 = 91.16%; human eval 4.63/5 | Dùng GPT-4 cũ, KHÔNG phải GPT-4o | full-text |
-| Fernandes 2025 | GPT-4o **Mini** + 6 LLM khác | METEOR = 0.78 (Mini); 0.84 (Gemini best) | GPT-4o **Mini** ≠ GPT-4o full | full-text, Table 2 |
-| Ferreira 2025 | GPT-4 Turbo (`gpt-4-1106`) | Syntactic 100%; helpful 95% | GPT-4 Turbo, không phải GPT-4o | [doi](https://doi.org/10.1109/AST66626.2025.00007) |
-| Karpurapu 2024 | GPT-3.5, GPT-4-Preview, PaLM-2, Llama-2 | BDD error-free (few-shot) | Dừng ở GPT-4-Preview, không GPT-4o | [doi](https://doi.org/10.1109/ACCESS.2024.3391815) |
+| Rathnayake 2026 | GPT-4 (`gpt-4-0613`) | BERTScore F1 = 91.16%; human eval 4.63/5 | Dùng GPT-4 cũ, KHÔNG phải GPT-5.4-mini | full-text |
+| Fernandes 2025 | GPT-4o-mini + 6 LLM khác | METEOR = 0.78 (Mini); 0.84 (Gemini best) | GPT-4o-mini ≠ GPT-5.4-mini | full-text, Table 2 |
+| Ferreira 2025 | GPT-4 Turbo (`gpt-4-1106`) | Syntactic 100%; helpful 95% | GPT-4 Turbo, không phải GPT-5.4-mini | [doi](https://doi.org/10.1109/AST66626.2025.00007) |
+| Karpurapu 2024 | GPT-3.5, GPT-4-Preview, PaLM-2, Llama-2 | BDD error-free (few-shot) | Dừng ở GPT-4-Preview, không GPT-5.4-mini | [doi](https://doi.org/10.1109/ACCESS.2024.3391815) |
 
-→ **0/19 paper dùng GPT-4o full.** Paper gần nhất chỉ tới GPT-4 Turbo / GPT-4o Mini.
+→ **0/19 paper dùng GPT-5.4-mini 2026-03-17.** Paper gần nhất chỉ tới GPT-4 Turbo / GPT-4o-mini.
 
 ### Bằng chứng GAP-M1 (cosine all-MiniLM + ngưỡng chưa dùng)
 
@@ -74,7 +74,7 @@ GAP composite gồm 3 thành phần con, mỗi thành phần đã verify phản 
 
 | Paper | Cách đo "chạy được" | Vì sao KHÁC behave parser | Số liệu | Nguồn |
 |---|---|---|---|---|
-| Karpurapu 2024 | **Gherkin-lint** (linter) | Chỉ check style/syntax tĩnh, KHÔNG verify parse được; file pass lint vẫn fail behave | few-shot ~0 lỗi; zero-shot 89% lỗi | [doi](https://doi.org/10.1109/ACCESS.2024.3391815) |
+| Karpurapu 2024 | **Gherkin-lint** (linter) | Chỉ check style/syntax tĩnh, KHÔNG verify parse được; file pass lint vẫn fail behave | few-shot ~0 lỗi; domain-specific few-shot prompting 89% lỗi | [doi](https://doi.org/10.1109/ACCESS.2024.3391815) |
 | Fonseca 2025 | Syntactic correctness (AToMIC) | Trên mobile UI, không phải behave parser chuẩn | **93.3%** đúng cú pháp | [doi](https://doi.org/10.1109/ASE63991.2025.00273) |
 | Ferreira 2025 | TypeScript syntax check (Cypress) | Check TypeScript, không phải Gherkin `.feature` | 100% syntactic | full-text |
 | Kavuri 2022 | Selenium/PyTest execution | Chạy Python script, không phải Gherkin parser | 92% (GPT-4) | full-text |
@@ -95,10 +95,10 @@ GAP composite gồm 3 thành phần con, mỗi thành phần đã verify phản 
 
 | Thành phần GAP | Nguồn evidence | Thành viên chủ trì |
 |---|---|---|
-| GAP-T (GPT-4o) | Full-text 17 paper (Rathnayake, Fernandes, Ferreira...) | Bạn B |
+| GAP-T (GPT-5.4-mini 2026-03-17) | Full-text 17 paper (Rathnayake, Fernandes, Ferreira...) | **Nguyễn Minh Hoàng** |
 | GAP-M1 (cosine all-MiniLM) | Full-text + IEEE (Rathnayake SBCS, Varpe BERTScore) | Chung |
 | **GAP-M2 (executable behave)** | IEEE (Fonseca 93.3%, Storer 80%, Karpurapu) + full-text (Gherkin-lint analysis) | **Nguyễn Hiếu An** |
-| GAP-D (Connextra) | Cả 2 evidence table | Bạn B |
+| GAP-D (Connextra) | Cả 2 evidence table | **Nguyễn Minh Hoàng** |
 
 ---
 
@@ -124,7 +124,7 @@ GAP composite gồm 3 thành phần con, mỗi thành phần đã verify phản 
 ## PICO cuối cùng
 
 - **P:** ≥ 50 user story Connextra từ ≥ 3 SE project public (Mendeley BDD + 2 GitHub repos)
-- **I:** GPT-4o full, zero-shot, temperature=0
+- **I:** GPT-5.4-mini, domain-specific few-shot prompting, temperature=0
 - **C:** expert-written Gherkin (ground truth, do nhóm có kinh nghiệm BDD viết theo rubric)
 - **O:** cosine similarity (all-MiniLM-L6-v2) ≥ 0.85 + executable rate (`behave --dry-run`) ≥ 80%
 
@@ -136,13 +136,13 @@ GAP composite gồm 3 thành phần con, mỗi thành phần đã verify phản 
 
 | Tiêu chí | Câu hỏi | Đánh giá | Ghi chú & Căn cứ xác minh thực tế |
 |---|---|---|---|
-| **Dataset** | Có nguồn dataset Connextra tải được không? | ⚠️ Cần xử lý | Tải dataset "Requirements data sets (user stories)" của Dalpiaz (Mendeley Data, public). Nếu thiếu/không đúng chuẩn, sẽ thu thập file `.feature` từ các repo public (như Cucumber-JS, Spring) và dịch ngược thành Connextra user stories. Đã check link public tồn tại. |
-| **Tool/API** | GPT-4o có khả thi truy cập không? | ✅ An toàn | Nhóm đã có ngân sách để chạy trực tiếp **GPT-4o bản full**. Chi phí ước tính nằm trong khả năng đầu tư của nhóm. Đã check OpenAI platform. |
+| **Dataset** | Có nguồn dataset Connextra tải được không? | ⚠️ Cần xử lý | Crawl 3 mã nguồn mở (Sylius, Fineract, Diaspora) về để lấy bộ gherkin mẫu, sau đó reverse từ gherkin sang user stories |
+| **Tool/API** | GPT-5.4-mini có khả thi truy cập không? | ✅ An toàn | Nhóm đã có ngân sách để chạy trực tiếp **GPT-5.4-mini**. Chi phí ước tính nằm trong khả năng đầu tư của nhóm. Đã check OpenAI platform. |
 | **Compute** | Cần phần cứng gì? | ✅ An toàn | Thư viện `sentence-transformers` (all-MiniLM-L6-v2) có thể chạy mượt mà trên CPU hoặc Google Colab T4 miễn phí. Gherkin parser (`behave`) rất nhẹ. |
-| **Ground truth**| Cần chuyên gia gán nhãn không? | ⚠️ Cần xử lý | Cần expert-written Gherkin cho 50 stories. Sẽ ưu tiên lấy ground truth `.feature` có sẵn từ các repo mã nguồn mở lớn thay vì tự gán hoàn toàn để giảm thiểu expert bias và tiết kiệm thời gian (ước tính < 5h). |
+| **Ground truth**| Cần chuyên gia gán nhãn không? | ⚠️ Cần xử lý | Cần expert-written Gherkin cho 261 stories. Sẽ ưu tiên lấy ground truth `.feature` có sẵn từ các repo mã nguồn mở lớn thay vì tự gán hoàn toàn để giảm thiểu expert bias và tiết kiệm thời gian (ước tính < 5h). |
 | **Skills** | Nhóm implement được pipeline? | ✅ An toàn | Python, gọi API OpenAI, dùng `sentence-transformers` và chạy file Python script gọi lệnh `behave` bằng subprocess đều là kiến thức cơ bản nhóm đã nắm rõ. |
 | **Thời gian** | Có kịp timeline môn học? | ✅ An toàn | Pipeline (API call -> parser -> embedding) có thể được tự động hoá hoàn toàn bằng 1 script Python. Khả thi chạy trong 1-2 tuần. |
-| **Contribution**| Kết quả âm có giá trị báo cáo không? | ✅ An toàn | Hoàn toàn có. Nếu GPT-4o thất bại (vd: parse fail nhiều), đây vẫn là báo cáo đầu tiên chứng minh điểm yếu của LLM với syntax khắt khe của Gherkin trên benchmark Connextra. |
+| **Contribution**| Kết quả âm có giá trị báo cáo không? | ✅ An toàn | Hoàn toàn có. Nếu GPT-5.4-mini thất bại (vd: parse fail nhiều), đây vẫn là báo cáo đầu tiên chứng minh điểm yếu của LLM với syntax khắt khe của Gherkin trên benchmark Connextra. |
 
 > **Phương án Downscope (nếu cần):** 
 > *   Nếu không tìm đủ 50 dataset chuẩn từ open source: Sẽ downscope N=30, ảnh hưởng đến statistical power một chút nhưng vẫn đủ để chạy non-parametric tests.
