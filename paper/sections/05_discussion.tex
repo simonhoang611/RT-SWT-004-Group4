@@ -1,0 +1,26 @@
+% ============================================================
+% Section 5: Discussion
+% Author: PL (Simon Hoang)
+% Target file: paper/sections/05_discussion.tex
+% ============================================================
+
+\section{Discussion}
+\label{sec:discussion}
+
+The results from our two research questions show a clear contrast. On one hand, GPT-5.4-mini was perfect at generating code that parses correctly (100\% executable rate). On the other hand, it struggled to consistently beat our strict semantic threshold of 0.85. In this section, we discuss why this happens and what it means for software teams.
+
+\subsection{Why the Syntax was Perfect but Semantics were Borderline}
+
+The 100\% pass rate for syntax is a big deal. Gherkin is very strict about keywords like \texttt{Given}, \texttt{When}, \texttt{Then}, and \texttt{And}. If you miss a keyword or format a data table wrong, the whole test suite crashes. The fact that the model learned how to format these perfectly shows that our domain-specific few-shot prompting worked. Giving the model just one good example from the same project was enough to teach it the project's formatting rules.
+
+However, writing valid code is not the same as writing the \textit{right} test. Our semantic test failed to reach statistical significance ($p = 0.355$). Why did the model struggle to match the expert-written Gherkin? The main reason is that a standard Connextra user story is usually very short. It just says ``As a user, I want X, so that Y.'' But an expert QA engineer knows a lot of unwritten rules about the project. For example, in the Apache Fineract project, a loan test needs specific interest rates and payment dates. If those details are not explicitly written in the user story, the model has to guess them. It usually guesses wrong or leaves them out. The model only knows what is in the prompt, while the human expert knows the whole system. This explains why the generated skeleton often looks right but misses the deep business logic.
+
+\subsection{How Teams Should Use This}
+
+Because the model cannot perfectly guess the business logic, teams cannot use it to generate acceptance tests automatically. You cannot just feed a user story into GPT-5.4-mini, take the output, and run it in your CI/CD pipeline without looking at it. That would be dangerous because the test might pass but fail to check the real business requirements.
+
+Instead, teams should use the model as a drafting tool. Right now, QA engineers spend a lot of time just typing out boilerplate Gherkin and fixing syntax errors. If they use the model to write the first draft, they get a file that is guaranteed to parse correctly in \texttt{behave}. The engineer's job changes from ``writing code from scratch'' to ``reviewing and fixing the logic.'' They can just read the draft, add the missing edge cases, fix the numbers, and save time. 
+
+\subsection{The Value of Combining Both Metrics}
+
+Our study shows why it is so important to test both syntax and semantics at the same time. If we had only tested semantics with the \texttt{all-MiniLM-L6-v2} model, we would have concluded that the model is just average. If we had only tested syntax with a linter, we would have said the model is perfect. By putting both metrics together, we get the real picture: the model is a great formatting assistant but a mediocre business analyst. Future research needs to find ways to give the model more context, like feeding it the actual source code or old test files, so it does not have to guess the missing business rules.

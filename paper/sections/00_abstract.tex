@@ -1,0 +1,9 @@
+% ============================================================
+% Section 0: Abstract
+% Author: PL (Simon Hoang)
+% Target file: paper/sections/00_abstract.tex
+% ============================================================
+
+\begin{abstract}
+Nobody really enjoys writing Gherkin test scenarios by hand. It takes too long. We wanted to find out if software teams could simply hand standard user stories over to a Large Language Model and get ready-to-run tests back. So, we tested GPT-5.4-mini on 261 user stories that we reverse-engineered from three totally different open-source projects---Sylius, Apache Fineract, and Diaspora. We didn't just check if the output looked similar to the original text. We actually threw the generated files into the \texttt{behave} test runner to see if they would crash. Surprisingly, they didn't. Every single one of the 261 files parsed perfectly (100\% pass rate, $p < 0.001$). But getting the syntax right is only half the battle. When we measured the semantic meaning of the generated code against what the human experts originally wrote, the model stumbled. The median skeleton cosine similarity was 0.853. That number looks okay, but our Wilcoxon test showed it wasn't statistically significant against our 0.85 baseline ($p = 0.355$). The bottom line is that GPT-5.4-mini acts as a fantastic tool for drafting basic syntax quickly, but human engineers absolutely must review the business logic manually.
+\end{abstract}

@@ -1,0 +1,346 @@
+% ============================================================
+% Section 3: Methodology
+% LR (Nguyen Hieu An): 3.1 Dataset + 3.2 Experimental Setup
+% MS (Vo Hieu Chuong):  3.3 Metrics + 3.4 Statistical Analysis Plan
+% ============================================================
+
+\section{Methodology}
+\label{sec:method}
+
+% ---------------------------------------------------------------------
+% 3.1 Dataset — LR (Nguyen Hieu An)
+% ---------------------------------------------------------------------
+\subsection{Dataset}
+\label{sec:dataset}
+
+Our dataset contains 261 user stories in the Connextra template
+(``As a [role], I want [feature], so that [benefit]''). We did not write
+these stories ourselves. Instead, we reverse-engineered them from 261
+expert-written \texttt{.feature} files taken from the production test
+suites of three open-source projects: Sylius, Apache
+Fineract, and Diaspora.\footnote{\url{https://github.com/Sylius/Sylius},
+\url{https://github.com/apache/fineract},
+\url{https://github.com/diaspora/diaspora}} We first crawled all Gherkin
+feature files from the three repositories, discarded files that the
+\texttt{behave} parser rejected, and selected 261 scenarios. We then
+converted each scenario back into a Connextra user story with acceptance
+criteria. Each user story is therefore paired with exactly one
+expert-written Gherkin file, which serves as its ground truth. This
+design avoids expert bias: the reference Gherkin was written by the
+projects' own engineers for real production code, not by us for this
+study.
+
+We picked these three projects because they cover three unrelated
+business domains: e-commerce, core banking, and social networking
+(Table~\ref{tab:dataset}). A model that merely memorizes the
+conventions of one domain cannot score well on the other two, which
+strengthens the external validity of our results.
+
+\begin{table}[t]
+\caption{Dataset composition (N = 261 Connextra user stories).}
+\label{tab:dataset}
+\centering
+\begin{tabular}{llr}
+\toprule
+\textbf{Project} & \textbf{Domain} & \textbf{User stories} \\
+\midrule
+Sylius           & E-commerce        & 100 \\
+Apache Fineract  & Finance/Banking   & 100 \\
+Diaspora         & Social Network    & 61  \\
+\midrule
+\textbf{Total}   &                   & \textbf{261} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Listing~\ref{lst:example-us} shows one user story from the Sylius
+subset, and Listing~\ref{lst:example-gt} shows the expert-written
+Gherkin file it was derived from.
+
+\begin{lstlisting}[float=ht, basicstyle=\ttfamily\scriptsize, frame=tb, captionpos=b, aboveskip=1em, belowskip=1em, breaklines=true, columns=fullflexible, caption={Example Connextra user story (id 1, Sylius, excerpt).},label={lst:example-us}]
+As a store owner,
+I want the checkout process to prevent
+customers from completing an order with a
+shipping method that has become unavailable,
+So that customers cannot place orders using
+shipping methods that are no longer valid or
+offered.
+
+Acceptance Criteria:
+- When a customer has selected a shipping
+  method and payment method during checkout,
+  but that shipping method is subsequently
+  disabled entirely, the system should block
+  order confirmation [...]
+\end{lstlisting}
+
+\begin{lstlisting}[float=ht, basicstyle=\ttfamily\scriptsize, frame=tb, captionpos=b, aboveskip=1em, belowskip=1em, breaklines=true, columns=fullflexible, caption={Corresponding expert-written Gherkin ground truth (excerpt).},label={lst:example-gt}]
+@checkout
+Feature: Preventing placing an order with a
+    disabled shipping method
+
+  Background:
+    Given the store operates on a single
+      channel in the "United States" named
+      "US Web Store"
+    And the store has a product "Ubi T-Shirt"
+      priced at "$19.99"
+    And the store has "Raven Post" shipping
+      method with "$4.00" fee
+    And the store allows paying "Offline"
+
+  @api @ui
+  Scenario: Being prevented from placing an
+      order with a shipping method that's
+      disabled after completing the shipping
+      method choice step
+    Given I added product "Ubi T-Shirt" to
+      the cart
+    And I addressed the cart
+    And I chose "Raven Post" shipping method
+      and "Offline" payment method
+    But this shipping method has been disabled
+    When I try to confirm my order
+    Then I should not be able to confirm order
+      because the "Raven Post" shipping
+      method is not available
+  [...]
+\end{lstlisting}
+
+% ---------------------------------------------------------------------
+% 3.2 Experimental Setup — LR (Nguyen Hieu An)
+% ---------------------------------------------------------------------
+\subsection{Experimental Setup and Pipeline}
+\label{sec:pipeline}
+
+All generations use \texttt{gpt-5.4-mini}, pinned to the snapshot
+\texttt{2026-03-17}, through the official OpenAI Chat Completions API.
+We set \texttt{temperature} to 0 so that decoding is deterministic: the
+same input always produces the same output, which makes every run of
+our pipeline reproducible. We impose no explicit max-token cap, so the
+model is never forced to truncate a scenario mid-file. Pinning the
+snapshot protects the study against silent model updates during the
+experiment window.
+
+We prompt the model with domain-specific few-shot prompting. Each of
+the three domains gets (a) its own system message, which places the
+model in the role of a QA engineer on that specific project, and (b)
+exactly one example pair---a user story and its expert-written
+Gherkin---taken from that same project. We chose this strategy because
+the three projects write Gherkin in very different styles: Fineract
+relies on dense data tables, Diaspora writes concrete UI steps with
+CSS selectors in the Capybara style, and Sylius uses the
+business-level language of Behat. A single generic example cannot
+teach the model these project conventions, and prior work reports that
+few-shot examples sharply reduce syntax errors in generated BDD
+scenarios~\cite{karpurapu2024bddautomation}. Listing~\ref{lst:prompt} shows the
+prompt template verbatim; the placeholders in braces are filled per
+domain at run time.
+
+\begin{lstlisting}[float=ht, basicstyle=\ttfamily\scriptsize, frame=tb, captionpos=b, aboveskip=1em, belowskip=1em, breaklines=true, columns=fullflexible, caption={Prompt template (verbatim). Placeholders in braces are instantiated per domain.},label={lst:prompt}]
+System: {domain_specific_system_message}
+
+User:
+Generate a BDD Gherkin file for the following
+user story.
+Follow the exact style, wording, and
+conventions shown in the Example.
+
+EXAMPLE USER STORY:
+{example_user_story_from_same_domain}
+
+EXAMPLE GHERKIN:
+{example_gherkin_from_same_domain}
+
+---
+NOW GENERATE FOR THIS USER STORY:
+{user_story_text}
+\end{lstlisting}
+
+The pipeline runs in five steps. First, we load the 261 user stories
+from \texttt{data/full\_user\_stories.csv}. Second, for each story we
+build the domain-specific prompt and call the API. Third, we strip the
+Markdown code fence (\texttt{```gherkin}) when the model wraps its
+output in one; we make no other change to the generated text. Fourth,
+we store every generated file in
+\texttt{results/full\_gpt54mini\_output.csv} and append one log record
+per API call---timestamp, model version, token counts, and cost---to
+\texttt{results/full\_api\_log.jsonl}. Fifth, we score each generated
+file on the two metrics defined in Section~\ref{sec:metrics}:
+executability via \texttt{behave --dry-run} and semantic similarity
+via \texttt{all-MiniLM-L6-v2} embeddings.
+
+The pipeline also handles transient API failures. When a call fails or
+times out, the script waits 60 seconds and retries the same story
+until it succeeds, so no sample is dropped and no result is ever
+filled in by hand. A one-second pause between calls keeps us under the
+API rate limit, and the output file is saved after every sample, so a
+crash loses no data. In the full run, all 261 calls returned a valid
+response (N = 261; nothing was excluded).
+
+Our replication package, including the dataset, prompts, scripts, and
+raw results, is publicly available at:
+\url{https://github.com/simonhoang611/RT-SWT-004-Group4}.
+
+% ============================================================
+% 3.3 Metrics — MS (Vo Hieu Chuong)
+% ============================================================
+\subsection{Metrics}
+\label{sec:metrics}
+
+We evaluate the quality of LLM-generated Gherkin scenarios using two complementary metrics,
+each targeting a distinct research question.
+
+% ----------------------------------------------------------
+\subsubsection{Metric 1: Skeleton Cosine Similarity (RQ1 — Semantic Quality)}
+\label{sec:metric-skeleton}
+
+\textbf{What it is.}
+Skeleton Cosine Similarity measures the semantic similarity between an LLM-generated
+Gherkin scenario and its reference scenario by comparing their \emph{dense vector
+representations} (embeddings).
+We use the \texttt{all-MiniLM-L6-v2} sentence-transformer model~\cite{reimers2019sentencebert}
+to encode each scenario into a 384-dimensional vector, then compute the cosine similarity
+between the two vectors.
+A score of 1.0 indicates identical meaning; 0.0 indicates orthogonal semantics.
+We adopt a threshold of $\tau = 0.85$, consistent with prior work on semantic adequacy
+in test-case generation~\cite{fraser2011evosuite}.
+
+\textbf{Why the Skeleton variant.}
+Raw Gherkin text contains structural keywords (\texttt{Feature:}, \texttt{Scenario:},
+\texttt{Given}, \texttt{When}, \texttt{Then}, \texttt{And}) that are syntactically
+mandatory but carry no domain-specific meaning.
+Including these keywords biases the embedding toward formatting rather than business logic.
+To isolate the \emph{core business logic}, we strip all Gherkin keywords before encoding,
+producing a \emph{skeleton} string that contains only the natural-language step descriptions.
+
+Table~\ref{tab:skeleton-example} illustrates this process with a concrete example.
+
+\begin{table}[h]
+\centering
+\caption{Skeleton extraction example. Gherkin keywords (bold) are removed;
+only the natural-language content is retained for embedding.}
+\label{tab:skeleton-example}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{p{0.28\linewidth} p{0.28\linewidth} p{0.28\linewidth}}
+\toprule
+\textbf{Original Gherkin Step} & \textbf{Skeleton (after stripping)} & \textbf{Embedding (illustration)} \\
+\midrule
+\texttt{\textbf{Given} the user is on the login page}
+  & \texttt{the user is on the login page}
+  & $[0.23,\,-0.11,\,\ldots,\,0.87]$ \\
+\addlinespace
+\texttt{\textbf{When} the user enters invalid credentials}
+  & \texttt{the user enters invalid credentials}
+  & $[0.31,\,0.05,\,\ldots,\,-0.42]$ \\
+\addlinespace
+\texttt{\textbf{Then} an error message is displayed}
+  & \texttt{an error message is displayed}
+  & $[0.19,\,-0.27,\,\ldots,\,0.61]$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The final Skeleton Cosine Similarity score for a scenario is the cosine similarity between
+the mean-pooled embedding of all skeleton steps of the generated scenario and that of the
+reference scenario.
+
+\textbf{Formal definition.}
+Let $\mathbf{g}$ and $\mathbf{r}$ be the mean-pooled embeddings of the generated and
+reference skeletons, respectively.
+The Skeleton Cosine Similarity is defined as:
+\begin{equation}
+  \text{SkelCos}(\mathbf{g}, \mathbf{r})
+    = \frac{\mathbf{g} \cdot \mathbf{r}}{\|\mathbf{g}\| \cdot \|\mathbf{r}\|}
+\label{eq:skelcos}
+\end{equation}
+We evaluate $H_0^{\text{RQ1}}: \tilde{\mu} \leq 0.85$ (the population median does not
+exceed the threshold) against $H_1^{\text{RQ1}}: \tilde{\mu} > 0.85$.
+
+% ----------------------------------------------------------
+\subsubsection{Metric 2: Executable Syntax Rate (RQ2 — Syntactic Correctness)}
+\label{sec:metric-esr}
+
+\textbf{What it is.}
+The Executable Syntax Rate (ESR) is the proportion of generated Gherkin scenarios that
+parse and load without errors in a real test runner.
+Formally:
+\begin{equation}
+  \text{ESR} = \frac{|\{s \in S \mid \texttt{behave --dry-run}(s) = \textsc{pass}\}|}{|S|}
+\label{eq:esr}
+\end{equation}
+where $S$ is the set of all generated scenarios.
+
+\textbf{Why \texttt{behave --dry-run} instead of a static linter.}
+Static linters such as \texttt{gherkin-lint} validate only the superficial token structure
+of a \texttt{.feature} file.
+They may pass files that contain step-definition references that are undefined, ambiguous,
+or semantically malformed, which would cause actual test execution to fail.
+By contrast, \texttt{behave --dry-run} performs a full parse-and-load cycle: it checks
+Gherkin syntax, resolves step definitions against the step-definition registry, and reports
+any \texttt{MissingStepImplementationError} or \texttt{AmbiguousStep} at dry-run time.
+This gives a \emph{runtime-faithful} measure of syntactic correctness.
+
+We set the acceptability threshold at $\tau_{\text{ESR}} = 0.80$ (i.e., $\geq$80\% of
+scenarios must be executable), following industry guidelines for minimum viable test
+coverage~\cite{wohlin2012experimentation}.
+We evaluate $H_0^{\text{RQ2}}: p_{\text{ESR}} \leq 0.80$ against
+$H_1^{\text{RQ2}}: p_{\text{ESR}} > 0.80$.
+
+% ============================================================
+% 3.4 Statistical Analysis Plan — MS (Vo Hieu Chuong)
+% ============================================================
+\subsection{Statistical Analysis Plan}
+\label{sec:stats}
+
+We use a significance level of $\alpha = 0.05$ for all hypothesis tests.
+Two separate tests are applied, one per research question, selected based on the
+distributional characteristics of each outcome variable.
+
+% ----------------------------------------------------------
+\subsubsection{RQ1 — Wilcoxon Signed-Rank Test (one-sample)}
+
+We test whether the \emph{population median} of Skeleton Cosine Similarity exceeds
+the threshold $\mu_0 = 0.85$.
+
+\textbf{Why Wilcoxon (not a $t$-test).}
+Cosine similarity scores are bounded in $[-1, 1]$ and, in practice, tend to cluster
+near the upper end of the range.
+Preliminary inspection of our data (see Figure~\ref{fig:rq1-dist}) reveals a
+left-skewed distribution, violating the normality assumption of the one-sample $t$-test.
+The \emph{Wilcoxon signed-rank test} is a non-parametric alternative that compares
+medians without requiring a normal distribution~\cite{arcuri2011practical}.
+It ranks the absolute deviations from $\mu_0$ and tests whether the sum of positive
+ranks significantly exceeds that of negative ranks.
+
+\textbf{Hypotheses (RQ1):}
+\begin{align}
+  H_0^{\text{RQ1}} &: \tilde{\mu}_{\text{SkelCos}} \leq 0.85 \notag \\
+  H_1^{\text{RQ1}} &: \tilde{\mu}_{\text{SkelCos}} > 0.85 \notag
+\end{align}
+We report the one-sided $p$-value and Cliff's $\delta$ as the effect size
+($|\delta| < 0.147$: negligible; $0.147$--$0.33$: small; $0.33$--$0.474$: medium;
+$\geq 0.474$: large~\cite{romano2006exploring}).
+
+% ----------------------------------------------------------
+\subsubsection{RQ2 — Exact Binomial Test (one-sample)}
+
+We test whether the true proportion of executable scenarios exceeds the threshold
+$p_0 = 0.80$.
+
+\textbf{Why Exact Binomial.}
+Each scenario is independently assessed by \texttt{behave --dry-run} and yields a
+binary outcome: \textsc{pass} or \textsc{fail}.
+This is a Bernoulli trial with unknown success probability $p$.
+The Exact Binomial test is the standard choice for this data type: it computes the
+exact probability of observing at least $k$ successes out of $N$ trials under
+$H_0: p = p_0$, without relying on asymptotic (normal) approximations that may be
+unreliable when $p$ is close to 0 or 1~\cite{agresti2002categorical}.
+
+\textbf{Hypotheses (RQ2):}
+\begin{align}
+  H_0^{\text{RQ2}} &: p_{\text{ESR}} \leq 0.80 \notag \\
+  H_1^{\text{RQ2}} &: p_{\text{ESR}} > 0.80 \notag
+\end{align}
+We report the one-sided $p$-value and the 95\% Clopper-Pearson confidence
+interval~\cite{clopper1934use} for the true proportion.

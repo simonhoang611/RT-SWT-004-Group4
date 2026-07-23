@@ -1,0 +1,34 @@
+% ============================================================
+% Section 2 -- Related Work
+% Author (DG): Tran Tuan Khang (SE204881)
+% Target file: paper/sections/02_related.tex
+% ============================================================
+
+\section{Related Work}
+\label{sec:related}
+
+Generating BDD scenarios with language models forces researchers to deal with two completely different problems: getting the meaning right and getting the syntax to parse. Most papers look at just one of these problems at a time. When testing LLMs on raw user stories, people usually report really high accuracy but they use data that does not represent real-world diversity. 
+
+% ------------------------------------------------------------------
+\subsection{Gherkin / BDD Generation Using LLMs}
+\label{subsec:rw-gherkin}
+
+Take Rathnayake et al.~\cite{rathnayake2026bddgeneration} for example. They ran GPT-4, Claude 3 Opus, and Gemini 1.5 Flash on 500 stories and saw a 91.16\% BERTScore for GPT-4. They pulled all those stories from just one company's internal backlog. That makes it impossible for anyone else to reproduce the experiment or know if the model would work for a different business domain.
+
+Sometimes researchers do use open data. Fernandes et al.~\cite{fernandes2025gherkin} pulled test cases from public sources to compare seven models, including GPT-3.5 Turbo and DeepSeek R1. The problem is they only used ten test descriptions in total to get a 0.84 METEOR score for Gemini. Ten descriptions is simply not enough data to prove anything statistically. Karpurapu et al.~\cite{karpurapu2024bddautomation} did a bit better by testing about 50 stories with PaLM-2 and GPT-3.5-Turbo, but they used Gherkin-lint to validate the output which is a problem because a static linter is not a real test runner and it will pass code that has the right keywords even if the logic is broken and the actual test crashes. dos Santos et al.~\cite{dossantos2025bddtestgeneration} just looked at how much coverage ChatGPT had on 34 stories and didn't even run the code. Narvaez et al.~\cite{narvaez2025lawtogherkin} tested Claude 3.7 on food-safety laws, which is totally different from normal software requirements. No one is actually parsing the output in a real testing environment on a large dataset while also checking semantic embeddings at the same time.
+
+% ------------------------------------------------------------------
+\subsection{Test-Generation Pipelines and Domain Applications}
+\label{subsec:rw-pipelines}
+
+Other teams try to build whole testing pipelines using LLMs. Ferreira et al.~\cite{ferreira2025industrialcasestudy} set up GPT-4 Turbo at a car company to write scenarios. They reported zero syntax errors for 50 scenarios. Fonseca et al.~\cite{fonseca2025mobileacceptance} pushed JIRA issues from the BMW app through DeepSeek-R1 and got 93.3\% correct syntax. These tools clearly work well for the specific teams that built them. We have no idea if that 90\% success rate holds up when the tool is dropped into a banking app or a social network.
+
+Looking at unit-test generation shows the same kind of roadblocks. Zhang et al.~\cite{zhang2024testbench} got GPT-4 to cover 92.51\% of lines in Java classes. They actually had to write a custom bug-fix script because GPT-3.5 was failing 97.84\% of the time on syntax. Kavuri~\cite{kavuri2022testscriptautomation} tested GPT-4 on mixed requirements. Chang and Shirazi~\cite{chang2025llmassessment} found GPT-4o-mini was pretty stable for Python code. Wang et al.~\cite{wang2024xuatcopilot} used three GPT agents to test WeChat Pay and got an 88.55\% pass rate on GUI scripts. Clicking buttons on a screen requires a completely different thought process than writing BDD scenarios.
+
+% ------------------------------------------------------------------
+\subsection{Research Gap and Positioning}
+\label{subsec:rw-gap}
+
+Looking at what everyone has done so far leaves a few obvious holes in the research. Nobody is using GPT-5.4-mini (API 2026-03-17) as the main engine to write Gherkin from Connextra stories. People rely on BERTScore or human grading for semantics instead of setting a hard 0.85 cosine cutoff with something like \texttt{all-MiniLM-L6-v2}. Almost everyone uses linters to check syntax rather than running the code in \texttt{behave --dry-run}. And there are no open multi-domain datasets with more than about 50 stories in this area.
+
+Our experiment tries to fix these issues. We downloaded 261 Connextra stories from Apache Fineract, Diaspora, and Sylius. We ran them through GPT-5.4-mini. We gave the model one specific example for each project's domain. We checked the results against two hard rules: a 0.85 skeleton cosine threshold and an 80\% executable pass rate under \texttt{behave}. We haven't seen any other study run both of these strict checks on a dataset this big.
