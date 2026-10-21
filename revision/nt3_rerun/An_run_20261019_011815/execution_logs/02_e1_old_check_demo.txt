@@ -1,0 +1,4 @@
+plain text, not Gherkin: check_executable -> PASS; behave says: ['USING RUNNER: behave.runner:Runner', "ConfigError: No steps directory in 'C:\\\\Users\\\\hieua\\\\AppData\\\\Local\\\\Temp\\\\tmpkvcfyfff'"]
+generated id 136: check_executable -> PASS; behave says: ['USING RUNNER: behave.runner:Runner', "ConfigError: No steps directory in 'C:\\\\Users\\\\hieua\\\\AppData\\\\Local\\\\Temp\\\\tmpkvcfyfff'"]
+
+STDERR:

@@ -1,0 +1,27 @@
+Median overlap by project (exemplars excluded):
+                 story_gt_overlap  gen_story_overlap  gen_gt_overlap  gen_gt_not_story
+project                                                                               
+Apache Fineract             0.015              0.094           0.062             0.044
+Diaspora                    0.052              0.111           0.138             0.105
+Sylius                      0.067              0.133           0.250             0.178
+
+Spearman rho with skeleton_cosine (p):
+          group   N           measure     rho      p
+            All 258  story_gt_overlap  0.4096 0.0000
+            All 258 gen_story_overlap  0.2182 0.0004
+            All 258    gen_gt_overlap  0.5818 0.0000
+            All 258  gen_gt_not_story  0.5267 0.0000
+Apache Fineract  99  story_gt_overlap  0.1132 0.2644
+Apache Fineract  99 gen_story_overlap -0.0343 0.7358
+Apache Fineract  99    gen_gt_overlap  0.4573 0.0000
+Apache Fineract  99  gen_gt_not_story  0.5114 0.0000
+       Diaspora  60  story_gt_overlap  0.3127 0.0150
+       Diaspora  60 gen_story_overlap -0.0957 0.4672
+       Diaspora  60    gen_gt_overlap  0.4440 0.0004
+       Diaspora  60  gen_gt_not_story  0.4655 0.0002
+         Sylius  99  story_gt_overlap  0.2772 0.0055
+         Sylius  99 gen_story_overlap  0.3262 0.0010
+         Sylius  99    gen_gt_overlap  0.3392 0.0006
+         Sylius  99  gen_gt_not_story  0.0735 0.4699
+
+STDERR:

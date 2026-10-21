@@ -1,0 +1,168 @@
+{
+  "executed_by": "Nguyen Hieu An",
+  "recorded_at_local": "2026-10-19T01:18:26.589666+07:00",
+  "machine": "Windows-11-10.0.26300-SP0",
+  "python": "3.12.14",
+  "versions": {
+    "pandas": "3.0.5",
+    "numpy": "2.5.3",
+    "scipy": "1.18.1",
+    "behave": "1.3.3"
+  },
+  "steps": [
+    {
+      "step": 1,
+      "command": [
+        "revision/check_syntax.py",
+        "--input",
+        "results/full_gpt54mini_output.csv",
+        "--out",
+        "revision/results/syntax_parse_n261.csv"
+      ],
+      "exit_code": 0
+    },
+    {
+      "step": 2,
+      "command": [
+        "revision/e1_old_check_demo.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "step": 3,
+      "command": [
+        "revision/recompute_descriptives.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "step": 4,
+      "command": [
+        "revision/b3_threshold_sensitivity.py",
+        "--audit",
+        "C:\\Users\\hieua\\OneDrive\\Tài liệu\\ChatGPT\\SWT301\\outputs\\FISAT_run_checks_review_2026-10-19\\FISAT_RUN_CHECKS_An_2026-10-18\\audit_inputs\\b2_annotation_An_CONFIRMED.csv",
+        "--mutation",
+        "C:\\Users\\hieua\\OneDrive\\Tài liệu\\ChatGPT\\SWT301\\outputs\\FISAT_run_checks_review_2026-10-19\\FISAT_RUN_CHECKS_An_2026-10-18\\audit_inputs\\mutation_results.csv"
+      ],
+      "exit_code": 0
+    },
+    {
+      "step": 5,
+      "command": [
+        "revision/h1_domain_analysis.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "step": 6,
+      "command": [
+        "revision/b1_leakage_proxy.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "step": 7,
+      "command": [
+        "revision/check_syntax.py",
+        "--input",
+        "results/full_gpt54mini_output.csv",
+        "--out",
+        "revision/h2/h2_syntax_C0.csv"
+      ],
+      "exit_code": 0
+    },
+    {
+      "step": 8,
+      "command": [
+        "revision/check_syntax.py",
+        "--input",
+        "revision/h2/h2_C1_output.csv",
+        "--out",
+        "revision/h2/h2_syntax_C1.csv"
+      ],
+      "exit_code": 0
+    },
+    {
+      "step": 9,
+      "command": [
+        "revision/check_syntax.py",
+        "--input",
+        "revision/h2/h2_C2_output.csv",
+        "--out",
+        "revision/h2/h2_syntax_C2.csv"
+      ],
+      "exit_code": 0
+    },
+    {
+      "step": 10,
+      "command": [
+        "revision/h2/h2_analysis.py"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "comparisons": [
+    {
+      "file": "revision/results/descriptives_skeleton_cosine.csv",
+      "match": true
+    },
+    {
+      "file": "revision/results/exemplar_scores.csv",
+      "match": true
+    },
+    {
+      "file": "revision/results/b3_threshold_sweep.csv",
+      "match": true
+    },
+    {
+      "file": "revision/results/b3_mutation_by_threshold.csv",
+      "match": true
+    },
+    {
+      "file": "revision/results/h1_domain_table.csv",
+      "match": true
+    },
+    {
+      "file": "revision/results/h1_pairwise.csv",
+      "match": true
+    },
+    {
+      "file": "revision/results/b1_overlap_per_file.csv",
+      "match": true
+    },
+    {
+      "file": "revision/results/b1_spearman.csv",
+      "match": true
+    },
+    {
+      "file": "revision/results/syntax_parse_n261.csv",
+      "match": true
+    },
+    {
+      "file": "revision/h2/h2_syntax_C0.csv",
+      "match": true
+    },
+    {
+      "file": "revision/h2/h2_syntax_C1.csv",
+      "match": true
+    },
+    {
+      "file": "revision/h2/h2_syntax_C2.csv",
+      "match": true
+    },
+    {
+      "file": "revision/h2/h2_results_table.csv",
+      "match": true
+    },
+    {
+      "file": "revision/h2/h2_results_by_project.csv",
+      "match": true
+    },
+    {
+      "file": "revision/h2/h2_results_pairwise.csv",
+      "match": true
+    }
+  ],
+  "all_15_tables_match": true,
+  "note": "Written by run_checks.py. The person named above ran it; reading the logs and the result is their own step."
+}

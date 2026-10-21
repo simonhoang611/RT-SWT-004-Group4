@@ -1,0 +1,22 @@
+              set           group     N    min     Q1  median     Q3    max    IQR   mean     SD  cliffs_delta_vs_0.85  wilcoxon_p_one_sided
+         all_N261             all 261.0 0.5847 0.8062  0.8535 0.8936 1.0000 0.0874 0.8500 0.0693                0.0651                0.3554
+         all_N261          Sylius 100.0 0.7036 0.8587  0.8888 0.9358 1.0000 0.0771 0.8882 0.0606                0.5600                0.0000
+         all_N261 Apache Fineract 100.0 0.5847 0.7973  0.8266 0.8587 0.9974 0.0614 0.8237 0.0611               -0.3000                1.0000
+         all_N261        Diaspora  61.0 0.6907 0.7870  0.8349 0.8743 1.0000 0.0874 0.8305 0.0679               -0.1475                0.9831
+no_exemplars_N258             all 258.0 0.5847 0.8051  0.8533 0.8903 0.9945 0.0852 0.8483 0.0678                0.0543                0.4739
+no_exemplars_N258          Sylius  99.0 0.7036 0.8585  0.8871 0.9344 0.9945 0.0759 0.8871 0.0598                0.5556                0.0000
+no_exemplars_N258 Apache Fineract  99.0 0.5847 0.7963  0.8265 0.8584 0.9735 0.0621 0.8219 0.0588               -0.3131                1.0000
+no_exemplars_N258        Diaspora  60.0 0.6907 0.7863  0.8314 0.8736 0.9623 0.0873 0.8276 0.0648               -0.1667                0.9916
+              set  kruskal_H    kruskal_p
+         all_N261  58.429287 2.052304e-13
+no_exemplars_N258  60.869195 6.059296e-14
+
+Exemplar scores:
+ id    project_name  skeleton_cosine
+  2          Sylius           1.0000
+102 Apache Fineract           0.9974
+202        Diaspora           1.0000
+
+Saved revision/results\descriptives_skeleton_cosine.csv
+
+STDERR:

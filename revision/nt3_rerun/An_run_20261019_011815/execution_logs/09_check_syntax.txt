@@ -1,0 +1,9 @@
+PASS 260/261 = 99.62%
+parse_status
+PASS    260
+FAIL      1
+
+FAIL ids: [135]
+Exact binomial vs 0.80: p = 3.37e-24; 95% Clopper-Pearson CI [0.9788, 0.9999]
+
+STDERR:
