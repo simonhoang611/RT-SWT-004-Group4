@@ -1,0 +1,18 @@
+\section{Related Work}
+\label{sec:related}
+
+\subsection{LLM-Based Gherkin and BDD Generation}
+
+Research on LLM-assisted BDD generation has typically emphasized either semantic resemblance or syntactic correctness. Rathnayake et al.~\cite{rathnayake2026} evaluated multiple frontier models on 500 proprietary stories and reported strong BERTScore performance. The scale is useful, but the private dataset limits independent replication. Fernandes et al.~\cite{fernandes2025} used public material and compared seven LLMs, but their evaluation comprised only ten test descriptions. Karpurapu et al.~\cite{karpurapu2024} evaluated GPT-3.5, GPT-4, Llama-2-13B, and PaLM-2 and found fewer Gherkin-lint syntax errors with few-shot prompting overall; zero-shot outputs accounted for 89\% of the observed syntax errors. This supports evaluating example-based prompting, while noting that their validator was a linter rather than a runtime parser.
+
+Industrial pipeline studies provide a complementary view. Ferreira et al.~\cite{ferreira2025} evaluated GPT-4 Turbo in an industrial web-application workflow; their downstream Test Flow evaluation produced 50 Cypress test cases and reported 100\% TypeScript syntactic correctness. Fonseca et al.~\cite{fonseca2025} evaluated the AToMIC framework on 13 issues from the BMW MyBMW application and reported 93.3\% syntactically correct generated Gherkin scenarios. These results demonstrate that LLMs can be integrated into practical workflows, but single-organization or single-application evaluations make cross-domain generalization difficult to assess.
+
+\subsection{Test Generation and Semantic Evaluation}
+
+Broader software-test generation research shows that syntactic success and fault-revealing or semantic quality should not be conflated. TestBench provides a benchmark for evaluating class-level test-case generation across LLMs~\cite{zhang2025testbench}. Chang and Shokrolah Shirazi propose a systematic benchmark for assessing LLM test-case generation over generated program structures~\cite{chang2025}. XUAT-Copilot uses multiple LLM-based agents for automated user-acceptance testing of WeChat Pay~\cite{wang2024xuat}. These systems solve different tasks from Gherkin generation, but they reinforce a common methodological lesson: generation quality is multi-dimensional, and an apparently successful artifact may still be weak on the property that matters to users.
+
+For semantic comparison, sentence embeddings provide a scalable alternative to manual labeling. Sentence-BERT~\cite{reimers2019} enables dense representations suitable for cosine similarity. However, concrete names and values in raw Gherkin can dominate textual resemblance without representing domain intent. The present study therefore masks quoted values and numbers and keeps only keyword lines before embedding, and it treats the resulting skeleton similarity as a proxy rather than a definitive measure of business correctness. Section~\ref{sec:res-defects} tests how well that proxy tracks business-logic defects.
+
+\subsection{Positioning of This Study}
+
+Compared with prior BDD-generation studies, this work combines four design choices in one experiment: a public multi-domain dataset, a pinned compact GPT model, same-project one-shot prompting, and separate parser and semantic evaluation. The contribution is therefore methodological and empirical rather than a claim of model novelty. The study also avoids interpreting a parser pass as semantic correctness: the behave parser answers only whether the generated file is valid Gherkin, while skeleton cosine similarity estimates closeness to the expert reference. These outcomes are reported and interpreted separately.

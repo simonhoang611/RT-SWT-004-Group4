@@ -1,0 +1,44 @@
+% FISAT 2026, paper 367005: revised camera-ready version (18 Oct 2026).
+\documentclass[runningheads]{llncs}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{flafter} % a float never appears before the text that defines it
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{microtype}
+\urlstyle{same}
+\Urlmuskip=0mu plus 1mu % lets long URLs break after "/" instead of running into the margin
+\hypersetup{hidelinks} % no coloured boxes around citations and links
+\setlength{\tabcolsep}{6pt} % llncs sets 1.4pt, which runs table columns together
+\setlength{\emergencystretch}{1em} % allows a looser line rather than one that runs into the margin
+
+\lstset{basicstyle=\ttfamily\footnotesize,breaklines=true,frame=none,columns=fullflexible,keepspaces=true,numberbychapter=false}
+
+\begin{document}
+
+\title{Evaluating GPT-5.4-mini for Gherkin Test Generation: An Empirical Study}
+\titlerunning{Evaluating GPT-5.4-mini for Gherkin Test Generation}
+
+\author{Nguyen Minh Hoang \and Nguyen Hieu An \and Tran Tuan Khang \and Vo Hieu Chuong \and
+Tong Vy Thuan \and Le Thi Quynh Chi\thanks{Corresponding author.}}
+\authorrunning{N. M. Hoang et al.}
+\institute{FPT University, Vietnam\\ \email{chiltq6@fe.edu.vn}}
+
+\maketitle
+
+\input{sections/00_abstract}
+\input{sections/01_intro}
+\input{sections/02_related}
+\input{sections/03_method}
+\input{sections/04_results}
+\input{sections/05_discussion}
+\input{sections/06_threats}
+\input{sections/07_conclusion}
+\input{sections/08_disclosure}
+
+\input{sections/09_references}
+\input{sections/10_appendix}
+
+\end{document}
