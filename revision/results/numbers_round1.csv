@@ -1,0 +1,18 @@
+item,plan_id,value_in_submitted_pdf,recomputed_N261,recomputed_N258_no_exemplars,source_script,status,cross_check_An_work_2026-10-12
+Syntax PASS count,E1,261/261 (100%),258/261 (98.85%); FAIL ids 136 148 154,255/258 (98.84%),check_syntax.py (behave 1.3.3 parser),TO CONFIRM (An personally),"Matches An_work numbers_checklist.csv (separate script, run by Codex for An)"
+Exact binomial p vs 0.80,E1,< 0.001,2.44e-21,4.60e-21,check_syntax.py,TO CONFIRM (An personally),"Matches An_work numbers_checklist.csv (separate script, run by Codex for An)"
+95% Clopper-Pearson CI,E1,[98.6% 100.0%],[96.68% 99.76%],[96.64% 99.76%],check_syntax.py,TO CONFIRM (An personally),"Matches An_work numbers_checklist.csv (separate script, run by Codex for An)"
+Old check_executable on non-Gherkin text,E1,-,PASS (behave stops with ConfigError: No steps directory),-,e1_old_check_demo.py,TO CONFIRM (An personally),"Matches An_work numbers_checklist.csv (separate script, run by Codex for An)"
+RQ1 min,E2,0.742,0.5847,0.5847,recompute_descriptives.py,TO CONFIRM (An personally),"Matches An_work numbers_checklist.csv (separate script, run by Codex for An)"
+RQ1 Q1 (type 7),E2,0.831,0.8062,0.8051,recompute_descriptives.py,TO CONFIRM (An personally),"Matches An_work numbers_checklist.csv (separate script, run by Codex for An)"
+RQ1 median,E2,0.853,0.8535,0.8533,recompute_descriptives.py,TO CONFIRM (An personally),Matches (0.853535712 / 0.853260636). N261 rounds to 0.854 at 3 dp; the PDF value 0.853 is truncated.
+RQ1 Q3 (type 7),E2,0.874,0.8936,0.8903,recompute_descriptives.py,TO CONFIRM (An personally),"Matches An_work numbers_checklist.csv (separate script, run by Codex for An)"
+RQ1 max,E2,0.921,1.0000,0.9945,recompute_descriptives.py,TO CONFIRM (An personally),"Matches An_work numbers_checklist.csv (separate script, run by Codex for An)"
+RQ1 mean +- SD (ddof 1),E2,0.851 +- 0.031,0.8500 +- 0.0693,0.8483 +- 0.0678,recompute_descriptives.py,TO CONFIRM (An personally),"Matches An_work numbers_checklist.csv (separate script, run by Codex for An)"
+RQ1 Wilcoxon one-sided p,E2/E6,0.355,0.3554,0.4739,recompute_descriptives.py,TO CONFIRM (An personally),"Matches An_work numbers_checklist.csv (separate script, run by Codex for An)"
+RQ1 Cliff's delta vs 0.85 = P(x>0.85)-P(x<0.85),E2,0.038 (not reproducible),0.0651,0.0543,recompute_descriptives.py,TO CONFIRM (An personally),"Matches An_work numbers_checklist.csv (separate script, run by Codex for An)"
+Exemplar scores id 2/102/202,E6,not reported,1.0000 / 0.9974 / 1.0000,-,recompute_descriptives.py,TO CONFIRM (An personally),"Matches An_work numbers_checklist.csv (separate script, run by Codex for An)"
+IQR Sylius / Fineract / Diaspora,E8,text: social network 'more consistent',0.0771 / 0.0614 / 0.0874,0.0759 / 0.0621 / 0.0873,recompute_descriptives.py,TO CONFIRM (An personally),"Matches An_work numbers_checklist.csv (separate script, run by Codex for An)"
+Median Sylius / Fineract / Diaspora,E8,not reported,0.8888 / 0.8266 / 0.8349,0.8871 / 0.8265 / 0.8314,recompute_descriptives.py,TO CONFIRM (An personally),"Matches An_work numbers_checklist.csv (separate script, run by Codex for An)"
+Kruskal-Wallis across projects,E8,not reported,H = 58.43; p = 2.05e-13,H = 60.87; p = 6.06e-14,recompute_descriptives.py,TO CONFIRM (An personally),"Matches An_work numbers_checklist.csv (separate script, run by Codex for An)"
+Skeletons over 256 tokens (real tokenizer incl. special tokens),E4,not reported,GT 175/261 (67.05%); generated 167/261 (63.98%),GT 174/258 (67.44%); generated 166/258 (64.34%); Fineract GT 94/99,An_work 06_mutation_test_SBERT/results_audited/skeleton_token_lengths.csv,TO CONFIRM (An personally),"Recounted from An_work CSV on 15/10; SUA_PAPER_THEO_SO_DA_DO.md says 172/164, which is wrong"
