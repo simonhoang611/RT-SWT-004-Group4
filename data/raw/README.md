@@ -1,54 +1,54 @@
 # Multi-Domain Gherkin Dataset (Expert Ground Truth)
 
-Tài liệu này cung cấp minh chứng về nguồn gốc, bản quyền (License), ngày thu thập và cấu trúc của bộ dữ liệu Gherkin được trích xuất phục vụ cho dự án đánh giá khả năng sinh Gherkin của LLM.
+This document provides evidence of the origin, copyright (License), collection date and structure of the Gherkin dataset extracted for the project evaluating the Gherkin generation capability of LLMs.
 
-## 1. Nguồn Gốc Dữ Liệu (Data Sources)
+## 1. Data Origin (Data Sources)
 
-Bộ dữ liệu gồm 100 file `.feature` nguyên bản được trích xuất từ 3 hệ thống mã nguồn mở hàng đầu thuộc 3 lĩnh vực (domain) khác nhau. Các file này do chính các kỹ sư quốc tế của dự án viết ra (Expert-written), đảm bảo tính **Construct Validity** tuyệt đối.
+The dataset consists of 100 original `.feature` files extracted from 3 leading open-source systems belonging to 3 different fields (domains). These files were written by the projects' own international engineers (Expert-written), ensuring absolute **Construct Validity**.
 
-| Lĩnh vực | Tên Dự Án | GitHub Repository | Giấy phép (License) | Số lượng file |
+| Domain | Project Name | GitHub Repository | License | Number of files |
 |---|---|---|---|---|
 | E-commerce | **Sylius** | https://github.com/Sylius/Sylius | MIT License | 34 |
 | Finance/Banking | **Apache Fineract** | https://github.com/apache/fineract | Apache License 2.0 | 33 |
 | Social Network | **Diaspora** | https://github.com/diaspora/diaspora | GNU AGPL-3.0 | 33 |
 
-- **Ngày thu thập (Date Downloaded):** 28/06/2026
-- **Cách thu thập:** Tải trực tiếp mã nguồn mới nhất từ nhánh chính của dự án trên GitHub và lấy ngẫu nhiên các file `.feature`.
+- **Collection date (Date Downloaded):** 28/06/2026
+- **Collection method:** Downloaded the latest source code directly from the main branch of each project on GitHub and randomly sampled `.feature` files.
 
-## 2. Cấu Trúc Thư Mục Dữ Liệu
+## 2. Data Directory Structure
 
-Thư mục `raw/` lưu trữ 100 file `.feature` gốc, được chia làm 3 thư mục con tương ứng với 3 dự án:
-- `Sylius_Ecommerce/`: 34 file
-- `Apache_Fineract_Finance/`: 33 file
-- `Diaspora_Social_Network/`: 33 file
+The `raw/` directory stores the 100 original `.feature` files, divided into 3 subdirectories corresponding to the 3 projects:
+- `Sylius_Ecommerce/`: 34 files
+- `Apache_Fineract_Finance/`: 33 files
+- `Diaspora_Social_Network/`: 33 files
 
-## 3. Cấu Trúc Các File CSV
+## 3. Structure of the CSV Files
 
-Bộ dữ liệu được dịch ngược (Reverse-engineered) thành 3 file CSV lưu ở thư mục cha `data/`:
+The dataset was reverse-engineered into 3 CSV files stored in the parent directory `data/`:
 
-### 3.1. `pilot_sample.csv` (Input thử nghiệm - 20 câu)
-Dùng làm đầu vào (Input) cho AI sinh code Gherkin. Cấu trúc gồm 5 cột:
-- `id`: Định danh duy nhất (1-100)
-- `domain`: Lĩnh vực của dự án
-- `project_name`: Tên dự án gốc
-- `expert_filename`: Tên của file `.feature` gốc chứa đáp án (để dễ đối chiếu)
-- `user_story`: Câu User Story được biên dịch chuẩn Connextra (*As a... I want to... So that...*)
+### 3.1. `pilot_sample.csv` (Pilot input - 20 items)
+Used as the input for the AI to generate Gherkin code. The structure consists of 5 columns:
+- `id`: Unique identifier (1-100)
+- `domain`: Domain of the project
+- `project_name`: Name of the original project
+- `expert_filename`: Name of the original `.feature` file containing the answer (for easy cross-reference)
+- `user_story`: User Story sentence written in the standard Connextra format (*As a... I want to... So that...*)
 
-### 3.2. `pilot_ground_truth.csv` (Đáp án thử nghiệm - 20 câu) & `full_ground_truth.csv` (Đáp án toàn bộ - 100 câu)
-Dùng làm bộ Đáp án Chuẩn (Baseline Ground Truth) để đo đạc và chấm điểm AI. Cấu trúc gồm 7 cột:
-- `id`: Định danh duy nhất
-- `domain`: Lĩnh vực của dự án
-- `project_name`: Tên dự án gốc
-- `user_story`: Câu User Story
-- `expert_filename`: Tên file `.feature` gốc của các mã nguồn mở.
-- `github_file_url`: **Đường link URL trực tiếp** trỏ đến file `.feature` này trên GitHub (Dùng làm minh chứng để Hội đồng kiểm tra tính xác thực).
-- `gherkin_content`: Nội dung Gherkin nguyên vẹn của các file `.feature`.
+### 3.2. `pilot_ground_truth.csv` (Pilot answer key - 20 items) & `full_ground_truth.csv` (Full answer key - 100 items)
+Used as the Standard Answer Key (Baseline Ground Truth) to measure and score the AI. The structure consists of 7 columns:
+- `id`: Unique identifier
+- `domain`: Domain of the project
+- `project_name`: Name of the original project
+- `user_story`: User Story sentence
+- `expert_filename`: Original `.feature` file name from the open-source repositories.
+- `github_file_url`: **Direct URL link** pointing to this `.feature` file on GitHub (used as evidence so that the Committee can verify authenticity).
+- `gherkin_content`: The intact Gherkin content of the `.feature` files.
 
 
 
-## 4. Phụ lục: Nội dung Giấy phép chi tiết (Full Licenses)
+## 4. Appendix: Full License Texts (Full Licenses)
 
-Dưới đây là toàn văn nội dung giấy phép gốc của 3 dự án, chứng minh tính hợp pháp của việc trích xuất và sử dụng dữ liệu này cho mục đích Nghiên cứu Khoa học.
+Below is the full original license text of the 3 projects, demonstrating the legality of extracting and using this data for Scientific Research purposes.
 
 <details>
 <summary><b>1. Sylius - MIT License</b></summary>

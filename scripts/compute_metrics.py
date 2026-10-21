@@ -1,8 +1,8 @@
 """
 Compute Metrics (Role MS)
 =========================
-Script nay doc file output.csv (do LR tao ra) va ground truth,
-tinh raw_cosine + skeleton_cosine + executable, roi luu vao summary.csv
+This script reads the output.csv file (produced by LR) and the ground truth,
+computes raw_cosine + skeleton_cosine + executable, then saves them to summary.csv
 
 Model: gpt-5.4-mini-2026-03-17 (temperature=0, few-shot)
 """
@@ -35,7 +35,7 @@ os.makedirs(os.path.dirname(summary_path), exist_ok=True)
 df_gen = pd.read_csv(output_path)
 df_gt  = pd.read_csv(gt_path)
 
-# Merge theo id
+# Merge by id
 df = df_gen.merge(df_gt[['id', 'gherkin_content']], on='id', how='inner')
 print(f"Matched rows: {len(df)}")
 
@@ -51,20 +51,20 @@ print("Model loaded!")
 # === 3. Skeleton function ===
 def to_skeleton(gherkin_text):
     """
-    Giu lai cau truc Given/When/Then, loai bo data cu the (trong dau ngoac kep).
-    Vi du: Given a customer named "John" -> Given a customer named <PARAM>
+    Keep the Given/When/Then structure, remove specific data (inside double quotes).
+    Example: Given a customer named "John" -> Given a customer named <PARAM>
     """
     if not isinstance(gherkin_text, str):
         return ""
-    # Chuyen literal \n thanh newline that (fix CSV encoding)
+    # Convert literal \n into a real newline (fix CSV encoding)
     text = gherkin_text.replace('\\n', '\n')
-    # Bo cac ky tu tag nhu @checkout, @api, @ui
+    # Remove tags such as @checkout, @api, @ui
     text = re.sub(r'@\w+', '', text)
-    # Thay the cac gia tri trong dau ngoac kep bang <PARAM>
+    # Replace values inside double quotes with <PARAM>
     text = re.sub(r'"[^"]*"', '<PARAM>', text)
-    # Thay the cac so bang <NUM>
+    # Replace numbers with <NUM>
     text = re.sub(r'\b\d+(\.\d+)?\b', '<NUM>', text)
-    # Giu lai cac dong co keyword BDD
+    # Keep only the lines that start with a BDD keyword
     lines = text.split('\n')
     keywords = ['Feature', 'Scenario', 'Given', 'When', 'Then', 'And', 'But', 'Background']
     skeleton_lines = []
@@ -141,7 +141,7 @@ print(f"\n--- Executable Rate ---")
 pass_count = (df['executable'] == 'PASS').sum()
 print(f"  PASS: {pass_count}/{len(df)} ({pass_count/len(df)*100:.1f}%)")
 
-# === 7. Save summary.csv (CHI CHUA METRIC - KHONG CHUA generated_gherkin) ===
+# === 7. Save summary.csv (METRICS ONLY - DOES NOT CONTAIN generated_gherkin) ===
 df[['id', 'raw_cosine', 'skeleton_cosine', 'executable']].to_csv(summary_path, index=False, encoding='utf-8')
 print(f"\nSaved summary (Role MS): {summary_path}")
 

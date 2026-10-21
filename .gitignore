@@ -217,7 +217,7 @@ __marimo__/
 # Streamlit
 .streamlit/secrets.toml
 
-# API keys & secrets - TUYỆT ĐOI không commit
+# API keys & secrets - never commit
 .env
 *.env
 secrets.json

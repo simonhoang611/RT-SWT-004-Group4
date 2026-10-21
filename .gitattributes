@@ -1,0 +1,4 @@
+# Store the revision material byte for byte (no line-ending conversion), so that the SHA-256 values
+# recorded in revision/ and paper_revised/ can be checked on any operating system.
+revision/** -text
+paper_revised/** -text

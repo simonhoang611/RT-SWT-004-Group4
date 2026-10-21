@@ -14,8 +14,8 @@ def main():
     # Check for API key
     api_key = os.environ.get("OPENAI_API_KEY")
     if not api_key:
-        console.print("[yellow]Mẹo: Bạn có thể click chuột phải để dán (paste) Key vào terminal.[/yellow]")
-        api_key = input("Vui lòng nhập OpenAI API Key: ").strip()
+        console.print("[yellow]Tip: You can right-click to paste the Key into the terminal.[/yellow]")
+        api_key = input("Please enter your OpenAI API Key: ").strip()
         
     client = OpenAI(api_key=api_key)
     
@@ -24,28 +24,28 @@ def main():
     out_path = os.path.join("data", "full_user_stories_261.csv")
     
     if not os.path.exists(gt_path) or not os.path.exists(tpl_us_path):
-        console.print("[bold red]Lỗi: Không tìm thấy file dữ liệu đầu vào![/bold red]")
+        console.print("[bold red]Error: Input data file not found![/bold red]")
         return
         
     df_gt = pd.read_csv(gt_path)
     
-    # Đọc file đang làm dở nếu có, không thì đọc template gốc
+    # Read the partially completed file if it exists, otherwise read the original template
     if os.path.exists(out_path):
         df_tpl = pd.read_csv(out_path)
-        console.print("[green]Tìm thấy file chạy dở, sẽ tự động chạy tiếp![/green]")
+        console.print("[green]Found a partially completed run file, resuming automatically![/green]")
     else:
         df_tpl = pd.read_csv(tpl_us_path)
-        console.print("[green]Bắt đầu chạy từ đầu bằng file template.[/green]")
+        console.print("[green]Starting from the beginning using the template file.[/green]")
     
     # Identify missing or ERROR user stories
     missing_mask = df_tpl['user_story'].isna() | (df_tpl['user_story'] == 'ERROR')
     df_missing = df_gt[missing_mask].copy()
     
-    console.print(f"Tổng số mẫu: {len(df_tpl)}")
-    console.print(f"Số mẫu cần sinh mới: [bold yellow]{len(df_missing)}[/bold yellow]")
+    console.print(f"Total samples: {len(df_tpl)}")
+    console.print(f"Samples to generate: [bold yellow]{len(df_missing)}[/bold yellow]")
     
     if len(df_missing) == 0:
-        console.print("[bold green]Không có mẫu nào cần sinh mới![/bold green]")
+        console.print("[bold green]No samples need to be generated![/bold green]")
         return
         
     with Progress(
@@ -55,7 +55,7 @@ def main():
         TaskProgressColumn(),
         console=console
     ) as progress:
-        task = progress.add_task("[cyan]Đang gọi API GPT-5.4-mini...", total=len(df_missing))
+        task = progress.add_task("[cyan]Calling the GPT-5.4-mini API...", total=len(df_missing))
         
         for idx, row in df_missing.iterrows():
             prompt = f"""You are a product owner. Given the following BDD Gherkin file from a project named {row['project_name']} (Domain: {row['domain']}), write the original User Story that would have generated these tests.
@@ -86,7 +86,7 @@ GHERKIN CODE:
                     story_text = response.choices[0].message.content.strip()
                     success = True
                 except Exception as e:
-                    console.print(f"[red]Rate Limit/Lỗi ở ID {row['id']} - Đợi 60s để OpenAI nạp lại Token... Lỗi: {str(e)[:100]}[/red]")
+                    console.print(f"[red]Rate Limit/Error at ID {row['id']} - Waiting 60s for OpenAI to replenish tokens... Error: {str(e)[:100]}[/red]")
                     time.sleep(60) # Wait 60s for TPM reset and retry
                 
             # Fill the generated story into the template dataframe
@@ -98,7 +98,7 @@ GHERKIN CODE:
             progress.advance(task)
             time.sleep(1) # Base delay to avoid hitting TPM too fast
             
-    console.print(f"[bold green]Hoàn tất! Đã lưu file {out_path}[/bold green]")
+    console.print(f"[bold green]Done! Saved file {out_path}[/bold green]")
 
 if __name__ == "__main__":
     main()
