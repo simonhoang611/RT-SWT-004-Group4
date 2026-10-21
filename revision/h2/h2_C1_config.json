@@ -1,0 +1,16 @@
+{
+ "condition": "C1",
+ "model_requested": "gpt-5.4-mini-2026-03-17",
+ "temperature": 0,
+ "max_tokens": null,
+ "exemplars": null,
+ "exclude_in_analysis": [
+  2,
+  86,
+  102,
+  119,
+  202,
+  203
+ ],
+ "started_utc": "2026-10-16T11:56:13.699333+00:00"
+}

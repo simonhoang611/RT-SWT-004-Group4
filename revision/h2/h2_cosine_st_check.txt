@@ -1,0 +1,5 @@
+model sentence-transformers/all-MiniLM-L6-v2 revision 1110a243fdf4706b3f48f1d95db1a4f5529b4d41
+sentence-transformers 5.6.0, python 3.14.6, Windows-11-10.0.26200-SP0
+sentence-transformers vs ONNX (h2_cosine_per_file.csv): n=783 max_abs_diff=2.98e-07
+  per condition: C0 2.38e-07, C1 2.98e-07, C2 2.98e-07
+C0 sentence-transformers vs results/full_per_row_metrics.csv: n=261 max_abs_diff=3.58e-07
