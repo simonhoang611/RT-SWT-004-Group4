@@ -1,0 +1,19 @@
+{
+  "confirmed_by": "An",
+  "recorded_by": "Codex (transcription of explicit user confirmation)",
+  "recorded_at_utc": "2026-10-15T15:00:03Z",
+  "recorded_at_local": "2026-10-15 22:00 +07:00",
+  "question_english_translation": "Have you read all 60 cases and do you agree to keep all labels, defect counts and B2/H3 evidence unchanged, or have you only read the summary report?",
+  "verbatim_answer_english_translation": "Reviewed all 60 cases, keep everything unchanged",
+  "translation_note": "Values marked _english_translation are English translations (19 Oct 2026, AI-assisted) of the original Vietnamese wording, which the authors keep in the original file (SHA-256 35ba7cfa5e878fb8…).",
+  "decision": "KEEP for each of the existing fixed 60 IDs, B2 and H3; labels/counts/evidence unchanged",
+  "provenance": "AI-drafted labels; An reports personal review and explicitly confirms retaining all; Codex records that confirmation.",
+  "time_scope": "Recording time, not claimed reading time for individual cases",
+  "not_confirmed": [
+    "An personally reran revision/",
+    "Hoang reviewed independently",
+    "human inter-rater kappa",
+    "H2 C1-C3 completed",
+    "final camera-ready ready"
+  ]
+}

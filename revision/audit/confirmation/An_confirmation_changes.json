@@ -1,0 +1,87 @@
+[
+  {
+    "path": "BAO_CAO_CHO_AN.md",
+    "status": "modified",
+    "sha256": "69ee8ab1a376f52f580d3860aa6fda3ac8daac106999822a7b5941b88aa4f1aa"
+  },
+  {
+    "path": "DOC_TRUOC_GUI_HOANG.md",
+    "status": "added",
+    "sha256": "1b7e09e339d980ea9178cee85069319be33a39e75dfc4a8767cc9f96179982bc"
+  },
+  {
+    "path": "NHAT_KY_AN.md",
+    "status": "modified",
+    "sha256": "6eb70bf60e22004f1041e7d71f4c97e225597abea6237e8c4a43cf057fbf68b3"
+  },
+  {
+    "path": "PHAN_HOI_REVIEW_HOANG.md",
+    "status": "modified",
+    "sha256": "0331ddca913a4bd1688cf6062e626223297e167f5c89ad017374fd0de2ae86a9"
+  },
+  {
+    "path": "02_B2_semantic_defects/b2_annotation_An_CONFIRMED.csv",
+    "status": "added",
+    "sha256": "7f6780dd4eb7e617715355ef50f503c7e59c3f8a427bd71c8379493c49103b28"
+  },
+  {
+    "path": "02_B2_semantic_defects/B2_ket_qua.md",
+    "status": "modified",
+    "sha256": "e5f9ee26f23f4af972f7dc43a940a443f36ddc5c5cd62b0a93988d5d2a713c8c"
+  },
+  {
+    "path": "03_H3_temporal_causal/h3_annotation_An_CONFIRMED.csv",
+    "status": "added",
+    "sha256": "a76c6fc5e2322e804f5e138f6b721eb35ab3d76d79f5f74537ccd271c3b472d5"
+  },
+  {
+    "path": "03_H3_temporal_causal/H3_ket_qua.md",
+    "status": "modified",
+    "sha256": "a791e6d559939c7a940a857f1c0e5cec5e10114b40c6013d58e6531f30209136"
+  },
+  {
+    "path": "05_consistency_format/B2_H3_SAU_AN_XAC_NHAN.md",
+    "status": "added",
+    "sha256": "eb84510e9f83e87283ca1b5d687a8dcfc2a7c7c22515a6d5a0bb47aa60e0e73f"
+  },
+  {
+    "path": "05_consistency_format/DOAN_THAY_THE_B2_H3_E13_E15.md",
+    "status": "modified",
+    "sha256": "f3b4e819b76734423bbd93dab250c87c6f25e2f90fe511a5983ba9f4dd8030db"
+  },
+  {
+    "path": "07_audit/An_confirmation_2026-10-15.json",
+    "status": "added",
+    "sha256": "35ba7cfa5e878fb8024b1a4581377eb09c8a7aa284a83b9792db95950ddc4e32"
+  },
+  {
+    "path": "07_audit/b2_An_confirmed_summary.txt",
+    "status": "added",
+    "sha256": "fddd61772abfefa9ff9f0710418588c40282bd93fd8439e82a7deed44ffc138d"
+  },
+  {
+    "path": "07_audit/FINAL_VERIFICATION.json",
+    "status": "modified",
+    "sha256": "6cd1e21046386fb4fa87e8c865d462d4559e61f9d002c61794214cd9c15b24bd"
+  },
+  {
+    "path": "07_audit/h3_An_confirmed_summary.txt",
+    "status": "added",
+    "sha256": "cba4925a6160053da5efdd36f0f67f432e7f3d25beb7408dbb463094ffbe9f02"
+  },
+  {
+    "path": "09_An_review/HUONG_DAN_DUYET_60_CASE.md",
+    "status": "modified",
+    "sha256": "dfcbfefa4548a4874d6e1b91e2008077fb8793dbe2453b23086627c7c91a8f36"
+  },
+  {
+    "path": "09_An_review/NHAT_KY_DUYET_60_CASE.xlsx",
+    "status": "modified",
+    "sha256": "902b23c8972da8011fef584970db4232562a8120786600429539bc200bffaf8f"
+  },
+  {
+    "path": "09_An_review/XAC_NHAN_CUA_AN.md",
+    "status": "added",
+    "sha256": "c88b0e59554262925246c13f2f698a42a1c564ffcab99e69c9a9ada434314680"
+  }
+]

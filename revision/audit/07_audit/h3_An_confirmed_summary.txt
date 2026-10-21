@@ -1,0 +1,12 @@
+== has_temporal_causal_defect (annotator A, N=60) ==
+Total: 25/60 = 41.7% [95% CI 29.1%, 55.1%]
+  E-commerce: 6/20 = 30.0% [95% CI 11.9%, 54.3%]
+  Finance/Banking: 16/20 = 80.0% [95% CI 56.3%, 94.3%]
+  Social Network: 3/20 = 15.0% [95% CI 3.2%, 37.9%]
+
+Number of scenarios with at least 1 defect of each type:
+PRE_missing      8
+ACTION_wrong     4
+POST_missing    19
+CAUSAL_wrong     9
+ORDER_wrong      1

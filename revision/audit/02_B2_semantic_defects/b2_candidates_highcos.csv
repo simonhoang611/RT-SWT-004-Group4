@@ -1,0 +1,59 @@
+id,domain,project,expert_filename,skeleton_cosine,high_cos,exemplar,n_numbers_in_US_AC,numbers_missing_in_gen,n_numbers_missing,n_numbers_invented,numbers_invented_sample,ops_in_US,ops_missing_in_gen,neg_US,neg_gen,neg_GT,cond_US,cond_gen,flags,suspicion_score
+174,Finance/Banking,Apache Fineract,WorkingCapitalDiscountAdjustmentBackdateUndo.feature,0.9062,True,False,0,,0,42,0.00; 01 April 2027; 01 February 2027; 01 January 2027; 01 June 2027; 01 May 2027; 10; 10 January 2027; 10 March 2027; 10.00; 10.50; 10000.00; 11.50; 12.00; 12000.00,"ARITH,LTE","ARITH,LTE",1,0,12,11,13,OP_MISSING|NUM_INVENTED|NEG_DROPPED,12
+141,Finance/Banking,Apache Fineract,LoanRegressionSafety.feature,0.882,True,False,0,,0,19,0.00; 01 February 2027; 01 January 2027; 01 March 2027; 05; 05 February 2027; 100.00; 1000.00; 12; 15 January 2027; 15 March 2027; 20; 20 January 2027; 2027; 250.00,ARITH,,1,0,2,9,17,NUM_INVENTED|NEG_DROPPED,8
+172,Finance/Banking,Apache Fineract,WorkingCapitalLoanCreditBalanceRefund.feature,0.8612,True,False,1,400,1,25,001122; 01 February 2027; 01 January 2027; 1; 1000.00; 1000.01; 1100.00; 12; 1234567890; 2; 2027; 25.00; 3; 30; 365,"ARITH,EQ,GT",EQ,6,5,17,5,13,NUM_MISSING|OP_MISSING|NUM_INVENTED,8
+176,Finance/Banking,Apache Fineract,WorkingCapitalDiscountAmortizationAdjustment.feature,0.8768,True,False,0,,0,19,01 January 2027; 100.00; 1000.00; 10000; 10000.00; 1100.00; 1200; 1200.00; 15 January 2027; 2.50; 20 January 2027; 2027; 300.00; 31 January 2027; 75.00,ARITH,ARITH,0,1,3,7,15,OP_MISSING|NUM_INVENTED,7
+187,Finance/Banking,Apache Fineract,WorkingCapitalNearBreachEvaluation.feature,0.8889,True,False,0,,0,13,01 February 2027; 01 January 2027; 02 January 2027; 08 February 2027; 10.00; 15.00; 2027; 249.99; 250.00; 251.00; 5000.00; 6000.00; 7,"EQ,LT",EQ,4,6,96,9,19,OP_MISSING|NUM_INVENTED,7
+157,Finance/Banking,Apache Fineract,WorkingCapitalLoanRepayment.feature,0.8535,True,False,0,,0,10,01 January 2027; 02 January 2027; 03 January 2027; 101.00; 1010.00; 120.00; 2027; 365; 365.00; 780.00,"ARITH,GT,GTE",GTE,0,0,2,4,8,OP_MISSING|NUM_INVENTED,7
+124,Finance/Banking,Apache Fineract,WorkingCapitalDiscountAdjustment.feature,0.8883,True,False,0,,0,13,01 January 2027; 01 January 2028; 02 January 2027; 100.00; 1000.01; 150.00; 2027; 2028; 25.00; 31 December 2026; 50.00; 850.00; 900.00,"EQ,GT,LT",EQ,2,14,16,5,6,OP_MISSING|NUM_INVENTED,7
+186,Finance/Banking,Apache Fineract,WorkingCapitalLoanGoodwillCreditAccountingEntries.feature,0.8941,True,False,0,,0,60,0.00; 01 April 2027; 01 August 2027; 01 February 2027; 01 January 2027; 01 July 2027; 01 June 2027; 01 March 2027; 01 May 2027; 01 September 2027; 05 March 2027; 10 August 2027; 10 February 2027; 10.00; 1000.00,"GT,LTE",LTE,1,1,1,9,11,OP_MISSING|NUM_INVENTED,7
+103,Finance/Banking,Apache Fineract,0_COB.feature,0.8688,True,False,0,,0,75,01 January 2027; 09 February 2027; 10 February 2027; 10 January 2027; 10.00; 10.25; 1000.00; 10000.00; 100001; 100002; 100003; 100004; 11 January 2027; 11.00; 11.50,LTE,LTE,5,6,21,11,18,OP_MISSING|NUM_INVENTED,7
+106,Finance/Banking,Apache Fineract,LoanAccrualTransaction.feature,0.8615,True,False,0,,0,27,0.41; 01 April 2027; 01 August 2027; 01 February 2027; 01 January 2027; 01 July 2027; 01 June 2027; 01 March 2027; 01 May 2027; 02 August 2027; 02 July 2027; 02 March 2027; 10.00; 100.00; 1000.00,ARITH,ARITH,0,0,1,10,21,OP_MISSING|NUM_INVENTED,7
+184,Finance/Banking,Apache Fineract,WorkingCapitalLoanProductAdvancedAccounting.feature,0.8628,True,False,1,400,1,14,0; 1; 1001; 1002; 2; 2001; 2002; 2003; 3002; 3003; 4002; 5002; 6002; 7002,GT,,0,4,0,2,11,NUM_MISSING|NUM_INVENTED,6
+180,Finance/Banking,Apache Fineract,WorkingCapitalLoanActionTemplates.feature,0.901,True,False,1,404,1,13,100000; 125000; 130000; 15 March 2027; 20; 20 March 2027; 2027; 2027-03-15; 2027-03-20; 2027-03-22; 22; 22 March 2027; 85000,,,2,6,5,21,18,NUM_MISSING|NUM_INVENTED,6
+108,Finance/Banking,Apache Fineract,LoanReAging-Part2.feature,0.8575,True,False,1,,0,38,0.00; 01 April 2027; 01 August 2027; 01 January 2028; 01 July 2027; 01 June 2027; 01 May 2027; 01 October 2027; 01 September 2027; 1000.00; 10000.00; 1020.00; 1035.00; 12000.00; 12050.00,,,1,1,2,8,15,NUM_INVENTED,5
+121,Finance/Banking,Apache Fineract,Reporting.feature,0.853,True,False,0,,0,27,0.00; 01 February 2027; 01 January 2027; 05; 05 January 2027; 10.00; 10000.00; 11.00; 12; 12.00; 120.00; 12000.00; 15000.00; 18; 18000.00,,,0,0,0,3,7,NUM_INVENTED,5
+155,Finance/Banking,Apache Fineract,WorkingCapitalLoanGoodwillCreditBackdatedUndo.feature,0.8715,True,False,0,,0,37,01 February 2027; 01 January 2027; 10.0; 10000; 11.0; 12; 12.0; 12000; 15 February 2027; 15 January 2027; 15 March 2027; 1500; 200; 2000; 2027,"ARITH,GT",,1,2,3,8,29,NUM_INVENTED,5
+129,Finance/Banking,Apache Fineract,EMICalculation-Part2.feature,0.859,True,False,0,,0,72,0.00; 001; 002; 003; 004; 005; 01 April 2027; 01 February 2027; 01 January 2027; 01 March 2027; 01 May 2027; 02; 02 March 2027; 05 March 2027; 06,ARITH,,1,1,0,7,6,NUM_INVENTED,5
+123,Finance/Banking,Apache Fineract,BusinessDate.feature,0.8593,True,False,1,,0,13,01; 01 January 2027; 01/01/2027; 02; 02 January 2027; 10 January 2027; 15 February 2027; 2027; 2027-13-01; 28; 28 February 2027; 32; 32 January 2027,,,1,5,1,2,21,NUM_INVENTED,5
+159,Finance/Banking,Apache Fineract,LoanDelinquency-Part1.feature,0.8966,True,False,0,,0,6,01 January 2027; 02 January 2027; 15 January 2027; 2026; 2027; 31 December 2026,EQ,EQ,0,6,31,4,23,OP_MISSING|NUM_INVENTED,5
+193,Finance/Banking,Apache Fineract,LoanWriteOff.feature,0.8559,True,False,1,,0,15,0.00; 01 January 2027; 10 January 2027; 10.00; 1000.00; 12.00; 12.50; 125.00; 15 January 2027; 20; 20 January 2027; 2027; 5000.00; 875.00; 887.50,,,10,15,9,12,11,NUM_INVENTED,5
+185,Finance/Banking,Apache Fineract,WorkingCapitalDelinquencyResume.feature,0.8707,True,False,0,,0,10,01 February 2027; 01 January 2027; 15 February 2027; 15 January 2027; 2.5; 20 January 2027; 2027; 25; 25 January 2027; 31 December 2026,,,5,14,2,10,22,NUM_INVENTED,5
+178,Finance/Banking,Apache Fineract,LoanReschedule.feature,0.8582,True,False,0,,0,14,001; 01 January 2027; 10000; 109; 12000; 15 March 2027; 15000; 18000; 2.0; 2.25; 2.5; 20 April 2027; 20000; 24000,,,0,0,5,9,12,NUM_INVENTED,5
+195,Finance/Banking,Apache Fineract,LoanRepaymentSchedule.feature,0.8828,True,False,1,,0,25,0.00; 01 April 2027; 01 February 2027; 01 January 2027; 01 March 2027; 02 January 2027; 03 January 2027; 04 January 2027; 10.00; 1000.00; 1010.00; 1020.00; 1030.00; 1500; 1500.00,ARITH,,1,5,15,7,6,NUM_INVENTED,5
+30,E-commerce,Sylius,taxon_validation.feature,0.8589,True,False,0,,0,0,,"GT,LTE","GT,LTE",6,6,10,7,7,OP_MISSING,4
+35,E-commerce,Sylius,prevent_buying_more_products_than_available_in_a_stock.feature,0.9155,True,False,0,,0,1,3,"ARITH,EQ,LT","EQ,LT",1,2,4,3,1,OP_MISSING,4
+198,Finance/Banking,Apache Fineract,AssetExternalization-Part1.feature,0.8879,True,False,1,9999-12-31,1,3,01 January 2027; 02 January 2027; 2027,EQ,EQ,0,5,15,8,26,NUM_MISSING|OP_MISSING|NUM_INVENTED,4
+128,Finance/Banking,Apache Fineract,WorkingCapitalLoanOrigination.feature,0.8721,True,False,2,,0,4,10001; 10002; 888888; 999999,GTE,GTE,3,19,32,5,17,OP_MISSING|NUM_INVENTED,4
+206,Social Network,Diaspora,post_with_a_poll.feature,0.8507,True,False,1,,0,0,,"GTE,LT","GTE,LT",0,1,4,6,7,OP_MISSING,4
+164,Finance/Banking,Apache Fineract,LoanReAgingAccrualsEqualAmortization.feature,0.8759,True,False,1,,0,9,02 January 2027; 03 January 2027; 04 January 2027; 15 February 2027; 2027; 28 January 2027; 29 January 2027; 30 January 2027; 31 January 2027,"ARITH,LTE",,1,2,122,10,27,NUM_INVENTED,4
+4,E-commerce,Sylius,applying_only_exclusive_catalog_promotion.feature,0.9473,True,False,0,,0,6,0; 1; 10; 12.00; 20; 9.60,,,0,0,0,4,6,NUM_INVENTED,3
+69,E-commerce,Sylius,redirecting_on_login_after_being_logout.feature,0.9268,True,False,0,,0,0,,,,1,0,1,1,4,NEG_DROPPED,3
+86,E-commerce,Sylius,receiving_discount_based_on_total_of_items_from_specific_taxon.feature,0.9026,True,False,0,,0,3,12.00; 3.00; 8.00,"ARITH,GT,GTE",GT,3,5,5,7,18,OP_MISSING|NUM_INVENTED,3
+27,E-commerce,Sylius,seeing_products_lowest_price_before_discount.feature,0.8788,True,False,1,,0,2,12.00; 8.00,"GT,LT",GT,7,9,9,11,28,OP_MISSING,3
+24,E-commerce,Sylius,sorting_zones_by_priority.feature,0.8616,True,False,1,0,1,1,10,ARITH,ARITH,1,1,0,1,1,NUM_MISSING|OP_MISSING,3
+38,E-commerce,Sylius,receiving_fixed_discount_on_specific_products.feature,0.8645,True,False,1,,0,6,12.00; 17.00; 27.00; 3.00; 7.00; 8.00,"ARITH,GT,LT",,4,2,3,5,8,NUM_INVENTED,3
+144,Finance/Banking,Apache Fineract,WorkingCapitalLoanGoodwillCredit.feature,0.8508,True,False,2,400,1,4,01 February 2027; 01 January 2027; 2027; 30 January 2027,"ARITH,GT,GTE",,8,12,2,14,39,NUM_MISSING|NUM_INVENTED,3
+46,E-commerce,Sylius,receiving_fixed_discount_on_products_from_specific_taxon.feature,0.9161,True,False,1,,0,6,15.00; 23.00; 25.00; 3.00; 5.00; 8.00,"ARITH,GT,LT",,2,1,1,5,7,NUM_INVENTED,3
+87,E-commerce,Sylius,applying_catalog_promotions_for_product_created_in_catalog_promotions_scope.feature,0.9376,True,False,0,,0,5,10; 10.80; 12.00; 15.00; 18.00,,,4,1,3,5,3,NUM_INVENTED|NEG_REDUCED,3
+20,E-commerce,Sylius,browsing_product_association_types.feature,0.9895,True,False,0,,0,0,,ARITH,ARITH,0,0,0,0,1,OP_MISSING,2
+23,E-commerce,Sylius,returning_from_addressing_step_to_shop_homepage.feature,0.9334,True,False,1,,0,0,,ARITH,ARITH,0,0,1,1,1,OP_MISSING,2
+37,E-commerce,Sylius,editing_zone.feature,0.9085,True,False,0,,0,5,1; 10; 2; 3; 4,,,0,5,0,4,6,NUM_INVENTED,2
+5,E-commerce,Sylius,preventing_deletion_of_purchased_product_variant.feature,0.9354,True,False,0,,0,1,12.00,GTE,GTE,2,3,3,2,1,OP_MISSING,2
+7,E-commerce,Sylius,product_association_type_unique_code_validation.feature,0.8738,True,False,0,,0,0,,ARITH,ARITH,2,2,0,4,2,OP_MISSING,2
+18,E-commerce,Sylius,adding_channel.feature,0.8747,True,False,0,,0,5,0100; 0200; 1; 336699; 555,,,0,0,0,6,12,NUM_INVENTED,2
+135,Finance/Banking,Apache Fineract,WorkingCapitalLoanProduct.feature,0.8848,True,False,0,,0,5,0.01; 256; 33; 513; 999999,"EQ,GT,LTE",,38,67,92,20,69,NUM_INVENTED,2
+175,Finance/Banking,Apache Fineract,WorkingCapitalDelinquencyConfiguration.feature,0.9735,True,False,1,,0,1,5,"EQ,GT,GTE,LT",EQ,27,23,26,18,17,OP_MISSING,2
+200,Finance/Banking,Apache Fineract,BatchApi.feature,0.8535,True,False,5,,0,5,001; 01 January 2027; 15; 15 February 2027; 2027,,,3,5,7,15,30,NUM_INVENTED,2
+224,Social Network,Diaspora,screenshots.feature,0.8843,True,False,0,,0,0,,GTE,GTE,0,0,0,2,8,OP_MISSING,2
+65,E-commerce,Sylius,adding_select_product_attribute.feature,0.9317,True,False,0,,0,0,,GTE,GTE,1,2,3,4,2,OP_MISSING,2
+71,E-commerce,Sylius,adding_images_to_existing_product.feature,0.9377,True,False,0,,0,1,1,"ARITH,EQ",ARITH,8,6,4,12,11,OP_MISSING,2
+58,E-commerce,Sylius,zone_validation.feature,0.8665,True,False,0,,0,0,,"GT,GTE",GT,20,29,33,7,12,OP_MISSING,2
+261,Social Network,Diaspora,user_applications.feature,0.8743,True,False,0,,0,0,,ARITH,ARITH,2,8,1,5,3,OP_MISSING,2
+256,Social Network,Diaspora,user_applications.feature,0.8566,True,False,0,,0,1,3,ARITH,ARITH,2,5,1,5,3,OP_MISSING,2
+92,E-commerce,Sylius,preventing_adding_to_cart_product_or_variant_from_another_channel.feature,0.8804,True,False,0,,0,3,12.00; 15.00; 20.00,,,3,5,4,2,2,NUM_INVENTED,1
+56,E-commerce,Sylius,viewing_total_quantity_of_the_cart.feature,0.8746,True,False,2,,0,3,12.00; 15.00; 5,ARITH,,0,0,3,4,8,NUM_INVENTED,1
+15,E-commerce,Sylius,addressing_order_with_shipping_address_when_it_is_required_one_for_channel.feature,0.8581,True,False,0,,0,3,12; 12.00; 12345,,,1,1,0,3,4,NUM_INVENTED,1
+99,E-commerce,Sylius,applying_catalog_promotions_in_proper_channels.feature,0.9071,True,False,0,,0,3,16.00; 20; 25.00,,,3,3,3,5,4,NUM_INVENTED,1
+36,E-commerce,Sylius,seeing_order_items_with_proper_names.feature,0.8756,True,False,1,,0,3,1; 18.00; 40.00,ARITH,,0,0,0,1,1,NUM_INVENTED,1
+245,Social Network,Diaspora,mentions_from_profile_page.feature,0.8503,True,False,0,,0,0,,,,3,1,1,8,4,NEG_REDUCED,1

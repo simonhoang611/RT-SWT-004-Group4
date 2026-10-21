@@ -1,0 +1,7 @@
+behave_version,source,domain,total_files,parse_ok,parse_fail,error_files,n_scenarios,E1_NO_THEN,E2_GIVEN_AFTER_ACTION,E3_THEN_BEFORE_WHEN,E4_BG_NOT_GIVEN,W1_NO_WHEN,W2_NO_CONTEXT,W3_MULTI_CYCLE
+1.2.6,expert_GT,E-commerce,99,99,0,2,268,2,0,0,0,2,0,1
+1.2.6,expert_GT,Finance/Banking,99,86,13,20,2064,43,30,5,3,98,1987,1431
+1.2.6,expert_GT,Social Network,60,60,0,18,235,1,5,11,50,12,2,111
+1.2.6,generated,E-commerce,99,99,0,2,261,0,0,3,0,1,0,8
+1.2.6,generated,Finance/Banking,99,96,3,5,1358,0,0,7,0,275,731,206
+1.2.6,generated,Social Network,60,60,0,0,294,0,0,0,0,2,9,53

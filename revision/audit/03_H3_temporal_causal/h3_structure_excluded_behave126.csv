@@ -1,0 +1,517 @@
+source,id,parse_ok,n_scenarios,n_scen_with_error,file_has_error,share_scen_error,E1_NO_THEN,E2_GIVEN_AFTER_ACTION,E3_THEN_BEFORE_WHEN,E4_BG_NOT_GIVEN,W1_NO_WHEN,W2_NO_CONTEXT,W3_MULTI_CYCLE,domain,project_name
+generated,1,True,2.0,1.0,True,0.5,0.0,0.0,1.0,0.0,0.0,0.0,1.0,E-commerce,Sylius
+generated,3,True,3.0,2.0,True,0.6667,0.0,0.0,2.0,0.0,0.0,0.0,2.0,E-commerce,Sylius
+generated,4,True,2.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,5,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,6,True,3.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,7,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,8,True,5.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,9,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,10,True,3.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,11,True,2.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,12,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,13,True,4.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,14,True,2.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,15,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,16,True,2.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,E-commerce,Sylius
+generated,17,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,18,True,4.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,19,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,20,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,21,True,2.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,22,True,2.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,23,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,24,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,25,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,E-commerce,Sylius
+generated,26,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,27,True,7.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,28,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,29,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,30,True,6.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,31,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,32,True,2.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,33,True,2.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,34,True,2.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,35,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,36,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,37,True,6.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,38,True,6.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,39,True,7.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,40,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,41,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,42,True,6.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,43,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,44,True,6.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,45,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,46,True,5.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,47,True,2.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,48,True,4.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,49,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,50,True,4.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,51,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,52,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,53,True,2.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,54,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,55,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,56,True,4.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,E-commerce,Sylius
+generated,57,True,3.0,0.0,False,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,E-commerce,Sylius
+generated,58,True,12.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,59,True,6.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,60,True,2.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,61,True,4.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,62,True,8.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,63,True,3.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,64,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,65,True,2.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,66,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,67,True,2.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,68,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,69,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,70,True,2.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,71,True,9.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,72,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,73,True,3.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,74,True,3.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,75,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,E-commerce,Sylius
+generated,76,True,5.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,77,True,5.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,78,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,E-commerce,Sylius
+generated,79,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,80,True,3.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,81,True,3.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,82,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,83,True,2.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,84,True,4.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,85,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,86,True,5.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,87,True,3.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,88,True,2.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,89,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,90,True,2.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,91,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,92,True,2.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,93,True,5.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,94,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,95,True,2.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,96,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,97,True,3.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,98,True,3.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,99,True,2.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,100,True,4.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+generated,101,True,5.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2.0,Finance/Banking,Apache Fineract
+generated,103,True,10.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,Finance/Banking,Apache Fineract
+generated,104,True,5.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,Finance/Banking,Apache Fineract
+generated,105,True,4.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,Finance/Banking,Apache Fineract
+generated,106,True,7.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2.0,Finance/Banking,Apache Fineract
+generated,107,True,10.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,Finance/Banking,Apache Fineract
+generated,108,True,5.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,5.0,4.0,Finance/Banking,Apache Fineract
+generated,109,True,9.0,0.0,False,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,Finance/Banking,Apache Fineract
+generated,110,True,17.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,Finance/Banking,Apache Fineract
+generated,111,True,7.0,2.0,True,0.2857,0.0,0.0,2.0,0.0,0.0,0.0,2.0,Finance/Banking,Apache Fineract
+generated,112,True,12.0,0.0,False,0.0,0.0,0.0,0.0,0.0,7.0,7.0,0.0,Finance/Banking,Apache Fineract
+generated,113,True,3.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,3.0,0.0,Finance/Banking,Apache Fineract
+generated,114,True,11.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,11.0,0.0,Finance/Banking,Apache Fineract
+generated,115,True,12.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,Finance/Banking,Apache Fineract
+generated,116,True,5.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,Finance/Banking,Apache Fineract
+generated,117,True,5.0,1.0,True,0.2,0.0,0.0,1.0,0.0,0.0,0.0,3.0,Finance/Banking,Apache Fineract
+generated,118,True,6.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,Finance/Banking,Apache Fineract
+generated,119,True,19.0,0.0,False,0.0,0.0,0.0,0.0,0.0,7.0,19.0,0.0,Finance/Banking,Apache Fineract
+generated,120,True,14.0,0.0,False,0.0,0.0,0.0,0.0,0.0,7.0,7.0,0.0,Finance/Banking,Apache Fineract
+generated,121,True,9.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,Finance/Banking,Apache Fineract
+generated,122,True,14.0,0.0,False,0.0,0.0,0.0,0.0,0.0,12.0,8.0,0.0,Finance/Banking,Apache Fineract
+generated,123,True,12.0,0.0,False,0.0,0.0,0.0,0.0,0.0,6.0,12.0,5.0,Finance/Banking,Apache Fineract
+generated,124,True,10.0,0.0,False,0.0,0.0,0.0,0.0,0.0,6.0,0.0,1.0,Finance/Banking,Apache Fineract
+generated,125,True,4.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2.0,Finance/Banking,Apache Fineract
+generated,126,True,8.0,0.0,False,0.0,0.0,0.0,0.0,0.0,4.0,4.0,0.0,Finance/Banking,Apache Fineract
+generated,127,True,8.0,0.0,False,0.0,0.0,0.0,0.0,0.0,2.0,0.0,1.0,Finance/Banking,Apache Fineract
+generated,128,True,19.0,0.0,False,0.0,0.0,0.0,0.0,0.0,10.0,4.0,6.0,Finance/Banking,Apache Fineract
+generated,129,True,5.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,Finance/Banking,Apache Fineract
+generated,130,True,5.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,4.0,Finance/Banking,Apache Fineract
+generated,131,True,5.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,Finance/Banking,Apache Fineract
+generated,132,True,13.0,0.0,False,0.0,0.0,0.0,0.0,0.0,6.0,6.0,2.0,Finance/Banking,Apache Fineract
+generated,133,True,15.0,0.0,False,0.0,0.0,0.0,0.0,0.0,12.0,0.0,0.0,Finance/Banking,Apache Fineract
+generated,134,True,4.0,0.0,False,0.0,0.0,0.0,0.0,0.0,4.0,4.0,0.0,Finance/Banking,Apache Fineract
+generated,135,True,74.0,0.0,False,0.0,0.0,0.0,0.0,0.0,38.0,74.0,32.0,Finance/Banking,Apache Fineract
+generated,136,False,,,,,,,,,,,,Finance/Banking,Apache Fineract
+generated,137,True,24.0,0.0,False,0.0,0.0,0.0,0.0,0.0,8.0,8.0,4.0,Finance/Banking,Apache Fineract
+generated,138,True,39.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,39.0,6.0,Finance/Banking,Apache Fineract
+generated,139,True,17.0,0.0,False,0.0,0.0,0.0,0.0,0.0,4.0,17.0,0.0,Finance/Banking,Apache Fineract
+generated,140,True,44.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,44.0,0.0,Finance/Banking,Apache Fineract
+generated,141,True,6.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,6.0,1.0,Finance/Banking,Apache Fineract
+generated,142,True,10.0,0.0,False,0.0,0.0,0.0,0.0,0.0,3.0,3.0,0.0,Finance/Banking,Apache Fineract
+generated,143,True,28.0,0.0,False,0.0,0.0,0.0,0.0,0.0,14.0,28.0,11.0,Finance/Banking,Apache Fineract
+generated,144,True,22.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,22.0,0.0,Finance/Banking,Apache Fineract
+generated,145,True,28.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,4.0,Finance/Banking,Apache Fineract
+generated,146,True,20.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,Finance/Banking,Apache Fineract
+generated,147,True,17.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,Finance/Banking,Apache Fineract
+generated,148,False,,,,,,,,,,,,Finance/Banking,Apache Fineract
+generated,149,True,34.0,0.0,False,0.0,0.0,0.0,0.0,0.0,8.0,0.0,1.0,Finance/Banking,Apache Fineract
+generated,150,True,4.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,Finance/Banking,Apache Fineract
+generated,151,True,39.0,0.0,False,0.0,0.0,0.0,0.0,0.0,3.0,0.0,16.0,Finance/Banking,Apache Fineract
+generated,152,True,31.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,31.0,0.0,Finance/Banking,Apache Fineract
+generated,153,True,34.0,0.0,False,0.0,0.0,0.0,0.0,0.0,13.0,34.0,4.0,Finance/Banking,Apache Fineract
+generated,154,False,,,,,,,,,,,,Finance/Banking,Apache Fineract
+generated,155,True,15.0,0.0,False,0.0,0.0,0.0,0.0,0.0,1.0,0.0,2.0,Finance/Banking,Apache Fineract
+generated,156,True,26.0,0.0,False,0.0,0.0,0.0,0.0,0.0,8.0,26.0,16.0,Finance/Banking,Apache Fineract
+generated,157,True,6.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,6.0,1.0,Finance/Banking,Apache Fineract
+generated,158,True,16.0,0.0,False,0.0,0.0,0.0,0.0,0.0,3.0,16.0,3.0,Finance/Banking,Apache Fineract
+generated,159,True,22.0,0.0,False,0.0,0.0,0.0,0.0,0.0,4.0,22.0,0.0,Finance/Banking,Apache Fineract
+generated,160,True,12.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,Finance/Banking,Apache Fineract
+generated,161,True,16.0,0.0,False,0.0,0.0,0.0,0.0,0.0,9.0,16.0,2.0,Finance/Banking,Apache Fineract
+generated,162,True,11.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,11.0,3.0,Finance/Banking,Apache Fineract
+generated,163,True,7.0,0.0,False,0.0,0.0,0.0,0.0,0.0,4.0,7.0,0.0,Finance/Banking,Apache Fineract
+generated,164,True,16.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,16.0,1.0,Finance/Banking,Apache Fineract
+generated,165,True,4.0,1.0,True,0.25,0.0,0.0,1.0,0.0,0.0,0.0,1.0,Finance/Banking,Apache Fineract
+generated,166,True,12.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,3.0,Finance/Banking,Apache Fineract
+generated,167,True,10.0,1.0,True,0.1,0.0,0.0,1.0,0.0,6.0,0.0,1.0,Finance/Banking,Apache Fineract
+generated,168,True,13.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,13.0,0.0,Finance/Banking,Apache Fineract
+generated,169,True,15.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,15.0,5.0,Finance/Banking,Apache Fineract
+generated,170,True,15.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,Finance/Banking,Apache Fineract
+generated,171,True,9.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,Finance/Banking,Apache Fineract
+generated,172,True,8.0,0.0,False,0.0,0.0,0.0,0.0,0.0,3.0,3.0,2.0,Finance/Banking,Apache Fineract
+generated,173,True,5.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,5.0,1.0,Finance/Banking,Apache Fineract
+generated,174,True,6.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,Finance/Banking,Apache Fineract
+generated,175,True,25.0,0.0,False,0.0,0.0,0.0,0.0,0.0,13.0,25.0,9.0,Finance/Banking,Apache Fineract
+generated,176,True,6.0,0.0,False,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,Finance/Banking,Apache Fineract
+generated,177,True,14.0,0.0,False,0.0,0.0,0.0,0.0,0.0,3.0,14.0,9.0,Finance/Banking,Apache Fineract
+generated,178,True,7.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,Finance/Banking,Apache Fineract
+generated,179,True,19.0,0.0,False,0.0,0.0,0.0,0.0,0.0,9.0,4.0,7.0,Finance/Banking,Apache Fineract
+generated,180,True,12.0,0.0,False,0.0,0.0,0.0,0.0,0.0,4.0,12.0,0.0,Finance/Banking,Apache Fineract
+generated,181,True,10.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,10.0,5.0,Finance/Banking,Apache Fineract
+generated,182,True,10.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,Finance/Banking,Apache Fineract
+generated,183,True,14.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,Finance/Banking,Apache Fineract
+generated,184,True,12.0,0.0,False,0.0,0.0,0.0,0.0,0.0,7.0,12.0,2.0,Finance/Banking,Apache Fineract
+generated,185,True,11.0,0.0,False,0.0,0.0,0.0,0.0,0.0,1.0,0.0,1.0,Finance/Banking,Apache Fineract
+generated,186,True,9.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,Finance/Banking,Apache Fineract
+generated,187,True,10.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,Finance/Banking,Apache Fineract
+generated,188,True,8.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,8.0,0.0,Finance/Banking,Apache Fineract
+generated,189,True,8.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,8.0,2.0,Finance/Banking,Apache Fineract
+generated,190,True,19.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,19.0,0.0,Finance/Banking,Apache Fineract
+generated,191,True,15.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,Finance/Banking,Apache Fineract
+generated,192,True,8.0,2.0,True,0.25,0.0,0.0,2.0,0.0,0.0,0.0,2.0,Finance/Banking,Apache Fineract
+generated,193,True,8.0,0.0,False,0.0,0.0,0.0,0.0,0.0,3.0,0.0,0.0,Finance/Banking,Apache Fineract
+generated,194,True,14.0,0.0,False,0.0,0.0,0.0,0.0,0.0,14.0,0.0,0.0,Finance/Banking,Apache Fineract
+generated,195,True,2.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2.0,Finance/Banking,Apache Fineract
+generated,196,True,23.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,2.0,1.0,Finance/Banking,Apache Fineract
+generated,197,True,5.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,Finance/Banking,Apache Fineract
+generated,198,True,17.0,0.0,False,0.0,0.0,0.0,0.0,0.0,7.0,4.0,6.0,Finance/Banking,Apache Fineract
+generated,199,True,46.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,46.0,0.0,Finance/Banking,Apache Fineract
+generated,200,True,14.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,14.0,0.0,Finance/Banking,Apache Fineract
+generated,201,True,4.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,Social Network,Diaspora
+generated,203,True,5.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,Social Network,Diaspora
+generated,204,True,5.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,Social Network,Diaspora
+generated,205,True,5.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,Social Network,Diaspora
+generated,206,True,6.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,Social Network,Diaspora
+generated,207,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,Social Network,Diaspora
+generated,208,True,5.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,5.0,0.0,Social Network,Diaspora
+generated,209,True,4.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,Social Network,Diaspora
+generated,210,True,2.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2.0,Social Network,Diaspora
+generated,211,True,7.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2.0,Social Network,Diaspora
+generated,212,True,6.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2.0,Social Network,Diaspora
+generated,213,True,5.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,Social Network,Diaspora
+generated,214,True,3.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,Social Network,Diaspora
+generated,215,True,3.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,Social Network,Diaspora
+generated,216,True,8.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,Social Network,Diaspora
+generated,217,True,5.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,4.0,Social Network,Diaspora
+generated,218,True,7.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,3.0,Social Network,Diaspora
+generated,219,True,3.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,Social Network,Diaspora
+generated,220,True,5.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,4.0,Social Network,Diaspora
+generated,221,True,5.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,Social Network,Diaspora
+generated,222,True,2.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,Social Network,Diaspora
+generated,223,True,6.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2.0,Social Network,Diaspora
+generated,224,True,2.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,Social Network,Diaspora
+generated,225,True,5.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,3.0,Social Network,Diaspora
+generated,226,True,6.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,3.0,Social Network,Diaspora
+generated,227,True,5.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,Social Network,Diaspora
+generated,228,True,4.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,4.0,0.0,Social Network,Diaspora
+generated,229,True,12.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,5.0,Social Network,Diaspora
+generated,230,True,3.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2.0,Social Network,Diaspora
+generated,231,True,11.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,Social Network,Diaspora
+generated,232,True,3.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,Social Network,Diaspora
+generated,233,True,2.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,Social Network,Diaspora
+generated,234,True,5.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,Social Network,Diaspora
+generated,235,True,4.0,0.0,False,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,Social Network,Diaspora
+generated,236,True,2.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,Social Network,Diaspora
+generated,237,True,12.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,3.0,Social Network,Diaspora
+generated,238,True,2.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2.0,Social Network,Diaspora
+generated,239,True,3.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,3.0,Social Network,Diaspora
+generated,240,True,9.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,Social Network,Diaspora
+generated,241,True,2.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,Social Network,Diaspora
+generated,242,True,7.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,Social Network,Diaspora
+generated,243,True,5.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,Social Network,Diaspora
+generated,244,True,9.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,Social Network,Diaspora
+generated,245,True,3.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,Social Network,Diaspora
+generated,246,True,12.0,0.0,False,0.0,0.0,0.0,0.0,0.0,1.0,0.0,2.0,Social Network,Diaspora
+generated,247,True,5.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,Social Network,Diaspora
+generated,248,True,6.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,Social Network,Diaspora
+generated,249,True,2.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,Social Network,Diaspora
+generated,250,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,Social Network,Diaspora
+generated,251,True,10.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,Social Network,Diaspora
+generated,252,True,2.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,Social Network,Diaspora
+generated,253,True,2.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,Social Network,Diaspora
+generated,254,True,3.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,Social Network,Diaspora
+generated,255,True,9.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,3.0,Social Network,Diaspora
+generated,256,True,3.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,Social Network,Diaspora
+generated,257,True,6.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,Social Network,Diaspora
+generated,258,True,3.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,Social Network,Diaspora
+generated,259,True,8.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,Social Network,Diaspora
+generated,260,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,Social Network,Diaspora
+generated,261,True,3.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,Social Network,Diaspora
+expert_GT,1,True,2.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,3,True,3.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,4,True,2.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,5,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,6,True,4.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,7,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,8,True,5.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,9,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,10,True,6.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,11,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,12,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,13,True,3.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,14,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,15,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,16,True,2.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,17,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,18,True,2.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,19,True,2.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,20,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,21,True,2.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,22,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,23,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,24,True,2.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,25,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,26,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,27,True,14.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,28,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,29,True,2.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,30,True,6.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,31,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,32,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,33,True,2.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,34,True,2.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,35,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,36,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,37,True,6.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,38,True,7.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,39,True,7.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,40,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,41,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,42,True,6.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,43,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,44,True,6.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,45,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,46,True,6.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,47,True,2.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,48,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,49,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,50,True,4.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,51,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,52,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,53,True,2.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,54,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,55,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,56,True,3.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,57,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,58,True,12.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,59,True,6.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,60,True,1.0,1.0,True,1.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,61,True,5.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,62,True,8.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,63,True,3.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,64,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,65,True,3.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,66,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,67,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,68,True,9.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,69,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,70,True,2.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,71,True,9.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,72,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,73,True,2.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,74,True,3.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,75,True,2.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,76,True,5.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,77,True,4.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,78,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,E-commerce,Sylius
+expert_GT,79,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,80,True,3.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,81,True,3.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,82,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,83,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,E-commerce,Sylius
+expert_GT,84,True,2.0,1.0,True,0.5,1.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,85,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,86,True,5.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,87,True,3.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,88,True,2.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,89,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,90,True,2.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,91,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,92,True,2.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,93,True,6.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,94,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,95,True,2.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,96,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,97,True,2.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,98,True,3.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,99,True,2.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,E-commerce,Sylius
+expert_GT,100,True,4.0,0.0,False,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,E-commerce,Sylius
+expert_GT,101,True,5.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,5.0,5.0,Finance/Banking,Apache Fineract
+expert_GT,103,True,19.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,19.0,17.0,Finance/Banking,Apache Fineract
+expert_GT,104,False,,,,,,,,,,,,Finance/Banking,Apache Fineract
+expert_GT,105,True,2.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,Finance/Banking,Apache Fineract
+expert_GT,106,True,13.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,13.0,5.0,Finance/Banking,Apache Fineract
+expert_GT,107,True,8.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,8.0,8.0,Finance/Banking,Apache Fineract
+expert_GT,108,False,,,,,,,,,,,,Finance/Banking,Apache Fineract
+expert_GT,109,False,,,,,,,,,,,,Finance/Banking,Apache Fineract
+expert_GT,110,False,,,,,,,,,,,,Finance/Banking,Apache Fineract
+expert_GT,111,True,4.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,4.0,4.0,Finance/Banking,Apache Fineract
+expert_GT,112,False,,,,,,,,,,,,Finance/Banking,Apache Fineract
+expert_GT,113,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,Finance/Banking,Apache Fineract
+expert_GT,114,True,11.0,1.0,True,0.0909,1.0,0.0,0.0,0.0,0.0,11.0,2.0,Finance/Banking,Apache Fineract
+expert_GT,115,True,9.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,9.0,8.0,Finance/Banking,Apache Fineract
+expert_GT,116,True,4.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,4.0,4.0,Finance/Banking,Apache Fineract
+expert_GT,117,False,,,,,,,,,,,,Finance/Banking,Apache Fineract
+expert_GT,118,True,3.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,3.0,3.0,Finance/Banking,Apache Fineract
+expert_GT,119,True,5.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,5.0,2.0,Finance/Banking,Apache Fineract
+expert_GT,120,False,,,,,,,,,,,,Finance/Banking,Apache Fineract
+expert_GT,121,False,,,,,,,,,,,,Finance/Banking,Apache Fineract
+expert_GT,122,False,,,,,,,,,,,,Finance/Banking,Apache Fineract
+expert_GT,123,True,11.0,8.0,True,0.7273,8.0,0.0,0.0,0.0,2.0,9.0,1.0,Finance/Banking,Apache Fineract
+expert_GT,124,True,13.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,13.0,5.0,Finance/Banking,Apache Fineract
+expert_GT,125,False,,,,,,,,,,,,Finance/Banking,Apache Fineract
+expert_GT,126,True,8.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,8.0,0.0,Finance/Banking,Apache Fineract
+expert_GT,127,True,19.0,1.0,True,0.0526,1.0,0.0,0.0,0.0,0.0,19.0,7.0,Finance/Banking,Apache Fineract
+expert_GT,128,True,29.0,0.0,False,0.0,0.0,0.0,0.0,0.0,4.0,29.0,14.0,Finance/Banking,Apache Fineract
+expert_GT,129,True,3.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,3.0,3.0,Finance/Banking,Apache Fineract
+expert_GT,130,False,,,,,,,,,,,,Finance/Banking,Apache Fineract
+expert_GT,131,False,,,,,,,,,,,,Finance/Banking,Apache Fineract
+expert_GT,132,True,17.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,17.0,2.0,Finance/Banking,Apache Fineract
+expert_GT,133,False,,,,,,,,,,,,Finance/Banking,Apache Fineract
+expert_GT,134,True,4.0,4.0,True,1.0,4.0,0.0,0.0,0.0,0.0,4.0,0.0,Finance/Banking,Apache Fineract
+expert_GT,135,True,115.0,9.0,True,0.0783,6.0,0.0,3.0,0.0,44.0,115.0,23.0,Finance/Banking,Apache Fineract
+expert_GT,136,True,14.0,2.0,True,0.1429,2.0,0.0,0.0,0.0,0.0,14.0,5.0,Finance/Banking,Apache Fineract
+expert_GT,137,True,50.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,50.0,50.0,Finance/Banking,Apache Fineract
+expert_GT,138,True,50.0,1.0,True,0.02,1.0,0.0,0.0,0.0,0.0,45.0,35.0,Finance/Banking,Apache Fineract
+expert_GT,139,True,11.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,11.0,6.0,Finance/Banking,Apache Fineract
+expert_GT,140,True,50.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,50.0,49.0,Finance/Banking,Apache Fineract
+expert_GT,141,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,1.0,1.0,Finance/Banking,Apache Fineract
+expert_GT,142,True,9.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,9.0,8.0,Finance/Banking,Apache Fineract
+expert_GT,143,True,26.0,0.0,False,0.0,0.0,0.0,0.0,0.0,14.0,26.0,10.0,Finance/Banking,Apache Fineract
+expert_GT,144,True,15.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,15.0,13.0,Finance/Banking,Apache Fineract
+expert_GT,145,True,29.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,29.0,29.0,Finance/Banking,Apache Fineract
+expert_GT,146,True,50.0,1.0,True,0.02,0.0,1.0,0.0,0.0,0.0,46.0,48.0,Finance/Banking,Apache Fineract
+expert_GT,147,True,10.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,10.0,10.0,Finance/Banking,Apache Fineract
+expert_GT,148,True,41.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,41.0,41.0,Finance/Banking,Apache Fineract
+expert_GT,149,True,50.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,50.0,50.0,Finance/Banking,Apache Fineract
+expert_GT,150,True,4.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,4.0,0.0,Finance/Banking,Apache Fineract
+expert_GT,151,True,50.0,6.0,True,0.12,6.0,0.0,0.0,0.0,0.0,50.0,17.0,Finance/Banking,Apache Fineract
+expert_GT,152,True,50.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,47.0,50.0,Finance/Banking,Apache Fineract
+expert_GT,153,True,59.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,59.0,23.0,Finance/Banking,Apache Fineract
+expert_GT,154,True,34.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,34.0,27.0,Finance/Banking,Apache Fineract
+expert_GT,155,True,13.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,13.0,9.0,Finance/Banking,Apache Fineract
+expert_GT,156,True,24.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,24.0,23.0,Finance/Banking,Apache Fineract
+expert_GT,157,True,27.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,27.0,26.0,Finance/Banking,Apache Fineract
+expert_GT,158,True,21.0,1.0,True,0.0476,1.0,0.0,0.0,0.0,7.0,11.0,6.0,Finance/Banking,Apache Fineract
+expert_GT,159,True,50.0,1.0,True,0.02,1.0,0.0,0.0,0.0,0.0,50.0,36.0,Finance/Banking,Apache Fineract
+expert_GT,160,True,50.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,50.0,50.0,Finance/Banking,Apache Fineract
+expert_GT,161,True,10.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,10.0,1.0,Finance/Banking,Apache Fineract
+expert_GT,162,True,5.0,1.0,True,0.2,0.0,0.0,1.0,0.0,0.0,3.0,5.0,Finance/Banking,Apache Fineract
+expert_GT,163,True,2.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,2.0,0.0,Finance/Banking,Apache Fineract
+expert_GT,164,True,40.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,40.0,40.0,Finance/Banking,Apache Fineract
+expert_GT,165,True,6.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,6.0,6.0,Finance/Banking,Apache Fineract
+expert_GT,166,True,50.0,1.0,True,0.02,1.0,0.0,0.0,0.0,0.0,50.0,38.0,Finance/Banking,Apache Fineract
+expert_GT,167,True,31.0,0.0,False,0.0,0.0,0.0,0.0,0.0,1.0,31.0,8.0,Finance/Banking,Apache Fineract
+expert_GT,168,True,47.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,47.0,47.0,Finance/Banking,Apache Fineract
+expert_GT,169,True,11.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,Finance/Banking,Apache Fineract
+expert_GT,170,True,17.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,17.0,11.0,Finance/Banking,Apache Fineract
+expert_GT,171,True,3.0,3.0,True,1.0,0.0,0.0,0.0,3.0,0.0,0.0,3.0,Finance/Banking,Apache Fineract
+expert_GT,172,True,30.0,4.0,True,0.1333,4.0,0.0,0.0,0.0,0.0,29.0,20.0,Finance/Banking,Apache Fineract
+expert_GT,173,True,12.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,12.0,12.0,Finance/Banking,Apache Fineract
+expert_GT,174,True,15.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,15.0,14.0,Finance/Banking,Apache Fineract
+expert_GT,175,True,22.0,0.0,False,0.0,0.0,0.0,0.0,0.0,17.0,22.0,3.0,Finance/Banking,Apache Fineract
+expert_GT,176,True,9.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,9.0,9.0,Finance/Banking,Apache Fineract
+expert_GT,177,True,13.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,13.0,5.0,Finance/Banking,Apache Fineract
+expert_GT,178,True,53.0,3.0,True,0.0566,3.0,0.0,0.0,0.0,0.0,53.0,35.0,Finance/Banking,Apache Fineract
+expert_GT,179,True,32.0,0.0,False,0.0,0.0,0.0,0.0,0.0,4.0,32.0,8.0,Finance/Banking,Apache Fineract
+expert_GT,180,True,11.0,0.0,False,0.0,0.0,0.0,0.0,0.0,2.0,11.0,7.0,Finance/Banking,Apache Fineract
+expert_GT,181,True,41.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,41.0,40.0,Finance/Banking,Apache Fineract
+expert_GT,182,True,50.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,50.0,33.0,Finance/Banking,Apache Fineract
+expert_GT,183,True,35.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,35.0,35.0,Finance/Banking,Apache Fineract
+expert_GT,184,True,12.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,12.0,0.0,Finance/Banking,Apache Fineract
+expert_GT,185,True,14.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,14.0,4.0,Finance/Banking,Apache Fineract
+expert_GT,186,True,18.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,18.0,5.0,Finance/Banking,Apache Fineract
+expert_GT,187,True,39.0,2.0,True,0.0513,2.0,0.0,0.0,0.0,0.0,39.0,18.0,Finance/Banking,Apache Fineract
+expert_GT,188,True,9.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,9.0,9.0,Finance/Banking,Apache Fineract
+expert_GT,189,True,20.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,20.0,12.0,Finance/Banking,Apache Fineract
+expert_GT,190,True,50.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,50.0,42.0,Finance/Banking,Apache Fineract
+expert_GT,191,True,25.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,25.0,23.0,Finance/Banking,Apache Fineract
+expert_GT,192,True,50.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,50.0,50.0,Finance/Banking,Apache Fineract
+expert_GT,193,True,12.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,12.0,6.0,Finance/Banking,Apache Fineract
+expert_GT,194,True,19.0,1.0,True,0.0526,1.0,0.0,0.0,0.0,0.0,19.0,15.0,Finance/Banking,Apache Fineract
+expert_GT,195,True,12.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,12.0,12.0,Finance/Banking,Apache Fineract
+expert_GT,196,True,32.0,30.0,True,0.9375,1.0,28.0,1.0,0.0,1.0,0.0,18.0,Finance/Banking,Apache Fineract
+expert_GT,197,True,28.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,28.0,25.0,Finance/Banking,Apache Fineract
+expert_GT,198,True,55.0,1.0,True,0.0182,0.0,1.0,0.0,0.0,0.0,54.0,46.0,Finance/Banking,Apache Fineract
+expert_GT,199,True,20.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,20.0,20.0,Finance/Banking,Apache Fineract
+expert_GT,200,True,13.0,0.0,False,0.0,0.0,0.0,0.0,0.0,2.0,13.0,1.0,Finance/Banking,Apache Fineract
+expert_GT,201,True,4.0,1.0,True,0.25,1.0,0.0,0.0,0.0,0.0,0.0,0.0,Social Network,Diaspora
+expert_GT,203,True,5.0,5.0,True,1.0,0.0,0.0,0.0,5.0,1.0,0.0,2.0,Social Network,Diaspora
+expert_GT,204,True,6.0,6.0,True,1.0,0.0,0.0,0.0,6.0,0.0,0.0,2.0,Social Network,Diaspora
+expert_GT,205,True,5.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,Social Network,Diaspora
+expert_GT,206,True,8.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,Social Network,Diaspora
+expert_GT,207,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,Social Network,Diaspora
+expert_GT,208,True,2.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,Social Network,Diaspora
+expert_GT,209,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,Social Network,Diaspora
+expert_GT,210,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,Social Network,Diaspora
+expert_GT,211,True,2.0,2.0,True,1.0,0.0,0.0,0.0,2.0,0.0,0.0,2.0,Social Network,Diaspora
+expert_GT,212,True,6.0,4.0,True,0.6667,0.0,0.0,4.0,0.0,0.0,0.0,4.0,Social Network,Diaspora
+expert_GT,213,True,3.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2.0,Social Network,Diaspora
+expert_GT,214,True,3.0,1.0,True,0.3333,0.0,1.0,0.0,0.0,0.0,0.0,0.0,Social Network,Diaspora
+expert_GT,215,True,1.0,1.0,True,1.0,0.0,0.0,1.0,0.0,0.0,0.0,1.0,Social Network,Diaspora
+expert_GT,216,True,7.0,0.0,False,0.0,0.0,0.0,0.0,0.0,1.0,0.0,2.0,Social Network,Diaspora
+expert_GT,217,True,5.0,0.0,False,0.0,0.0,0.0,0.0,0.0,1.0,0.0,4.0,Social Network,Diaspora
+expert_GT,218,True,5.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,5.0,Social Network,Diaspora
+expert_GT,219,True,2.0,0.0,False,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,Social Network,Diaspora
+expert_GT,220,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,Social Network,Diaspora
+expert_GT,221,True,6.0,0.0,False,0.0,0.0,0.0,0.0,0.0,2.0,0.0,2.0,Social Network,Diaspora
+expert_GT,222,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,Social Network,Diaspora
+expert_GT,223,True,5.0,1.0,True,0.2,0.0,1.0,0.0,0.0,0.0,0.0,3.0,Social Network,Diaspora
+expert_GT,224,True,2.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,Social Network,Diaspora
+expert_GT,225,True,3.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,3.0,Social Network,Diaspora
+expert_GT,226,True,5.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2.0,Social Network,Diaspora
+expert_GT,227,True,4.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2.0,Social Network,Diaspora
+expert_GT,228,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,1.0,1.0,Social Network,Diaspora
+expert_GT,229,True,19.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,6.0,Social Network,Diaspora
+expert_GT,230,True,3.0,1.0,True,0.3333,0.0,0.0,1.0,0.0,1.0,0.0,1.0,Social Network,Diaspora
+expert_GT,231,True,10.0,10.0,True,1.0,0.0,0.0,0.0,10.0,0.0,0.0,6.0,Social Network,Diaspora
+expert_GT,232,True,3.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,Social Network,Diaspora
+expert_GT,233,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,Social Network,Diaspora
+expert_GT,234,True,4.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,Social Network,Diaspora
+expert_GT,235,True,2.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2.0,Social Network,Diaspora
+expert_GT,236,True,2.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,Social Network,Diaspora
+expert_GT,237,True,8.0,8.0,True,1.0,0.0,0.0,1.0,8.0,0.0,0.0,8.0,Social Network,Diaspora
+expert_GT,238,True,2.0,0.0,False,0.0,0.0,0.0,0.0,0.0,2.0,0.0,0.0,Social Network,Diaspora
+expert_GT,239,True,3.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,3.0,Social Network,Diaspora
+expert_GT,240,True,6.0,6.0,True,1.0,0.0,0.0,1.0,6.0,0.0,0.0,1.0,Social Network,Diaspora
+expert_GT,241,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,1.0,1.0,Social Network,Diaspora
+expert_GT,242,True,6.0,2.0,True,0.3333,0.0,2.0,0.0,0.0,0.0,0.0,5.0,Social Network,Diaspora
+expert_GT,243,True,3.0,1.0,True,0.3333,0.0,0.0,1.0,0.0,0.0,0.0,2.0,Social Network,Diaspora
+expert_GT,244,True,5.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,3.0,Social Network,Diaspora
+expert_GT,245,True,2.0,2.0,True,1.0,0.0,0.0,2.0,0.0,0.0,0.0,2.0,Social Network,Diaspora
+expert_GT,246,True,15.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,5.0,Social Network,Diaspora
+expert_GT,247,True,3.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,Social Network,Diaspora
+expert_GT,248,True,4.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,Social Network,Diaspora
+expert_GT,249,True,2.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,Social Network,Diaspora
+expert_GT,250,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,Social Network,Diaspora
+expert_GT,251,True,7.0,7.0,True,1.0,0.0,1.0,0.0,7.0,1.0,0.0,3.0,Social Network,Diaspora
+expert_GT,252,True,2.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,Social Network,Diaspora
+expert_GT,253,True,2.0,0.0,False,0.0,0.0,0.0,0.0,0.0,2.0,0.0,0.0,Social Network,Diaspora
+expert_GT,254,True,2.0,2.0,True,1.0,0.0,0.0,0.0,2.0,0.0,0.0,2.0,Social Network,Diaspora
+expert_GT,255,True,7.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.0,Social Network,Diaspora
+expert_GT,256,True,2.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,Social Network,Diaspora
+expert_GT,257,True,4.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2.0,Social Network,Diaspora
+expert_GT,258,True,2.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2.0,Social Network,Diaspora
+expert_GT,259,True,4.0,4.0,True,1.0,0.0,0.0,0.0,4.0,0.0,0.0,4.0,Social Network,Diaspora
+expert_GT,260,True,1.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,Social Network,Diaspora
+expert_GT,261,True,2.0,0.0,False,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,Social Network,Diaspora

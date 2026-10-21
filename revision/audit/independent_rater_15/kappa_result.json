@@ -1,0 +1,46 @@
+{
+  "b2": {
+    "N": 15,
+    "rows_An_cols_Hoang": {
+      "Y": {
+        "Y": 4,
+        "N": 1
+      },
+      "N": {
+        "Y": 2,
+        "N": 8
+      }
+    },
+    "observed_agreement": 0.8,
+    "expected_agreement": 0.5333333333333333,
+    "kappa": 0.5714285714285714,
+    "exact_fraction": "4/7",
+    "disagreement_ids": [
+      98,
+      229,
+      255
+    ]
+  },
+  "h3": {
+    "N": 15,
+    "rows_An_cols_Hoang": {
+      "Y": {
+        "Y": 5,
+        "N": 0
+      },
+      "N": {
+        "Y": 3,
+        "N": 7
+      }
+    },
+    "observed_agreement": 0.8,
+    "expected_agreement": 0.4888888888888889,
+    "kappa": 0.6086956521739131,
+    "exact_fraction": "14/23",
+    "disagreement_ids": [
+      229,
+      236,
+      255
+    ]
+  }
+}
