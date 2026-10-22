@@ -5,7 +5,7 @@ revised after the reviews. The version submitted for review is in `paper/` (git 
 
 | Path | Content |
 |---|---|
-| `367005_camera_ready.pdf` | PDF compiled with pdflatex from the source in this folder |
+| `367005_Evaluating_GPT_5_4_mini_for_Gherkin_Test_Generation_An_Empirical_Study_Camera_Ready.pdf` | PDF compiled with pdflatex from the source in this folder |
 | `main.tex`, `sections/`, `figures/`, `llncs.cls` | LaTeX source (Springer LNCS class v2.25) |
 | `CHANGES_rev.md` | every change made in the revision, with the source of each new number |
 
