@@ -1,10 +1,14 @@
-% FISAT 2026, paper 367005: revised camera-ready version (22 Oct 2026).
+% FISAT 2026, paper 367005: revised camera-ready version (29 Oct 2026).
 \documentclass[runningheads]{llncs}
 \usepackage[T1]{fontenc}
 \usepackage{graphicx}
+\usepackage{array}
 \usepackage{flafter} % a float never appears before the text that defines it
+\usepackage{float} % [H] keeps the appendix tables and figures in reading order
 \usepackage{amsmath}
 \usepackage{listings}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta}
 \usepackage{hyperref}
 \usepackage{url}
 \usepackage{microtype}
@@ -21,8 +25,7 @@
 \title{Evaluating GPT-5.4-mini for Gherkin Test Generation: An Empirical Study}
 \titlerunning{Evaluating GPT-5.4-mini for Gherkin Test Generation}
 
-\author{Nguyen Minh Hoang \and Nguyen Hieu An \and Tran Tuan Khang \and Vo Hieu Chuong \and
-Tong Vy Thuan \and Le Thi Quynh Chi\thanks{Corresponding author.}}
+\author{Nguyen Minh Hoang \and Nguyen Hieu An \and Le Thi Quynh Chi\thanks{Corresponding author.}}
 \authorrunning{N. M. Hoang et al.}
 \institute{FPT University, Vietnam\\ \email{chiltq6@fe.edu.vn}}
 

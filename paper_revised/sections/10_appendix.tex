@@ -1,33 +1,106 @@
 \appendix
+\raggedbottom % the [H] tables and figures below would otherwise be spread over the page
 
 \section{Prompt, Skeleton Example and Additional Results}
 \label{app:details}
 
-Listing~\ref{lst:prompt} gives the prompt template of condition C0 (Section~\ref{sec:method}), Table~\ref{tab:skeleton} illustrates the skeleton extraction of Section~\ref{sec:metric1}, Fig.~\ref{fig:dist} and Fig.~\ref{fig:domain} show the distribution of skeleton cosine in C0 overall and per project, Table~\ref{tab:sweep} gives the threshold sensitivity analysis of Section~\ref{sec:res-b3}, and Table~\ref{tab:rq2} gives the parser results of RQ2.
+Listing~\ref{lst:prompt} gives the user prompt and Listing~\ref{lst:sys} the system messages (Section~\ref{sec:method}), Table~\ref{tab:prompts} maps each project to its exemplars, Table~\ref{tab:skeleton} illustrates the skeleton extraction of Section~\ref{sec:metric1}, Fig.~\ref{fig:dist} and Fig.~\ref{fig:domain} show the distribution of skeleton cosine in C0 overall and per project, Table~\ref{tab:sweep} gives the reference-point sensitivity analysis of Section~\ref{sec:res-b3}, and Table~\ref{tab:rq2} gives the parser results of RQ2.
 
-\begin{lstlisting}[caption={Prompt template of condition C0. Braced placeholders are instantiated by project at run time.},label={lst:prompt}]
-System: {domain_specific_system_message}
-User:
+\noindent\begin{minipage}{\linewidth}
+\begin{lstlisting}[caption={User prompt of conditions C0 and C2, verbatim except for the three braced placeholders; the first line ends with a space. C1 drops the second line and both example blocks.},label={lst:prompt}]
 Generate a BDD Gherkin file for the following user story.
 Follow the exact style, wording, and conventions shown in the Example.
 
 EXAMPLE USER STORY:
-{example_user_story_from_same_domain}
+{example_user_story}
 
 EXAMPLE GHERKIN:
-{example_gherkin_from_same_domain}
+{example_gherkin}
 
 ---
 NOW GENERATE FOR THIS USER STORY:
-{user_story_text}
+{user_story}
 \end{lstlisting}
+\end{minipage}
 
-\begin{table}[t]
+\noindent\begin{minipage}{\linewidth}
+\begin{lstlisting}[caption={System messages, verbatim. Each project keeps its message in C0, C1 and C2.},label={lst:sys}]
+Sylius: You are an expert QA Engineer for Sylius, an E-commerce platform using the Behat framework. You write business-focused Gherkin tests. Focus on product variants, shopping carts, and UI interactions using business language.
+
+Apache Fineract: You are an expert QA Engineer for Apache Fineract, a core banking system. Your signature style is using detailed Data Tables in the Background block to mock extensive financial data (e.g. LoanProduct, clients). Write highly technical, data-driven Gherkin.
+
+Diaspora: You are an expert QA Engineer for Diaspora, a Ruby on Rails social network using Capybara and Cucumber. Your signature style is writing concrete UI automation steps using CSS selectors (e.g. 'within ".class"') and exact UI actions.
+\end{lstlisting}
+\end{minipage}
+
+\begin{table}[H]
+\centering
+\caption{Exemplar per project and condition (dataset id and reference file). The example story is the dataset story of that id and the example Gherkin is its full reference file.}
+\label{tab:prompts}
+\urlstyle{tt}
+\begin{tabular}{@{}llr>{\raggedright\arraybackslash}p{7.6cm}@{}}
+\hline
+Project & Condition & Id & Reference file\\
+\hline
+Sylius & C0 & 2 & \nolinkurl{being_unable_to_see_cart.feature}\\
+ & C2 & 86 & \nolinkurl{receiving_discount_based_on_total_of_items_from_specific_taxon.feature}\\
+Fineract & C0 & 102 & \nolinkurl{WorkingCapitalNearBreachConfiguration.feature}\\
+ & C2 & 119 & \nolinkurl{LoanInterestPaymentWaiver.feature}\\
+Diaspora & C0 & 202 & \nolinkurl{media-embed.feature}\\
+ & C2 & 203 & \nolinkurl{connects_users.feature}\\
+\hline
+\end{tabular}
+\end{table}
+
+The replication package holds the components of every prompt as separate files in the folder \texttt{revision/prompts/}: the three system messages of Listing~\ref{lst:sys}, the one-shot template of Listing~\ref{lst:prompt}, the zero-shot template of C1, the story and reference Gherkin of each of the six exemplars (subfolder \texttt{exemplars/}), and the mapping of Table~\ref{tab:prompts} (\texttt{exemplar\_mapping.csv}). A C0 or C2 prompt is the one-shot template with the story and Gherkin of the project's exemplar in place of \texttt{\{example\_user\_story\}} and \texttt{\{example\_gherkin\}}. The script \texttt{revision/prompts/make\_prompt\_artifacts.py} rebuilds these files from the dataset and the generation code without calling the API. It checks that the system messages equal those of the original notebook and that the C0 prompts it assembles equal those of the notebook for all 261 stories. All files use LF line breaks, and their SHA-256 hashes are listed below (in \texttt{MANIFEST\_SHA256.txt} the exemplar files carry the prefix \texttt{exemplars/}). C0 was run on 19 July 2026 and C1 and C2 on 16 October 2026, as recorded in the API logs. In those logs the prompt-token difference between C0 or C2 and C1 is the same for every file of a project (C0: 271, 1,910 and 299 tokens for Sylius, Fineract and Diaspora; C2: 960, 9,413 and 965), which is consistent with one fixed exemplar block per project. The version used for this paper is the release tag \texttt{fisat2026-camera-ready}, \url{https://github.com/simonhoang611/RT-SWT-004-Group4/tree/fisat2026-camera-ready}.
+
+% \\* keeps each file name on the same page as its hash
+\medskip
+{\footnotesize\ttfamily\raggedright\setlength{\parindent}{0pt}
+exemplar\_mapping.csv\\*
+\hspace*{2ex}982a690189c23702e9f8ac7b656a9072eab1af252a3b3ba711966c5432222b75\\[3pt]
+ex\_102.feature\\*
+\hspace*{2ex}3125864ffcac5dcb98c849b4d138771005ee1ad8405e7154f4ae9463d4388222\\[3pt]
+ex\_102\_user\_story.txt\\*
+\hspace*{2ex}58d9a3af1effd231652d7866f3dccabfc7c5ff4a6cce48816ae963f39558c4d0\\[3pt]
+ex\_119.feature\\*
+\hspace*{2ex}bf6699e8e799aa5cf4f850030bc22338c72fd85f85972076a30ba7e538b5dc51\\[3pt]
+ex\_119\_user\_story.txt\\*
+\hspace*{2ex}db4a5a90db39985ae0dba288f1148ce783f661e93da038543d6257a072ab60c0\\[3pt]
+ex\_2.feature\\*
+\hspace*{2ex}f24b39313e8729427c4a57f87a829015947e75d3f01f2ec84ec2b7cc477530cc\\[3pt]
+ex\_202.feature\\*
+\hspace*{2ex}1ef601612044212a7497f9cd7783efda22227b245355e848f999b5ca9ee26c7b\\[3pt]
+ex\_202\_user\_story.txt\\*
+\hspace*{2ex}db47c0704403977bb012616803c90ef5b7544bc16fe7983234846912e83a09ae\\[3pt]
+ex\_203.feature\\*
+\hspace*{2ex}358d7055e7b9d35685a83ac3b7e833dbd6bbf3d33c9ed06284825dd16b4fc5b5\\[3pt]
+ex\_203\_user\_story.txt\\*
+\hspace*{2ex}06513657140c86fdb09325892bdcb46779e62b5a165c6dc6931d49d1e512b242\\[3pt]
+ex\_2\_user\_story.txt\\*
+\hspace*{2ex}a87eb54d5e418bd8b03d9492ba3d589edc0063ac08b36246bd6ff819410392be\\[3pt]
+ex\_86.feature\\*
+\hspace*{2ex}2a8802083c191d1d22f3d9d96185f48602dfe7827945124e4f100f42d998c193\\[3pt]
+ex\_86\_user\_story.txt\\*
+\hspace*{2ex}c20891f56ce4fdb8598f4079a3a94c0dd94a51bc0a8b2be430246afc8313eebd\\[3pt]
+system\_message\_ecommerce.txt\\*
+\hspace*{2ex}64456030e3229cf63ce9f23a574433e67bc707864dd365e6aca842cab0c82498\\[3pt]
+system\_message\_finance.txt\\*
+\hspace*{2ex}2193526c6d69c6a09c8f6a34d3a37eafe3ea3f00d0604a47f85b47b7b7c27afd\\[3pt]
+system\_message\_social.txt\\*
+\hspace*{2ex}24bd9e8f470cc8f5fae0ea4d88b6413d70fd473ed0e4e25dfa75a197c56c19b9\\[3pt]
+user\_prompt\_one\_shot\_template.txt\\*
+\hspace*{2ex}e8908eb5441c9e8c8d3f15136d8295d9b011690a0f99b5d3a9d98356829d6387\\[3pt]
+user\_prompt\_zero\_shot\_template.txt\\*
+\hspace*{2ex}95645cbaf0b8fae23aa33b68137a0f95d02c626c26db2c91533d097fb6a05364\par
+}
+\medskip
+
+\begin{table}[H]
 \centering
 \caption{Skeleton extraction on a short Sylius-style fragment.}
 \label{tab:skeleton}
-\scriptsize
-\begin{tabular}{ll}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{5.8cm}>{\raggedright\arraybackslash}p{5.8cm}@{}}
 \hline
 Original line & Skeleton line\\
 \hline
@@ -40,25 +113,25 @@ Original line & Skeleton line\\
 \end{tabular}
 \end{table}
 
-\begin{figure}[t]
+\begin{figure}[H]
 \centering
-\includegraphics[width=0.72\textwidth]{figures/fig1_skeleton_distribution_258.png}
-\Description{Histogram of skeleton cosine similarity for 258 feature-file pairs. Scores range from about 0.58 to 0.99, and half of them lie between 0.81 and 0.89. A dashed line marks the 0.85 threshold and a dotted line marks the median of 0.8533, just above it.}
+\includegraphics[width=0.85\textwidth]{figures/fig1_skeleton_distribution_258.png}
+\Description{Histogram of skeleton cosine similarity for 258 feature-file pairs. Scores range from about 0.58 to 0.99, and half of them lie between 0.81 and 0.89. A dashed line marks the 0.85 reference point and a dotted line marks the median of 0.8533, just above it.}
 \caption{Distribution of skeleton cosine similarity for the 258 non-exemplar files (condition C0).}
 \label{fig:dist}
 \end{figure}
 
-\begin{figure}[t]
+\begin{figure}[H]
 \centering
-\includegraphics[width=0.72\textwidth]{figures/fig2_domain_distributions_258.png}
-\Description{Box plots of skeleton cosine similarity per project: Sylius (e-commerce, 99 files), Fineract (finance, 99 files) and Diaspora (social network, 60 files). The medians are 0.887, 0.826 and 0.831. A dashed line marks the 0.85 threshold; the whole Sylius box lies above it, while the Fineract and Diaspora medians lie below it.}
+\includegraphics[width=0.85\textwidth]{figures/fig2_domain_distributions_258.png}
+\Description{Box plots of skeleton cosine similarity per project: Sylius (e-commerce, 99 files), Fineract (finance, 99 files) and Diaspora (social network, 60 files). The medians are 0.887, 0.826 and 0.831. A dashed line marks the 0.85 reference point; the whole Sylius box lies above it, while the Fineract and Diaspora medians lie below it.}
 \caption{Skeleton cosine similarity per project (C0, $N = 258$). The dashed line marks 0.85.}
 \label{fig:domain}
 \end{figure}
 
-\begin{table}[t]
+\begin{table}[H]
 \centering
-\caption{Threshold sensitivity (C0, $N = 258$). The $p$-value is the one-sided Wilcoxon test that the median exceeds $t$.}
+\caption{Reference-point sensitivity (C0, $N = 258$). The $p$-value is the one-sided Wilcoxon test that the median exceeds $t$; the exact sign test gives the same decisions at every $t$ ($p = 0.002$ at 0.84 and 0.209 at 0.85).}
 \label{tab:sweep}
 \begin{tabular}{rrrrrrr}
 \hline
@@ -75,7 +148,7 @@ $t$ & Share $\ge t$ [95\% CI] & Median $- t$ & $p$ & Sylius & Fineract & Diaspor
 \end{tabular}
 \end{table}
 
-\begin{table}[t]
+\begin{table}[H]
 \centering
 \caption{Parser compliance of condition C0 (behave 1.3.3 parser).}
 \label{tab:rq2}
@@ -91,7 +164,7 @@ Exact binomial $p$ ($p_0 = 0.80$) & $4.6 \times 10^{-21}$ & $2.4 \times 10^{-21}
 \end{tabular}
 \end{table}
 
-\clearpage
+
 \section{Perturbation Test}
 \label{app:perturb}
 

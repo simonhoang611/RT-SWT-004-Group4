@@ -106,3 +106,29 @@ Every number in the paper was recomputed from the released data and outputs or m
 - References: Karpurapu et al., pages 58715–58721 added; Ferreira et al., venue corrected from "Workshop" to "Conference on Automation of Software Test", pages 1–11 and DOI 10.1109/AST66626.2025.00007 added (replacing the arXiv id); Fonseca et al., pages 3311–3321 added; Fernandes et al., "Gorgonio" corrected to "Gorgônio".
 - Fig. 1: the legend said "Prespecified threshold 0.85", which E7 had removed from the text; it now says "Threshold 0.85", as in Fig. 2. The figure was re-rendered with the same plotting script and data (`plot_verified_figures.py`, `results/full_per_row_metrics.csv`); only the legend label changed.
 - PDF rebuilt (pdflatex, TeX Live 2023, three runs, 0 errors, 20 pages, all fonts embedded); the conclusion still ends on page 15.
+
+## Action Tracker v1 (27–29 Oct 2026)
+
+Changes for the second review round. Every new number comes from the file named in the row (paths relative to the repository root).
+
+| ID | What the paper now contains | Where | Source |
+|---|---|---|---|
+| B1, H8 | Table 1 compares this study with [1]–[5] on data and openness, syntax oracle, semantic oracle, human defect labels, metric perturbation and exemplar variation, with a line per study on its focus, models and prompting, and main finding; one delta paragraph per contribution; background on correctness oracles, test evaluation, mutation-based validation, LLMs in requirements engineering and reporting guidelines (7 new references) | §1.1, §2.2, §2.3, References | the cited papers |
+| H1, H10 | Fineract files with truncated story input versus the 15 without; rescoring against the 15,000-character prefix; task named reconstruction from reverse-engineered stories | §4.2, RQ1, Abstract, §7 | `revision/results/h1_truncation_*` |
+| H2, H4, H11, M7, M11 | Same-time rerun of C0, C1, C2 and capped C0cap (28 Oct 2026); ablation from the rerun with the original runs alongside (Table 5); run-to-run variation on 60 files × 5 runs; failure policy of every run; C0cap result | §3.2, §3.3, §4.7, §4.8, §6, Fig. 1 | `revision/rerun/results/rerun_report.txt`, `rerun_per_job.csv`, `rerun_h11_per_file.csv` |
+| H3, M8 | RQ1 describes the distribution around the 0.85 reference point; "threshold" replaced by "reference point"; Figs. 2 and 3 re-rendered with the legend "Reference point 0.85" (same data) | §1.2, §3.4, §3.7, §4.1, §4.3, Appendix A | `results/full_per_row_metrics.csv` |
+| H5 | RQ1 renamed "Structural skeleton resemblance"; "semantic" replaced by "structural" for the metric | Abstract, §1–§5 | — |
+| H6, H13 | Prompts verbatim (Listings 1 and 2), exemplar mapping (Table 6), SHA-256 of the 18 prompt files, run dates | Appendix A | `revision/prompts/` |
+| H7 | Flowchart of the denominators (Fig. 1) | §3 | `sections/fig_flow.tex` |
+| H9 | Exact sign test and bootstrap CI for the median as primary test; Wilcoxon as sensitivity analysis; skewness with CI | §3.7, §4.1, Table 3, Abstract, §7 | `revision/results/h9_*` |
+| H12 | Kappa with 95% CI; consensus round on the 15 doubly labelled files (8 of 15 defective after consensus, 5 before); 25/60 reported as exploratory | §3.6, §4.4, §6, §7 | `revision/h12/results/h12_kappa_ci.txt`, `revision/audit/consensus_15/` |
+| M1 | References for the model page, the Chat Completions API, the all-MiniLM-L6-v2 model card and the behave 1.3.3 release | §3.2, §3.4, §3.5, References | `revision/m1_tool_sources/` |
+| M2 | "expert-written" replaced by "project-maintained" | Abstract, §1.2, §3.1, §6.2 | `data/raw/README.md` |
+| M3 | The human-review advice is followed by its scope: exploratory, high-similarity, stratified sample | §7 | — |
+| M4, M5, M12 | Abstract shortened to 192 words with δ for RQ1; roadmap paragraph; main-contribution sentence | Abstract, §1, §7 | — |
+| M6 | Dataset sources (Table 2) and the three source repositories as references | §3.1, References | `revision/m6_sources/` |
+| M9 | Effect sizes reported without categorical labels, with 95% CIs for δ, η²H and ρ | §3.7, §4.1, §4.2, §4.5 | `revision/results/m9_effect_size_ci.txt` |
+| M10 | RQ2 risk difference +18.84 percentage points [16.64, 19.76]; interpretive sentences moved to §5 | §3.7, §4.6, §5 | `revision/results/m10_rq2_risk_difference.txt` |
+| M13, M14 | Sentences flagged in Appendix A of the tracker (kappa per facet in the Abstract; requested model name in §3.2; "pinned model identifier" in §1.2) | Abstract, §1.2, §3.2 | — |
+
+Final check (29 Oct 2026): all tables, figures, listings and Appendix B were recomputed from the files above; the references were checked against Crossref, arXiv, ACL Anthology or the publisher. Corrections from that check: the exemplar sentences in §2.3 and the Abstract now follow the rerun; kang2023libro pages 2312–2323, fakhoury2024ticoder issue 9, the author order of foster2025ach as in the ACM version, and "accepted manuscript" removed from baltes2026guidelines. Fig. 1 had a TikZ key error that produced 17 LaTeX errors; it is fixed, and the figure is redrawn so that every arrow is straight and no two arrows cross (same boxes and counts; the exclusion of the C0 and C2 exemplars is now stated in the ablation box). Appendix tables and figures are now placed in reading order. The appendix tables, listings and hash list now share one type size (9 pt), and Figs. 2 and 3 are redrawn from the same data in the paper's font at their printed size by `paper_revised/figures/make_figures.py`.

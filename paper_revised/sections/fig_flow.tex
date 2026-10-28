@@ -1,0 +1,35 @@
+\begin{figure}[!htbp]
+\centering
+\begin{tikzpicture}[
+  box/.style={draw, rounded corners=1pt, align=center, font=\scriptsize, text width=20mm, minimum height=9mm, inner sep=2pt, execute at begin node=\hyphenpenalty10000\relax},
+  res/.style={box, very thick},
+  arr/.style={-{Stealth[length=1.6mm]}, semithick},
+  x=25mm, y=-14.5mm]
+% row 0: primary analysis; column 0: perturbation test; rows 1-2: ablation and rerun; column 4: defect audit
+\node[box] (R)  at (0,0) {261 reference files (Sylius 100, Fineract 100, Diaspora 61)};
+\node[box] (S)  at (1,0) {261 user stories, reverse-engineered from the files};
+\node[box] (G)  at (2,0) {C0: same-project one-shot, 261 outputs};
+\node[box] (X)  at (3,0) {exclude 3 exemplars (ids 2, 102, 202)};
+\node[res] (P)  at (4,0) {RQ1, RQ2: $N = 258$};
+\node[box] (A1) at (2,1) {C1 zero-shot, C2 other exemplars: 261 outputs each};
+\node[res] (A3) at (3,1) {ablation: $N = 255$\\(exemplars of C0 and C2 excluded)};
+\node[box] (RR) at (1,2.15) {rerun at one time: \mbox{C0--C2} and C0cap on 261 stories, \mbox{C0--C2} four more runs on 60 files};
+\node[res] (RA) at (2,2.15) {rerun: ablation $N = 255$; C0 and C0cap $N = 258$};
+\node[res] (RW) at (1,3.45) {run-to-run variation: 60 files $\times$ 5 runs};
+\node[box] (H1) at (4,1) {136 files with cosine $\ge 0.85$};
+\node[res] (H2) at (4,2.15) {defect audit: $N = 60$ (20 per project)};
+\node[res] (H3) at (4,3.45) {independent second rater: $N = 15$};
+\node[box] (M1) at (0,1) {120 reference scenarios (40 per project)};
+\node[box] (M2) at (0,2.15) {683 mutants (8 operators)};
+\node[res] (M3) at (0,3.45) {perturbation: 623 valid pairs};
+\draw[arr] (R) -- (S); \draw[arr] (S) -- (G); \draw[arr] (G) -- (X); \draw[arr] (X) -- (P);
+\draw[arr] (S) -- (RR);
+\fill (S |- A1) circle (0.5mm);
+\draw[arr] (S |- A1) -- (A1); \draw[arr] (A1) -- (A3);
+\draw[arr] (RR) -- (RA); \draw[arr] (RR) -- (RW);
+\draw[arr] (P) -- (H1); \draw[arr] (H1) -- (H2); \draw[arr] (H2) -- (H3);
+\draw[arr] (R) -- (M1); \draw[arr] (M1) -- (M2); \draw[arr] (M2) -- (M3);
+\end{tikzpicture}
+\caption{Data flow and the denominator of each analysis. Bold boxes are analysis sets. Exemplars are excluded so that no prompt example is scored against itself. The rerun repeats the prompts within one time window.}
+\label{fig:flow}
+\end{figure}
