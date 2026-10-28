@@ -171,3 +171,125 @@ Exact binomial $p$ ($p_0 = 0.80$) & $4.6 \times 10^{-21}$ & $2.4 \times 10^{-21}
 \textbf{Design.} The perturbation test measured whether the metric reacts to seeded defects. From the reference files, 120 scenarios (40 per project, fixed seed) were extracted, and eight operators were applied where applicable: changing a number, a quoted value, a comparison operator or a negation, dropping a Then or a Given step, swapping a When with a Then, and moving a Then to the front. Each mutant was compared with its original scenario using the same skeleton metric.
 
 \textbf{Results.} The 120 extracted scenarios yielded 683 applicable mutants. Of these, 29 mutants do not parse, and the extraction omitted the Background of 74 of the 120 source scenarios. Restricting to the 623 pairs in which both texts parse and the original has no keyword-order flag, every mutant keeps a skeleton cosine of at least 0.8995 with its original. At 0.90, 622 of 623 mutants would still pass, and at 0.95, 97.9\%. For changed numbers and quoted values (179 pairs) the skeletons are identical, which follows from masking and is not an empirical finding. Swapped When/Then steps and Then steps moved to the front (210 pairs) score at least 0.954, although the keyword-order check flags all of them. Because the test compares single scenarios and the main metric compares whole files, these results show insensitivity at the scenario level and do not estimate a false-negative rate for whole files.
+
+\section{Further Method and Result Details}
+\label{app:more}
+
+This appendix holds the details that Sections~\ref{sec:related}, \ref{sec:method}, \ref{sec:results} and~\ref{sec:threats} summarise.
+
+\textbf{Comparison with related studies.} Table~\ref{tab:delta} compares this study with the five BDD-generation studies of Section~\ref{sec:related}.
+
+\begin{table}[!t]
+\centering
+\caption{Comparison with BDD-generation studies, as reported in each paper. The line under each study gives its focus, models and prompting, and main finding.}
+\label{tab:delta}
+\scriptsize
+\setlength{\tabcolsep}{2pt}
+\renewcommand{\arraystretch}{1.1}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{1.5cm}>{\raggedright\arraybackslash}p{2.0cm}>{\raggedright\arraybackslash}p{1.6cm}>{\raggedright\arraybackslash}p{1.9cm}>{\raggedright\arraybackslash}p{2.0cm}>{\raggedright\arraybackslash}p{1.05cm}>{\raggedright\arraybackslash}p{1.15cm}@{}}
+\hline
+Study & Data and openness & Syntax oracle & Semantic oracle & Human defect labels & Metric perturb. & Exemplar varied\\
+\hline
+Rathnayake \cite{rathnayake2026} & 500 stories, one company; released & none & BERTScore and other similarity, LLM judge & 1--5 quality ratings; no defect labels & no & no\\
+\multicolumn{1}{l}{} & \multicolumn{6}{>{\raggedright\arraybackslash}p{10.3cm}}{\emph{Focus:} best model, prompt and input for scenario generation. \emph{Models:} GPT-4, Claude 3, Gemini; zero-shot, few-shot, chain-of-thought. \emph{Finding:} GPT-4 scored highest on similarity, Claude 3 highest with experts and LLM judges; the best prompt differed by model.}\\[2pt]
+Karpurapu \cite{karpurapu2024} & about 50 public stories; release not stated & Gherkin-lint & none & none & no & no\\
+\multicolumn{1}{l}{} & \multicolumn{6}{>{\raggedright\arraybackslash}p{10.3cm}}{\emph{Focus:} syntax errors and validation accuracy of generated acceptance tests. \emph{Models:} GPT-3.5, GPT-4, Llama-2-13B, PaLM-2; zero-shot, few-shot. \emph{Finding:} GPT-3.5 and GPT-4 produced error-free tests; few-shot prompts gave fewer syntax errors.}\\[2pt]
+Ferreira \cite{ferreira2025} & 13 stories, one company; confidential & TypeScript check of Cypress code & manual relevance check; helpfulness ratings & three error types in 20 tests & no & no\\
+\multicolumn{1}{l}{} & \multicolumn{6}{>{\raggedright\arraybackslash}p{10.3cm}}{\emph{Focus:} Gherkin and Cypress generation in a company workflow. \emph{Models:} GPT-4 Turbo; one iteratively engineered prompt per step. \emph{Finding:} users found 95\% of the scenarios helpful; 60\% of the Cypress tests reflected their scenarios.}\\[2pt]
+Fernandes \cite{fernandes2025} & 10 of 1,286 cases, one system & none & METEOR & qualitative error types & no & no (fixed format)\\
+\multicolumn{1}{l}{} & \multicolumn{6}{>{\raggedright\arraybackslash}p{10.3cm}}{\emph{Focus:} accuracy and stability on free-form test descriptions. \emph{Models:} seven LLMs, e.g.\ GPT-4 Turbo, Gemini, DeepSeek R1; zero-, one-, few-shot. \emph{Finding:} Gemini had the highest mean METEOR (0.84), but model differences were not significant.}\\[2pt]
+Fonseca \cite{fonseca2025} & 13 issues, one app; excerpts only & manual keyword check & LLM validator; practitioner survey & none & no & not stated\\
+\multicolumn{1}{l}{} & \multicolumn{6}{>{\raggedright\arraybackslash}p{10.3cm}}{\emph{Focus:} Gherkin, Page Objects and UI tests from issues and code changes. \emph{Models:} local DeepSeek-R1 for Gherkin, DeepSeek-Coder-V2, Gemma3:1b. \emph{Finding:} 93.3\% of the scenarios were syntactically valid and all generated UI tests ran.}\\[2pt]
+This study & 261 files, three public projects; released & behave 1.3.3 parser & none; structural skeleton cosine plus defect audit & criterion-level audit of 60 files; agreement and consensus on 15 & 8 operators, 623 pairs & yes (C1, C2)\\
+\multicolumn{1}{l}{} & \multicolumn{6}{>{\raggedright\arraybackslash}p{10.3cm}}{\emph{Focus:} RQ1 and RQ2. \emph{Model:} gpt-5.4-mini-2026-03-17; same-project one-shot (C0), zero-shot (C1), other exemplar (C2). \emph{Finding:} 98.8\% parse; median similarity 0.853 is not above 0.85; high-similarity files still contain defects.}\\[2pt]
+\hline
+\end{tabular}
+\end{table}
+
+
+\textbf{Unit of analysis.} The unit of analysis is a feature file, not a scenario. With the behave 1.3.3 parser, the 244 parseable files among the 258 analysed references contain 2,554 expanded scenarios, and the 255 parseable generated files contain 1,913. The reference files were not screened with a parser before inclusion: 14 of the 261 reference files fail to parse with behave 1.3.3 (13 with behave 1.2.6), 13 of them because their stored text is cut (see below); the full upstream files of these 13 parse. They remain in the dataset, because the metric of Section~\ref{sec:metric1} does not require a parse.
+
+\textbf{Sources and selection.} The files were collected in two batches. A random sample of 100 files over the three projects (34, 33 and 33) was downloaded on 28 June 2026. No clone of that download was kept, but the Fineract files that match an upstream version date it to the develop branch between 23 and 29 June 2026. To reach 100 files per project, 161 further files were drawn at random from the clones of Table~\ref{tab:dataset}; the random seed was not recorded. Diaspora's 71 feature files have only 58 distinct names, because ten names exist in both its desktop and mobile folders; the 61 selected files cover all 58 names. In the first batch the stored reference differs from the upstream file in two ways: the free-text Feature description is missing from 53 Sylius and Diaspora files, which the skeleton drops anyway, and 23 Fineract references end after 30,038 characters of stored text. Scoring against the full upstream files changes only files 114 and 133, both of which stay below 0.85, so the median, the sign test and every RQ1 decision are unchanged (Wilcoxon $p = 0.452$ instead of 0.474). Extraction paths, clone records and the per-file comparison are in the replication package.
+
+\textbf{Data flow.} Fig.~\ref{fig:flow} shows how the files pass through generation and analysis, with the denominator of each analysis.
+\input{sections/fig_flow}
+
+\textbf{RQ1 test details.} The sign test is a binomial test of the number of files above against the number below 0.85 with ties dropped (none occurred), and the bootstrap interval uses 10,000 resamples with seed 2026. Symmetry is checked with the skewness of $x_i - 0.85$ and its bootstrap interval. $\delta$ is the sign-test statistic expressed as a proportion and a one-sample analogue of Cliff's $\delta$ against the reference point. Quartiles use linear interpolation and the SD uses $n - 1$.
+
+\textbf{Encoder for the ablation.} Because the environment used for this analysis could not download the encoder, skeleton cosine for all three conditions was computed with an ONNX export of all-MiniLM-L6-v2 using the same tokenisation, 256-token truncation, mean pooling and normalisation; it reproduces the original C0 scores to within $4 \times 10^{-7}$, and a rerun with sentence-transformers (model revision \texttt{1110a24}) agrees with it to within $3 \times 10^{-7}$ in all three conditions.
+
+\textbf{Rerun analysis plan.} On the 60 files it reports, per condition, the within-file standard deviation (SD) of cosine across runs, the intraclass correlation ICC(1,1) and the number of files whose parser outcome or side of 0.85 changes; for C0 and C2 it adds a two-way analysis of variance (file random, prompt fixed), the mean between-prompt effect with a paired $t$ interval over files, and a Welch interval per file.
+
+\textbf{Failure handling.} The pipeline loads the stories, builds the prompt for the story's project and calls the API. It removes a Markdown code fence only when the model wraps its output in one; no generated text is edited by hand. Failure handling differed between runs. The C0 notebook set no timeout, so the client library's default of 600 s applied, and retried any failed request, including rate-limit errors, after a 60 s wait with no limit on the number of attempts; it did not check for empty output and logged only successful calls. For C1 and C2 a script made up to five attempts per story after an error, waiting 5, 10, 20, 40 and 60 s; it marked an output that was empty after fence removal, or a story whose five attempts all failed, as not OK with an empty output, to be retried in a later run of the script; such a story would have stayed in the denominator as a parser FAIL and been excluded from the cosine analysis. In both runs the client library could also retry a request twice on its own. None of these events is recorded: all 522 C1 and C2 requests succeeded at the first attempt, no output in any condition was empty, and all 261 C0 requests returned an output. The intervals between consecutive C0 log entries track output length (Pearson $r = 0.995$, at most 61 s), so a 60 s retry wait is unlikely to have occurred. The rerun script set a 600 s timeout and disabled the library's retries, so that every attempt is logged; it made up to five attempts per request, waiting 5, 10, 20 and 40 s, and counted an empty output as a failed attempt; a request still failing after a resumed run would have stayed in the denominator as a parser FAIL. All 1,764 rerun requests succeeded at the first attempt with a non-empty output. Each call is appended to a log with its timestamp and token counts. In the C0 log, the model field is the requested model name written by the script, not the name returned by the API, and the logged cost was computed with outdated prices. Recomputed from the logged token counts (328,257 prompt and 380,494 completion tokens) at the Standard list price of \$0.75 and \$4.50 per million input and output tokens, without cache discounts, the estimated C0 cost is approximately \$1.96 (an estimate from the logged tokens, not an invoice). The C1, C2 and rerun calls log the model name returned by the API; it was the requested snapshot in every call.
+
+\textbf{Defect facets.} For each criterion the labeller recorded two facets. The business-logic facet covers wrong or missing numbers, operators, negations and conditions, wrong expected outcomes, untested criteria and contradicting additions. The temporal/causal facet covers missing preconditions, wrong triggering actions, missing or non-causal outcomes and impossible state orderings.
+
+\textbf{Keyword-order check.} The automated check parses each file and flags four keyword-order violations per scenario: no Then step, a Given after a When or Then, a Then before any When, and a non-Given step in the Background. These flags encode the checker's conventions and do not by themselves establish a business defect.
+
+\textbf{RQ1 descriptive statistics.} Table~\ref{tab:rq1} gives the distribution of skeleton cosine in condition C0 for both denominators.
+
+\begin{table}[!t]
+\centering
+\caption{Skeleton cosine similarity of condition C0. The primary analysis excludes the three prompt exemplars.}
+\label{tab:rq1}
+\begin{tabular}{lrr}
+\hline
+Statistic & $N = 258$ (primary) & $N = 261$\\
+\hline
+Minimum & 0.585 & 0.585\\
+Q1 & 0.805 & 0.806\\
+Median & 0.853 & 0.854\\
+Q3 & 0.890 & 0.894\\
+Maximum & 0.994 & 1.000\\
+Mean $\pm$ SD & 0.848 $\pm$ 0.068 & 0.850 $\pm$ 0.069\\
+Median 95\% bootstrap CI & [0.844, 0.859] & [0.845, 0.861]\\
+Files $\ge 0.85$ & 136 (52.7\%) & 139 (53.3\%)\\
+Sign test, one-sided $p$ & 0.209 & 0.161\\
+Wilcoxon $W$, $p$ (sensitivity) & 16,784, 0.474 & 17,548, 0.355\\
+Skewness [95\% CI] & $-0.41$ [$-0.76$, $-0.08$] & $-0.33$ [$-0.68$, $-0.01$]\\
+$\delta$ [95\% CI] & 0.054 [$-0.072$, 0.179] & 0.065 [$-0.060$, 0.189]\\
+\hline
+\end{tabular}
+\end{table}
+
+\textbf{Skew of the C0 scores.} The lower half of the interquartile range is wider than the upper (0.048 against 0.037), and the mean (0.848) lies below the median (0.853).
+
+\textbf{Truncated story input.} The 84 Fineract files whose stories saw only the first 15,000 characters of the reference do not score lower than the 15 whose stories saw all of it (median 0.827 vs.\ 0.824; 27 of 84 and 7 of 15 reach 0.85; two-sided Mann--Whitney $p = 0.99$). Rescoring the 84 files against the skeleton of that 15,000-character prefix changes one score, by $-0.004$, because the encoder reads only 256 tokens and 82 of the 84 prefix skeletons are longer; the Fineract and pooled medians stay at 0.826 and 0.853. With only 15 non-truncated files this comparison is descriptive.
+
+\textbf{Reference point and defects.} We could not calibrate the reference point against defect labels. The defect audit (Section~\ref{sec:res-defects}) sampled only files at or above 0.85, so it cannot estimate how often files below a given reference point are defective. Within the audited range, cosine did not differ significantly between defective and non-defective files (Mann--Whitney $p = 0.21$; AUC 0.40 when a higher cosine is read as predicting a defect, i.e.\ defective files tended to score slightly lower). With 60 files from a restricted range, this neither shows nor rules out that the metric discriminates. Defects occurred in 11 of 24 files between 0.85 and 0.875, 10 of 16 between 0.875 and 0.90, 2 of 11 between 0.90 and 0.95, and 2 of 9 at 0.95 or above.
+
+\textbf{Example of a defect.} For example, a criterion in the story of Sylius file 76 expects a cart total of \$73.80 after ``one taxed product'' is removed from a cart holding three units of a \$100 product and two units of a \$30 product, both taxed at 23\%. That total corresponds to removing the \$100 product entirely. The generated scenario removes a single unit and still expects \$73.80, although its own data imply \$319.80. The file scores 0.914, and both the reviewed labels and the independent rater mark it as defective.
+
+\textbf{Consensus round.} Of the six disagreements across the two facets, five concern three Diaspora files that the independent rater marked as defective and the reviewed labels did not; the sixth is a Sylius file in the opposite direction. All three Fineract files received the same labels. In the consensus round (28--29 October 2026), the two raters kept the shared label in all 24 agreed decisions and adopted the independent rater's label in all six disagreements, so the three Diaspora files became defective and the Sylius file lost its business-logic defect.
+
+\textbf{Defect types.} The most frequent business-logic defects are wrong expected outcomes (20 files), missing or wrong conditions (9) and wrong numbers (8); no wrong operator or lost negation was found. On the temporal/causal facet, outcomes without a verifying Then are most frequent (19 files), followed by Then steps that do not follow from the When (9) and missing preconditions (8).
+
+\textbf{Parser failures of C0.} The three failures (files 136, 148 and 154) are an Examples block outside a Scenario Outline in two files and a malformed data table in one.
+
+\textbf{Output length in the ablation.} In the same-time rerun, outputs were longer under C1 and C2 than under C0 (median 750 and 752 completion tokens against 498).
+
+\textbf{Original ablation runs.} Table~\ref{tab:h2orig} gives the ablation of Table~\ref{tab:h2} in the original runs, with C0 run on 19 July and C1 and C2 on 16 October 2026.
+
+\begin{table}[H]
+\centering
+\caption{Prompt ablation in the original runs (C0 on 19 July, C1 and C2 on 16 October 2026), on the same 255 files and with the same columns as Table~\ref{tab:h2}.}
+\label{tab:h2orig}
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lrrrrrr}
+\hline
+Condition & Median & $\ge 0.85$ [95\% CI] & Sylius & Fineract & Diaspora & PASS\\
+\hline
+C0 & 0.853 & 52.9\% [46.6, 59.2] & 0.886 & 0.827 & 0.835 & 252\\
+C1 & 0.819 & 34.5\% [28.7, 40.7] & 0.873 & 0.769 & 0.825 & 252\\
+C2 & 0.875 & 64.3\% [58.1, 70.2] & 0.892 & 0.876 & 0.840 & 254\\
+\hline
+\end{tabular}
+\end{table}
+
+\textbf{Run-to-run details.} On the 60 repeated files the five outputs were identical for one file under C0 and for none under C1 or C2. The 95\% CIs of ICC(1,1) are 0.888--0.948 for C0, 0.864--0.936 for C1 and 0.898--0.953 for C2. Between the new and the original C0, 2 of 258 outputs are identical and the median per-file difference is 0.000 (IQR $-0.018$ to 0.014). The new C0 has a 95\% CI of 0.843--0.862 for the median, with 135 files above 0.85 and 123 below.
+
+\textbf{Variance components of the rerun.} For C0 and C2, the within-prompt SD is 0.020, the file-by-prompt SD 0.042 and the between-file SD 0.055. Fineract shows the largest mean shift from C0 to C2 ($+0.013$; 9 per-file intervals above 0, 6 below).
+
+\textbf{Output cap.} Under C0cap, 81 of the 258 non-exemplar outputs stopped at the cap, and 239 files passed the parser (92.6\%, 95\% CI [88.7\%, 95.5\%]) against 258 for the rerun C0 (exact McNemar $p < 0.001$); all 19 failures are capped outputs. The median cosine was 0.854, with a median paired difference of $+0.0005$ to the rerun C0 (Wilcoxon $p = 0.108$). These two tests are descriptive and uncorrected.
+
+\textbf{Details of the threats to validity.} The stories were written by GPT-5.4-mini; story--reference trigram overlap has a median of 4.9\% (Section~\ref{sec:res-b1}), and 84 Fineract stories were written from a 15,000-character prefix and score no lower than the other Fineract files (Section~\ref{sec:res-h1}). Structural leakage such as the order and number of criteria is not measured, and no independently written backlog was available. The original ablation ran three months after C0; the C0 of the same-time rerun has almost the same median as the original C0 (0.852 against 0.853), but the rerun cannot show what changed in the hosted service between the two dates. The returned model name was recorded for C1, C2 and the rerun, the original C0 log records only the requested name, and the API returned no system fingerprint. For about two thirds of the files the similarity metric sees only the first 256 tokens of a skeleton, and a valid alternative scenario can score low because it differs from the single project-maintained reference. The audit labels were drafted by an AI assistant and retained unchanged by a reviewing author, whose review was recorded as one confirmation rather than per-file decisions; the independence of the 15-file rater rests on the rater's own declaration, and the $\kappa$ intervals reach down to 0.05 and 0.24. No rater who had not seen the labels was available to relabel the other 45 files; because the consensus adopted the independent rater's label in every disagreement and added defects in three Diaspora files, their reviewed labels may undercount defects. The two label facets are not independent. The perturbation test mutates single extracted scenarios, omitted the Background of 74 of 120 source scenarios, and draws several mutants from the same scenario, so its pairs are not independent. The projects contribute 99, 99 and 60 analysed files, and results may differ for short tickets, mixed-language requirements, private conventions or projects with unstable step definitions.

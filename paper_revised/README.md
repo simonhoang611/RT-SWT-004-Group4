@@ -11,7 +11,7 @@ revised after the reviews. The version submitted for review is in `paper/` (git 
 
 Compile with `pdflatex main.tex` (twice). The reference list is written directly in
 `sections/09_references.tex`, so no BibTeX run is needed. Supporting material is in
-Appendices A and B (`sections/10_appendix.tex`).
+Appendices A–C (`sections/10_appendix.tex`).
 
 The analyses behind the revised numbers are in `../revision/` (see `../revision/README.md`), and the
 response letter to the reviewers is `../revision/response_letter/Response_to_Reviewers_367005.md`.
