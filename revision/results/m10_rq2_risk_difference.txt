@@ -1,0 +1,2 @@
+N = 258 (primary): 255/258 PASS, rate 0.9884 (95% Clopper-Pearson CI 0.9664-0.9976); risk difference from 0.80: +0.1884 (95% CI +0.1664 to +0.1976); one-sided exact binomial p = 4.6e-21
+N = 261: 258/261 PASS, rate 0.9885 (95% Clopper-Pearson CI 0.9668-0.9976); risk difference from 0.80: +0.1885 (95% CI +0.1668 to +0.1976); one-sided exact binomial p = 2.44e-21
