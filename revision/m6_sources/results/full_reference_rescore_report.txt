@@ -1,0 +1,16 @@
+max |recomputed - results/full_per_row_metrics.csv| = 3.58e-07
+
+files whose score changes:
+ id         project    stored_vs_raw  cos_stored_recomputed  cos_full_reference  change
+114 Apache Fineract            other                 0.8222              0.8052 -0.0170
+133 Apache Fineract truncated_prefix                 0.7036              0.8248  0.1212
+
+RQ1 on the 258 non-exemplar files:
+            reference   N  median  above  below  sign_p_greater  wilcoxon_p_greater
+       stored (paper) 258  0.8533    136    122          0.2092              0.4739
+full file in data/raw 258  0.8533    136    122          0.2092              0.4517
+
+references that fail to parse (all 261):
+  stored text: [104, 108, 109, 110, 112, 117, 120, 121, 122, 125, 130, 131, 133, 200]
+  full file:   [200]
+  stored text cut at 30,038 CSV characters: [104, 108, 109, 110, 112, 117, 120, 121, 122, 125, 130, 131, 133]

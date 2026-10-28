@@ -1,0 +1,11 @@
+Sylius: clone 9ab28ca4b5ad (2026-07-17T14:30:12+02:00), 839 .feature files (814 distinct names), 100 selected
+Apache Fineract: clone 5a9330467706 (2026-07-17T12:41:07-07:00), 147 .feature files (146 distinct names), 100 selected
+Diaspora: clone b7bf1dc33566 (2026-07-17T00:19:05+02:00), 71 .feature files (58 distinct names), 61 selected
+
+stored text vs data/raw: {('Sylius', 'narrative_removed'): 34, ('Sylius', 'same'): 66, ('Apache Fineract', 'other'): 5, ('Apache Fineract', 'same'): 73, ('Apache Fineract', 'truncated_prefix'): 22, ('Diaspora', 'same'): 42, ('Diaspora', 'narrative_removed'): 19}
+truncated references (22): [104, 106, 107, 108, 109, 110, 111, 112, 116, 117, 118, 119, 120, 121, 122, 125, 126, 127, 129, 130, 131, 133]
+CSV field length of truncated references: [30038]
+references whose CSV field is exactly 30,038 characters: [104, 106, 107, 108, 109, 110, 111, 112, 116, 117, 118, 119, 120, 121, 122, 124, 125, 126, 127, 129, 130, 131, 133]
+Sylius: first-batch window  ..  (0 files)
+Apache Fineract: first-batch window 69ace799c7c6 2026-06-23 .. 963bdaf8069f 2026-06-29 (8 files)
+Diaspora: first-batch window 49f3442f6482 2025-06-22 .. b7bf1dc33566 2026-07-17 (14 files)

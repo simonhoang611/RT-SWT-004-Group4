@@ -1,0 +1,13 @@
+[core]
+	repositoryformatversion = 0
+	filemode = false
+	bare = false
+	logallrefupdates = true
+	symlinks = false
+	ignorecase = true
+[remote "origin"]
+	url = https://github.com/Sylius/Sylius.git
+	fetch = +refs/heads/2.3:refs/remotes/origin/2.3
+[branch "2.3"]
+	remote = origin
+	merge = refs/heads/2.3

@@ -1,0 +1,262 @@
+id,project,raw_path,stored_vs_raw,skeleton_cosine,cos_stored_recomputed,cos_full_reference,change,parses_stored,parses_full
+1,Sylius,data/raw/Sylius_Ecommerce/preventing_placing_order_with_disabled_shipping_method.feature,narrative_removed,0.8468596935272217,0.8468595743179321,0.8468595743179321,0.0,True,True
+2,Sylius,data/raw/Sylius_Ecommerce/being_unable_to_see_cart.feature,narrative_removed,1.0,0.9999998211860657,0.9999998211860657,0.0,True,True
+3,Sylius,data/raw/Sylius_Ecommerce/deleting_zone.feature,narrative_removed,0.9456870555877686,0.9456870555877686,0.9456870555877686,0.0,True,True
+4,Sylius,data/raw/Sylius_Ecommerce/applying_only_exclusive_catalog_promotion.feature,narrative_removed,0.9472514390945436,0.9472514390945435,0.9472514390945435,0.0,True,True
+5,Sylius,data/raw/Sylius_Ecommerce/preventing_deletion_of_purchased_product_variant.feature,narrative_removed,0.9354250431060792,0.9354249238967896,0.9354249238967896,0.0,True,True
+6,Sylius,data/raw/Sylius_Ecommerce/adding_product_option.feature,narrative_removed,0.8842424154281616,0.8842425346374512,0.8842425346374512,0.0,True,True
+7,Sylius,data/raw/Sylius_Ecommerce/product_association_type_unique_code_validation.feature,narrative_removed,0.8738020658493042,0.8738019466400146,0.8738019466400146,0.0,True,True
+8,Sylius,data/raw/Sylius_Ecommerce/filtering_orders_by_total_in_different_currencies.feature,narrative_removed,0.8334084749221802,0.8334083557128906,0.8334083557128906,0.0,True,True
+9,Sylius,data/raw/Sylius_Ecommerce/applying_catalog_promotions_with_different_states.feature,narrative_removed,0.8792132139205933,0.8792132139205933,0.8792132139205933,0.0,True,True
+10,Sylius,data/raw/Sylius_Ecommerce/modifying_billing_address.feature,narrative_removed,0.7487642765045166,0.748764157295227,0.748764157295227,0.0,True,True
+11,Sylius,data/raw/Sylius_Ecommerce/adding_product_review_as_a_guest.feature,narrative_removed,0.8431926965713501,0.843192458152771,0.843192458152771,0.0,True,True
+12,Sylius,data/raw/Sylius_Ecommerce/applying_catalog_promotion_with_proper_priorities.feature,narrative_removed,0.8465220332145691,0.8465219736099243,0.8465219736099243,0.0,True,True
+13,Sylius,data/raw/Sylius_Ecommerce/stale_live_component_prevents_completed_order_mutation.feature,narrative_removed,0.8776904344558716,0.8776904344558716,0.8776904344558716,0.0,True,True
+14,Sylius,data/raw/Sylius_Ecommerce/browsing_orders.feature,narrative_removed,0.8277587294578552,0.8277585506439209,0.8277585506439209,0.0,True,True
+15,Sylius,data/raw/Sylius_Ecommerce/addressing_order_with_shipping_address_when_it_is_required_one_for_channel.feature,narrative_removed,0.8580814599990845,0.8580814599990845,0.8580814599990845,0.0,True,True
+16,Sylius,data/raw/Sylius_Ecommerce/adding_administrator.feature,narrative_removed,0.9458646774291992,0.9458645582199097,0.9458645582199097,0.0,True,True
+17,Sylius,data/raw/Sylius_Ecommerce/adding_channel_with_shop_billing_data.feature,narrative_removed,0.9001240730285645,0.9001240730285645,0.9001240730285645,0.0,True,True
+18,Sylius,data/raw/Sylius_Ecommerce/adding_channel.feature,narrative_removed,0.8747493028640747,0.8747493028640747,0.8747493028640747,0.0,True,True
+19,Sylius,data/raw/Sylius_Ecommerce/being_unable_to_finalize_order_payment_when_item_has_become_tracked.feature,narrative_removed,0.8415932655334473,0.8415930271148682,0.8415930271148682,0.0,True,True
+20,Sylius,data/raw/Sylius_Ecommerce/browsing_product_association_types.feature,narrative_removed,0.9895427227020264,0.9895426034927368,0.9895426034927368,0.0,True,True
+21,Sylius,data/raw/Sylius_Ecommerce/adding_text_product_attribute.feature,narrative_removed,0.9322384595870972,0.9322384595870972,0.9322384595870972,0.0,True,True
+22,Sylius,data/raw/Sylius_Ecommerce/preventing_xss_attack_during_updating_address.feature,narrative_removed,0.7885506749153137,0.7885507941246033,0.7885507941246033,0.0,True,True
+23,Sylius,data/raw/Sylius_Ecommerce/returning_from_addressing_step_to_shop_homepage.feature,narrative_removed,0.9333564043045044,0.9333564043045044,0.9333564043045044,0.0,True,True
+24,Sylius,data/raw/Sylius_Ecommerce/sorting_zones_by_priority.feature,narrative_removed,0.8615679740905762,0.8615679740905762,0.8615679740905762,0.0,True,True
+25,Sylius,data/raw/Sylius_Ecommerce/ability_to_confirm_an_order_with_a_promotion_on_shipping.feature,narrative_removed,0.8530339002609253,0.8530337810516357,0.8530337810516357,0.0,True,True
+26,Sylius,data/raw/Sylius_Ecommerce/reordering_product_images.feature,narrative_removed,0.8839868307113647,0.8839868307113647,0.8839868307113647,0.0,True,True
+27,Sylius,data/raw/Sylius_Ecommerce/seeing_products_lowest_price_before_discount.feature,narrative_removed,0.8788022994995117,0.878802478313446,0.878802478313446,0.0,True,True
+28,Sylius,data/raw/Sylius_Ecommerce/sorting_shipping_method_selection.feature,narrative_removed,0.8156553506851196,0.8156553506851196,0.8156553506851196,0.0,True,True
+29,Sylius,data/raw/Sylius_Ecommerce/viewing_product_images.feature,narrative_removed,0.961082637310028,0.9610826969146729,0.9610826969146729,0.0,True,True
+30,Sylius,data/raw/Sylius_Ecommerce/taxon_validation.feature,narrative_removed,0.8589258790016174,0.8589257597923279,0.8589257597923279,0.0,True,True
+31,Sylius,data/raw/Sylius_Ecommerce/deleting_product_association_type.feature,narrative_removed,0.9944560527801514,0.994455873966217,0.994455873966217,0.0,True,True
+32,Sylius,data/raw/Sylius_Ecommerce/browsing_customer_groups.feature,narrative_removed,0.844903290271759,0.8449032306671143,0.8449032306671143,0.0,True,True
+33,Sylius,data/raw/Sylius_Ecommerce/skipping_shipping_step_when_order_does_not_require_any_shipping.feature,narrative_removed,0.736541748046875,0.7365416288375854,0.7365416288375854,0.0,True,True
+34,Sylius,data/raw/Sylius_Ecommerce/removing_product_variant_price_from_obsolete_channel.feature,narrative_removed,0.9442529678344728,0.9442529678344727,0.9442529678344727,0.0,True,True
+35,Sylius,data/raw/Sylius_Ecommerce/prevent_buying_more_products_than_available_in_a_stock.feature,same,0.9154659509658812,0.9154658913612366,0.9154658913612366,0.0,True,True
+36,Sylius,data/raw/Sylius_Ecommerce/seeing_order_items_with_proper_names.feature,same,0.8755961656570435,0.8755961656570435,0.8755961656570435,0.0,True,True
+37,Sylius,data/raw/Sylius_Ecommerce/editing_zone.feature,same,0.9084928035736084,0.908492922782898,0.908492922782898,0.0,True,True
+38,Sylius,data/raw/Sylius_Ecommerce/receiving_fixed_discount_on_specific_products.feature,same,0.8645349144935608,0.8645347952842712,0.8645347952842712,0.0,True,True
+39,Sylius,data/raw/Sylius_Ecommerce/navigating_between_product_show_and_edit_pages.feature,same,0.9455224871635436,0.9455225467681885,0.9455225467681885,0.0,True,True
+40,Sylius,data/raw/Sylius_Ecommerce/deleting_product_review.feature,same,0.945112943649292,0.9451130032539368,0.9451130032539368,0.0,True,True
+41,Sylius,data/raw/Sylius_Ecommerce/deleting_multiple_product_attributes.feature,same,0.9034841656684875,0.9034839868545532,0.9034839868545532,0.0,True,True
+42,Sylius,data/raw/Sylius_Ecommerce/filtering_payments_by_state.feature,same,0.9044272899627686,0.904427170753479,0.904427170753479,0.0,True,True
+43,Sylius,data/raw/Sylius_Ecommerce/receiving_fixed_discount_distributed_on_item_units.feature,same,0.8718346357345581,0.8718345165252686,0.8718345165252686,0.0,True,True
+44,Sylius,data/raw/Sylius_Ecommerce/modifying_shipping_address.feature,same,0.7325804829597473,0.732580304145813,0.732580304145813,0.0,True,True
+45,Sylius,data/raw/Sylius_Ecommerce/viewing_product_with_disabled_main_taxon.feature,same,0.9470893144607544,0.9470893144607544,0.9470893144607544,0.0,True,True
+46,Sylius,data/raw/Sylius_Ecommerce/receiving_fixed_discount_on_products_from_specific_taxon.feature,same,0.9161447286605836,0.9161446690559387,0.9161446690559387,0.0,True,True
+47,Sylius,data/raw/Sylius_Ecommerce/having_registration_account_form_prefilled_after_checkout.feature,same,0.8574093580245972,0.8574093580245972,0.8574093580245972,0.0,True,True
+48,Sylius,data/raw/Sylius_Ecommerce/sequential_order_number_generation.feature,same,0.7298057675361633,0.7298058271408081,0.7298058271408081,0.0,True,True
+49,Sylius,data/raw/Sylius_Ecommerce/preventing_changing_the_payment_method_of_a_cancelled_order.feature,same,0.8935776948928833,0.8935777544975281,0.8935777544975281,0.0,True,True
+50,Sylius,data/raw/Sylius_Ecommerce/editing_customer.feature,same,0.9572277665138244,0.9572277069091797,0.9572277069091797,0.0,True,True
+51,Sylius,data/raw/Sylius_Ecommerce/channel_unique_code_validation.feature,same,0.8641518950462341,0.8641517162322998,0.8641517162322998,0.0,True,True
+52,Sylius,data/raw/Sylius_Ecommerce/adding_new_channel_with_menu_taxon.feature,same,0.9280679225921632,0.9280679225921631,0.9280679225921631,0.0,True,True
+53,Sylius,data/raw/Sylius_Ecommerce/refunding_order_payment.feature,same,0.8905109167098999,0.8905109167098999,0.8905109167098999,0.0,True,True
+54,Sylius,data/raw/Sylius_Ecommerce/adding_non_translatable_attribute.feature,same,0.9381507635116576,0.9381505250930786,0.9381505250930786,0.0,True,True
+55,Sylius,data/raw/Sylius_Ecommerce/browsing_product_options.feature,same,0.8967888355255127,0.8967887759208679,0.8967887759208679,0.0,True,True
+56,Sylius,data/raw/Sylius_Ecommerce/viewing_total_quantity_of_the_cart.feature,same,0.874598503112793,0.8745983839035034,0.8745983839035034,0.0,True,True
+57,Sylius,data/raw/Sylius_Ecommerce/seeing_current_prices_of_products_after_catalog_promotion_becomes_ineligible.feature,same,0.8763545155525208,0.8763545751571655,0.8763545751571655,0.0,True,True
+58,Sylius,data/raw/Sylius_Ecommerce/zone_validation.feature,same,0.8665264844894409,0.8665264844894409,0.8665264844894409,0.0,True,True
+59,Sylius,data/raw/Sylius_Ecommerce/returning_from_order_summary_page_to_one_of_previous_steps.feature,same,0.8451180458068848,0.8451178669929504,0.8451178669929504,0.0,True,True
+60,Sylius,data/raw/Sylius_Ecommerce/viewing_non_translatable_attributes.feature,same,0.9638264179229736,0.9638262391090393,0.9638262391090393,0.0,True,True
+61,Sylius,data/raw/Sylius_Ecommerce/applying_promotion_coupon_with_per_customer_usage_limit.feature,same,0.7668248414993286,0.7668249011039734,0.7668249011039734,0.0,True,True
+62,Sylius,data/raw/Sylius_Ecommerce/product_review_validation.feature,same,0.8159376978874207,0.8159377574920654,0.8159377574920654,0.0,True,True
+63,Sylius,data/raw/Sylius_Ecommerce/applying_catalog_promotions_for_product.feature,same,0.944945991039276,0.9449459314346313,0.9449459314346313,0.0,True,True
+64,Sylius,data/raw/Sylius_Ecommerce/changing_customer_email.feature,same,0.948616623878479,0.9486165642738342,0.9486165642738342,0.0,True,True
+65,Sylius,data/raw/Sylius_Ecommerce/adding_select_product_attribute.feature,same,0.9316793084144592,0.9316793084144592,0.9316793084144592,0.0,True,True
+66,Sylius,data/raw/Sylius_Ecommerce/preventing_deletion_of_purchased_product.feature,same,0.9210219383239746,0.9210219383239746,0.9210219383239746,0.0,True,True
+67,Sylius,data/raw/Sylius_Ecommerce/payment_method_integrity_validation.feature,same,0.8742284774780273,0.8742284774780273,0.8742284774780273,0.0,True,True
+68,Sylius,data/raw/Sylius_Ecommerce/viewing_details_of_product_with_variants.feature,same,0.8170216679573059,0.8170216083526611,0.8170216083526611,0.0,True,True
+69,Sylius,data/raw/Sylius_Ecommerce/redirecting_on_login_after_being_logout.feature,same,0.9267799854278564,0.9267798066139221,0.9267798066139221,0.0,True,True
+70,Sylius,data/raw/Sylius_Ecommerce/viewing_available_shipping_methods_based_on_channel_as_a_visitor.feature,same,0.843384861946106,0.8433848023414612,0.8433848023414612,0.0,True,True
+71,Sylius,data/raw/Sylius_Ecommerce/adding_images_to_existing_product.feature,same,0.937724471092224,0.9377243518829346,0.9377243518829346,0.0,True,True
+72,Sylius,data/raw/Sylius_Ecommerce/viewing_taxon_image.feature,same,0.9869060516357422,0.986906111240387,0.986906111240387,0.0,True,True
+73,Sylius,data/raw/Sylius_Ecommerce/increasing_promotion_coupon_usage_after_placing_order.feature,same,0.8210404515266418,0.8210403919219971,0.8210403919219971,0.0,True,True
+74,Sylius,data/raw/Sylius_Ecommerce/sorting_payment_methods_by_position.feature,same,0.9397735595703124,0.939773440361023,0.939773440361023,0.0,True,True
+75,Sylius,data/raw/Sylius_Ecommerce/adding_checkbox_product_attribute.feature,same,0.8811233043670654,0.8811233043670654,0.8811233043670654,0.0,True,True
+76,Sylius,data/raw/Sylius_Ecommerce/applying_correct_taxes_for_items_with_the_same_tax_rate.feature,same,0.9137492775917052,0.9137493968009949,0.9137493968009949,0.0,True,True
+77,Sylius,data/raw/Sylius_Ecommerce/removing_catalog_promotions.feature,same,0.942913055419922,0.9429131150245667,0.9429131150245667,0.0,True,True
+78,Sylius,data/raw/Sylius_Ecommerce/recovering_order_after_cancelled_authorized_payment.feature,same,0.8998957872390747,0.8998957872390747,0.8998957872390747,0.0,True,True
+79,Sylius,data/raw/Sylius_Ecommerce/tax_category_unique_code_validation.feature,same,0.9080626964569092,0.908062756061554,0.908062756061554,0.0,True,True
+80,Sylius,data/raw/Sylius_Ecommerce/shipping_order.feature,same,0.8680106401443481,0.8680105209350586,0.8680105209350586,0.0,True,True
+81,Sylius,data/raw/Sylius_Ecommerce/archiving_shipping_methods.feature,same,0.9006376266479492,0.900637686252594,0.900637686252594,0.0,True,True
+82,Sylius,data/raw/Sylius_Ecommerce/browsing_shipments_from_multiple_channels.feature,same,0.7036337852478027,0.703633725643158,0.703633725643158,0.0,True,True
+83,Sylius,data/raw/Sylius_Ecommerce/seeing_items_on_order_summary_page.feature,same,0.8046802282333374,0.8046801686286926,0.8046801686286926,0.0,True,True
+84,Sylius,data/raw/Sylius_Ecommerce/seeing_correct_option_values_while_editing_product_variant.feature,same,0.8638969659805298,0.863896906375885,0.863896906375885,0.0,True,True
+85,Sylius,data/raw/Sylius_Ecommerce/not_being_able_to_delete_last_available_channel.feature,same,0.9686706066131592,0.9686704874038696,0.9686704874038696,0.0,True,True
+86,Sylius,data/raw/Sylius_Ecommerce/receiving_discount_based_on_total_of_items_from_specific_taxon.feature,same,0.9025750160217284,0.9025749564170837,0.9025749564170837,0.0,True,True
+87,Sylius,data/raw/Sylius_Ecommerce/applying_catalog_promotions_for_product_created_in_catalog_promotions_scope.feature,same,0.9376372694969176,0.937637209892273,0.937637209892273,0.0,True,True
+88,Sylius,data/raw/Sylius_Ecommerce/displaying_themed_channel_website.feature,same,0.8870778679847717,0.8870779275894165,0.8870779275894165,0.0,True,True
+89,Sylius,data/raw/Sylius_Ecommerce/seeing_order_with_different_promotions.feature,same,0.8743928670883179,0.8743928074836731,0.8743928074836731,0.0,True,True
+90,Sylius,data/raw/Sylius_Ecommerce/editing_tax_category.feature,same,0.9271806478500366,0.9271806478500366,0.9271806478500366,0.0,True,True
+91,Sylius,data/raw/Sylius_Ecommerce/assigning_customer_ip_address_to_placed_order.feature,same,0.8796117901802063,0.8796117305755615,0.8796117305755615,0.0,True,True
+92,Sylius,data/raw/Sylius_Ecommerce/preventing_adding_to_cart_product_or_variant_from_another_channel.feature,same,0.8804054856300354,0.8804053068161011,0.8804053068161011,0.0,True,True
+93,Sylius,data/raw/Sylius_Ecommerce/toggling_catalog_promotion.feature,same,0.936922013759613,0.9369218349456787,0.9369218349456787,0.0,True,True
+94,Sylius,data/raw/Sylius_Ecommerce/viewing_exchange_rates_based_on_current_channel.feature,same,0.9294031858444214,0.9294031262397766,0.9294031262397766,0.0,True,True
+95,Sylius,data/raw/Sylius_Ecommerce/seeing_shipping_fee_on_multiple_channels.feature,same,0.7849797606468201,0.7849797606468201,0.7849797606468201,0.0,True,True
+96,Sylius,data/raw/Sylius_Ecommerce/deleting_shipping_method.feature,same,0.9729660749435424,0.9729659557342529,0.9729659557342529,0.0,True,True
+97,Sylius,data/raw/Sylius_Ecommerce/restricting_list_of_countries_available_for_addressing.feature,same,0.9296935200691224,0.9296934604644775,0.9296934604644775,0.0,True,True
+98,Sylius,data/raw/Sylius_Ecommerce/selecting_main_taxons_for_product_in_a_different_locales.feature,same,0.8824858665466309,0.8824856281280518,0.8824856281280518,0.0,True,True
+99,Sylius,data/raw/Sylius_Ecommerce/applying_catalog_promotions_in_proper_channels.feature,same,0.9070749282836914,0.9070749282836914,0.9070749282836914,0.0,True,True
+100,Sylius,data/raw/Sylius_Ecommerce/sorting_inventory.feature,same,0.9589826464653016,0.9589824676513672,0.9589824676513672,0.0,True,True
+101,Apache Fineract,data/raw/Apache_Fineract_Finance/WorkingCapitalLoanCreditBalanceRefundAccountingEntries.feature,other,0.8235040307044983,0.8235040903091431,0.8235040903091431,0.0,True,True
+102,Apache Fineract,data/raw/Apache_Fineract_Finance/WorkingCapitalNearBreachConfiguration.feature,same,0.9974088668823242,0.9974087476730347,0.9974087476730347,0.0,True,True
+103,Apache Fineract,data/raw/Apache_Fineract_Finance/0_COB.feature,other,0.8688039779663086,0.8688039779663086,0.8688039779663086,0.0,True,True
+104,Apache Fineract,data/raw/Apache_Fineract_Finance/WorkingCapitalDiscountAmortizationRecalculation.feature,truncated_prefix,0.8429780006408691,0.8429778814315796,0.8429778814315796,0.0,False,True
+105,Apache Fineract,data/raw/Apache_Fineract_Finance/infrastructure.springbatch.feature,same,0.6969324350357056,0.696932315826416,0.696932315826416,0.0,True,True
+106,Apache Fineract,data/raw/Apache_Fineract_Finance/LoanAccrualTransaction.feature,truncated_prefix,0.8614972829818726,0.8614972233772278,0.8614972233772278,0.0,True,True
+107,Apache Fineract,data/raw/Apache_Fineract_Finance/WorkingCapitalDelinquencyPause.feature,truncated_prefix,0.8381062746047974,0.8381061553955078,0.8381061553955078,0.0,True,True
+108,Apache Fineract,data/raw/Apache_Fineract_Finance/LoanReAging-Part2.feature,truncated_prefix,0.8575183153152466,0.857518196105957,0.857518196105957,0.0,False,True
+109,Apache Fineract,data/raw/Apache_Fineract_Finance/LoanDownPayment-Part2.feature,truncated_prefix,0.8417873382568359,0.8417874574661255,0.8417874574661255,0.0,False,True
+110,Apache Fineract,data/raw/Apache_Fineract_Finance/LoanChargesProgressiveLoan.feature,truncated_prefix,0.8264937996864319,0.826493501663208,0.826493501663208,0.0,False,True
+111,Apache Fineract,data/raw/Apache_Fineract_Finance/LoanAccrualActivity-Part2.feature,truncated_prefix,0.8493717908859253,0.849371612071991,0.849371612071991,0.0,True,True
+112,Apache Fineract,data/raw/Apache_Fineract_Finance/LoanChargeback-Part3.feature,truncated_prefix,0.7895886898040771,0.7895888090133667,0.7895888090133667,0.0,False,True
+113,Apache Fineract,data/raw/Apache_Fineract_Finance/infrastructure.classpath.feature,same,0.803941011428833,0.803941011428833,0.803941011428833,0.0,True,True
+114,Apache Fineract,data/raw/Apache_Fineract_Finance/WorkingCapitalTransactionReprocessing.feature,other,0.8221852779388428,0.822185218334198,0.8051645755767822,-0.01702064275741577,True,True
+115,Apache Fineract,data/raw/Apache_Fineract_Finance/InlineCOB.feature,same,0.8241338729858398,0.8241339921951294,0.8241339921951294,0.0,True,True
+116,Apache Fineract,data/raw/Apache_Fineract_Finance/EMICalculation-Part3.feature,truncated_prefix,0.7512855529785156,0.7512855529785156,0.7512855529785156,0.0,True,True
+117,Apache Fineract,data/raw/Apache_Fineract_Finance/LoanMigration.feature,truncated_prefix,0.8106328845024109,0.810632586479187,0.810632586479187,0.0,False,True
+118,Apache Fineract,data/raw/Apache_Fineract_Finance/EMICalculation-Part4.feature,truncated_prefix,0.812156617641449,0.8121565580368042,0.8121565580368042,0.0,True,True
+119,Apache Fineract,data/raw/Apache_Fineract_Finance/LoanInterestPaymentWaiver.feature,truncated_prefix,0.8151640892028809,0.8151639699935913,0.8151639699935913,0.0,True,True
+120,Apache Fineract,data/raw/Apache_Fineract_Finance/LoanInterestPause.feature,truncated_prefix,0.8259611129760742,0.8259609341621399,0.8259609341621399,0.0,False,True
+121,Apache Fineract,data/raw/Apache_Fineract_Finance/Reporting.feature,truncated_prefix,0.8529846668243408,0.8529844284057617,0.8529844284057617,0.0,False,True
+122,Apache Fineract,data/raw/Apache_Fineract_Finance/LoanChargesDisbursement.feature,truncated_prefix,0.8288896083831787,0.8288896083831787,0.8288896083831787,0.0,False,True
+123,Apache Fineract,data/raw/Apache_Fineract_Finance/BusinessDate.feature,same,0.8593388795852661,0.8593388199806213,0.8593388199806213,0.0,True,True
+124,Apache Fineract,data/raw/Apache_Fineract_Finance/WorkingCapitalDiscountAdjustment.feature,other,0.888274073600769,0.8882741928100586,0.8882741928100586,0.0,True,True
+125,Apache Fineract,data/raw/Apache_Fineract_Finance/LoanReAgingEqualAmortization-Part1.feature,truncated_prefix,0.8272061347961426,0.827206015586853,0.827206015586853,0.0,False,True
+126,Apache Fineract,data/raw/Apache_Fineract_Finance/LoanRepayment-Part2.feature,truncated_prefix,0.752900242805481,0.752900242805481,0.752900242805481,0.0,True,True
+127,Apache Fineract,data/raw/Apache_Fineract_Finance/Loan-Part2.feature,truncated_prefix,0.7059836387634277,0.705983579158783,0.705983579158783,0.0,True,True
+128,Apache Fineract,data/raw/Apache_Fineract_Finance/WorkingCapitalLoanOrigination.feature,other,0.8720672130584717,0.8720672130584717,0.8720672130584717,0.0,True,True
+129,Apache Fineract,data/raw/Apache_Fineract_Finance/EMICalculation-Part2.feature,truncated_prefix,0.8590179085731506,0.8590178489685059,0.8590178489685059,0.0,True,True
+130,Apache Fineract,data/raw/Apache_Fineract_Finance/LoanRepayment-Part4.feature,truncated_prefix,0.8268017768859863,0.8268018364906311,0.8268018364906311,0.0,False,True
+131,Apache Fineract,data/raw/Apache_Fineract_Finance/LoanContractTermination.feature,truncated_prefix,0.8061673045158386,0.8061672449111938,0.8061672449111938,0.0,False,True
+132,Apache Fineract,data/raw/Apache_Fineract_Finance/WorkingCapitalBatchApi.feature,same,0.8742923736572266,0.874292254447937,0.874292254447937,0.0,True,True
+133,Apache Fineract,data/raw/Apache_Fineract_Finance/WorkingCapitalAmortizationSchedule.feature,truncated_prefix,0.7035825252532959,0.7035822868347168,0.8248225450515747,0.12124025821685791,False,True
+134,Apache Fineract,data/raw/Apache_Fineract_Finance/Configuration.feature,same,0.8116017580032349,0.8116016983985901,0.8116016983985901,0.0,True,True
+135,Apache Fineract,data/raw/Apache_Fineract_Finance/WorkingCapitalLoanProduct.feature,same,0.8847726583480835,0.884772539138794,0.884772539138794,0.0,True,True
+136,Apache Fineract,data/raw/Apache_Fineract_Finance/LoanDelinquency-Part2.feature,same,0.7942999601364136,0.7942997813224792,0.7942997813224792,0.0,True,True
+137,Apache Fineract,data/raw/Apache_Fineract_Finance/LoanReAging-Part1.feature,same,0.7805502414703369,0.7805498838424683,0.7805498838424683,0.0,True,True
+138,Apache Fineract,data/raw/Apache_Fineract_Finance/Loan-Part3.feature,same,0.7618412971496582,0.7618411779403687,0.7618411779403687,0.0,True,True
+139,Apache Fineract,data/raw/Apache_Fineract_Finance/WorkingCapitalPeriodPaymentRate.feature,same,0.8002870082855225,0.8002868890762329,0.8002868890762329,0.0,True,True
+140,Apache Fineract,data/raw/Apache_Fineract_Finance/LoanAccrualActivity-Part1.feature,same,0.7660717964172363,0.7660717964172363,0.7660717964172363,0.0,True,True
+141,Apache Fineract,data/raw/Apache_Fineract_Finance/LoanRegressionSafety.feature,same,0.8820130825042725,0.8820130825042725,0.8820130825042725,0.0,True,True
+142,Apache Fineract,data/raw/Apache_Fineract_Finance/LoanPayoutRefund.feature,same,0.7722344398498535,0.7722344398498535,0.7722344398498535,0.0,True,True
+143,Apache Fineract,data/raw/Apache_Fineract_Finance/WorkingCapitalBreachConfiguration.feature,same,0.9720382690429688,0.972038209438324,0.972038209438324,0.0,True,True
+144,Apache Fineract,data/raw/Apache_Fineract_Finance/WorkingCapitalLoanGoodwillCredit.feature,same,0.8508179187774658,0.8508176803588867,0.8508176803588867,0.0,True,True
+145,Apache Fineract,data/raw/Apache_Fineract_Finance/LoanReAmortizationAccruals.feature,same,0.8089763522148132,0.8089761734008789,0.8089761734008789,0.0,True,True
+146,Apache Fineract,data/raw/Apache_Fineract_Finance/LoanChargeOff-Part2.feature,same,0.8020042777061462,0.8020042181015015,0.8020042181015015,0.0,True,True
+147,Apache Fineract,data/raw/Apache_Fineract_Finance/LoanReAmortizationPreview.feature,same,0.7548428773880005,0.7548426389694214,0.7548426389694214,0.0,True,True
+148,Apache Fineract,data/raw/Apache_Fineract_Finance/LoanReAmortization-Part2.feature,same,0.7982848882675171,0.7982847094535828,0.7982847094535828,0.0,True,True
+149,Apache Fineract,data/raw/Apache_Fineract_Finance/LoanDelayedScheduleCaptures-Part1.feature,same,0.8437687754631042,0.8437686562538147,0.8437686562538147,0.0,True,True
+150,Apache Fineract,data/raw/Apache_Fineract_Finance/LoanOverrideFileds.feature,same,0.7646026611328125,0.7646026015281677,0.7646026015281677,0.0,True,True
+151,Apache Fineract,data/raw/Apache_Fineract_Finance/Loan-Part1.feature,same,0.7779790163040161,0.7779790163040161,0.7779790163040161,0.0,True,True
+152,Apache Fineract,data/raw/Apache_Fineract_Finance/LoanChargeOff-Part3.feature,same,0.7780547142028809,0.7780545353889465,0.7780545353889465,0.0,True,True
+153,Apache Fineract,data/raw/Apache_Fineract_Finance/WorkingCapitalDelinquencyReschedule.feature,same,0.8086267709732056,0.8086267113685608,0.8086267113685608,0.0,True,True
+154,Apache Fineract,data/raw/Apache_Fineract_Finance/LoanInterestRateChange.feature,same,0.8228840827941895,0.8228839635848999,0.8228839635848999,0.0,True,True
+155,Apache Fineract,data/raw/Apache_Fineract_Finance/WorkingCapitalLoanGoodwillCreditBackdatedUndo.feature,same,0.8715108633041382,0.8715107440948486,0.8715107440948486,0.0,True,True
+156,Apache Fineract,data/raw/Apache_Fineract_Finance/WorkingCapitalBreachDisable.feature,same,0.8559976816177368,0.8559975624084473,0.8559975624084473,0.0,True,True
+157,Apache Fineract,data/raw/Apache_Fineract_Finance/WorkingCapitalLoanRepayment.feature,same,0.8535357117652893,0.8535355925559998,0.8535355925559998,0.0,True,True
+158,Apache Fineract,data/raw/Apache_Fineract_Finance/WorkingCapitalLoanCharge.feature,same,0.8085600137710571,0.8085599541664124,0.8085599541664124,0.0,True,True
+159,Apache Fineract,data/raw/Apache_Fineract_Finance/LoanDelinquency-Part1.feature,same,0.8966465592384338,0.8966465592384338,0.8966465592384338,0.0,True,True
+160,Apache Fineract,data/raw/Apache_Fineract_Finance/LoanReAgingEqualAmortization-Part2.feature,same,0.819881796836853,0.8198817372322083,0.8198817372322083,0.0,True,True
+161,Apache Fineract,data/raw/Apache_Fineract_Finance/Datatables.feature,same,0.5847411155700684,0.5847411751747131,0.5847411751747131,0.0,True,True
+162,Apache Fineract,data/raw/Apache_Fineract_Finance/WorkingCapitalLoanRepaymentOverpayment.feature,same,0.8586449027061462,0.8586447834968567,0.8586447834968567,0.0,True,True
+163,Apache Fineract,data/raw/Apache_Fineract_Finance/Client.feature,same,0.6827452182769775,0.6827451586723328,0.6827451586723328,0.0,True,True
+164,Apache Fineract,data/raw/Apache_Fineract_Finance/LoanReAgingAccrualsEqualAmortization.feature,same,0.8758989572525024,0.8758988380432129,0.8758988380432129,0.0,True,True
+165,Apache Fineract,data/raw/Apache_Fineract_Finance/LoanChargesTrancheDisbursement.feature,same,0.7797027230262756,0.7797027230262756,0.7797027230262756,0.0,True,True
+166,Apache Fineract,data/raw/Apache_Fineract_Finance/LoanChargeback-Part1.feature,same,0.8292774558067322,0.829277515411377,0.829277515411377,0.0,True,True
+167,Apache Fineract,data/raw/Apache_Fineract_Finance/WorkingCapitalBreachSchedule.feature,same,0.8395522832870483,0.8395522832870483,0.8395522832870483,0.0,True,True
+168,Apache Fineract,data/raw/Apache_Fineract_Finance/LoanBuyDownFees.feature,same,0.7629218101501465,0.7629218101501465,0.7629218101501465,0.0,True,True
+169,Apache Fineract,data/raw/Apache_Fineract_Finance/WorkingCapitalTransactionAllocation.feature,same,0.8381781578063965,0.8381781578063965,0.8381781578063965,0.0,True,True
+170,Apache Fineract,data/raw/Apache_Fineract_Finance/LoanProduct.feature,same,0.8032994270324707,0.8032993078231812,0.8032993078231812,0.0,True,True
+171,Apache Fineract,data/raw/Apache_Fineract_Finance/LoanYearEndRetainedEarning.feature,same,0.6637433171272278,0.6637431383132935,0.6637431383132935,0.0,True,True
+172,Apache Fineract,data/raw/Apache_Fineract_Finance/WorkingCapitalLoanCreditBalanceRefund.feature,same,0.8612377643585205,0.8612377643585205,0.8612377643585205,0.0,True,True
+173,Apache Fineract,data/raw/Apache_Fineract_Finance/WorkingCapitalDiscountAmortization.feature,same,0.8104190826416016,0.810418963432312,0.810418963432312,0.0,True,True
+174,Apache Fineract,data/raw/Apache_Fineract_Finance/WorkingCapitalDiscountAdjustmentBackdateUndo.feature,same,0.9062085151672364,0.9062084555625916,0.9062084555625916,0.0,True,True
+175,Apache Fineract,data/raw/Apache_Fineract_Finance/WorkingCapitalDelinquencyConfiguration.feature,same,0.9734947085380554,0.9734947085380554,0.9734947085380554,0.0,True,True
+176,Apache Fineract,data/raw/Apache_Fineract_Finance/WorkingCapitalDiscountAmortizationAdjustment.feature,same,0.8768365383148193,0.8768366575241089,0.8768366575241089,0.0,True,True
+177,Apache Fineract,data/raw/Apache_Fineract_Finance/WorkingCapitalBreachReschedule.feature,same,0.8150988221168518,0.815098762512207,0.815098762512207,0.0,True,True
+178,Apache Fineract,data/raw/Apache_Fineract_Finance/LoanReschedule.feature,same,0.8582345247268677,0.8582345247268677,0.8582345247268677,0.0,True,True
+179,Apache Fineract,data/raw/Apache_Fineract_Finance/WorkingCapitalDatatables.feature,same,0.7395908236503601,0.7395907640457153,0.7395907640457153,0.0,True,True
+180,Apache Fineract,data/raw/Apache_Fineract_Finance/WorkingCapitalLoanActionTemplates.feature,same,0.901049017906189,0.9010489583015442,0.9010489583015442,0.0,True,True
+181,Apache Fineract,data/raw/Apache_Fineract_Finance/LoanCBR.feature,same,0.7633404731750488,0.7633403539657593,0.7633403539657593,0.0,True,True
+182,Apache Fineract,data/raw/Apache_Fineract_Finance/EMICalculation-Part1.feature,same,0.8363639712333679,0.8363640308380127,0.8363640308380127,0.0,True,True
+183,Apache Fineract,data/raw/Apache_Fineract_Finance/LoanCapitalizedIncome-Part2.feature,same,0.8580552339553833,0.8580551147460938,0.8580551147460938,0.0,True,True
+184,Apache Fineract,data/raw/Apache_Fineract_Finance/WorkingCapitalLoanProductAdvancedAccounting.feature,same,0.8627907037734985,0.8627906441688538,0.8627906441688538,0.0,True,True
+185,Apache Fineract,data/raw/Apache_Fineract_Finance/WorkingCapitalDelinquencyResume.feature,same,0.8707449436187744,0.8707447052001953,0.8707447052001953,0.0,True,True
+186,Apache Fineract,data/raw/Apache_Fineract_Finance/WorkingCapitalLoanGoodwillCreditAccountingEntries.feature,same,0.8941245675086975,0.8941245675086975,0.8941245675086975,0.0,True,True
+187,Apache Fineract,data/raw/Apache_Fineract_Finance/WorkingCapitalNearBreachEvaluation.feature,same,0.8888710141181946,0.8888710141181946,0.8888710141181946,0.0,True,True
+188,Apache Fineract,data/raw/Apache_Fineract_Finance/LoanDelayedScheduleCaptures-Part2.feature,same,0.7942495346069336,0.7942495346069336,0.7942495346069336,0.0,True,True
+189,Apache Fineract,data/raw/Apache_Fineract_Finance/WorkingCapitalBreachReset.feature,same,0.769931435585022,0.7699313759803772,0.7699313759803772,0.0,True,True
+190,Apache Fineract,data/raw/Apache_Fineract_Finance/LoanRepayment-Part3.feature,same,0.775617241859436,0.7756171226501465,0.7756171226501465,0.0,True,True
+191,Apache Fineract,data/raw/Apache_Fineract_Finance/LoanChargesCumulativeLoan.feature,same,0.8004380464553833,0.8004380464553833,0.8004380464553833,0.0,True,True
+192,Apache Fineract,data/raw/Apache_Fineract_Finance/LoanCapitalizedIncome-Part1.feature,same,0.8359201550483704,0.835919976234436,0.835919976234436,0.0,True,True
+193,Apache Fineract,data/raw/Apache_Fineract_Finance/LoanWriteOff.feature,same,0.8559240698814392,0.855924129486084,0.855924129486084,0.0,True,True
+194,Apache Fineract,data/raw/Apache_Fineract_Finance/LoanMerchantIssuedRefund.feature,same,0.8473310470581055,0.8473310470581055,0.8473310470581055,0.0,True,True
+195,Apache Fineract,data/raw/Apache_Fineract_Finance/LoanRepaymentSchedule.feature,same,0.8828449249267578,0.8828449249267578,0.8828449249267578,0.0,True,True
+196,Apache Fineract,data/raw/Apache_Fineract_Finance/WorkingCapital_COB.feature,same,0.8206927180290222,0.8206924200057983,0.8206924200057983,0.0,True,True
+197,Apache Fineract,data/raw/Apache_Fineract_Finance/LoanChargesInstallmentFee.feature,same,0.8008432388305664,0.8008431792259216,0.8008431792259216,0.0,True,True
+198,Apache Fineract,data/raw/Apache_Fineract_Finance/AssetExternalization-Part1.feature,same,0.8878820538520813,0.8878821134567261,0.8878821134567261,0.0,True,True
+199,Apache Fineract,data/raw/Apache_Fineract_Finance/LoanReAgingAccruals.feature,same,0.845922589302063,0.8459224700927734,0.8459224700927734,0.0,True,True
+200,Apache Fineract,data/raw/Apache_Fineract_Finance/BatchApi.feature,same,0.8534873723983765,0.8534873723983765,0.8534873723983765,0.0,False,False
+201,Diaspora,data/raw/Diaspora_Social_Network/single_post_view_moderation.feature,same,0.8554130792617798,0.8554129600524902,0.8554129600524902,0.0,True,True
+202,Diaspora,data/raw/Diaspora_Social_Network/media-embed.feature,narrative_removed,1.0000001192092896,1.0000001192092896,1.0000001192092896,0.0,True,True
+203,Diaspora,data/raw/Diaspora_Social_Network/connects_users.feature,same,0.7573209404945374,0.7573208808898926,0.7573208808898926,0.0,True,True
+204,Diaspora,data/raw/Diaspora_Social_Network/change_settings.feature,same,0.8096290826797485,0.8096290826797485,0.8096290826797485,0.0,True,True
+205,Diaspora,data/raw/Diaspora_Social_Network/oembed.feature,narrative_removed,0.8349426984786987,0.8349425792694092,0.8349425792694092,0.0,True,True
+206,Diaspora,data/raw/Diaspora_Social_Network/post_with_a_poll.feature,same,0.8506609201431274,0.8506609201431274,0.8506609201431274,0.0,True,True
+207,Diaspora,data/raw/Diaspora_Social_Network/diaspora_links_resolve.feature,narrative_removed,0.9172452688217164,0.9172452092170715,0.9172452092170715,0.0,True,True
+208,Diaspora,data/raw/Diaspora_Social_Network/registrations.feature,narrative_removed,0.7749359607696533,0.7749358415603638,0.7749358415603638,0.0,True,True
+209,Diaspora,data/raw/Diaspora_Social_Network/edits_profile.feature,same,0.7496908903121948,0.7496909499168396,0.7496909499168396,0.0,True,True
+210,Diaspora,data/raw/Diaspora_Social_Network/closes_account.feature,narrative_removed,0.9505735635757446,0.9505736827850342,0.9505736827850342,0.0,True,True
+211,Diaspora,data/raw/Diaspora_Social_Network/tags.feature,same,0.6906853914260864,0.6906852722167969,0.6906852722167969,0.0,True,True
+212,Diaspora,data/raw/Diaspora_Social_Network/hovercards.feature,narrative_removed,0.7969875931739807,0.7969874739646912,0.7969874739646912,0.0,True,True
+213,Diaspora,data/raw/Diaspora_Social_Network/people_aspects.feature,narrative_removed,0.700724720954895,0.7007246017456055,0.7007246017456055,0.0,True,True
+214,Diaspora,data/raw/Diaspora_Social_Network/registrations_1.feature,narrative_removed,0.7921079397201538,0.7921077013015747,0.7921077013015747,0.0,True,True
+215,Diaspora,data/raw/Diaspora_Social_Network/conversations.feature,narrative_removed,0.853611946105957,0.8536120653152466,0.8536120653152466,0.0,True,True
+216,Diaspora,data/raw/Diaspora_Social_Network/manages_aspects.feature,narrative_removed,0.8575509190559387,0.8575507998466492,0.8575507998466492,0.0,True,True
+217,Diaspora,data/raw/Diaspora_Social_Network/posts_from_main_page.feature,narrative_removed,0.8158317804336548,0.81583172082901,0.81583172082901,0.0,True,True
+218,Diaspora,data/raw/Diaspora_Social_Network/not_safe_for_work.feature,same,0.8179084062576294,0.8179082870483398,0.8179082870483398,0.0,True,True
+219,Diaspora,data/raw/Diaspora_Social_Network/logs_in_and_out.feature,same,0.8935070633888245,0.8935068845748901,0.8935068845748901,0.0,True,True
+220,Diaspora,data/raw/Diaspora_Social_Network/edits_profile_1.feature,same,0.7706295847892761,0.7706296443939209,0.7706296443939209,0.0,True,True
+221,Diaspora,data/raw/Diaspora_Social_Network/reshare.feature,narrative_removed,0.7347276210784912,0.7347277402877808,0.7347277402877808,0.0,True,True
+222,Diaspora,data/raw/Diaspora_Social_Network/logged_out_browsing.feature,narrative_removed,0.7124931812286377,0.7124931812286377,0.7124931812286377,0.0,True,True
+223,Diaspora,data/raw/Diaspora_Social_Network/search.feature,narrative_removed,0.7994173765182495,0.79941725730896,0.79941725730896,0.0,True,True
+224,Diaspora,data/raw/Diaspora_Social_Network/screenshots.feature,narrative_removed,0.8843275904655457,0.88432776927948,0.88432776927948,0.0,True,True
+225,Diaspora,data/raw/Diaspora_Social_Network/report.feature,same,0.8006967306137085,0.800696849822998,0.800696849822998,0.0,True,True
+226,Diaspora,data/raw/Diaspora_Social_Network/change_password.feature,same,0.8435128927230835,0.8435126543045044,0.8435126543045044,0.0,True,True
+227,Diaspora,data/raw/Diaspora_Social_Network/profile_photos.feature,same,0.843787431716919,0.843787431716919,0.843787431716919,0.0,True,True
+228,Diaspora,data/raw/Diaspora_Social_Network/home.feature,narrative_removed,0.7294996976852417,0.7294997572898865,0.7294997572898865,0.0,True,True
+229,Diaspora,data/raw/Diaspora_Social_Network/drawer.feature,narrative_removed,0.8697635531425476,0.8697635531425476,0.8697635531425476,0.0,True,True
+230,Diaspora,data/raw/Diaspora_Social_Network/posts_from_profile_page.feature,narrative_removed,0.7067298293113708,0.7067298889160156,0.7067298889160156,0.0,True,True
+231,Diaspora,data/raw/Diaspora_Social_Network/getting_started.feature,same,0.8041204214096069,0.8041201829910278,0.8041201829910278,0.0,True,True
+232,Diaspora,data/raw/Diaspora_Social_Network/activity_stream.feature,narrative_removed,0.827770471572876,0.8277704119682312,0.8277704119682312,0.0,True,True
+233,Diaspora,data/raw/Diaspora_Social_Network/invitations.feature,same,0.8413374423980713,0.8413373827934265,0.8413373827934265,0.0,True,True
+234,Diaspora,data/raw/Diaspora_Social_Network/aspect_navigation.feature,same,0.944997251033783,0.9449973106384277,0.9449973106384277,0.0,True,True
+235,Diaspora,data/raw/Diaspora_Social_Network/auto_follow_back.feature,same,0.7869808673858643,0.7869807481765747,0.7869807481765747,0.0,True,True
+236,Diaspora,data/raw/Diaspora_Social_Network/blocks_user.feature,same,0.8786800503730774,0.8786799907684326,0.8786799907684326,0.0,True,True
+237,Diaspora,data/raw/Diaspora_Social_Network/comments.feature,same,0.8152098059654236,0.8152098655700684,0.8152098655700684,0.0,True,True
+238,Diaspora,data/raw/Diaspora_Social_Network/donations.feature,same,0.9173388481140136,0.9173387885093689,0.9173387885093689,0.0,True,True
+239,Diaspora,data/raw/Diaspora_Social_Network/download_photos.feature,same,0.8733370304107666,0.873336911201477,0.873336911201477,0.0,True,True
+240,Diaspora,data/raw/Diaspora_Social_Network/follows_tags.feature,same,0.920059859752655,0.9200598001480103,0.9200598001480103,0.0,True,True
+241,Diaspora,data/raw/Diaspora_Social_Network/help.feature,same,0.8501456379890442,0.850145697593689,0.850145697593689,0.0,True,True
+242,Diaspora,data/raw/Diaspora_Social_Network/keyboard_navigation.feature,same,0.7808986902236938,0.7808985710144043,0.7808985710144043,0.0,True,True
+243,Diaspora,data/raw/Diaspora_Social_Network/likes.feature,same,0.8755416870117188,0.8755414485931396,0.8755414485931396,0.0,True,True
+244,Diaspora,data/raw/Diaspora_Social_Network/mentions.feature,same,0.845950722694397,0.8459506630897522,0.8459506630897522,0.0,True,True
+245,Diaspora,data/raw/Diaspora_Social_Network/mentions_from_profile_page.feature,same,0.8503067493438721,0.8503066301345825,0.8503066301345825,0.0,True,True
+246,Diaspora,data/raw/Diaspora_Social_Network/notifications.feature,same,0.7278736233711243,0.7278734445571899,0.7278734445571899,0.0,True,True
+247,Diaspora,data/raw/Diaspora_Social_Network/oidc_auth_code_flow.feature,same,0.7729515433311462,0.7729514837265015,0.7729514837265015,0.0,True,True
+248,Diaspora,data/raw/Diaspora_Social_Network/oidc_implicit_flow.feature,same,0.7821880578994751,0.7821880578994751,0.7821880578994751,0.0,True,True
+249,Diaspora,data/raw/Diaspora_Social_Network/photo_gallery.feature,same,0.962281346321106,0.9622814059257507,0.9622814059257507,0.0,True,True
+250,Diaspora,data/raw/Diaspora_Social_Network/posts_from_tag_page.feature,same,0.8209439516067505,0.8209438920021057,0.8209438920021057,0.0,True,True
+251,Diaspora,data/raw/Diaspora_Social_Network/post_preview.feature,same,0.904167115688324,0.9041669368743896,0.9041669368743896,0.0,True,True
+252,Diaspora,data/raw/Diaspora_Social_Network/public_stream.feature,same,0.8952540755271912,0.8952540159225464,0.8952540159225464,0.0,True,True
+253,Diaspora,data/raw/Diaspora_Social_Network/show_more.feature,same,0.9263588786125184,0.9263588190078735,0.9263588190078735,0.0,True,True
+254,Diaspora,data/raw/Diaspora_Social_Network/stops_following_users.feature,same,0.7976952791213989,0.7976951599121094,0.7976951599121094,0.0,True,True
+255,Diaspora,data/raw/Diaspora_Social_Network/two_factor_authentication.feature,same,0.8517448306083679,0.8517446517944336,0.8517446517944336,0.0,True,True
+256,Diaspora,data/raw/Diaspora_Social_Network/user_applications.feature,same,0.8566274046897888,0.856627345085144,0.856627345085144,0.0,True,True
+257,Diaspora,data/raw/Diaspora_Social_Network/more-button.feature,same,0.7898711562156677,0.7898710370063782,0.7898710370063782,0.0,True,True
+258,Diaspora,data/raw/Diaspora_Social_Network/multiphoto.feature,same,0.784293532371521,0.7842934131622314,0.7842934131622314,0.0,True,True
+259,Diaspora,data/raw/Diaspora_Social_Network/reactions.feature,same,0.7945604920387268,0.7945606708526611,0.7945606708526611,0.0,True,True
+260,Diaspora,data/raw/Diaspora_Social_Network/stream.feature,same,0.8895846605300903,0.8895846009254456,0.8895846009254456,0.0,True,True
+261,Diaspora,data/raw/Diaspora_Social_Network/user_applications_261.feature,same,0.8743376731872559,0.8743376135826111,0.8743376135826111,0.0,True,True
