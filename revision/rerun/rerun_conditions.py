@@ -36,6 +36,11 @@ environment variable OPENAI_API_KEY; never paste it into this file.
 Usage (from the repository root):
   python revision/rerun/rerun_conditions.py --pilot     # 12 calls: ids 1, 101, 201, rep 1
   python revision/rerun/rerun_conditions.py             # everything else (1,752 calls)
+Check the input without calling the API (no key needed):
+  python revision/rerun/rerun_conditions.py --show 101 --condition C2
+prints the SHA-256 of the two input CSV files (line endings normalised to LF, so the
+values equal those of the committed files on any operating system), the user story
+of that id and the exact system message and prompt the run sends for it.
 """
 import argparse
 import csv
@@ -128,6 +133,16 @@ def read_csv(path):
         return list(csv.DictReader(f))
 
 
+def file_sha256_lf(path):
+    # SHA-256 of the file with CRLF turned into LF, i.e. of the file as committed.
+    with open(path, "rb") as f:
+        return hashlib.sha256(f.read().replace(b"\r\n", b"\n")).hexdigest()
+
+
+def sha256_text(text):
+    return hashlib.sha256(text.encode("utf-8")).hexdigest()
+
+
 def all_jobs():
     jobs = [(c, 1, i) for c in CONDITIONS for i in range(1, 262)]
     jobs += [(c, r, i) for c in REPEATED for r in range(2, REPS + 1) for i in SUBSET]
@@ -142,18 +157,16 @@ def main():
     ap.add_argument("--stories", default="data/full_user_stories.csv")
     ap.add_argument("--gt", default="data/full_ground_truth.csv")
     ap.add_argument("--outdir", default="revision/rerun")
+    ap.add_argument("--show", type=int, help="print the input of this id and stop (no API call)")
+    ap.add_argument("--condition", default="C0", choices=CONDITIONS, help="condition for --show")
     x = ap.parse_args()
-
-    key = os.environ.get("OPENAI_API_KEY")
-    if not key:
-        sys.exit("Set OPENAI_API_KEY in the environment first.")
-    import openai
-    client = openai.OpenAI(api_key=key, timeout=TIMEOUT_S, max_retries=0)
 
     stories = {int(r["id"]): r for r in read_csv(x.stories)}
     gt = {int(r["id"]): r["gherkin_content"] for r in read_csv(x.gt)}
     if len(stories) != 261 or len(gt) != 261:
         sys.exit("Expected 261 stories and 261 reference files.")
+    inputs = {"stories_file": x.stories, "stories_sha256_lf": file_sha256_lf(x.stories),
+              "gt_file": x.gt, "gt_sha256_lf": file_sha256_lf(x.gt)}
 
     def prompt_for(cond, r):
         if cond == "C1":
@@ -161,6 +174,22 @@ def main():
         e = EXEMPLARS[cond].get(r["domain"], EXEMPLARS[cond]["Social Network"])
         # same as get_sample() in cell 5
         return one_shot_prompt(stories[e]["user_story"], gt[e].replace("\\n", "\n"), r["user_story"])
+
+    if x.show is not None:
+        r = stories[x.show]
+        for k, v in inputs.items():
+            print(f"{k}: {v}")
+        print(f"id {x.show} ({r['domain']}, {r['project_name']}), condition {x.condition}")
+        print("=== user story ===\n" + r["user_story"])
+        print("=== system message ===\n" + sys_msg(r["domain"]))
+        print("=== prompt ===\n" + prompt_for(x.condition, r))
+        return
+
+    key = os.environ.get("OPENAI_API_KEY")
+    if not key:
+        sys.exit("Set OPENAI_API_KEY in the environment first.")
+    import openai
+    client = openai.OpenAI(api_key=key, timeout=TIMEOUT_S, max_retries=0)
 
     os.makedirs(x.outdir, exist_ok=True)
     calls_path = os.path.join(x.outdir, "rerun_calls.jsonl")
@@ -188,7 +217,7 @@ def main():
     config = {"model_requested": MODEL, "temperature": TEMPERATURE, "cap_C0cap": CAP,
               "timeout_s": TIMEOUT_S, "client_max_retries": 0, "attempts": ATTEMPTS, "waits_s": WAITS_S,
               "seed": SEED, "reps": REPS, "subset": SUBSET, "exemplars": EXEMPLARS,
-              "workers": x.workers, "pilot": x.pilot, "script_sha256": script_sha,
+              "workers": x.workers, "pilot": x.pilot, "script_sha256": script_sha, **inputs,
               "openai_version": openai.__version__, "python": platform.python_version(),
               "started_utc": datetime.now(timezone.utc).isoformat()}
     with open(os.path.join(x.outdir, "rerun_config.jsonl"), "a", encoding="utf-8") as f:
@@ -206,12 +235,15 @@ def main():
     def run(job):
         cond, rep, i = job
         r = stories[i]
+        prompt = prompt_for(cond, r)
         kwargs = {"model": MODEL, "temperature": TEMPERATURE,
                   "messages": [{"role": "system", "content": sys_msg(r["domain"])},
-                               {"role": "user", "content": prompt_for(cond, r)}]}
+                               {"role": "user", "content": prompt}]}
         if cond == "C0cap":
             kwargs["max_completion_tokens"] = CAP
-        entry, text, errors = {"condition": cond, "rep": rep, "id": i}, "", []
+        entry, text, errors = {"condition": cond, "rep": rep, "id": i,
+                               "user_story_sha256": sha256_text(r["user_story"]),
+                               "prompt_sha256": sha256_text(prompt)}, "", []
         for attempt in range(1, ATTEMPTS + 1):
             t0 = time.time()
             try:
