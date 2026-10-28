@@ -1,0 +1,15 @@
+                                group   N  median     Q1     Q3   mean  n_ge_0.85  share_ge_0.85
+    Fineract non-truncated (original)  15  0.8235 0.7308 0.8724 0.8091          7         0.4667
+        Fineract truncated (original)  84  0.8266 0.7998 0.8577 0.8242         27         0.3214
+Fineract truncated (prefix reference)  84  0.8266 0.7998 0.8577 0.8242         26         0.3095
+              Fineract all (original)  99  0.8265 0.7963 0.8584 0.8219         34         0.3434
+      Fineract all (prefix reference)  99  0.8265 0.7963 0.8584 0.8219         33         0.3333
+                 All N=258 (original) 258  0.8533 0.8051 0.8903 0.8483        136         0.5271
+         All N=258 (prefix reference) 258  0.8530 0.8051 0.8903 0.8482        135         0.5233
+
+reproduction of results/full_per_row_metrics.csv (N=258): max_abs_diff=3.58e-07
+non-truncated files, prefix vs original: max_abs_diff=1.79e-07
+Fineract truncated vs non-truncated, Mann-Whitney two-sided: original p=0.9883, prefix p=0.9961
+Fineract truncated (n=84): cosine changed by >1e-6 in 1 files; prefix - original: min=-0.0035 max=0.0000; changed ids: [157]
+Fineract truncated references: skeleton tokens median full=3842, prefix=1040; prefix skeleton > 256 tokens in 82 of 84
+All N=258, one-sided Wilcoxon x - 0.85 > 0: original p=0.4739, prefix p=0.4756
