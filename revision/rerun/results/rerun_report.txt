@@ -1,0 +1,52 @@
+== Run ==
+input sha256 (LF): stories 37a39d548a3563001831f758fee7997997e8c8967b892c1a5b33d6ae8b202011, reference a6f57f9282a3caa9f16427908b233b61879b45ca34f12aa4065a0c1cb3a691b6
+jobs expected 1764, logged 1764, missing 0
+prompt_sha256 equals the prompt rebuilt from data/: 1752; differs: 0; not logged (pilot run before the field existed): 12
+final status: {'OK': 1764}
+attempts: {1: 1764}; logged errors: 0
+response_model: {'gpt-5.4-mini-2026-03-17': 1764}
+system_fingerprint: {None: 1764}
+finish_reason by condition: {('C0cap', 'stop'): 180, ('C2', 'stop'): 501, ('C0', 'stop'): 501, ('C1', 'stop'): 501, ('C0cap', 'length'): 81}
+first and last call (UTC): 2026-10-28T13:27:23.253258+00:00 .. 2026-10-28T14:43:02.685392+00:00
+tokens: prompt 3281325, completion 3188547; estimated cost at the Standard list price $16.81 (no cache discount; not an invoice)
+cached prompt tokens reported by the API: 1731072
+check: original C0 rescored with ONNX vs results/full_per_row_metrics.csv, max abs diff 3.58e-07
+
+== 1. Same-time ablation, rep 1, 255 files (H2) ==
+C0: n 255 (cosine n 255), median 0.8521, IQR 0.0836 [0.8098, 0.8934], >= 0.85 134 (52.5%, 95% CI 46.2%-58.8%), parser PASS 255/255 (100.00%, 95% CI 98.56%-100.00%)
+C1: n 255 (cosine n 255), median 0.8106, IQR 0.0966 [0.7701, 0.8667], >= 0.85 86 (33.7%, 95% CI 27.9%-39.9%), parser PASS 252/255 (98.82%, 95% CI 96.60%-99.76%)
+C2: n 255 (cosine n 255), median 0.8726, IQR 0.0834 [0.8329, 0.9162], >= 0.85 162 (63.5%, 95% CI 57.3%-69.4%), parser PASS 254/255 (99.61%, 95% CI 97.83%-99.99%)
+C1 vs C0: n 255, higher 62, lower 193, median paired diff -0.0296 (bootstrap 95% CI -0.0384 to -0.0210; added for M9, not in the plan); Wilcoxon W 6192.0, p 8.64e-18, Holm p 1.73e-17; McNemar C0-only 3, C1-only 0, p 0.25, Holm p 0.5
+C2 vs C0: n 255, higher 140, lower 115, median paired diff +0.0076 (bootstrap 95% CI -0.0013 to +0.0150; added for M9, not in the plan); Wilcoxon W 12110.0, p 0.000356, Holm p 0.000356; McNemar C0-only 1, C2-only 0, p 1, Holm p 1
+  Sylius (n 98): median C0 0.8925, C1 0.8719, C2 0.8908; >= 0.85 C0 76.5%, C1 63.3%, C2 74.5%; PASS C0 98, C1 98, C2 98
+  Apache Fineract (n 98): median C0 0.8285, C1 0.7792, C2 0.8732; >= 0.85 C0 35.7%, C1 4.1%, C2 65.3%; PASS C0 98, C1 95, C2 97
+  Diaspora (n 59): median C0 0.8287, C1 0.8301, C2 0.8410; >= 0.85 C0 40.7%, C1 33.9%, C2 42.4%; PASS C0 59, C1 59, C2 59
+median completion tokens: {'C0': 498.0, 'C0cap': 505.0, 'C1': 750.0, 'C2': 752.0}
+
+== 2. RQ1 and RQ2 on the new C0, rep 1, 258 files ==
+cosine n 258, median 0.8521 (bootstrap 95% CI 0.8426-0.8617), above 135, below 123, exact sign test one-sided p 0.247, Wilcoxon one-sided p 0.396, delta 0.0465
+parser PASS 258/258 (100.00%, 95% CI 98.58%-100.00%), exact binomial vs 0.80 one-sided p 9.94e-26, risk difference +0.2000 (95% CI +0.1858 to +0.2000)
+
+== 3. New C0 (rep 1) vs original C0, 258 files ==
+byte-identical outputs 2/258; cosine diff new - original median +0.0000, IQR [-0.0177, +0.0137], mean abs 0.0232, paired Wilcoxon two-sided p 0.689 (n 258)
+parser outcome differs 3; side of 0.85 differs 45
+
+== 4. Run-to-run variation, 60 files x 5 reps (H4) ==
+C0: files 60 (all 5 reps OK for 60); 5 identical outputs 1; per-file SD median 0.0155 (max 0.0699); pooled within-file SD 0.0202; ICC(1,1) 0.9210 95% CI [0.8876, 0.9475]; parser outcome changes 0; side of 0.85 changes 19
+C1: files 60 (all 5 reps OK for 60); 5 identical outputs 0; per-file SD median 0.0169 (max 0.0554); pooled within-file SD 0.0224; ICC(1,1) 0.9041 95% CI [0.8644, 0.9359]; parser outcome changes 2; side of 0.85 changes 13
+C2: files 60 (all 5 reps OK for 60); 5 identical outputs 0; per-file SD median 0.0140 (max 0.0450); pooled within-file SD 0.0191; ICC(1,1) 0.9286 95% CI [0.8983, 0.9527]; parser outcome changes 2; side of 0.85 changes 14
+
+== 5. Within- and between-prompt variation, C0 and C2 on the subset (H11) ==
+files with all reps in both prompts: 60
+within-prompt (residual) variance 0.000386 (SD 0.0197); file x prompt variance component 0.001755; file variance component 0.002993
+between-prompt effect (mean over files of C2 mean - C0 mean) +0.0043, paired t 95% CI -0.0113 to +0.0200; F(prompt x file vs within) 23.725
+per-file Welch 95% CI of C2 - C0: wholly above 0 19, wholly below 0 17, include 0 24
+  Apache Fineract (n 20): mean effect +0.0135; above 0 9, below 0 6
+  Diaspora (n 20): mean effect +0.0037; above 0 5, below 0 6
+  Sylius (n 20): mean effect -0.0042; above 0 5, below 0 5
+
+== 6. Capped condition C0cap vs new C0, rep 1, 258 files (M11) ==
+stopped by the cap (finish_reason = length): 81/258
+parser PASS 239/258 (92.64%, 95% CI 88.74%-95.51%); median cosine 0.8543
+C0cap vs C0: median paired diff +0.0005, Wilcoxon two-sided p 0.108 (n 258); McNemar C0-only 19, C0cap-only 0, p 3.81e-06
+among the files stopped by the cap: parser PASS 62/81
