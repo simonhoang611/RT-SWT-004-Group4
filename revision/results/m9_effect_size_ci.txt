@@ -1,0 +1,7 @@
+delta N = 258: 0.0543 (above 136, below 122); exact 95% CI [-0.0715, 0.1787]; bootstrap 95% CI [-0.0620, 0.1783]
+delta N = 261: 0.0651 (above 139, below 122); exact 95% CI [-0.0599, 0.1887]; bootstrap 95% CI [-0.0575, 0.1877]
+eta^2_H N = 258: 0.2309; bootstrap 95% CI [0.1439, 0.3360] (group sizes [99, 60, 99])
+Spearman rho story overlap vs cosine, All (n = 258): 0.4319; bootstrap 95% CI [0.3250, 0.5271]
+Spearman rho story overlap vs cosine, Apache Fineract (n = 99): 0.1062; bootstrap 95% CI [-0.1106, 0.3139]
+Spearman rho story overlap vs cosine, Diaspora (n = 60): 0.3334; bootstrap 95% CI [0.0766, 0.5513]
+Spearman rho story overlap vs cosine, Sylius (n = 99): 0.2937; bootstrap 95% CI [0.1065, 0.4592]
