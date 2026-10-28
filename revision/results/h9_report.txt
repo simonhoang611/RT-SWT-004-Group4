@@ -1,0 +1,35 @@
+sample              C0 N=258  C0 N=261
+N                        258       261
+median              0.853261  0.853536
+median_ci_low       0.844334  0.844903
+median_ci_high      0.859178  0.861238
+above                    136       139
+below                    122       122
+delta               0.054264  0.065134
+sign_p_greater      0.209185  0.160997
+wilcoxon_W           16784.0   17548.0
+wilcoxon_p_greater  0.473916  0.355437
+mean                0.848251  0.849986
+Q1                  0.805052  0.806167
+Q3                  0.890279  0.893578
+median_minus_Q1     0.048209  0.047368
+Q3_minus_median     0.037019  0.040042
+skewness           -0.407824 -0.333265
+skew_ci_low        -0.758513  -0.67908
+skew_ci_high       -0.080289 -0.006015
+hodges_lehmann      0.850244  0.851468
+
+                      table           group   N  above  below  sign_p_greater  sign_p_less  wilcoxon_p_greater  wilcoxon_p_less  skewness  median  median_ci_low  median_ci_high
+                per project Apache Fineract  99     34     65          0.9994       0.0012              1.0000           0.0000   -0.8291     NaN            NaN             NaN
+                per project        Diaspora  60     25     35          0.9225       0.1225              0.9916           0.0084   -0.0830     NaN            NaN             NaN
+                per project          Sylius  99     77     22          0.0000       1.0000              0.0000           1.0000   -0.8135     NaN            NaN             NaN
+            reference point            0.80 258    202     56          0.0000          NaN              0.0000              NaN       NaN     NaN            NaN             NaN
+            reference point            0.82 258    175     83          0.0000          NaN              0.0000              NaN       NaN     NaN            NaN             NaN
+            reference point            0.84 258    153    105          0.0017          NaN              0.0097              NaN       NaN     NaN            NaN             NaN
+            reference point            0.85 258    136    122          0.2092          NaN              0.4739              NaN       NaN     NaN            NaN             NaN
+            reference point            0.86 258    112    146          0.9854          NaN              0.9884              NaN       NaN     NaN            NaN             NaN
+            reference point            0.88 258     79    179          1.0000          NaN              1.0000              NaN       NaN     NaN            NaN             NaN
+            reference point            0.90 258     57    201          1.0000          NaN              1.0000              NaN       NaN     NaN            NaN             NaN
+ablation (255 common files)              C0 255    135    120          0.1903          NaN              0.4440              NaN       NaN  0.8535         0.8449          0.8593
+ablation (255 common files)              C1 255     88    167          1.0000          NaN              1.0000              NaN       NaN  0.8189         0.8051          0.8278
+ablation (255 common files)              C2 255    164     91          0.0000          NaN              0.0000              NaN       NaN  0.8754         0.8655          0.8833
