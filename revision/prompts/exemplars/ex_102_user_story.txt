@@ -1,0 +1,14 @@
+As a Bank Administrator,
+I want to create, view, update, and delete Working Capital Near Breach configurations with proper validation on their fields (name, frequency, frequency type, and threshold),
+So that I can accurately manage and enforce early-warning thresholds for working capital loans before they reach an actual breach, while preventing invalid, duplicate, or unsafe configuration changes.
+
+Acceptance Criteria:
+- The system shall allow an Admin to create a new Working Capital Near Breach configuration by providing valid values for name, frequency, frequency type, and threshold, and shall persist and correctly return these values upon creation, update, and deletion.
+- The system shall reject creation or update of a Near Breach configuration when mandatory fields (nearBreachName, nearBreachFrequency, nearBreachFrequencyType, nearBreachThreshold) are null or empty, returning a clear mandatory-field error message.
+- The system shall reject creation or update when nearBreachFrequency is not greater than 0, returning an appropriate validation error.
+- The system shall reject creation or update when nearBreachFrequencyType is not one of the allowed values (DAYS, WEEKS, MONTHS, YEARS), returning an appropriate validation error.
+- The system shall reject creation or update when nearBreachThreshold is not greater than 0 or exceeds 100, returning an appropriate validation error.
+- The system shall prevent creating or updating a Near Breach configuration with a name that already exists, returning a duplicate-name error.
+- The system shall prevent deleting a Near Breach configuration that has already been deleted, returning an appropriate error, and shall also prevent retrieval of such a deleted configuration.
+- The system shall reject deletion or retrieval requests referencing a Near Breach configuration ID that does not exist or is invalid (e.g., 0 or an unassigned ID), returning a not-found error.
+- The system shall prevent deletion of a Near Breach configuration that is still assigned to an active Working Capital Loan Product or a Working Capital Loan Account, returning an appropriate assignment error.

@@ -1,0 +1,37 @@
+{
+  "result": "PASS",
+  "API_calls": 0,
+  "system_messages_equal_to_notebook": 3,
+  "C0_messages_equal_to_notebook": 261,
+  "artifact_count_excluding_manifest": 18,
+  "ex_119_decoded_characters": 29776,
+  "ex_119_bytes": 29776,
+  "artifact_sha256": {
+    "exemplar_mapping.csv": "982a690189c23702e9f8ac7b656a9072eab1af252a3b3ba711966c5432222b75",
+    "exemplars/ex_102.feature": "3125864ffcac5dcb98c849b4d138771005ee1ad8405e7154f4ae9463d4388222",
+    "exemplars/ex_102_user_story.txt": "58d9a3af1effd231652d7866f3dccabfc7c5ff4a6cce48816ae963f39558c4d0",
+    "exemplars/ex_119.feature": "bf6699e8e799aa5cf4f850030bc22338c72fd85f85972076a30ba7e538b5dc51",
+    "exemplars/ex_119_user_story.txt": "db4a5a90db39985ae0dba288f1148ce783f661e93da038543d6257a072ab60c0",
+    "exemplars/ex_2.feature": "f24b39313e8729427c4a57f87a829015947e75d3f01f2ec84ec2b7cc477530cc",
+    "exemplars/ex_202.feature": "1ef601612044212a7497f9cd7783efda22227b245355e848f999b5ca9ee26c7b",
+    "exemplars/ex_202_user_story.txt": "db47c0704403977bb012616803c90ef5b7544bc16fe7983234846912e83a09ae",
+    "exemplars/ex_203.feature": "358d7055e7b9d35685a83ac3b7e833dbd6bbf3d33c9ed06284825dd16b4fc5b5",
+    "exemplars/ex_203_user_story.txt": "06513657140c86fdb09325892bdcb46779e62b5a165c6dc6931d49d1e512b242",
+    "exemplars/ex_2_user_story.txt": "a87eb54d5e418bd8b03d9492ba3d589edc0063ac08b36246bd6ff819410392be",
+    "exemplars/ex_86.feature": "2a8802083c191d1d22f3d9d96185f48602dfe7827945124e4f100f42d998c193",
+    "exemplars/ex_86_user_story.txt": "c20891f56ce4fdb8598f4079a3a94c0dd94a51bc0a8b2be430246afc8313eebd",
+    "system_message_ecommerce.txt": "64456030e3229cf63ce9f23a574433e67bc707864dd365e6aca842cab0c82498",
+    "system_message_finance.txt": "2193526c6d69c6a09c8f6a34d3a37eafe3ea3f00d0604a47f85b47b7b7c27afd",
+    "system_message_social.txt": "24bd9e8f470cc8f5fae0ea4d88b6413d70fd473ed0e4e25dfa75a197c56c19b9",
+    "user_prompt_one_shot_template.txt": "e8908eb5441c9e8c8d3f15136d8295d9b011690a0f99b5d3a9d98356829d6387",
+    "user_prompt_zero_shot_template.txt": "95645cbaf0b8fae23aa33b68137a0f95d02c626c26db2c91533d097fb6a05364"
+  },
+  "source_sha256_lf": {
+    "scripts/run_experiment.ipynb": "f139daf1d9a725a900013f5e096b0b6354c6211e384676cdfe7f3c4210450dbb",
+    "revision/h2/h2_run_prompts.py": "295353eb82418514df4d7cbc5457da4b93cc613f0d145cd4bc35eef3efc13437",
+    "data/full_user_stories.csv": "37a39d548a3563001831f758fee7997997e8c8967b892c1a5b33d6ae8b202011",
+    "data/full_ground_truth.csv": "a6f57f9282a3caa9f16427908b233b61879b45ca34f12aa4065a0c1cb3a691b6"
+  },
+  "historical_request_log": false,
+  "note": "Exact reconstruction from saved source/data, not recovery of transmitted API payload logs."
+}

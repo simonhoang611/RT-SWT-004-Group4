@@ -1,0 +1,12 @@
+Generate a BDD Gherkin file for the following user story. 
+Follow the exact style, wording, and conventions shown in the Example.
+
+EXAMPLE USER STORY:
+{example_user_story}
+
+EXAMPLE GHERKIN:
+{example_gherkin}
+
+---
+NOW GENERATE FOR THIS USER STORY:
+{user_story}

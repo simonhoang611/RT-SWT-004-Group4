@@ -1,0 +1,9 @@
+As an administrator,
+I want to be prevented from viewing the details of a customer's cart that is not yet an order,
+So that I only access valid order information and receive clear feedback when attempting to view non-existent orders.
+
+Acceptance Criteria:
+- The store operates on a single channel in "United States" with a product "PHP T-Shirt" priced at "$12.00"
+- Given a customer has added the product "PHP T-Shirt" to their cart without placing an order
+- When an administrator attempts to view the summary of the customer's latest cart
+- The administrator should be informed that the order does not exist

@@ -1,0 +1,13 @@
+As a Loan Officer,
+I want to apply an Interest Payment Waiver transaction on a loan account with different payment allocation strategies, timings, and amounts,
+So that I can waive part or all of the interest due for a borrower while accurately reflecting the impact on the repayment schedule, transaction history, and accounting journal entries.
+
+Acceptance Criteria:
+- The system must allow an Interest Payment Waiver transaction to be applied on the due date, before the due date, or after the maturity date, with either the exact outstanding interest amount or a partial amount.
+- When the waiver amount exceeds the interest due, the system must correctly allocate the remaining amount to principal, fees, or penalties based on the configured payment allocation strategy (e.g., interest-principal, fee-interest-principal, principal-interest).
+- The repayment schedule must be updated accurately after the waiver, reflecting correct values for principal due, interest, fees, penalties, paid amount, in advance amount, late amount, and outstanding balance for each period and in the total row.
+- The Loan Transactions tab must display the Interest Payment Waiver transaction with the correct date, amount, and breakdown across principal, interest, fees, and penalties, along with the resulting loan balance.
+- The system must generate correct journal entries for the Interest Payment Waiver transaction, debiting the Interest Income account and crediting the appropriate receivable accounts (Loans Receivable and/or Interest/Fee Receivable) based on the allocation.
+- If the waiver amount results in an overpayment, the loan status must change to "OVERPAID," the overpaid amount must be tracked, and the corresponding journal entries must include the Overpayment account.
+- The system must support undoing an Interest Payment Waiver transaction, reverting the repayment schedule, transaction history, and journal entries to their prior state.
+- The system must correctly handle scenarios where a waiver is applied before the due date, followed by a subsequent repayment for the remaining due amount on the due date, ensuring accurate calculation of "in advance," "late," and "outstanding" values.

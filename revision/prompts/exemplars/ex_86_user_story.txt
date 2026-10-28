@@ -1,0 +1,11 @@
+As a customer,
+I want to receive discounts on my cart when I buy enough products from a promoted taxon,
+So that I can pay less for eligible purchases.
+
+Acceptance Criteria:
+- A promotion can apply a fixed discount when the cart contains products from a specific taxon and the total value of those products meets or exceeds a minimum threshold.
+- If the cart contains an eligible product from the promoted taxon and the threshold is met, the discount is applied to the order total.
+- If the cart contains products from a different taxon than the one targeted by the promotion, no discount is applied.
+- If the cart contains products from the promoted taxon but their total value does not meet the minimum threshold, no discount is applied.
+- If multiple quantities of a product from the promoted taxon make the total value meet the minimum threshold, the discount is applied once.
+- If multiple promotions target different taxons and the cart contains eligible products for each promotion, all applicable discounts are applied together.

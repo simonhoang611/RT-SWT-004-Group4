@@ -1,0 +1,5 @@
+Generate a BDD Gherkin file for the following user story. 
+
+---
+NOW GENERATE FOR THIS USER STORY:
+{user_story}

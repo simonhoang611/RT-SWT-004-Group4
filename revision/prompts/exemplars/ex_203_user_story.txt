@@ -1,0 +1,10 @@
+As a user of the social network,
+I want to follow other users and manage my contact aspects while safely viewing their profiles,
+So that I can build meaningful connections and control how I interact with and see people I follow or who follow me.
+
+Acceptance Criteria:
+- When a user's profile name contains malicious script content, the system must sanitize/escape it before displaying it in flash messages or elsewhere, preventing script execution.
+- When a user adds a contact to a newly created aspect, the contact count for both the new aspect and the original aspect used by the other user must be updated correctly, without duplicating the relationship.
+- On a profile page of someone the user follows but who does not follow back, the aspect name they were added to should be visible, a mention option should be available, but no direct messaging option should be shown.
+- On a profile page of someone who follows the user but whom the user does not yet follow, an "Add contact" option should be shown, and neither mention nor messaging options should be available.
+- On a profile page of someone with a mutual follow relationship (added to multiple aspects), the system should indicate "All aspects" and display both mention and messaging options.

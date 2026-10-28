@@ -1,0 +1,8 @@
+As a signed-in user,
+I want to have media links I post automatically rendered as embedded players,
+So that other users can play audio and video content directly without leaving the page.
+
+Acceptance Criteria:
+- A registered user must be able to sign in successfully before posting content.
+- When a user posts a message containing a link to a video file (e.g., .ogv format) using the publisher, the system should display an HTML5 video player for that content.
+- When a user posts a message containing a link to an audio file (e.g., .ogg format) using the publisher, the system should display an HTML5 audio player for that content.
