@@ -98,6 +98,36 @@ An ran the 10 scripts of rounds 1–3 on An's own machine with `nt3_rerun/run_ch
 tables matched the stored ones. The script, its input manifest, An's result file and logs, and a short
 report are in `nt3_rerun/`.
 
+## Round 5 (27–29 Oct 2026): Action Tracker v1
+
+Analyses for the second review round (Action Tracker v1). Run from the repository root;
+`--onnx-dir` is the ONNX encoder of round 3.
+None of these scripts calls the API except `rerun/rerun_conditions.py`.
+
+    python revision/rerun/rerun_analysis.py --onnx-dir <folder with model.onnx and tokenizer.json>
+    python revision/h1_truncation_split.py --onnx-dir <folder with model.onnx and tokenizer.json>
+    python revision/h9_median_tests.py
+    python revision/m9_effect_size_ci.py
+    python revision/m10_rq2_risk_difference.py
+    python revision/h12/h12_kappa_ci.py
+    python revision/audit/consensus_15/validate_consensus.py --final
+
+| Script or folder | Item | Output |
+|---|---|---|
+| `rerun/rerun_conditions.py` | H2, H4, H11, M11 | calls the API: C0, C1, C2 and the capped C0cap on all 261 stories, and C0, C1, C2 four more times on 60 stories; writes `rerun/rerun_calls.jsonl` and `rerun/rerun_config.jsonl` (plan fixed before the run: `rerun/RERUN_ANALYSIS_PLAN.md`, SHA-256 in `rerun/RERUN_ANALYSIS_PLAN.sha256`) |
+| `rerun/rerun_analysis.py` | H2, H4, H11, M7, M11 | `rerun/results/rerun_report.txt`, `rerun_per_job.csv`, `rerun_h11_per_file.csv` |
+| `h1_truncation_split.py` | H1, H10 | `results/h1_truncation_split.csv`, `h1_truncation_per_file.csv`, `h1_truncation_report.txt` |
+| `h9_median_tests.py` | H9 | `results/h9_report.txt`, `h9_rq1_median_tests.csv`, `h9_sign_tests_other.csv` |
+| `m9_effect_size_ci.py` | M9 | `results/m9_effect_size_ci.txt` |
+| `m10_rq2_risk_difference.py` | M10 | `results/m10_rq2_risk_difference.txt` |
+| `h12/h12_kappa_ci.py` | H12 | `h12/results/h12_kappa_ci.txt` |
+| `audit/consensus_15/` | H12 | consensus on the 15 doubly labelled files (see its `README.md`) |
+| `prompts/` | H6, H13 | prompt components, exemplars and their SHA-256 (`prompts/README.md`) |
+| `m1_tool_sources/` | M1 | records of the cited tool pages |
+| `m6_sources/` | M6 | dataset sources and clone records |
+
+The rerun was made on 28 October 2026. Its log keeps the line endings written by the run script.
+
 ## Response letter
 
 `response_letter/Response_to_Reviewers_367005.md` (and `.pdf`) is the letter sent with the revision.
