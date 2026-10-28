@@ -1,0 +1,4 @@
+source: revision/audit/independent_rater_15/kappa_result.json
+bootstrap: 10000 resamples of files, seed 2026, percentile 95% CI
+business logic: n 15, kappa 0.571, 95% CI 0.054 to 1.000 (undefined resamples 0)
+temporal/causal: n 15, kappa 0.609, 95% CI 0.237 to 1.000 (undefined resamples 0)
