@@ -1,48 +1,46 @@
-# Multi-Domain Gherkin Dataset (Expert Ground Truth)
+# Multi-Domain Gherkin Dataset (Project-Maintained Reference Files)
 
 This document provides evidence of the origin, copyright (License), collection date and structure of the Gherkin dataset extracted for the project evaluating the Gherkin generation capability of LLMs.
 
 ## 1. Data Origin (Data Sources)
 
-The dataset consists of 100 original `.feature` files extracted from 3 leading open-source systems belonging to 3 different fields (domains). These files were written by the projects' own international engineers (Expert-written), ensuring absolute **Construct Validity**.
+The dataset consists of 261 `.feature` files extracted from 3 open-source systems belonging to 3 different fields (domains). The files are project-maintained reference files: they are part of each project's own test suite. Who wrote or reviewed each file was not verified.
 
 | Domain | Project Name | GitHub Repository | License | Number of files |
 |---|---|---|---|---|
-| E-commerce | **Sylius** | https://github.com/Sylius/Sylius | MIT License | 34 |
-| Finance/Banking | **Apache Fineract** | https://github.com/apache/fineract | Apache License 2.0 | 33 |
-| Social Network | **Diaspora** | https://github.com/diaspora/diaspora | GNU AGPL-3.0 | 33 |
+| E-commerce | **Sylius** | https://github.com/Sylius/Sylius | MIT License | 100 |
+| Finance/Banking | **Apache Fineract** | https://github.com/apache/fineract | Apache License 2.0 | 100 |
+| Social Network | **Diaspora** | https://github.com/diaspora/diaspora | GNU AGPL-3.0 | 61 |
 
-- **Collection date (Date Downloaded):** 28/06/2026
-- **Collection method:** Downloaded the latest source code directly from the main branch of each project on GitHub and randomly sampled `.feature` files.
+- **Collection:** in two batches, both sampled at random from the `.feature` files of each project. The first batch (100 files: Sylius 34, Fineract 33, Diaspora 33) was downloaded on 28/06/2026. The second batch (161 files) was drawn from clones made on 19/07/2026 (Sylius branch `2.3`, Fineract and Diaspora branch `develop`).
+- The source commits, the two batches and the differences between the stored reference text and the upstream files are documented in `revision/m6_sources/README.md`.
 
 ## 2. Data Directory Structure
 
-The `raw/` directory stores the 100 original `.feature` files, divided into 3 subdirectories corresponding to the 3 projects:
-- `Sylius_Ecommerce/`: 34 files
-- `Apache_Fineract_Finance/`: 33 files
-- `Diaspora_Social_Network/`: 33 files
+The `raw/` directory stores the 261 `.feature` files, divided into 3 subdirectories corresponding to the 3 projects:
+- `Sylius_Ecommerce/`: 100 files
+- `Apache_Fineract_Finance/`: 100 files
+- `Diaspora_Social_Network/`: 61 files
 
 ## 3. Structure of the CSV Files
 
-The dataset was reverse-engineered into 3 CSV files stored in the parent directory `data/`:
+The parent directory `data/` holds 4 CSV files. The user stories were reverse-engineered from the feature files.
 
-### 3.1. `pilot_sample.csv` (Pilot input - 20 items)
-Used as the input for the AI to generate Gherkin code. The structure consists of 5 columns:
-- `id`: Unique identifier (1-100)
+### 3.1. `full_user_stories.csv` (261 items) and `pilot_sample.csv` (pilot, 30 items: ids 1-10, 101-110, 201-210)
+The user stories given to the model. The structure consists of 4 columns:
+- `id`: Unique identifier (1-261)
 - `domain`: Domain of the project
 - `project_name`: Name of the original project
-- `expert_filename`: Name of the original `.feature` file containing the answer (for easy cross-reference)
 - `user_story`: User Story sentence written in the standard Connextra format (*As a... I want to... So that...*)
 
-### 3.2. `pilot_ground_truth.csv` (Pilot answer key - 20 items) & `full_ground_truth.csv` (Full answer key - 100 items)
-Used as the Standard Answer Key (Baseline Ground Truth) to measure and score the AI. The structure consists of 7 columns:
+### 3.2. `full_ground_truth.csv` (261 items) and `pilot_ground_truth.csv` (pilot, 30 items)
+The reference files against which the generated Gherkin is scored. The structure consists of 6 columns:
 - `id`: Unique identifier
 - `domain`: Domain of the project
 - `project_name`: Name of the original project
-- `user_story`: User Story sentence
-- `expert_filename`: Original `.feature` file name from the open-source repositories.
-- `github_file_url`: **Direct URL link** pointing to this `.feature` file on GitHub (used as evidence so that the Committee can verify authenticity).
-- `gherkin_content`: The intact Gherkin content of the `.feature` files.
+- `expert_filename`: File name of the reference `.feature` file in the open-source repository (the column name is kept unchanged because the scripts read it)
+- `github_file_url`: **Direct URL link** pointing to this `.feature` file on GitHub
+- `gherkin_content`: The Gherkin text used as the reference. For some files of the first batch it differs from the upstream file (for example, the feature description was removed or the text was cut at 30,038 CSV characters); see `revision/m6_sources/README.md`.
 
 
 
