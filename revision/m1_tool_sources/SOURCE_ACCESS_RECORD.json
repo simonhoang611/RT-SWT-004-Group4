@@ -1,0 +1,47 @@
+[
+  {
+    "key": "openai_gpt54mini",
+    "organization": "OpenAI",
+    "title": "GPT-5.4 Mini model documentation",
+    "url": "https://developers.openai.com/api/docs/models/gpt-5.4-mini",
+    "confirmed": "Page displays the snapshot gpt-5.4-mini-2026-03-17. This shows that the snapshot exists; it does not show which model the C0 requests returned (see Section 3.3 of the paper).",
+    "screenshot": "openai_gpt54mini.png",
+    "cited_in": "Section 3.2",
+    "access_date": "2026-10-28",
+    "screenshot_sha256": "44d56ccaf559a6fb6c8361b3c8fe0ab5bb3f269a0941009b03dfa1fc64b03172"
+  },
+  {
+    "key": "openai_chat_api",
+    "organization": "OpenAI",
+    "title": "Create chat completion, API reference",
+    "url": "https://developers.openai.com/api/reference/resources/chat/subresources/completions/methods/create",
+    "confirmed": "Page documents POST /chat/completions with the request parameters model, temperature and max_completion_tokens, and a model field in the returned ChatCompletion object.",
+    "screenshot": "openai_chat_api.png",
+    "cited_in": "Section 3.2",
+    "access_date": "2026-10-28",
+    "screenshot_sha256": "5fd374ef6266f15322c677300757661c001525e25db04d3cdb364fbfe9ad1c19"
+  },
+  {
+    "key": "minilm_card",
+    "organization": "Sentence Transformers",
+    "title": "all-MiniLM-L6-v2 model card, revision 1110a24",
+    "url": "https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/tree/1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+    "confirmed": "Model card of the official organization: 384-dimensional embeddings. On 2026-10-28 the Hugging Face API reported 1110a243fdf4706b3f48f1d95db1a4f5529b4d41 (last modified 2026-06-01) as the current revision, the revision used for the sentence-transformers re-check in revision/h2/h2_cosine_st_check.txt.",
+    "screenshot": "minilm_card.png",
+    "cited_in": "Section 3.4",
+    "access_date": "2026-10-28",
+    "screenshot_sha256": "87f9ab7591a07d864f003e8bac710e891ce5930820a543b31dfcf47d9659ad04"
+  },
+  {
+    "key": "behave133",
+    "organization": "behave developers",
+    "title": "behave v1.3.3 release",
+    "url": "https://github.com/behave/behave/releases/tag/v1.3.3",
+    "confirmed": "Official release tag v1.3.3, commit 7673da8324be5588642b23511ca4d7a134a0b0c1, released 2025-09-04.",
+    "secondary_url": "https://pypi.org/project/behave/1.3.3/",
+    "screenshot": "behave_v1.3.3.png",
+    "cited_in": "Section 3.5",
+    "access_date": "2026-10-28",
+    "screenshot_sha256": "bda0342399fb26042affa6cc909ad0b89c7dffaf3bc42a6c1f6c554009b63ff5"
+  }
+]
