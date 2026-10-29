@@ -13,7 +13,7 @@ For each threat we report what we did and the residual risk.
 
 \textbf{Similarity.} \emph{Mitigation:} we compared cosine with defect labels, seeded perturbations, project results and reference points from 0.80 to 0.90. \emph{Residual risk:} masking hides values, tables are omitted, many skeletons exceed the 256-token limit, and cosine did not separate defective from non-defective audited files.
 
-\textbf{Defect labels.} \emph{Mitigation:} one independent rater labelled 15 files; we report both $\kappa$ values with CIs and held the required consensus round. \emph{Residual risk:} labels were AI-drafted and reviewed in one confirmation; agreement is below 0.7 and imprecise; the other 45 files were not relabelled. The audit is exploratory and limited to files scoring at least 0.85.
+\textbf{Defect labels.} \emph{Mitigation:} one independent rater labelled 15 files; we report both $\kappa$ values with CIs and held the required consensus round. \emph{Residual risk:} labels were AI-drafted and reviewed in a single round; agreement is below 0.7 and imprecise; the other 45 files were not relabelled. The audit is exploratory and limited to files scoring at least 0.85.
 
 \textbf{Parser and perturbation.} \emph{Mitigation:} parser compliance uses \texttt{behave}; non-parsing mutant pairs were excluded. \emph{Residual risk:} mutants are dependent single scenarios and do not estimate whole-file sensitivity; parser success does not execute steps or establish behavior.
 
