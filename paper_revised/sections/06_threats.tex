@@ -1,28 +1,24 @@
 \section{Threats to Validity}
 \label{sec:threats}
 
-For each threat we state the mitigation we actually performed and the risk that remains. Threats that we could only measure or disclose are collected at the end of the section.
+For each threat we report what we did and the residual risk.
 
 \subsection{Internal Validity}
 
-\textbf{Reverse-engineered stories.} The stories were written by the model under test from the reference files, so the input can carry wording, structure and scenario order from the file it is compared with. \emph{Mitigation:} we measured story--reference overlap and its correlation with similarity (Section~\ref{sec:res-b1}) and checked the Fineract stories written from a prefix (Section~\ref{sec:res-h1}). \emph{Residual risk:} overlap correlates with similarity in two of the three projects, structural leakage is not measured, and the results may overstate performance on natural requirements.
+\textbf{Reverse-engineered stories.} \emph{Mitigation:} we measured trigram overlap and prefix-story performance (Sections~\ref{sec:res-b1} and~\ref{sec:res-h1}). \emph{Residual risk:} overlap correlates with similarity in two projects, structural leakage is unmeasured, and performance may be overstated for natural requirements; no independently written backlog was available.
 
-\textbf{Exemplars, pilot and ablation.} \emph{Mitigation:} the three original exemplars are excluded from the primary analysis, both denominators are reported, and the same-time rerun repeats C0, C1 and C2 with interleaved requests. \emph{Residual risk:} the 30 pilot stories used when the reference point was set are part of the evaluated set, and C2 uses one random draw of exemplars.
-
-\textbf{Hosted model and output cap.} \emph{Mitigation:} we pinned the snapshot, used temperature 0, logged each call, measured run-to-run variation (Section~\ref{sec:res-rep}) and ran the proposal's cap of 1,500 output tokens as C0cap. \emph{Residual risk:} nondeterminism remains, changes of the serving configuration cannot be detected, and the RQ2 result applies to uncapped generation; under the cap, long files are cut and parser compliance is lower.
+\textbf{Exemplars, pilot and hosted model.} \emph{Mitigation:} prompt exemplars are excluded from the primary analysis; C0--C2 were rerun with interleaved requests, calls were logged, and run variation and the planned 1,500-token C0cap condition were measured. \emph{Residual risk:} the 30 pilot stories are in the evaluated set, C2 uses one random exemplar draw, nondeterminism remains, and hosted serving changes cannot be detected. Under C0cap, long outputs were cut and parser compliance fell to 92.6\%; the uncapped RQ2 result does not apply to that condition.
 
 \subsection{Construct Validity}
 
-\textbf{Similarity metric.} Skeleton cosine is an imperfect proxy for business correctness. \emph{Mitigation:} we checked it against defect labels, seeded defects, reference points from 0.80 to 0.90 and per project. \emph{Residual risk:} it is blind to numbers and quoted values, ignores data tables and Examples, often sees only the start of a file, and did not separate defective from non-defective audited files.
+\textbf{Similarity.} \emph{Mitigation:} we compared cosine with defect labels, seeded perturbations, project results and reference points from 0.80 to 0.90. \emph{Residual risk:} masking hides values, tables are omitted, many skeletons exceed the 256-token limit, and cosine did not separate defective from non-defective audited files.
 
-\textbf{Defect labels.} \emph{Mitigation:} an independent human rater labelled 15 files, we report $\kappa$ with 95\% intervals, and the two raters held the consensus round our protocol requires on these files (Section~\ref{sec:res-defects}). \emph{Residual risk:} the labels are AI-drafted and were reviewed in one confirmation; $\kappa = 0.571$ and $0.609$ are below the protocol's 0.7 and imprecise with 15 files; the other 45 files were not relabelled, so the audit is exploratory and may undercount defects, in particular in the social-network domain; and it covers only files at or above 0.85.
+\textbf{Defect labels.} \emph{Mitigation:} one independent rater labelled 15 files; we report both $\kappa$ values with CIs and held the required consensus round. \emph{Residual risk:} labels were AI-drafted and reviewed in one confirmation; agreement is below 0.7 and imprecise; the other 45 files were not relabelled. The audit is exploratory and limited to files scoring at least 0.85.
 
-\textbf{Perturbation test and parser compliance.} \emph{Mitigation:} non-parsing pairs are excluded, results are reported by operator, and validity is checked with behave's parser rather than a dry run. \emph{Residual risk:} the perturbation pairs are single, dependent scenarios and do not estimate whole-file sensitivity, and a parser pass shows only valid Gherkin, not execution against the application.
+\textbf{Parser and perturbation.} \emph{Mitigation:} parser compliance uses \texttt{behave}; non-parsing mutant pairs were excluded. \emph{Residual risk:} mutants are dependent single scenarios and do not estimate whole-file sensitivity; parser success does not execute steps or establish behavior.
 
 \subsection{External and Conclusion Validity}
 
-\textbf{Projects.} \emph{Mitigation:} all main results are reported per project. \emph{Residual risk:} three mature, English-language public projects are not representative of BDD practice, and because the projects contribute unequal numbers of files and differ significantly in similarity, pooled results do not generalise across domains.
+\textbf{Projects and reference point.} \emph{Mitigation:} we report per-project results and the 0.80--0.90 sensitivity analysis. \emph{Residual risk:} three public English-language projects are not representative of all BDD practice; 0.85 is uncalibrated, and the RQ1 decision changes between 0.84 and 0.85. Planned-after-review analyses are exploratory and their $p$-values are not corrected.
 
-\textbf{Thresholds and tests.} \emph{Mitigation:} we report how the conclusions change between reference points of 0.80 and 0.90, and the ablation and rerun plans were fixed with their hashes before the runs. \emph{Residual risk:} neither the 0.85 reference point nor the 80\% threshold is an industry standard, the reference point was not calibrated, and the RQ1 test result changes between 0.84 and 0.85. All analyses planned after the reviews are exploratory; their $p$-values are not corrected.
-
-\textbf{Uncontrolled limitations.} The measures above do not control every threat. We had no independently written requirements, could not detect changes in the hosted service, did not execute the generated files against step definitions, and could not relabel the 45 audit files outside the consensus round. The conclusions therefore hold only for reverse-engineered stories from these three projects, in the time window of the runs, and with the similarity metric read as a proxy.
+The study had no independently written requirements, could not detect hosted-service changes, did not execute generated files against step definitions, and could not relabel the 45 files outside consensus. Conclusions are limited to reverse-engineered stories from these projects during the observed run window, with skeleton cosine treated only as a proxy.

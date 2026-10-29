@@ -1,9 +1,9 @@
-% FISAT 2026, paper 367005: revised camera-ready version (29 Oct 2026). The appendices are in supplementary.tex.
+% FISAT 2026, paper 367005: shortened paper; appendices are in supplementary.tex.
 \documentclass[runningheads]{llncs}
 \usepackage[T1]{fontenc}
 \usepackage{graphicx}
 \usepackage{array}
-\usepackage{flafter} % a float never appears before the text that defines it
+\usepackage{flafter}
 \usepackage{amsmath}
 \usepackage{listings}
 \usepackage{tikz}
@@ -12,24 +12,19 @@
 \usepackage{url}
 \usepackage{microtype}
 \urlstyle{same}
-\Urlmuskip=0mu plus 1mu % lets long URLs break after "/" instead of running into the margin
-\hypersetup{hidelinks} % no coloured boxes around citations and links
-\setlength{\tabcolsep}{6pt} % llncs sets 1.4pt, which runs table columns together
-\setlength{\emergencystretch}{1em} % allows a looser line rather than one that runs into the margin
-
+\Urlmuskip=0mu plus 1mu
+\hypersetup{hidelinks}
+\setlength{\tabcolsep}{6pt}
+\setlength{\emergencystretch}{1em}
 \lstset{basicstyle=\ttfamily\footnotesize,breaklines=true,frame=none,columns=fullflexible,keepspaces=true,numberbychapter=false}
-
 \begin{document}
-
 \title{Evaluating GPT-5.4-mini for Gherkin Test Generation: An Empirical Study}
 \titlerunning{Evaluating GPT-5.4-mini for Gherkin Test Generation}
-
-\author{Nguyen Minh Hoang \and Nguyen Hieu An \and Le Thi Quynh Chi\thanks{Corresponding author.}}
+\author{Nguyen Minh Hoang\inst{1} \and Nguyen Hieu An\inst{1} \and Le Thi Quynh Chi\inst{1}\textsuperscript{*}}
 \authorrunning{N. M. Hoang et al.}
-\institute{FPT University, Vietnam\\ \email{chiltq6@fe.edu.vn}}
-
+\institute{Department of Software Engineering, FPT University, Ho Chi Minh City, Vietnam\\
+Email: \email{\normalfont hoangminh6112006@gmail.com (N.M.H.); hieuannguyen2k6@gmail.com (N.H.A.); chiltq6@fe.edu.vn (L.T.Q.C.)}\\\textsuperscript{*} Corresponding author}
 \maketitle
-
 \input{sections/00_abstract}
 \input{sections/01_intro}
 \input{sections/02_related}
@@ -39,7 +34,6 @@
 \input{sections/06_threats}
 \input{sections/07_conclusion}
 \input{sections/08_disclosure}
-
+\clearpage
 \input{sections/09_references}
-
 \end{document}
