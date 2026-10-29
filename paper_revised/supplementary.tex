@@ -1,0 +1,48 @@
+% FISAT 2026, paper 367005: supplementary material (29 Oct 2026). Build main.tex first; section, table and
+% equation numbers of the paper are read from main.aux.
+\documentclass[runningheads]{llncs}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage{flafter} % a float never appears before the text that defines it
+\usepackage{float} % [H] keeps the appendix tables and figures in reading order
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta}
+\usepackage{xr-hyper}
+\externaldocument[P-]{main}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{microtype}
+\urlstyle{same}
+\Urlmuskip=0mu plus 1mu % lets long URLs break after "/" instead of running into the margin
+\hypersetup{hidelinks} % no coloured boxes around citations and links
+\setlength{\tabcolsep}{6pt} % llncs sets 1.4pt, which runs table columns together
+\setlength{\emergencystretch}{1em} % allows a looser line rather than one that runs into the margin
+
+\lstset{basicstyle=\ttfamily\footnotesize,breaklines=true,frame=none,columns=fullflexible,keepspaces=true,numberbychapter=false}
+
+\renewcommand{\thesection}{S\arabic{section}}
+\renewcommand{\thetable}{S\arabic{table}}
+\renewcommand{\thefigure}{S\arabic{figure}}
+\AtBeginDocument{\renewcommand{\thelstlisting}{S\arabic{lstlisting}}}
+
+\begin{document}
+
+\title{Supplementary Material for ``Evaluating GPT-5.4-mini for Gherkin Test Generation: An Empirical Study''}
+\titlerunning{Evaluating GPT-5.4-mini for Gherkin Test Generation: Supplement}
+
+\author{Nguyen Minh Hoang \and Nguyen Hieu An \and Le Thi Quynh Chi\thanks{Corresponding author.}}
+\authorrunning{N. M. Hoang et al.}
+\institute{FPT University, Vietnam\\ \email{chiltq6@fe.edu.vn}}
+
+\maketitle
+
+\noindent This supplement belongs to the paper above. Section, table, figure and reference numbers without the prefix S refer to the paper; the references are those of the paper.
+
+\input{sections/10_appendix}
+
+\input{sections/09_references}
+
+\end{document}

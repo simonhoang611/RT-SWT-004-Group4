@@ -162,3 +162,12 @@ On the mentor's comment that the paper must be rewritten with the revised conten
   - §6.2: "the faulty dry-run check was replaced by behave's parser" → "validity is checked with behave's parser rather than a dry run".
 - To keep the body within page 15 after defining the two defect facets in §3.6, three sentences were shortened (the ONNX sentence in §3.2, one discussion sentence in §5 and the exploratory-analysis sentence in §6) without dropping a number.
 - The Acknowledgments still state that an AI coding assistant drafted the audit labels in the revision; this is the required AI disclosure, not revision history.
+
+## Paper without appendices (29 Oct 2026)
+
+On the mentor's instruction, the paper ends with the references and has no appendices. The former Appendices A–C are now a separate document, the supplementary material (`supplementary.tex`, PDF in this folder), with the same text, tables and figures. Its sections are numbered S1–S3 (were A–C), its tables S1–S7 (were Tables 4–10), its figures S1–S3 (were Figs. 1–3) and its listings S1–S2 (were Listings 1–2); numbers without the prefix S refer to the paper, and it repeats the paper's reference list so that citation numbers are the same.
+
+- The paper now has 18 pages: the body still ends on the last line of page 15 and the references fill pages 16–18. Build: pdflatex, three runs, 0 errors, no overfull boxes, no undefined references; the supplementary material has 14 pages and builds with the same result.
+- In the body, the pointers to an appendix table, figure or listing now name the supplementary item (for example "Table S5 of the supplementary material" for the comparison with [1]–[5]); the roadmap sentence in §1 names Sections S1–S3 and refers to Data and Ethics, which gives the direct link to the supplementary PDF in this folder of the repository.
+- `\appendix` was removed from `sections/10_appendix.tex`; its references to the paper's sections and tables are read from `main.aux` with the `xr-hyper` package (prefix `P-`).
+- No number was dropped: the numbers in the body and the supplementary material together are the same as in the previous version.

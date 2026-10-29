@@ -1,7 +1,7 @@
 \section{Methodology}
 \label{sec:method}
 
-Fig.~\ref{fig:flow} in Appendix~\ref{app:more} shows how the files pass through generation and analysis, with the denominator of each analysis.
+Fig.~S3 in the supplementary material shows how the files pass through generation and analysis, with the denominator of each analysis.
 
 \subsection{Dataset Construction}
 
@@ -31,7 +31,7 @@ The projects were chosen for domain and style diversity (Section~\ref{sec:intro}
 
 \subsection{Model and Prompt Configuration}
 
-All generation requests specified gpt-5.4-mini-2026-03-17~\cite{openai_gpt54mini} through the OpenAI Chat Completions API~\cite{openai_chat_api} with temperature 0; the returned model name was recorded for C1, C2 and the rerun below but not for the original C0. The requests set no maximum-token cap, which deviates from the research proposal's planned cap of 1,500 output tokens. The original condition (C0) is same-project one-shot prompting: each project has its own system message and one example pair (user story and reference Gherkin) from the same project (Listing~\ref{lst:prompt} in Appendix~\ref{app:details}). The three example files (ids 2, 102 and 202) are also members of the dataset, and their own generated files score 1.000, 0.997 and 1.000 on the metric below. The primary analysis therefore excludes them ($N = 258$); results for all 261 files are reported alongside, and no generated file was excluded because of its content.
+All generation requests specified gpt-5.4-mini-2026-03-17~\cite{openai_gpt54mini} through the OpenAI Chat Completions API~\cite{openai_chat_api} with temperature 0; the returned model name was recorded for C1, C2 and the rerun below but not for the original C0. The requests set no maximum-token cap, which deviates from the research proposal's planned cap of 1,500 output tokens. The original condition (C0) is same-project one-shot prompting: each project has its own system message and one example pair (user story and reference Gherkin) from the same project (Listing~S1 in the supplementary material). The three example files (ids 2, 102 and 202) are also members of the dataset, and their own generated files score 1.000, 0.997 and 1.000 on the metric below. The primary analysis therefore excludes them ($N = 258$); results for all 261 files are reported alongside, and no generated file was excluded because of its content.
 
 \textbf{Prompt ablation.} C1 is zero-shot: the same system message and wording, with the example block and the sentence referring to it removed. C2 is one-shot with a different exemplar per project (ids 86, 119 and 203), drawn with a fixed random seed (2026) from the remaining files of each project before any C2 output existed. Model, temperature, system messages and output clean-up are identical in all conditions, and the ablation is analysed on the 255 files that are not an exemplar in any condition. Its analysis plan, written before the C1 and C2 runs of 16 October 2026 and released with its SHA-256 hash, specifies paired Wilcoxon signed-rank tests on per-file cosine and exact McNemar tests on parser outcomes, each against C0 and Holm-corrected. All three conditions were scored with an ONNX export of the encoder that reproduces the original C0 scores.
 
@@ -44,7 +44,7 @@ The pipeline builds the prompt for the story's project, calls the API and remove
 \subsection{Metric 1: Skeleton Cosine Similarity}
 \label{sec:metric1}
 
-Skeleton cosine similarity compares a generated file with its reference after reducing both to a skeleton. The skeleton keeps every line that begins with a Gherkin keyword (Feature, Background, Scenario, Given, When, Then, And, But), including the keyword itself. It removes tags, replaces every double-quoted string with \texttt{<PARAM>} and every number with \texttt{<NUM>}, and drops all other lines, so data tables, doc strings and Examples tables disappear (Table~\ref{tab:skeleton} in Appendix~\ref{app:details}). Each skeleton is encoded as a whole with all-MiniLM-L6-v2~\cite{reimers2019,minilm_card}, which mean-pools token embeddings and truncates its input at 256 word-piece tokens. With $g$ and $r$ the embeddings of the generated and reference skeletons,
+Skeleton cosine similarity compares a generated file with its reference after reducing both to a skeleton. The skeleton keeps every line that begins with a Gherkin keyword (Feature, Background, Scenario, Given, When, Then, And, But), including the keyword itself. It removes tags, replaces every double-quoted string with \texttt{<PARAM>} and every number with \texttt{<NUM>}, and drops all other lines, so data tables, doc strings and Examples tables disappear (Table~S2 in the supplementary material). Each skeleton is encoded as a whole with all-MiniLM-L6-v2~\cite{reimers2019,minilm_card}, which mean-pools token embeddings and truncates its input at 256 word-piece tokens. With $g$ and $r$ the embeddings of the generated and reference skeletons,
 \begin{equation}
 \mathrm{SkelCos}(g, r) = \frac{g \cdot r}{\lVert g \rVert \lVert r \rVert}.
 \end{equation}
@@ -68,7 +68,7 @@ Because neither metric checks business intent, we audited high-scoring outputs f
 
 The labels were drafted by an AI coding assistant (OpenAI Codex) and then reviewed by a second author, who retained all of them unchanged; that review was recorded as one confirmation covering all 60 files, not as a decision with reasons per file. To estimate reliability, the first author, who reports not having seen the labels or their aggregate rates before rating, labelled a subset of 15 files fixed in advance (6 Sylius, 3 Fineract, 6 Diaspora) with the same guide, and we report Cohen's $\kappa$~\cite{cohen1960} between these labels and the reviewed labels. This is agreement between one independent human rater and AI-drafted, human-reviewed labels, not between two independent human raters. Because both values fell below the 0.7 required by our protocol, the reviewing author and the independent rater then held the protocol's consensus round on the 15 files and recorded a final label, severity, reason and line evidence for each of the 30 file--facet decisions.
 
-Separately, an automated check flags four keyword-order violations per scenario, and a perturbation test applied eight defect-seeding operators to 120 scenarios extracted from the reference files and compared each mutant with its original using the same metric (Appendix~\ref{app:perturb}).
+Separately, an automated check flags four keyword-order violations per scenario, and a perturbation test applied eight defect-seeding operators to 120 scenarios extracted from the reference files and compared each mutant with its original using the same metric (Section~S2 of the supplementary material).
 
 \subsection{Statistical Analysis Plan}
 

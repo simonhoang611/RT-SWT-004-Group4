@@ -3,7 +3,7 @@
 
 \subsection{LLM-Based Gherkin and BDD Generation}
 
-Research on LLM-assisted BDD generation has typically emphasized either semantic resemblance or syntactic correctness; Table~\ref{tab:delta} (Appendix~\ref{app:more}) summarizes the five studies closest to ours. Rathnayake et al.~\cite{rathnayake2026} evaluated GPT-4, Claude 3 and Gemini on 500 user stories from one company and reported a BERTScore F1 of 91.16\% for GPT-4. Fernandes et al.~\cite{fernandes2025} found business-logic flaws, such as a reversed or omitted outcome, among the most frequent errors of seven LLMs. Karpurapu et al.~\cite{karpurapu2024} found that zero-shot outputs accounted for 89\% of the observed Gherkin-lint syntax errors, but their validator was a linter rather than a runtime parser. In industrial workflows, all 50 Cypress test cases of Ferreira et al.~\cite{ferreira2025} were valid TypeScript, yet only 60\% reflected their Gherkin scenarios, and Fonseca et al.~\cite{fonseca2025} found 93.3\% of their generated scenarios syntactically valid by a manual keyword check. These single-organization or single-application evaluations show that LLMs can be integrated into practical workflows, but they make cross-domain generalization difficult to assess.
+Research on LLM-assisted BDD generation has typically emphasized either semantic resemblance or syntactic correctness; Table~S5 of the supplementary material summarizes the five studies closest to ours. Rathnayake et al.~\cite{rathnayake2026} evaluated GPT-4, Claude 3 and Gemini on 500 user stories from one company and reported a BERTScore F1 of 91.16\% for GPT-4. Fernandes et al.~\cite{fernandes2025} found business-logic flaws, such as a reversed or omitted outcome, among the most frequent errors of seven LLMs. Karpurapu et al.~\cite{karpurapu2024} found that zero-shot outputs accounted for 89\% of the observed Gherkin-lint syntax errors, but their validator was a linter rather than a runtime parser. In industrial workflows, all 50 Cypress test cases of Ferreira et al.~\cite{ferreira2025} were valid TypeScript, yet only 60\% reflected their Gherkin scenarios, and Fonseca et al.~\cite{fonseca2025} found 93.3\% of their generated scenarios syntactically valid by a manual keyword check. These single-organization or single-application evaluations show that LLMs can be integrated into practical workflows, but they make cross-domain generalization difficult to assess.
 
 \subsection{Test Generation and Semantic Evaluation}
 
@@ -15,10 +15,10 @@ Reporting is a further concern. A review of 74 LLM studies in requirements engin
 
 \subsection{Positioning of This Study}
 
-Table~\ref{tab:delta} compares this study with the five BDD-generation studies above on the criteria that bear on our contributions.
+Table~S5 compares this study with the five BDD-generation studies above on the criteria that bear on our contributions.
 
 
-\textbf{Contribution 1, the benchmark.} The other studies with named sources each draw on one company, system or application, and two do not release their data (Table~\ref{tab:delta}). Our 261 reference files are from three public projects in different domains and are released with their construction and a leakage measurement.
+\textbf{Contribution 1, the benchmark.} The other studies with named sources each draw on one company, system or application, and two do not release their data (Table~S5). Our 261 reference files are from three public projects in different domains and are released with their construction and a leakage measurement.
 
 \textbf{Contribution 2, the evaluation.} Karpurapu et al.\ check syntax with a linter, and the other studies measure semantics with similarity metrics, ratings or an LLM validator. Fernandes et al.\ describe business-logic flaws qualitatively, but none of the five studies tests whether its semantic measure reacts to business-logic defects, and none varies which example is given in the prompt. Our defect audit and perturbation test show that files with high skeleton similarity can still violate their acceptance criteria, and our ablation shows that removing the example lowers skeleton similarity by more than repeated runs vary, while a different exemplar moves single files in both directions without a detectable average effect.
 

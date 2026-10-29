@@ -3,12 +3,12 @@
 
 \subsection{RQ1: Structural Skeleton Resemblance}
 
-On the 258 non-exemplar files the median is 0.853 (95\% bootstrap CI 0.844--0.859), 0.003 above the reference point. 136 files lie above 0.85 and 122 below, and the exact sign test gives one-sided $p = 0.209$ with $\delta = 0.054$ (95\% CI $-0.072$ to $0.179$) (Table~\ref{tab:rq1} in Appendix~\ref{app:more}; Fig.~\ref{fig:dist} in Appendix~\ref{app:details}). The differences are skewed to the left (skewness $-0.41$, 95\% bootstrap CI $-0.76$ to $-0.08$; the mean is 0.848), so the pre-registered Wilcoxon test addresses the pseudo-median (Hodges--Lehmann estimate 0.850) rather than the median; it gives $p = 0.474$. Including the three exemplars gives $p = 0.161$ (sign test) and $p = 0.355$ (Wilcoxon). Decision: fail to reject $H_0$ in all four analyses.
+On the 258 non-exemplar files the median is 0.853 (95\% bootstrap CI 0.844--0.859), 0.003 above the reference point. 136 files lie above 0.85 and 122 below, and the exact sign test gives one-sided $p = 0.209$ with $\delta = 0.054$ (95\% CI $-0.072$ to $0.179$) (Table~S6 and Fig.~S1 in the supplementary material). The differences are skewed to the left (skewness $-0.41$, 95\% bootstrap CI $-0.76$ to $-0.08$; the mean is 0.848), so the pre-registered Wilcoxon test addresses the pseudo-median (Hodges--Lehmann estimate 0.850) rather than the median; it gives $p = 0.474$. Including the three exemplars gives $p = 0.161$ (sign test) and $p = 0.355$ (Wilcoxon). Decision: fail to reject $H_0$ in all four analyses.
 
 \subsection{Results per Project}
 \label{sec:res-h1}
 
-The pooled median hides differences between projects (Table~\ref{tab:domain}; Fig.~\ref{fig:domain} in Appendix~\ref{app:details}). Sylius is the only project above the reference point: its median is 0.887 and 77.8\% of its files score at least 0.85. Fineract (median 0.826) and Diaspora (median 0.831) are significantly below 0.85 by the Wilcoxon test (one-sided $p < 0.001$ and $p = 0.008$); with the sign test, Fineract remains significantly below ($p = 0.001$) but Diaspora does not ($p = 0.12$; 25 files above, 35 below). The projects differ (Kruskal--Wallis $H = 60.87$, df $= 2$, $p < 0.001$, $\eta^2_H = 0.231$, 95\% CI 0.144--0.336). Sylius differs from Fineract and from Diaspora (Holm-adjusted $p < 0.001$ for both), while the difference between Fineract and Diaspora is not significant ($p = 0.74$).
+The pooled median hides differences between projects (Table~\ref{tab:domain}; Fig.~S2 in the supplementary material). Sylius is the only project above the reference point: its median is 0.887 and 77.8\% of its files score at least 0.85. Fineract (median 0.826) and Diaspora (median 0.831) are significantly below 0.85 by the Wilcoxon test (one-sided $p < 0.001$ and $p = 0.008$); with the sign test, Fineract remains significantly below ($p = 0.001$) but Diaspora does not ($p = 0.12$; 25 files above, 35 below). The projects differ (Kruskal--Wallis $H = 60.87$, df $= 2$, $p < 0.001$, $\eta^2_H = 0.231$, 95\% CI 0.144--0.336). Sylius differs from Fineract and from Diaspora (Holm-adjusted $p < 0.001$ for both), while the difference between Fineract and Diaspora is not significant ($p = 0.74$).
 
 \textbf{Truncated story input.} The 84 Fineract files whose stories saw only the first 15,000 characters of the reference do not score lower than the 15 whose stories saw all of it (median 0.827 vs.\ 0.824; two-sided Mann--Whitney $p = 0.99$), and rescoring them against the skeleton of that prefix leaves the Fineract and pooled medians unchanged.
 
@@ -32,14 +32,14 @@ All & 258 & 0.853 (0.085) & 52.7\% [46.4, 58.9] & 0.474 & 0.526\\
 \subsection{Sensitivity to the Reference Point}
 \label{sec:res-b3}
 
-Because 0.85 was not calibrated, we repeated the RQ1 test for reference points between 0.80 and 0.90 (Table~\ref{tab:sweep} in Appendix~\ref{app:details}). The pooled median lies significantly above every reference point up to 0.84 (at 0.84, sign test $p = 0.002$, Wilcoxon $p = 0.0097$) and above none from 0.85 upwards. The conclusion of RQ1 therefore depends on where the reference point is placed within a few hundredths. The project ranking does not: at every reference point Sylius has the largest share of files above it, and Fineract the smallest from 0.83 upwards.
+Because 0.85 was not calibrated, we repeated the RQ1 test for reference points between 0.80 and 0.90 (Table~S3 in the supplementary material). The pooled median lies significantly above every reference point up to 0.84 (at 0.84, sign test $p = 0.002$, Wilcoxon $p = 0.0097$) and above none from 0.85 upwards. The conclusion of RQ1 therefore depends on where the reference point is placed within a few hundredths. The project ranking does not: at every reference point Sylius has the largest share of files above it, and Fineract the smallest from 0.83 upwards.
 
 We could not calibrate the reference point against defect labels, because the defect audit (Section~\ref{sec:res-defects}) sampled only files at or above 0.85; within that range, cosine did not differ significantly between defective and non-defective files (Mann--Whitney $p = 0.21$).
 
 \subsection{Defects in High-Similarity Outputs}
 \label{sec:res-defects}
 
-\textbf{Defect audit.} The audit is an exploratory observation and is not used to validate any conclusion, because its labels did not reach the agreement our protocol required (below). Of the 60 audited files, all with skeleton cosine of at least 0.85, 25 (41.7\%, 95\% CI [29.1, 55.1]) contain at least one defect of severity 2 or 3: 6 of 20 Sylius files, 16 of 20 Fineract files and 3 of 20 Diaspora files. The two facets flag exactly the same 25 files, so we report them as one result, not as two independent findings. The most frequent defects are wrong expected outcomes (20 files) and outcomes without a verifying Then (19). The share of 41.7\% describes a sample balanced across projects and restricted to high-scoring files; it is not an estimate of the defect rate of the whole corpus. Appendix~\ref{app:more} gives an example.
+\textbf{Defect audit.} The audit is an exploratory observation and is not used to validate any conclusion, because its labels did not reach the agreement our protocol required (below). Of the 60 audited files, all with skeleton cosine of at least 0.85, 25 (41.7\%, 95\% CI [29.1, 55.1]) contain at least one defect of severity 2 or 3: 6 of 20 Sylius files, 16 of 20 Fineract files and 3 of 20 Diaspora files. The two facets flag exactly the same 25 files, so we report them as one result, not as two independent findings. The most frequent defects are wrong expected outcomes (20 files) and outcomes without a verifying Then (19). The share of 41.7\% describes a sample balanced across projects and restricted to high-scoring files; it is not an estimate of the defect rate of the whole corpus. Section~S3 of the supplementary material gives an example.
 
 \textbf{Agreement.} On the 15 doubly labelled files, the independent rater agreed with the reviewed labels on 12 files for each facet. Cohen's $\kappa$ was 0.571 (95\% CI 0.05--1.00) for the business-logic facet and 0.609 (0.24--1.00) for the temporal/causal facet. Both values are below the threshold of 0.7 set in our protocol. Five of the six disagreements concern three Diaspora files that the independent rater marked as defective; in the consensus round the two raters adopted the independent rater's label in all six. After consensus, 6 of the 15 files have a business-logic defect and 8 a temporal/causal defect, against 5 and 5 in the reviewed labels. The other 45 files were not relabelled, so all audit figures above use the reviewed labels; with the consensus labels for the 15 files, 28 of the 60 files would be defective (26 on the business-logic facet).
 
@@ -54,7 +54,7 @@ The user stories are short compared with the references: a median of 4.9\% of th
 
 \subsection{RQ2: Parser Compliance}
 
-RQ2 asks whether more than 80\% of the generated files are valid Gherkin. Of the 258 non-exemplar files, 255 pass the parser (98.84\%, 95\% CI [96.64\%, 99.76\%], $p < 0.001$; Table~\ref{tab:rq2} in Appendix~\ref{app:details}). The risk difference from the 80\% reference rate is $+18.84$ percentage points (95\% CI [16.64, 19.76], the Clopper--Pearson interval shifted by 0.80). Decision: reject $H_0$.
+RQ2 asks whether more than 80\% of the generated files are valid Gherkin. Of the 258 non-exemplar files, 255 pass the parser (98.84\%, 95\% CI [96.64\%, 99.76\%], $p < 0.001$; Table~S4 in the supplementary material). The risk difference from the 80\% reference rate is $+18.84$ percentage points (95\% CI [16.64, 19.76], the Clopper--Pearson interval shifted by 0.80). Decision: reject $H_0$.
 
 \subsection{Prompt Ablation}
 \label{sec:res-h2}
@@ -63,7 +63,7 @@ The comparisons below use the same-time rerun (Table~\ref{tab:h2}; 255 common fi
 
 \begin{table}[!htbp]
 \centering
-\caption{Prompt ablation on the 255 files that are not an exemplar in any condition, in the same-time rerun (28 October 2026). Skeleton cosine medians overall and per project ($n$ = 98, 98, 59), share of files $\ge 0.85$ with 95\% CI, and parser PASS count. Table~\ref{tab:h2orig} gives the original runs.}
+\caption{Prompt ablation on the 255 files that are not an exemplar in any condition, in the same-time rerun (28 October 2026). Skeleton cosine medians overall and per project ($n$ = 98, 98, 59), share of files $\ge 0.85$ with 95\% CI, and parser PASS count. Table~S7 in the supplementary material gives the original runs.}
 \label{tab:h2}
 \scriptsize
 \setlength{\tabcolsep}{4pt}
@@ -80,7 +80,7 @@ C2 (exemplars 86, 119, 203) & 0.873 & 63.5\% [57.3, 69.4] & 0.891 & 0.873 & 0.84
 
 Replacing the exemplars (C2) raised cosine in 140 files and lowered it in 115 (median paired difference $+0.008$, 95\% CI $-0.001$ to $0.015$; Holm-adjusted $p < 0.001$; the Wilcoxon test concerns the pseudo-median of the differences, the interval their median). The C2 median of 0.873 comes mostly from Fineract (median 0.829 under C0, 0.873 under C2), while Sylius and Diaspora change by less than 0.015. The paired difference is smaller than the within-file SD across runs (0.020 for C0, 0.019 for C2), so by the rule fixed in the plan we do not report it as an effect of the exemplars.
 
-Parser compliance was similar under all three prompts. Under C0, C1 and C2, 255, 252 and 254 of the 255 files parse (exact McNemar against C0, Holm-adjusted $p = 0.50$ and $1.0$); the tests do not establish equivalence. The original ablation, with C0 run three months before C1 and C2, gave the same direction and similar paired differences ($-0.028$ and $+0.008$; Table~\ref{tab:h2orig} in Appendix~\ref{app:more}).
+Parser compliance was similar under all three prompts. Under C0, C1 and C2, 255, 252 and 254 of the 255 files parse (exact McNemar against C0, Holm-adjusted $p = 0.50$ and $1.0$); the tests do not establish equivalence. The original ablation, with C0 run three months before C1 and C2, gave the same direction and similar paired differences ($-0.028$ and $+0.008$; Table~S7 in the supplementary material).
 
 
 \subsection{Run-to-Run Variation}
