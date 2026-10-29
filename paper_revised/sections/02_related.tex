@@ -15,11 +15,11 @@ Reporting is a further concern. A review of 74 LLM studies in requirements engin
 
 \subsection{Positioning of This Study}
 
-Table~\ref{tab:delta} in Appendix~\ref{app:more} compares this study with the five BDD-generation studies above on the criteria that bear on our contributions.
+Table~\ref{tab:delta} compares this study with the five BDD-generation studies above on the criteria that bear on our contributions.
 
 
 \textbf{Contribution 1, the benchmark.} The other studies with named sources each draw on one company, system or application, and two do not release their data (Table~\ref{tab:delta}). Our 261 reference files are from three public projects in different domains and are released with their construction and a leakage measurement.
 
 \textbf{Contribution 2, the evaluation.} Karpurapu et al.\ check syntax with a linter, and the other studies measure semantics with similarity metrics, ratings or an LLM validator. Fernandes et al.\ describe business-logic flaws qualitatively, but none of the five studies tests whether its semantic measure reacts to business-logic defects, and none varies which example is given in the prompt. Our defect audit and perturbation test show that files with high skeleton similarity can still violate their acceptance criteria, and our ablation shows that removing the example lowers skeleton similarity by more than repeated runs vary, while a different exemplar moves single files in both directions without a detectable average effect.
 
-\textbf{Contribution 3, the replication package.} It contains the model identifier, prompts, scripts, API logs, generated outputs and all revision analyses, so that every number in this paper can be recomputed.
+\textbf{Contribution 3, the replication package.} It contains the model identifier, prompts, scripts, API logs, generated outputs and all additional analyses, so that every number in this paper can be recomputed.

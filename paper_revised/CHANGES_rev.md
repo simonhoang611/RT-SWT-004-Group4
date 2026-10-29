@@ -146,3 +146,19 @@ On Hoàng's decision (17 Oct), the body must end within page 15. After the Actio
 - Shortened without dropping a number: §1 (the two opening paragraphs merged; the research gap refers to §2 instead of restating [1]–[4]), §2.1–§2.3 (all citations kept), §5 (§5.4 merged into §5.1–§5.2), §6 (every threat keeps its mitigation and residual risk; three pairs of threats merged; "Uncontrolled limitations" unchanged) and §7 (the main-contribution sentence is still the second one, and the scope sentence still follows the advice).
 - Float numbers changed: Table 1 is now the dataset table (was Table 2), Table 2 the per-project table (was 4), Table 3 the ablation (was 5), and in the appendices Table 4 (was 6), Table 5 (was 7), Tables 6–7 (were 8–9), Figs. 1–2 (were 2–3), Table 8 (was 1), Fig. 3 (was 1), Table 9 (was 3) and Table 10 (new, split from 5). Tables 8 and 9 are top floats (`[!t]`), because with `[H]` they left about a third of a page empty; every float is on the page of the sentence that introduces it or on the next page.
 - Appendix C, details of the threats: "the C0 of the same-time rerun has the same median as the original C0" now reads "almost the same median ... (0.852 against 0.853)", the medians of Table 3 and Table 10.
+
+## Paper text without revision history (29 Oct 2026)
+
+On the mentor's comment that the paper must be rewritten with the revised content rather than marked up, the body now reads as one final text. No result, number or claim was changed; only the wording that told the reader what had changed since the submitted version. Build: pdflatex, three runs, 0 errors, no overfull boxes, no undefined references. The body still ends on page 15; the PDF has 28 pages.
+
+- Removed the six "(added in revision)" labels (the run-in headings "Sources and selection", "Prompt ablation", "Same-time rerun" and "Truncated story input", and the headings of §3.6 and §4.8) and renamed "Analyses added in revision" to "Exploratory analyses"; its first sentence still states that these analyses were planned after the reviews and are exploratory.
+- Removed the pointers to Appendices B and C that only said "details are in the appendix"; pointers to a table, figure or listing in the appendices are kept (34 → 15 pointers in §1–§8). The appendices are unchanged.
+- Rewrote the sentences that described the revision itself:
+  - §1: "this revised version adds a leakage measurement, ..." → "this study therefore includes a leakage measurement, ...";
+  - §1, §2.3, Data and Ethics: "revision analyses" → "additional analyses";
+  - §3.5: the sentence on the dry-run check of the submitted version now gives only the reason the dry run is not used (it stops with a configuration error before parsing the file);
+  - §3.7: "Following review, the median is therefore tested" → "The median is therefore tested" (the deviation from the proposal's Wilcoxon test is still stated);
+  - §4.6 and §7: the sentences saying that 98.84% corrects the 100% of the submitted version were removed (the correction is recorded in table row E1 above);
+  - §6.2: "the faulty dry-run check was replaced by behave's parser" → "validity is checked with behave's parser rather than a dry run".
+- To keep the body within page 15 after defining the two defect facets in §3.6, three sentences were shortened (the ONNX sentence in §3.2, one discussion sentence in §5 and the exploratory-analysis sentence in §6) without dropping a number.
+- The Acknowledgments still state that an AI coding assistant drafted the audit labels in the revision; this is the required AI disclosure, not revision history.
